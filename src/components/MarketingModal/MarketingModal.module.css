@@ -1,0 +1,237 @@
+.overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+  background: rgba(0, 0, 0, 0.35);
+}
+
+.card {
+  position: relative;
+  width: 100%;
+  max-width: 24rem;
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.18);
+  overflow: hidden;
+}
+
+/* InAppGuidance-style brand teal */
+.header {
+  background: #5b8da0;
+  color: #fff;
+  text-align: center;
+  font-weight: 700;
+  font-size: 1.05rem;
+  padding: 1rem 2.5rem 1rem 1rem;
+  line-height: 1.35;
+}
+
+.close {
+  position: absolute;
+  top: 0.65rem;
+  right: 0.65rem;
+  width: 2rem;
+  height: 2rem;
+  border: none;
+  background: transparent;
+  color: #fff;
+  font-size: 1.35rem;
+  line-height: 1;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+.close:hover {
+  background: rgba(255, 255, 255, 0.15);
+}
+
+.body {
+  padding: 1.35rem 1.5rem 1rem;
+}
+
+.title {
+  margin: 0 0 0.5rem;
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: #1a1a1a;
+  line-height: 1.3;
+}
+
+.subtitle {
+  margin: 0 0 1rem;
+  font-size: 0.95rem;
+  color: #444;
+}
+
+.videoWrap {
+  position: relative;
+  border-radius: 10px;
+  overflow: hidden;
+  margin-bottom: 1rem;
+  border: 1px solid #d8dfe4;
+  background: linear-gradient(135deg, #d0dae0 0%, #a8b8c4 100%);
+  min-height: 11rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.videoBlur {
+  position: absolute;
+  inset: 0;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='200'%3E%3Cfilter id='b'%3E%3CfeGaussianBlur stdDeviation='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' fill='%23c5d0d6'/%3E%3Crect x='20' y='30' width='360' height='24' rx='4' fill='%23e8eef2'/%3E%3Crect x='20' y='70' width='200' height='12' rx='3' fill='%23dfe8ec'/%3E%3Crect x='20' y='95' width='280' height='12' rx='3' fill='%23dfe8ec'/%3E%3Crect x='20' y='120' width='240' height='12' rx='3' fill='%23dfe8ec'/%3E%3C/svg%3E")
+    center / cover no-repeat;
+  filter: blur(2px);
+  opacity: 0.85;
+}
+
+.playBtn {
+  position: relative;
+  z-index: 1;
+  width: 4.5rem;
+  height: 4.5rem;
+  border-radius: 50%;
+  border: none;
+  background: #5b8da0;
+  color: #fff;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+}
+
+.playBtn:hover {
+  filter: brightness(1.05);
+}
+
+.playIcon {
+  width: 0;
+  height: 0;
+  border-style: solid;
+  border-width: 10px 0 10px 16px;
+  border-color: transparent transparent transparent #fff;
+  margin-left: 4px;
+}
+
+.benefits {
+  background: #eef6e8;
+  border: 1px solid #c5dcb8;
+  border-radius: 8px;
+  padding: 0.85rem 1rem;
+  margin-bottom: 1rem;
+}
+
+.benefitsLast {
+  margin-bottom: 0;
+}
+
+.benefitsList {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.benefitItem {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.5rem;
+  font-size: 0.9rem;
+  color: #2d3a2d;
+  margin-bottom: 0.5rem;
+}
+
+.benefitItem:last-child {
+  margin-bottom: 0;
+}
+
+.checkIcon {
+  flex-shrink: 0;
+  margin-top: 0.05rem;
+  color: #3d8f36;
+  width: 1.125rem;
+  height: 1.125rem;
+  display: block;
+}
+
+.footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0 1.5rem 1.35rem;
+  flex-wrap: wrap;
+}
+
+.primary {
+  flex: 1 1 auto;
+  min-width: 10rem;
+  padding: 0.75rem 1rem;
+  border: none;
+  border-radius: 8px;
+  background: #5b8da0;
+  color: #fff;
+  font-weight: 700;
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+.primary:hover {
+  filter: brightness(1.06);
+}
+
+.later {
+  background: none;
+  border: none;
+  padding: 0.25rem;
+  color: #5b8da0;
+  text-decoration: underline;
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+.later:hover {
+  color: #4a7588;
+}
+
+.fieldGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 0.65rem;
+  margin-bottom: 1rem;
+}
+
+.field {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  border: 1px solid #c5ccd3;
+  border-radius: 8px;
+  padding: 0.5rem 0.65rem;
+  background: #fff;
+}
+
+.fieldIcon {
+  flex-shrink: 0;
+  width: 1.125rem;
+  height: 1.125rem;
+  color: #8899a8;
+  display: block;
+}
+
+.input {
+  flex: 1;
+  border: none;
+  outline: none;
+  font-size: 0.95rem;
+  min-width: 0;
+}
+
+.input::placeholder {
+  color: #8a96a0;
+  font-style: italic;
+}

@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Ihre Anfragen warten - jetzt ist der richtige Moment</title>
+  <style>
+*,
+*::before,
+*::after { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  padding: 32px 16px 48px;
+  background: #e8ecef;
+  font-family: Arial, Helvetica, sans-serif;
+  color: #333;
+  -webkit-font-smoothing: antialiased;
+}
+
+.preview-banner {
+  max-width: 640px;
+  margin: 0 auto 12px;
+  padding: 12px 16px;
+  background: #fff;
+  border-radius: 6px;
+  border-left: 4px solid #98c44c;
+  font-size: 13px;
+  line-height: 1.5;
+  color: #555;
+}
+
+.preview-banner strong {
+  display: block;
+  color: #222;
+  font-size: 14px;
+  margin-bottom: 4px;
+}
+
+.email-shell {
+  max-width: 640px;
+  margin: 0 auto;
+  background: #fff;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+}
+
+.email-inner {
+  padding: 28px 40px 32px;
+}
+
+.email-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 20px;
+}
+
+.logo-block {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-shrink: 0;
+}
+
+.logo-icon {
+  width: 52px;
+  height: 52px;
+  flex-shrink: 0;
+}
+
+.logo-text {
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 22px;
+  line-height: 1.15;
+  color: #4a4a4a;
+  letter-spacing: -0.02em;
+}
+
+.logo-text span {
+  display: block;
+}
+
+.tuv-badge {
+  width: 118px;
+  height: auto;
+  flex-shrink: 0;
+}
+
+.divider {
+  height: 2px;
+  background: #98c44c;
+  border: none;
+  margin: 0 0 28px;
+}
+
+.email-body {
+  font-size: 15px;
+  line-height: 1.55;
+  color: #333;
+}
+
+.email-body p {
+  margin: 0 0 18px;
+}
+
+.email-body > p:first-of-type {
+  margin-bottom: 26px;
+}
+
+.email-body p:last-of-type {
+  margin-bottom: 0;
+}
+
+.email-body strong {
+  font-weight: 700;
+}
+
+.cta-wrap {
+  margin: 28px 0 24px;
+}
+
+.cta-button {
+  display: inline-block;
+  padding: 14px 28px;
+  background: #98c44c;
+  color: #fff !important;
+  font-size: 15px;
+  font-weight: 700;
+  text-decoration: none;
+  border-radius: 4px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.16);
+  letter-spacing: 0.01em;
+}
+
+.cta-button:hover {
+  filter: brightness(1.06);
+}
+
+.closing-line {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+.sign-off {
+  margin-top: 22px;
+  margin-bottom: 0;
+  line-height: 1.65;
+}
+
+.email-footer {
+  padding: 20px 40px 28px;
+  border-top: 2px solid #98c44c;
+  font-size: 11px;
+  line-height: 1.55;
+  color: #888;
+}
+
+.footer-links {
+  text-align: center;
+  margin-bottom: 14px;
+  font-size: 12px;
+}
+
+.footer-links a {
+  color: #5d9cec;
+  text-decoration: none;
+}
+
+.footer-links a:hover {
+  text-decoration: underline;
+}
+
+.footer-links span {
+  color: #ccc;
+  margin: 0 6px;
+}
+
+.footer-legal p {
+  margin: 0 0 4px;
+}
+
+@media (max-width: 520px) {
+  .email-inner,
+  .email-footer {
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+
+  .email-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .tuv-badge {
+    width: 100px;
+  }
+}
+  </style>
+</head>
+<body>
+  <div class="preview-banner">
+    <strong>Betreff (Vorschau):</strong>
+    Ihre Anfragen warten - jetzt ist der richtige Moment
+  </div>
+  <article class="email-shell">
+    <div class="email-inner">
+      <header class="email-header">
+        <div class="logo-block">
+          <svg class="logo-icon" viewBox="0 0 52 52" aria-hidden="true">
+            <circle cx="22" cy="22" r="18" fill="#98c44c" />
+            <rect x="19" y="14" width="6" height="16" rx="1" fill="#fff" />
+            <rect x="14" y="19" width="16" height="6" rx="1" fill="#fff" />
+            <circle cx="34" cy="34" r="11" fill="none" stroke="#98c44c" stroke-width="4" />
+            <line x1="42" y1="42" x2="48" y2="48" stroke="#98c44c" stroke-width="4" stroke-linecap="round" />
+          </svg>
+          <div class="logo-text"><span>Anfragen-</span><span>Manager</span></div>
+        </div>
+        <svg class="tuv-badge" viewBox="0 0 118 72" aria-label="TÜV Saarland SEHR GUT Kundenzufriedenheit">
+          <rect width="118" height="72" rx="2" fill="#1a4f8a" />
+          <text x="8" y="16" fill="#fff" font-size="9" font-family="Arial,sans-serif" font-weight="700">TÜV</text>
+          <text x="8" y="26" fill="#fff" font-size="7" font-family="Arial,sans-serif">SAARLAND</text>
+          <rect x="52" y="8" width="58" height="56" fill="#fff" />
+          <text x="58" y="32" fill="#1a4f8a" font-size="14" font-family="Arial,sans-serif" font-weight="700">SEHR</text>
+          <text x="58" y="48" fill="#1a4f8a" font-size="14" font-family="Arial,sans-serif" font-weight="700">GUT</text>
+          <text x="58" y="60" fill="#666" font-size="6" font-family="Arial,sans-serif">Kundenzufriedenheit</text>
+        </svg>
+      </header>
+      <hr class="divider" />
+      <div class="email-body">
+        <p>Guten Tag Sven,</p>
+        <p>vor einer Woche haben wir Sie kurz erinnert: Wer zeitnah auf Anfragen reagiert, hat erfahrungsgemäß die besten Chancen auf einen erfolgreichen Abschluss. <strong>Ein kurzer Blick in Ihren Account lohnt sich.</strong></p>
+        <p>Wenn Sie den Einstieg noch nicht gefunden haben oder Fragen zur Nutzung haben – vereinbaren Sie jetzt kurz einen Termin mit uns. Wir zeigen Ihnen in 15 Minuten, wie Sie das Beste aus Ihrem Anfragen-Manager herausholen.</p>
+        <div class="cta-wrap">
+          <a class="cta-button" href="#">Einloggen &amp; Anfragen prüfen</a>
+        </div>
+        <p class="closing-line">Wenden Sie sich jederzeit an Ihre Partnerbetreuerin – wir helfen gerne.</p>
+        <p class="sign-off">Freundliche Grüße<br />Ihr Anfragen-Manager-Team</p>
+      </div>
+    </div>
+    <footer class="email-footer">
+      <div class="footer-links">
+        <a href="#">AGB</a><span>|</span>
+        <a href="#">Datenschutz</a><span>|</span>
+        <a href="#">Impressum</a>
+      </div>
+      <div class="footer-legal">
+        <p>VP Verbund Pflegehilfe GmbH | Inge-Reitz-Straße 5-7 | 55120 Mainz | Deutschland</p>
+        <p>E-Mail: anfrage@pflegehilfe.de | Telefon: 06131/26 52 054</p>
+        <p>Geschäftsführer: Johannes Haas, Michael Haas, Maximilian Haas</p>
+        <p>Sitz der Gesellschaft: Mainz, Rheinland Pfalz</p>
+        <p>Registergericht: Amtsgericht Frankfurt am Main | Registernummer: HRB 109505</p>
+        <p>Umsatzsteuer-Identifikationsnummer gemäß § 27 a Umsatzsteuergesetz: DE315652480</p>
+      </div>
+    </footer>
+  </article>
+</body>
+</html>
