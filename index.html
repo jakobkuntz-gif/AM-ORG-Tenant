@@ -1016,33 +1016,193 @@
 
       .locations-title {
         margin: 0;
-        color: var(--primary);
-        font-size: var(--type-display-xl);
-        font-weight: 700;
-        line-height: 1.08;
-      }
-
-      .locations-subtitle {
-        margin-top: 8px;
-        color: var(--green);
-        font-size: var(--type-heading-md);
-        font-weight: 700;
+        color: var(--primary-dark);
+        font-size: var(--font-page-header);
+        font-weight: var(--font-section-heading-weight);
         line-height: 1.2;
       }
 
-      .locations-shell .auth-card {
-        margin-top: 52px;
+      .locations-description {
+        margin: 8px 0 0;
+        color: var(--muted);
+        font-size: var(--font-body);
+        line-height: 1.45;
       }
 
-      .locations-row {
-        min-height: 64px;
-        padding: 12px 18px;
-        border-top: var(--table-separator-width) solid var(--primary);
+      .locations-shell .auth-card {
+        margin-top: 20px;
+      }
+
+      .locations-toolbar {
+        margin-top: 14px;
         display: flex;
+        justify-content: flex-end;
+      }
+
+      .location-add-btn,
+      .locations-add-btn {
+        border: 0;
+        border-radius: 4px;
+        background: var(--green);
+        color: var(--white);
+        font-size: var(--font-body);
+        font-weight: 700;
+        line-height: 1;
+        padding: 10px 16px;
+        box-shadow: 0 1px 2px rgba(23, 44, 56, 0.2);
+        cursor: pointer;
+      }
+
+      .location-add-btn:hover,
+      .locations-add-btn:hover {
+        filter: brightness(0.96);
+      }
+
+      .locations-table {
+        width: 100%;
+        border-collapse: collapse;
+        table-layout: auto;
+      }
+
+      .locations-table thead th {
+        padding: 10px 14px;
+        background: var(--card-header-bg);
+        color: var(--white);
+        font-size: var(--font-section-heading);
+        font-weight: var(--font-section-heading-weight);
+        line-height: 1.35;
+        text-align: left;
+        vertical-align: middle;
+      }
+
+      .locations-table__name-head {
+        display: inline-flex;
         align-items: center;
-        font-size: 13px;
-        line-height: 1.25;
-        color: #111;
+        gap: 10px;
+      }
+
+      .locations-table__name-head i[class*="fa-"] {
+        font-size: 0.92em;
+        line-height: 1;
+      }
+
+      .locations-table__status-head {
+        width: auto;
+        white-space: nowrap;
+        padding-left: 12px;
+      }
+
+      .locations-table__end-head {
+        width: auto;
+        white-space: nowrap;
+        padding-left: 12px;
+      }
+
+      .locations-table__spacer-head,
+      .locations-table__spacer-cell {
+        padding: 0;
+        width: 99%;
+      }
+
+      .locations-table tbody td {
+        padding: 10px 14px;
+        border-top: var(--table-separator-width) solid var(--line);
+        font-size: var(--font-body);
+        line-height: 1.35;
+        color: var(--text);
+        vertical-align: middle;
+      }
+
+      .locations-table tbody td.locations-row__name {
+        padding-left: 40px;
+      }
+
+      .locations-table tbody td + td {
+        padding-left: 12px;
+        width: auto;
+        white-space: normal;
+      }
+
+      .location-status-wrap {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+      }
+
+      .location-status-chip {
+        flex: 0 0 auto;
+        min-width: 58px;
+        border-radius: 12px;
+        padding: 3px 10px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        font-size: var(--font-caption);
+        font-weight: 700;
+        line-height: 1.2;
+        border: 1px solid transparent;
+      }
+
+      .location-status-chip--active {
+        background: #e8f6df;
+        color: #4a6f1f;
+        border-color: #c8e3a8;
+      }
+
+      .location-status-chip--inactive {
+        background: var(--off-white);
+        color: var(--muted);
+        border-color: var(--line);
+        cursor: pointer;
+      }
+
+      .location-status-chip--inactive:hover {
+        border-color: var(--primary);
+        color: var(--primary-dark);
+      }
+
+      .location-status-chip--inactive:focus-visible {
+        outline: 2px solid var(--primary);
+        outline-offset: 2px;
+      }
+
+      .location-status-meta {
+        font-size: var(--font-helper);
+        color: var(--muted);
+        white-space: nowrap;
+      }
+
+      .location-end-wrap {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        white-space: nowrap;
+      }
+
+      .location-end-date {
+        font-size: var(--font-helper);
+        color: var(--text);
+      }
+
+      .location-end-open {
+        font-size: var(--font-helper);
+        color: var(--muted);
+      }
+
+      .location-extend-btn {
+        border: 1px solid var(--primary);
+        background: var(--white);
+        color: var(--primary-dark);
+        border-radius: 4px;
+        padding: 2px 8px;
+        font-size: var(--font-helper);
+        font-weight: 600;
+        line-height: 1.2;
+        cursor: pointer;
+      }
+
+      .location-extend-btn:hover {
+        background: var(--primary-surface);
       }
 
       .locations-row.empty {
@@ -1051,24 +1211,342 @@
       }
 
       .locations-footer {
-        border-top: var(--table-separator-width) solid var(--primary);
-        padding: 14px 18px;
-        color: #3f4750;
-        font-size: 12px;
+        border-top: var(--table-separator-width) solid var(--line);
+        padding: 12px 14px;
+        color: var(--muted);
+        font-size: var(--font-helper);
         line-height: 1.25;
         display: flex;
         justify-content: flex-end;
         align-items: center;
-        gap: 18px;
+        gap: 14px;
         background: var(--white);
       }
 
       .locations-footer button {
         border: 0;
         background: transparent;
-        color: #58616b;
+        color: var(--text);
         cursor: pointer;
+        font-size: var(--font-label);
+      }
+
+      .standort-modal-overlay {
+        position: fixed;
+        inset: 0;
+        display: none;
+        align-items: center;
+        justify-content: center;
+        background: rgba(15, 21, 25, 0.55);
+        z-index: 75;
+      }
+
+      .standort-modal-overlay.open {
+        display: flex;
+      }
+
+      .standort-modal {
+        width: min(92vw, 760px);
+        background: var(--white);
+        border-radius: 10px;
+        overflow: hidden;
+        box-shadow: 0 22px 44px rgba(0, 0, 0, 0.3);
+      }
+
+      .standort-modal-header {
+        background: var(--card-header-bg);
+        color: var(--white);
+        padding: 12px 16px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 12px;
+      }
+
+      .standort-modal-title {
+        margin: 0;
+        font-size: var(--font-section-heading);
+        font-weight: var(--font-section-heading-weight);
+      }
+
+      .standort-modal-close {
+        border: 0;
+        background: transparent;
+        color: var(--white);
+        font-size: 24px;
+        line-height: 1;
+        cursor: pointer;
+      }
+
+      .standort-modal-body {
+        padding: 16px;
+      }
+
+      .standort-form-grid {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(220px, 1fr));
+        gap: 12px;
+      }
+
+      .standort-form-field {
+        display: flex;
+        flex-direction: column;
+        gap: 6px;
+      }
+
+      .standort-form-field--full {
+        grid-column: 1 / -1;
+      }
+
+      .standort-form-field label {
+        font-size: var(--font-label);
+        font-weight: 700;
+      }
+
+      .standort-form-input {
+        height: 40px;
+        border: 1px solid #9ec6d7;
+        border-radius: 4px;
+        background: var(--white);
+        color: var(--text);
+        font-size: var(--font-body);
+        padding: 0 10px;
+      }
+
+      .standort-modal-actions {
+        margin-top: 14px;
+        display: flex;
+        justify-content: flex-end;
+        gap: 10px;
+      }
+
+      .standort-form-error {
+        margin: 8px 0 0;
+        color: var(--red);
+        font-size: var(--font-helper);
+      }
+
+      .locations-toolbar {
+        display: flex;
+        justify-content: flex-end;
+        margin-top: 14px;
+        margin-bottom: 8px;
+      }
+
+      .location-add-btn {
+        border: 1px solid #79ad31;
+        background: var(--green);
+        color: var(--white);
+        border-radius: 4px;
+        padding: 8px 14px;
+        font-size: var(--font-label);
+        font-weight: 700;
+        line-height: 1.2;
+        cursor: pointer;
+        box-shadow: 0 2px 0 rgba(0, 0, 0, 0.12);
+      }
+
+      .location-add-btn:hover {
+        filter: brightness(0.97);
+      }
+
+      .location-modal-overlay {
+        position: fixed;
+        inset: 0;
+        background: rgba(25, 35, 44, 0.35);
+        display: none;
+        align-items: center;
+        justify-content: center;
+        z-index: 1200;
+        padding: 20px;
+      }
+
+      .location-modal-overlay.open {
+        display: flex;
+      }
+
+      .location-modal {
+        width: min(100%, 620px);
+        background: var(--white);
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        box-shadow: 0 14px 42px rgba(14, 38, 56, 0.22);
+        overflow: hidden;
+      }
+
+      .location-modal-head {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 12px;
+        padding: 12px 16px;
+        background: var(--card-header-bg);
+        color: var(--white);
+      }
+
+      .location-modal-title {
+        margin: 0;
+        font-size: var(--font-section-heading);
+        font-weight: var(--font-section-heading-weight);
+        line-height: 1.3;
+      }
+
+      .location-modal-close {
+        border: 0;
+        background: transparent;
+        color: var(--white);
+        font-size: 24px;
+        line-height: 1;
+        cursor: pointer;
+      }
+
+      .location-modal-body {
+        padding: 16px;
+      }
+
+      .location-modal-help {
+        margin: 0 0 12px;
+        font-size: var(--font-helper);
+        line-height: 1.4;
+        color: var(--muted);
+      }
+
+      .location-form-grid {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 12px 14px;
+      }
+
+      .location-form-field {
+        display: flex;
+        flex-direction: column;
+        gap: 6px;
+      }
+
+      .location-form-field.full {
+        grid-column: 1 / -1;
+      }
+
+      .location-form-field label {
+        font-size: var(--font-helper);
+        color: var(--muted);
+        font-weight: 600;
+      }
+
+      .location-form-field input {
+        height: 36px;
+        border: 1px solid var(--line);
+        border-radius: 4px;
+        padding: 0 10px;
+        font-size: var(--font-body);
+        color: var(--text);
+        background: var(--white);
+      }
+
+      .location-modal-actions {
+        display: flex;
+        justify-content: flex-end;
+        margin-top: 14px;
+      }
+
+      .location-submit-btn {
+        border: 0;
+        border-radius: 4px;
+        background: var(--primary);
+        color: var(--white);
+        padding: 10px 14px;
+        font-size: var(--font-body);
+        font-weight: 700;
+        cursor: pointer;
+      }
+
+      .location-submit-btn:hover {
+        background: var(--primary-dark);
+      }
+
+      .toast {
+        position: fixed;
+        right: 20px;
+        top: calc(var(--topbar-height) + var(--topbar-separator-height) + 16px);
+        z-index: 1300;
+        max-width: min(92vw, 460px);
+        opacity: 0;
+        transform: translateY(10px);
+        pointer-events: none;
+        transition: opacity 0.22s ease, transform 0.22s ease;
+      }
+
+      .toast.open {
+        opacity: 1;
+        transform: translateY(0);
+        pointer-events: auto;
+      }
+
+      .toast__inner {
+        display: flex;
+        align-items: flex-start;
+        gap: 10px;
+        padding: 12px 14px;
+        border: 1px solid var(--line);
+        border-left: 4px solid var(--green);
+        border-radius: 8px;
+        background: var(--white);
+        box-shadow: 0 8px 24px rgba(23, 44, 56, 0.14);
+      }
+
+      .toast__icon {
+        flex: 0 0 auto;
+        align-self: center;
+        width: auto;
+        height: auto;
+        background: transparent;
+        color: var(--green);
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 19px;
+        margin-top: 0;
+        line-height: 1;
+      }
+
+      .toast__content {
+        flex: 1;
+        min-width: 0;
+      }
+
+      .toast__title {
+        margin: 0 0 2px;
+        font-size: var(--font-label);
+        font-weight: 700;
+        color: var(--text);
+        line-height: 1.3;
+      }
+
+      .toast__message {
+        margin: 0;
+        font-size: var(--font-body);
+        line-height: 1.45;
+        color: var(--text);
+      }
+
+      .toast__close {
+        flex: 0 0 auto;
+        margin-top: 2px;
+        border: 0;
+        background: transparent;
+        color: var(--muted);
         font-size: 18px;
+        line-height: 1;
+        cursor: pointer;
+        padding: 0 2px;
+      }
+
+      .toast__close:hover {
+        color: var(--text);
+      }
+
+      .toast.hidden {
+        display: none;
       }
 
       .stats-page {
@@ -1590,8 +2068,8 @@
       }
 
       .locations-table-head {
-        font-size: 13px;
-        padding: 11px 14px;
+        font-size: var(--font-section-heading);
+        padding: 10px 14px;
       }
 
       /* FA icons optically read larger than the title — scale to align with the header wordmark */
@@ -3223,24 +3701,196 @@
 
         <section id="meineStandortePage" class="locations-page">
           <div class="locations-shell">
-            <h2 class="locations-title">Meine Standorte</h2>
-            <div class="locations-subtitle">Ihre aktiven Standorte</div>
+            <h2 class="locations-title">Ihr Standort-Management</h2>
+            <p class="locations-description">
+              Nutzen Sie die Übersicht zum Standort-Management. Fügen Sie neue Standorte hinzu und
+              behalten Sie jederzeit die Kontrolle.
+            </p>
+            <div class="locations-toolbar">
+              <button id="openStandortModalBtn" class="location-add-btn" type="button">
+                Standort hinzufügen
+              </button>
+            </div>
 
             <div class="auth-card">
-              <div class="auth-card__header locations-table-head">
-                <i class="fa-solid fa-location-dot" aria-hidden="true"></i>
-                <span>Standorte</span>
-              </div>
               <div class="auth-card__body auth-card__body--flush">
-              <div class="locations-row">Mainz</div>
-              <div class="locations-row">Frankfurt</div>
-              <div class="locations-row">Wiesbaden</div>
-              <div class="locations-row">Berlin</div>
-              <div class="locations-row">Kaiserslautern</div>
+              <table class="locations-table">
+                <colgroup>
+                  <col class="locations-table__col-name" />
+                  <col class="locations-table__col-status" />
+                  <col class="locations-table__col-end" />
+                  <col class="locations-table__col-spacer" />
+                </colgroup>
+                <thead>
+                  <tr>
+                    <th scope="col">
+                      <span class="locations-table__name-head">
+                        <i class="fa-solid fa-location-dot" aria-hidden="true"></i>
+                        <span>Standorte</span>
+                      </span>
+                    </th>
+                    <th scope="col" class="locations-table__status-head">Status</th>
+                    <th scope="col" class="locations-table__end-head">Laufzeitende</th>
+                    <th scope="col" class="locations-table__spacer-head" aria-hidden="true"></th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="locations-row__name">Mainz</td>
+                    <td>
+                      <div class="location-status-wrap">
+                        <span class="location-status-chip location-status-chip--active">Aktiv</span>
+                        <span class="location-status-meta">Start: 01.01.2026 | 12 Monate</span>
+                      </div>
+                    </td>
+                    <td>
+                      <span class="location-end-open">fortlaufend</span>
+                    </td>
+                    <td class="locations-table__spacer-cell" aria-hidden="true"></td>
+                  </tr>
+                  <tr>
+                    <td class="locations-row__name">Frankfurt</td>
+                    <td>
+                      <div class="location-status-wrap">
+                        <span class="location-status-chip location-status-chip--active">Aktiv</span>
+                        <span class="location-status-meta">Start: 01.03.2026 | 6 Monate</span>
+                      </div>
+                    </td>
+                    <td>
+                      <div class="location-end-wrap">
+                        <span class="location-end-date">31.08.2026</span>
+                        <button
+                          type="button"
+                          class="location-extend-btn"
+                          data-action="extend"
+                        >
+                          jetzt verlängern
+                        </button>
+                      </div>
+                    </td>
+                    <td class="locations-table__spacer-cell" aria-hidden="true"></td>
+                  </tr>
+                  <tr>
+                    <td class="locations-row__name">Wiesbaden</td>
+                    <td>
+                      <div class="location-status-wrap">
+                        <span class="location-status-chip location-status-chip--active">Aktiv</span>
+                        <span class="location-status-meta">Start: 15.03.2026 | 3 Monate</span>
+                      </div>
+                    </td>
+                    <td>
+                      <div class="location-end-wrap">
+                        <span class="location-end-date">14.06.2026</span>
+                        <button
+                          type="button"
+                          class="location-extend-btn"
+                          data-action="extend"
+                        >
+                          jetzt verlängern
+                        </button>
+                      </div>
+                    </td>
+                    <td class="locations-table__spacer-cell" aria-hidden="true"></td>
+                  </tr>
+                  <tr>
+                    <td class="locations-row__name">Berlin</td>
+                    <td>
+                      <div class="location-status-wrap">
+                        <span class="location-status-chip location-status-chip--active">Aktiv</span>
+                        <span class="location-status-meta">Start: 01.04.2026 | 1 Monat</span>
+                      </div>
+                    </td>
+                    <td>
+                      <div class="location-end-wrap">
+                        <span class="location-end-date">30.04.2026</span>
+                        <button
+                          type="button"
+                          class="location-extend-btn"
+                          data-action="extend"
+                        >
+                          jetzt verlängern
+                        </button>
+                      </div>
+                    </td>
+                    <td class="locations-table__spacer-cell" aria-hidden="true"></td>
+                  </tr>
+                  <tr>
+                    <td class="locations-row__name">Kaiserslautern</td>
+                    <td>
+                      <div class="location-status-wrap">
+                        <span class="location-status-chip location-status-chip--active">Aktiv</span>
+                        <span class="location-status-meta">Start: 10.02.2026 | 12 Monate</span>
+                      </div>
+                    </td>
+                    <td>
+                      <span class="location-end-open">fortlaufend</span>
+                    </td>
+                    <td class="locations-table__spacer-cell" aria-hidden="true"></td>
+                  </tr>
+                  <tr>
+                    <td class="locations-row__name">Koblenz</td>
+                    <td>
+                      <div class="location-status-wrap">
+                        <button
+                          type="button"
+                          class="location-status-chip location-status-chip--inactive"
+                          data-location="Koblenz"
+                          aria-label="Koblenz reaktivieren"
+                        >
+                          pausiert
+                        </button>
+                        <span class="location-status-meta">Start: 01.08.2025 | 6 Monate</span>
+                      </div>
+                    </td>
+                    <td>
+                      <div class="location-end-wrap">
+                        <span class="location-end-date">31.01.2026</span>
+                        <button
+                          type="button"
+                          class="location-extend-btn"
+                          data-action="reactivate"
+                        >
+                          jetzt reaktivieren
+                        </button>
+                      </div>
+                    </td>
+                    <td class="locations-table__spacer-cell" aria-hidden="true"></td>
+                  </tr>
+                  <tr>
+                    <td class="locations-row__name">Saarbrücken</td>
+                    <td>
+                      <div class="location-status-wrap">
+                        <button
+                          type="button"
+                          class="location-status-chip location-status-chip--inactive"
+                          data-location="Saarbrücken"
+                          aria-label="Saarbrücken reaktivieren"
+                        >
+                          pausiert
+                        </button>
+                        <span class="location-status-meta">Start: 01.01.2026 | 3 Monate</span>
+                      </div>
+                    </td>
+                    <td>
+                      <div class="location-end-wrap">
+                        <span class="location-end-date">31.03.2026</span>
+                        <button
+                          type="button"
+                          class="location-extend-btn"
+                          data-action="reactivate"
+                        >
+                          jetzt reaktivieren
+                        </button>
+                      </div>
+                    </td>
+                    <td class="locations-table__spacer-cell" aria-hidden="true"></td>
+                  </tr>
+                </tbody>
+              </table>
               <div class="locations-footer">
                 <span>Standorte pro Seite:</span>
-                <span>5</span>
-                <span>1-5 von 5</span>
+                <span>7</span>
+                <span>1-7 von 7</span>
                 <button type="button" aria-label="Vorherige Seite">
                   <i class="fa-solid fa-chevron-left" aria-hidden="true"></i>
                 </button>
@@ -4207,6 +4857,103 @@
       </div>
     </aside>
 
+    <div id="standortModalOverlay" class="location-modal-overlay" aria-hidden="true">
+      <div class="location-modal" role="dialog" aria-modal="true" aria-labelledby="standortModalTitle">
+        <div class="location-modal-head">
+          <h3 id="standortModalTitle" class="location-modal-title">
+            Wachsen Sie mit einem neuen Standort
+          </h3>
+          <button
+            id="standortModalCloseBtn"
+            class="location-modal-close"
+            type="button"
+            aria-label="Modal schließen"
+          >
+            &times;
+          </button>
+        </div>
+        <form id="standortModalForm" class="location-modal-body">
+          <p class="location-modal-help">
+            Teilen Sie uns mit, welchen Standort Ihrer Organisation Sie gerne zum Anfragen-Manager
+            hinzufügen möchten. Wir melden uns danach bei Ihnen um die beste Option zu besprechen.
+          </p>
+          <div class="location-form-grid">
+            <div class="location-form-field full">
+              <label for="standortNameInput">Name des Standorts</label>
+              <input id="standortNameInput" name="standortName" required />
+            </div>
+            <div class="location-form-field">
+              <label for="standortStreetInput">Straße Hausnummer</label>
+              <input id="standortStreetInput" name="standortStreet" required />
+            </div>
+            <div class="location-form-field">
+              <label for="standortCityInput">Postleitzahl Ort</label>
+              <input id="standortCityInput" name="standortCity" required />
+            </div>
+            <div class="location-form-field">
+              <label for="standortContactInput">Ansprechpartner</label>
+              <input id="standortContactInput" name="standortContact" required />
+            </div>
+            <div class="location-form-field">
+              <label for="standortPhoneInput">Telefonnummer für Rückruf</label>
+              <input id="standortPhoneInput" name="standortPhone" required />
+            </div>
+          </div>
+          <div class="location-modal-actions">
+            <button id="standortSubmitBtn" class="location-submit-btn" type="submit">
+              Jetzt Anfrage senden
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <div
+      id="reactivationModalOverlay"
+      class="location-modal-overlay"
+      aria-hidden="true"
+    >
+      <div class="location-modal" role="dialog" aria-modal="true" aria-labelledby="reactivationModalTitle">
+        <div class="location-modal-head">
+          <h3 id="reactivationModalTitle" class="location-modal-title">
+            Standort kommt zurück
+          </h3>
+          <button
+            id="reactivationModalCloseBtn"
+            class="location-modal-close"
+            type="button"
+            aria-label="Modal schließen"
+          >
+            &times;
+          </button>
+        </div>
+        <div class="location-modal-body">
+          <p id="reactivationModalBodyText" class="location-modal-help"></p>
+          <p id="reactivationModalLocationText" class="location-modal-help hidden"></p>
+          <div class="location-modal-actions">
+            <button
+              id="reactivationRequestBtn"
+              class="location-submit-btn"
+              type="button"
+            >
+              Jetzt Reaktivierungsanfrage senden
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div id="appToast" class="toast hidden" role="status" aria-live="polite" aria-atomic="true">
+      <div class="toast__inner">
+        <span class="toast__icon" aria-hidden="true"><i class="fa-solid fa-circle-check"></i></span>
+        <div class="toast__content">
+          <p class="toast__title">Anfrage gesendet</p>
+          <p class="toast__message"></p>
+        </div>
+        <button type="button" class="toast__close" aria-label="Hinweis schließen">&times;</button>
+      </div>
+    </div>
+
     <script>
       const drawer = document.getElementById("drawer");
       let rows = [];
@@ -4246,6 +4993,18 @@
       const menuMeinKontoBtn = document.getElementById("menuMeinKontoBtn");
       const menuMeineStandorteBtn = document.getElementById("menuMeineStandorteBtn");
       const menuMeineStatistikenBtn = document.getElementById("menuMeineStatistikenBtn");
+      const openStandortModalBtn = document.getElementById("openStandortModalBtn");
+      const standortModalOverlay = document.getElementById("standortModalOverlay");
+      const standortModalCloseBtn = document.getElementById("standortModalCloseBtn");
+      const standortModalForm = document.getElementById("standortModalForm");
+      const reactivationModalOverlay = document.getElementById("reactivationModalOverlay");
+      const reactivationModalCloseBtn = document.getElementById("reactivationModalCloseBtn");
+      const reactivationModalTitle = document.getElementById("reactivationModalTitle");
+      const reactivationModalBodyText = document.getElementById("reactivationModalBodyText");
+      const reactivationModalLocationText = document.getElementById("reactivationModalLocationText");
+      const reactivationRequestBtn = document.getElementById("reactivationRequestBtn");
+      const appToast = document.getElementById("appToast");
+      const appToastCloseBtn = appToast?.querySelector(".toast__close");
       const sidebarTenantName = document.getElementById("sidebarTenantName");
       const detailStandortSelect = document.getElementById("detailStandortSelect");
       const profileUploadBtn = document.getElementById("profileUploadBtn");
@@ -4301,6 +5060,11 @@
         "ownerFilter",
         "locationFilter",
       ];
+      const standortSalesTasks = [];
+      let standortSalesTaskTab = null;
+      let standortToastTimer = null;
+      let selectedReactivationStandort = "";
+      let selectedReactivationAction = "reactivate";
       let currentLeadNumber = "";
       let currentLeadCanEdit = false;
       const leadCommentsById = new Map();
@@ -5182,7 +5946,7 @@
 
       function buildAssignableStandorte() {
         const locationRows = Array.from(
-          document.querySelectorAll("#meineStandortePage .locations-row:not(.empty)"),
+          document.querySelectorAll("#meineStandortePage .locations-row__name"),
         )
           .map((node) => node.textContent.trim())
           .filter(Boolean);
@@ -5763,6 +6527,520 @@
         setActiveMenu(menuMeineStandorteBtn);
       }
 
+      function openStandortModal() {
+        if (!standortModalOverlay) return;
+        standortModalOverlay.classList.add("open");
+        standortModalOverlay.setAttribute("aria-hidden", "false");
+      }
+
+      function closeStandortModal() {
+        if (!standortModalOverlay) return;
+        standortModalOverlay.classList.remove("open");
+        standortModalOverlay.setAttribute("aria-hidden", "true");
+      }
+
+      function openReactivationModal(locationName, actionType = "reactivate") {
+        if (!reactivationModalOverlay) return;
+        selectedReactivationStandort = String(locationName || "").trim();
+        selectedReactivationAction = actionType === "extend" ? "extend" : "reactivate";
+        if (reactivationModalTitle) {
+          reactivationModalTitle.textContent =
+            selectedReactivationAction === "extend"
+              ? selectedReactivationStandort
+                ? `Gute Entscheidung für ${selectedReactivationStandort}`
+                : "Gute Entscheidung"
+              : selectedReactivationStandort
+                ? `${selectedReactivationStandort} kommt zurück`
+                : "Standort kommt zurück";
+        }
+        if (reactivationModalBodyText) {
+          reactivationModalBodyText.textContent =
+            selectedReactivationAction === "extend"
+              ? selectedReactivationStandort
+                ? `Senden Sie eine Anfrage an Ihre Ansprechpartnerin um die Laufzeit für ${selectedReactivationStandort} zu verlängern. Besprechen Sie die passendste Option.`
+                : "Senden Sie eine Anfrage an Ihre Ansprechpartnerin um die Laufzeit zu verlängern. Besprechen Sie die passendste Option."
+              : selectedReactivationStandort
+                ? `Schön, dass Sie den Standort ${selectedReactivationStandort} reaktivieren möchten. Senden Sie dazu eine kurze Anfrage an Ihre Ansprechpartnerin und besprechen Sie die beste Option.`
+                : "Schön, dass Sie den Standort reaktivieren möchten. Senden Sie dazu eine kurze Anfrage an Ihre Ansprechpartnerin und besprechen Sie die beste Option.";
+        }
+        if (reactivationModalLocationText) {
+          reactivationModalLocationText.textContent = "";
+          reactivationModalLocationText.classList.add("hidden");
+        }
+        if (reactivationRequestBtn) {
+          reactivationRequestBtn.textContent =
+            selectedReactivationAction === "extend"
+              ? "Jetzt Verlängerungsanfrage senden"
+              : "Jetzt Reaktivierungsanfrage senden";
+        }
+        reactivationModalOverlay.classList.add("open");
+        reactivationModalOverlay.setAttribute("aria-hidden", "false");
+      }
+
+      function closeReactivationModal() {
+        if (!reactivationModalOverlay) return;
+        reactivationModalOverlay.classList.remove("open");
+        reactivationModalOverlay.setAttribute("aria-hidden", "true");
+      }
+
+      function getStandortRequestToastMessage(standortName) {
+        const name = String(standortName || "").trim();
+        return name
+          ? `Ihre Anfrage für ${name} ist unterwegs - wir melden uns.`
+          : "Ihre Anfrage ist unterwegs - wir melden uns.";
+      }
+
+      function hideAppToast() {
+        if (!appToast) return;
+        appToast.classList.remove("open");
+        if (standortToastTimer) {
+          window.clearTimeout(standortToastTimer);
+          standortToastTimer = null;
+        }
+      }
+
+      function showStandortRequestToast(standortName) {
+        showAppToast(getStandortRequestToastMessage(standortName), 6000, "Anfrage gesendet");
+      }
+
+      function showAppToast(message, durationMs = 6000, title = "Anfrage gesendet") {
+        if (!appToast) return;
+        const titleEl = appToast.querySelector(".toast__title");
+        const messageEl = appToast.querySelector(".toast__message");
+        if (titleEl) titleEl.textContent = title;
+        if (messageEl) messageEl.textContent = message;
+        appToast.classList.remove("hidden");
+        window.requestAnimationFrame(() => {
+          appToast.classList.add("open");
+        });
+        if (standortToastTimer) window.clearTimeout(standortToastTimer);
+        standortToastTimer = window.setTimeout(hideAppToast, durationMs);
+      }
+
+      function escapeHtmlForSalesTask(value) {
+        return String(value || "")
+          .replaceAll("&", "&amp;")
+          .replaceAll("<", "&lt;")
+          .replaceAll(">", "&gt;")
+          .replaceAll('"', "&quot;")
+          .replaceAll("'", "&#039;");
+      }
+
+      function renderSalesTaskCommentHtml(task) {
+        return `<span class="link">Vertrag abschließen für einen neuen Standort - Dein ASP möchte einen neuen Standort für den Anfragen-Manager freischalten</span><br/>
+          Standortname: ${escapeHtmlForSalesTask(task.standortName)}<br/>
+          Standortadresse: ${escapeHtmlForSalesTask(task.addressLine)}<br/>
+          Name des ASP: ${escapeHtmlForSalesTask(task.contact)}<br/>
+          Telefonnummer: ${escapeHtmlForSalesTask(task.phone)}`;
+      }
+
+      function renderSalesTaskTabHtml(tasks) {
+        const incomingRows = tasks
+          .map(
+            (task) => `
+              <tr>
+                <td>${escapeHtmlForSalesTask(task.createdAt)}</td>
+                <td><span class="severity"><span class="dot red"></span>Vertrieb Anfragen-Manager</span></td>
+                <td>System</td>
+                <td>${renderSalesTaskCommentHtml(task)}</td>
+              </tr>`,
+          )
+          .join("");
+        const staticRows = `
+              <tr>
+                <td>23.03.2026 14:09</td>
+                <td><span class="severity"><span class="dot red"></span>Externer Hinweis</span></td>
+                <td>System</td>
+                <td><span class="link">Ein Ansprechpartner hat am 23.03.2026 14:09 ein Interesse am Anfragen-Manager bekundet.</span></td>
+              </tr>
+              <tr>
+                <td>23.03.2026 14:07</td>
+                <td>Externer Hinweis</td>
+                <td>System</td>
+                <td><span class="link">Dies ist ein bereits hinterlegter Hinweis. Kontext zur Aufgabe wird hier dokumentiert.</span></td>
+              </tr>
+              <tr>
+                <td>07.04.2025 14:34</td>
+                <td>Rückmeldung Kapazitäts-Anfrage</td>
+                <td>marketing@pflegehilfe.de</td>
+                <td><span class="link">Dies ist ein manuell hinzugefügter Action für die negative Rückmeldung auf eine Std. Betreuung-Warteliste Anfrage.</span></td>
+              </tr>`;
+        const safeRows =
+          incomingRows ||
+          `<tr><td colspan="4" style="text-align:center;color:var(--muted);padding:14px">Noch keine neuen Standortanfragen. Die Ansicht dient als statische Visualisierung für den Vertrieb.</td></tr>`;
+        const allRows = `${safeRows}${staticRows}`;
+        return `<!DOCTYPE html>
+<html lang="de">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Vertrieb Anfragen-Manager</title>
+    <style>
+      :root {
+        --line: #d9d9d9;
+        --line-soft: #eceff2;
+        --text: #2b2b2b;
+        --muted: #707070;
+        --white: #ffffff;
+        --blue: #4c8ba5;
+        --blue-dark: #2f7287;
+        --green: #98c44c;
+        --green-soft: #e8f6df;
+        --bg-panel: #f5f7f9;
+        --text-soft: #516a7c;
+      }
+      * { box-sizing: border-box; }
+      body {
+        margin: 0;
+        font-family: "Segoe UI", Arial, sans-serif;
+        color: var(--text);
+        background: var(--bg-panel);
+      }
+      .workspace {
+        padding: 8px;
+      }
+      .window {
+        border: 1px solid var(--line);
+        background: var(--white);
+        box-shadow: 0 4px 14px rgba(21, 38, 52, 0.08);
+      }
+      .top-strip {
+        border-bottom: 1px solid var(--line);
+        padding: 4px 10px;
+        font-size: 10px;
+        color: var(--text-soft);
+        background: var(--white);
+        display: flex;
+        gap: 10px;
+        align-items: center;
+        white-space: nowrap;
+        overflow: hidden;
+      }
+      .top-strip .right {
+        margin-left: auto;
+        display: inline-flex;
+        gap: 6px;
+        align-items: center;
+      }
+      .page {
+        padding: 8px 10px 10px;
+      }
+      .toolbar-line {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 10px;
+        margin-bottom: 6px;
+      }
+      .toolbar-title {
+        font-size: 12px;
+        color: var(--blue-dark);
+      }
+      .toolbar-actions {
+        display: inline-flex;
+        gap: 4px;
+        align-items: center;
+        font-size: 10px;
+        color: #446176;
+      }
+      .chip {
+        border: 1px solid var(--line);
+        border-radius: 2px;
+        padding: 2px 6px;
+        background: #ffffff;
+      }
+      .btn-mini {
+        height: 16px;
+        min-width: 16px;
+        border: 0;
+        border-radius: 2px;
+        color: #fff;
+        font-size: 10px;
+        line-height: 1;
+      }
+      .btn-mini.green { background: #69b632; }
+      .btn-mini.orange { background: #ee9e21; }
+      .btn-mini.red { background: #eb6a69; }
+      .meta-grid {
+        border: 1px solid var(--line);
+        margin-bottom: 7px;
+      }
+      .meta-head, .meta-row {
+        display: grid;
+        grid-template-columns: 120px 70px 70px 70px 1fr 160px 170px;
+        gap: 0;
+      }
+      .meta-head div {
+        font-size: 9px;
+        color: var(--text-soft);
+        padding: 4px 6px;
+        border-right: 1px solid var(--line-soft);
+        border-bottom: 1px solid var(--line);
+        background: #f8fafc;
+        font-weight: 600;
+      }
+      .meta-row div {
+        font-size: 9px;
+        color: var(--blue-dark);
+        padding: 5px 6px;
+        border-right: 1px solid var(--line-soft);
+      }
+      .meta-row .mail {
+        background: var(--green-soft);
+      }
+      .meta-row .num em {
+        background: #45b649;
+        color: #fff;
+        border-radius: 2px;
+        padding: 1px 4px;
+        font-style: normal;
+        margin-left: 4px;
+      }
+      .task-toolbar {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        font-size: 10px;
+        color: var(--text-soft);
+        margin: 8px 0 4px;
+      }
+      .task-toolbar .left,
+      .task-toolbar .right {
+        display: inline-flex;
+        gap: 6px;
+        align-items: center;
+      }
+      .task-card {
+        border: 1px solid var(--line);
+      }
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        table-layout: fixed;
+      }
+      th, td {
+        border-bottom: 1px solid #eef2f5;
+        border-right: 1px solid #f3f5f7;
+        padding: 3px 6px;
+        text-align: left;
+        vertical-align: top;
+        font-size: 10px;
+        line-height: 1.2;
+      }
+      th {
+        font-weight: 600;
+        color: var(--text-soft);
+        background: #f7f9fb;
+      }
+      td:last-child, th:last-child { border-right: 0; }
+      tbody tr:last-child td { border-bottom: 0; }
+      .severity {
+        display: inline-flex;
+        align-items: center;
+        gap: 4px;
+      }
+      .dot {
+        width: 7px;
+        height: 7px;
+        border-radius: 50%;
+        display: inline-block;
+      }
+      .dot.red { background: #e25f5f; }
+      .link {
+        color: #2b7aac;
+        text-decoration: underline;
+      }
+      .footer-controls {
+        display: flex;
+        justify-content: flex-end;
+        gap: 8px;
+        align-items: center;
+        font-size: 10px;
+        color: #5c7384;
+        margin-top: 5px;
+      }
+      .pager {
+        border: 1px solid var(--line);
+        padding: 1px 5px;
+        border-radius: 2px;
+        background: #fff;
+      }
+      .composer-grid {
+        margin-top: 7px;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 8px;
+      }
+      .composer-box {
+        border: 1px solid var(--line);
+        padding: 4px;
+        min-height: 74px;
+      }
+      .composer-head {
+        display: inline-flex;
+        gap: 8px;
+        align-items: center;
+        font-size: 10px;
+        color: var(--blue-dark);
+        margin-bottom: 4px;
+      }
+      .composer-input {
+        width: 100%;
+        min-height: 48px;
+        border: 1px solid var(--line);
+        padding: 4px;
+        font-size: 10px;
+        color: var(--text);
+        resize: none;
+        font-family: "Segoe UI", Arial, sans-serif;
+      }
+      .composer-actions {
+        margin-top: 5px;
+        display: inline-flex;
+        gap: 5px;
+      }
+      .btn-light {
+        border: 1px solid var(--line);
+        background: var(--white);
+        color: var(--blue-dark);
+        border-radius: 2px;
+        font-size: 10px;
+        padding: 2px 7px;
+      }
+      .btn-primary {
+        border: 1px solid #46b4dc;
+        background: #46b4dc;
+        color: var(--white);
+        border-radius: 2px;
+        font-size: 10px;
+        padding: 2px 7px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="workspace">
+      <div class="window">
+        <div class="top-strip">
+          <span>BRK, Sozialstation Nabburg</span>
+          <span>92507, Nabburg</span>
+          <span>Pflegedienst, Std. Betreuung, Haushaltshilfe</span>
+          <div class="right">
+            <span class="chip">DE</span>
+            <span class="chip">OE</span>
+            <button class="btn-mini red">×</button>
+          </div>
+        </div>
+        <div class="page">
+          <div class="toolbar-line">
+            <div class="toolbar-title">Vertrieb Anfragen-Manager, Negative Rückmeldung Warteliste, Positive Rückmeldung Warteliste</div>
+            <div class="toolbar-actions">
+              <span class="link">+ Neuer Ansprechpartner</span>
+              <button class="btn-mini red">■</button>
+              <button class="btn-mini green">⌕</button>
+              <button class="btn-mini orange">✎</button>
+            </div>
+          </div>
+
+          <div class="meta-grid">
+            <div class="meta-head">
+              <div>Position</div>
+              <div>Anrede</div>
+              <div>Vorname</div>
+              <div>Nachname</div>
+              <div>Email</div>
+              <div>Verantwortlichkeiten</div>
+              <div>Nummer</div>
+            </div>
+            <div class="meta-row">
+              <div>Büro</div>
+              <div>unbekannt</div>
+              <div>unbekannt</div>
+              <div>unbekannt</div>
+              <div class="mail">sales@awkwardsnorf.brk.de</div>
+              <div>Lead: 5x<br/>Stornierung: 0x<br/>Richtung: 0x</div>
+              <div class="num">09433 / 20439 11<br/>09323 / 20439 521 <em>Anrufen</em></div>
+            </div>
+          </div>
+
+          <div class="task-toolbar">
+            <div class="left">
+              <span class="chip">Produkt</span>
+              <span class="chip">Preis</span>
+              <span class="chip">Anfragenlimit</span>
+              <span class="chip">Anfrageninformationen</span>
+              <span class="chip">Zeitspanne</span>
+            </div>
+            <div class="right">
+              <span class="link">Anfragen-Manager Admin Tool</span>
+              <span class="link">Leadpreis-Rechner</span>
+              <span class="link">+ Neue Buchung</span>
+            </div>
+          </div>
+
+          <div class="task-card">
+            <table>
+              <thead>
+                <tr>
+                  <th style="width:120px">Datum</th>
+                  <th style="width:170px">Aufgabe</th>
+                  <th style="width:120px">Mitarbeiter</th>
+                  <th>Kommentar</th>
+                </tr>
+              </thead>
+              <tbody>${allRows}</tbody>
+            </table>
+          </div>
+
+          <div class="footer-controls">
+            <span>nur: anzeigen</span>
+            <span class="pager">1</span>
+            <span class="pager">2</span>
+            <span class="pager">3</span>
+          </div>
+
+          <div class="composer-grid">
+            <div class="composer-box">
+              <div class="composer-head">
+                <span>Interner Kommentar</span>
+                <span class="link">Anfragen</span>
+                <span class="link">Zustellungen</span>
+              </div>
+              <textarea class="composer-input" placeholder="Kommentar für das Team..."></textarea>
+              <div class="composer-actions">
+                <button class="btn-primary">Kommentar hinzufügen</button>
+                <button class="btn-light">Vorlagen</button>
+              </div>
+            </div>
+            <div class="composer-box">
+              <div class="composer-head">
+                <span>gesendet • 23.03.26, Mite</span>
+              </div>
+              <textarea class="composer-input" placeholder="Text für Rückmeldung oder Angebot..."></textarea>
+              <div class="composer-actions">
+                <button class="btn-primary">Kommentar hinzufügen</button>
+                <button class="btn-light">Speichern</button>
+                <button class="btn-light">Weiter</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>`;
+      }
+
+      function openOrRefreshSalesTaskTab() {
+        const html = renderSalesTaskTabHtml(standortSalesTasks);
+        if (!standortSalesTaskTab || standortSalesTaskTab.closed) {
+          standortSalesTaskTab = window.open("", "_blank");
+        }
+        if (!standortSalesTaskTab) return;
+        standortSalesTaskTab.document.open();
+        standortSalesTaskTab.document.write(html);
+        standortSalesTaskTab.document.close();
+      }
+
       function setStatsTab(tabKey) {
         document.querySelectorAll(".stats-tab").forEach((btn) => {
           const active = btn.dataset.statsTab === tabKey;
@@ -6046,6 +7324,92 @@
       menuMeineAnfragenBtn.addEventListener("click", openOverviewPage);
       menuMeinKontoBtn.addEventListener("click", openMeinKontoPage);
       menuMeineStandorteBtn.addEventListener("click", openMeineStandortePage);
+      if (appToastCloseBtn) {
+        appToastCloseBtn.addEventListener("click", hideAppToast);
+      }
+      if (appToast) {
+        appToast.addEventListener("transitionend", (event) => {
+          if (event.target !== appToast || event.propertyName !== "opacity") return;
+          if (!appToast.classList.contains("open")) {
+            appToast.classList.add("hidden");
+          }
+        });
+      }
+      if (openStandortModalBtn) {
+        openStandortModalBtn.addEventListener("click", openStandortModal);
+      }
+      if (standortModalCloseBtn) {
+        standortModalCloseBtn.addEventListener("click", closeStandortModal);
+      }
+      if (standortModalOverlay) {
+        standortModalOverlay.addEventListener("click", (event) => {
+          if (event.target === standortModalOverlay) closeStandortModal();
+        });
+      }
+      if (reactivationModalCloseBtn) {
+        reactivationModalCloseBtn.addEventListener("click", closeReactivationModal);
+      }
+      if (reactivationModalOverlay) {
+        reactivationModalOverlay.addEventListener("click", (event) => {
+          if (event.target === reactivationModalOverlay) closeReactivationModal();
+        });
+      }
+      if (meineStandortePage) {
+        meineStandortePage.addEventListener("click", (event) => {
+          const inactiveChip = event.target.closest(".location-status-chip--inactive");
+          const actionBtn = event.target.closest(".location-extend-btn");
+          if (!inactiveChip && !actionBtn) return;
+          const triggerNode = inactiveChip || actionBtn;
+          const row = triggerNode.closest("tr");
+          const locationName =
+            triggerNode.getAttribute("data-location") ||
+            row?.querySelector(".locations-row__name")?.textContent ||
+            "";
+          const actionType = actionBtn?.getAttribute("data-action") || "reactivate";
+          openReactivationModal(locationName, actionType);
+        });
+      }
+      if (reactivationRequestBtn) {
+        reactivationRequestBtn.addEventListener("click", () => {
+          closeReactivationModal();
+          showAppToast(
+            getStandortRequestToastMessage(selectedReactivationStandort),
+            6000,
+            "Anfrage gesendet",
+          );
+        });
+      }
+      if (standortModalForm) {
+        standortModalForm.addEventListener("submit", (event) => {
+          event.preventDefault();
+          const formData = new FormData(standortModalForm);
+          const standortName = String(formData.get("standortName") || "").trim();
+          const standortStreet = String(formData.get("standortStreet") || "").trim();
+          const standortCity = String(formData.get("standortCity") || "").trim();
+          const standortContact = String(formData.get("standortContact") || "").trim();
+          const standortPhone = String(formData.get("standortPhone") || "").trim();
+          if (
+            !standortName ||
+            !standortStreet ||
+            !standortCity ||
+            !standortContact ||
+            !standortPhone
+          ) {
+            return;
+          }
+          standortSalesTasks.unshift({
+            createdAt: new Date().toLocaleString("de-DE"),
+            standortName,
+            addressLine: `${standortStreet}, ${standortCity}`,
+            contact: standortContact,
+            phone: standortPhone,
+          });
+          openOrRefreshSalesTaskTab();
+          closeStandortModal();
+          standortModalForm.reset();
+          showStandortRequestToast(standortName);
+        });
+      }
       if (menuMeineStatistikenBtn) {
         menuMeineStatistikenBtn.addEventListener("click", openMeineStatistikenPage);
       }
