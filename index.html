@@ -5061,6 +5061,15 @@
         "locationFilter",
       ];
       const standortSalesTasks = [];
+      const LOCATION_ADDRESSES = {
+        Mainz: "Marktplatz 1, 55116 Mainz",
+        Frankfurt: "Berliner Straße 90, 60311 Frankfurt",
+        Wiesbaden: "Schlossplatz 1, 65183 Wiesbaden",
+        Berlin: "Unter den Linden 1, 10117 Berlin",
+        Kaiserslautern: "Rathausplatz 1, 67655 Kaiserslautern",
+        Koblenz: "Löhrstraße 66, 56068 Koblenz",
+        Saarbrücken: "Schlossplatz 15, 66119 Saarbrücken",
+      };
       let standortSalesTaskTab = null;
       let standortToastTimer = null;
       let selectedReactivationStandort = "";
@@ -6626,12 +6635,61 @@
           .replaceAll("'", "&#039;");
       }
 
+      function getPortalUserProfile() {
+        return {
+          name: (sidebarUserName?.textContent || "Unbekannt").trim(),
+          phone: (phoneValue?.textContent || "-").trim(),
+        };
+      }
+
+      function getLocationDetailsByName(standortName) {
+        const name = String(standortName || "").trim();
+        return {
+          standortName: name,
+          addressLine: LOCATION_ADDRESSES[name] || "Adresse im Portal hinterlegt",
+        };
+      }
+
+      function enqueueStandortSalesTask(task) {
+        standortSalesTasks.unshift({
+          createdAt: new Date().toLocaleString("de-DE"),
+          standortName: task.standortName,
+          addressLine: task.addressLine,
+          contact: task.contact,
+          phone: task.phone,
+          requestType: task.requestType || "new",
+        });
+      }
+
       function renderSalesTaskCommentHtml(task) {
+        const requestType = task.requestType || "new";
+        if (requestType === "extend") {
+          return `<span class="link">Laufzeit verlängern - Anfrage über den Anfragen-Manager</span><br/>
+            Standortname: ${escapeHtmlForSalesTask(task.standortName)}<br/>
+            Standortadresse: ${escapeHtmlForSalesTask(task.addressLine)}<br/>
+            Anfragender Nutzer: ${escapeHtmlForSalesTask(task.contact)}<br/>
+            Telefonnummer: ${escapeHtmlForSalesTask(task.phone)}`;
+        }
+        if (requestType === "reactivate") {
+          return `<span class="link">Standort reaktivieren - Anfrage über den Anfragen-Manager</span><br/>
+            Standortname: ${escapeHtmlForSalesTask(task.standortName)}<br/>
+            Standortadresse: ${escapeHtmlForSalesTask(task.addressLine)}<br/>
+            Anfragender Nutzer: ${escapeHtmlForSalesTask(task.contact)}<br/>
+            Telefonnummer: ${escapeHtmlForSalesTask(task.phone)}`;
+        }
         return `<span class="link">Vertrag abschließen für einen neuen Standort - Dein ASP möchte einen neuen Standort für den Anfragen-Manager freischalten</span><br/>
           Standortname: ${escapeHtmlForSalesTask(task.standortName)}<br/>
           Standortadresse: ${escapeHtmlForSalesTask(task.addressLine)}<br/>
           Name des ASP: ${escapeHtmlForSalesTask(task.contact)}<br/>
           Telefonnummer: ${escapeHtmlForSalesTask(task.phone)}`;
+      }
+
+      function renderSalesTaskEmployeeHtml(task) {
+        const requestType = task.requestType || "new";
+        if (requestType === "extend" || requestType === "reactivate") {
+          return escapeHtmlForSalesTask(task.contact);
+        }
+        return "System";
       }
 
       function renderSalesTaskTabHtml(tasks) {
@@ -6641,7 +6699,7 @@
               <tr>
                 <td>${escapeHtmlForSalesTask(task.createdAt)}</td>
                 <td><span class="severity"><span class="dot red"></span>Vertrieb Anfragen-Manager</span></td>
-                <td>System</td>
+                <td>${renderSalesTaskEmployeeHtml(task)}</td>
                 <td>${renderSalesTaskCommentHtml(task)}</td>
               </tr>`,
           )
@@ -7371,6 +7429,16 @@
       }
       if (reactivationRequestBtn) {
         reactivationRequestBtn.addEventListener("click", () => {
+          const portalUser = getPortalUserProfile();
+          const locationDetails = getLocationDetailsByName(selectedReactivationStandort);
+          enqueueStandortSalesTask({
+            standortName: locationDetails.standortName,
+            addressLine: locationDetails.addressLine,
+            contact: portalUser.name,
+            phone: portalUser.phone,
+            requestType: selectedReactivationAction,
+          });
+          openOrRefreshSalesTaskTab();
           closeReactivationModal();
           showAppToast(
             getStandortRequestToastMessage(selectedReactivationStandort),
@@ -7397,12 +7465,12 @@
           ) {
             return;
           }
-          standortSalesTasks.unshift({
-            createdAt: new Date().toLocaleString("de-DE"),
+          enqueueStandortSalesTask({
             standortName,
             addressLine: `${standortStreet}, ${standortCity}`,
             contact: standortContact,
             phone: standortPhone,
+            requestType: "new",
           });
           openOrRefreshSalesTaskTab();
           closeStandortModal();
