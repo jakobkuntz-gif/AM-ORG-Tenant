@@ -1061,7 +1061,11 @@
       .locations-table {
         width: 100%;
         border-collapse: collapse;
-        table-layout: auto;
+        table-layout: fixed;
+      }
+
+      .locations-table col {
+        width: 25%;
       }
 
       .locations-table thead th {
@@ -1072,18 +1076,13 @@
         font-weight: var(--font-section-heading-weight);
         line-height: 1.35;
         text-align: left;
-        vertical-align: middle;
+        vertical-align: bottom;
       }
 
-      .locations-table__name-head {
-        display: inline-flex;
-        align-items: center;
-        gap: 10px;
-      }
-
-      .locations-table__name-head i[class*="fa-"] {
-        font-size: 0.92em;
-        line-height: 1;
+      .locations-table thead th.locations-table__name-head,
+      .locations-table tbody td.locations-row__name {
+        padding-left: 14px;
+        white-space: nowrap;
       }
 
       .locations-table__status-head {
@@ -1098,12 +1097,6 @@
         padding-left: 12px;
       }
 
-      .locations-table__spacer-head,
-      .locations-table__spacer-cell {
-        padding: 0;
-        width: 99%;
-      }
-
       .locations-table tbody td {
         padding: 10px 14px;
         border-top: var(--table-separator-width) solid var(--line);
@@ -1111,10 +1104,6 @@
         line-height: 1.35;
         color: var(--text);
         vertical-align: middle;
-      }
-
-      .locations-table tbody td.locations-row__name {
-        padding-left: 40px;
       }
 
       .locations-table tbody td + td {
@@ -1126,12 +1115,11 @@
       .location-status-wrap {
         display: inline-flex;
         align-items: center;
-        gap: 8px;
       }
 
       .location-status-chip {
-        flex: 0 0 auto;
-        min-width: 58px;
+        width: 100%;
+        box-sizing: border-box;
         border-radius: 12px;
         padding: 3px 10px;
         display: inline-flex;
@@ -1141,6 +1129,7 @@
         font-weight: 700;
         line-height: 1.2;
         border: 1px solid transparent;
+        white-space: nowrap;
       }
 
       .location-status-chip--active {
@@ -1164,12 +1153,6 @@
       .location-status-chip--inactive:focus-visible {
         outline: 2px solid var(--primary);
         outline-offset: 2px;
-      }
-
-      .location-status-meta {
-        font-size: var(--font-helper);
-        color: var(--muted);
-        white-space: nowrap;
       }
 
       .location-end-wrap {
@@ -1199,10 +1182,160 @@
         font-weight: 600;
         line-height: 1.2;
         cursor: pointer;
+        white-space: nowrap;
       }
 
       .location-extend-btn:hover {
         background: var(--primary-surface);
+      }
+
+      .locations-table__products-head {
+        width: auto;
+        white-space: nowrap;
+        padding-left: 12px;
+      }
+
+      .locations-products-cell {
+        white-space: nowrap;
+      }
+
+      .locations-products-toggle {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        border: 0;
+        background: transparent;
+        padding: 0;
+        cursor: pointer;
+        font: inherit;
+        color: inherit;
+      }
+
+      .locations-products-toggle:disabled {
+        cursor: default;
+      }
+
+      .locations-products-count {
+        font-size: var(--font-body);
+        font-weight: 700;
+        line-height: 1.2;
+      }
+
+      .locations-products-count--full {
+        color: var(--muted);
+      }
+
+      .locations-products-count--partial {
+        color: var(--orange);
+      }
+
+      .locations-products-dash {
+        color: var(--muted);
+        font-size: var(--font-body);
+      }
+
+      .locations-products-chevron {
+        font-size: 11px;
+        color: var(--muted);
+        transition: transform 0.2s ease;
+      }
+
+      .locations-products-toggle[aria-expanded="true"] .locations-products-chevron {
+        transform: rotate(90deg);
+      }
+
+      .locations-products-detail-row {
+        display: none;
+      }
+
+      .locations-products-detail-row.open {
+        display: table-row;
+      }
+
+      .locations-table tbody tr.locations-products-detail-row td {
+        border-top: 0;
+        background: #f8f8f8;
+        vertical-align: top;
+      }
+
+      .locations-products-detail-empty {
+        padding: 0;
+      }
+
+      .locations-detail-meta-cell {
+        padding: 10px 14px;
+        padding-left: 12px;
+        vertical-align: top;
+        white-space: nowrap;
+      }
+
+      .locations-subscription-details {
+        margin: 0;
+        display: flex;
+        flex-direction: column;
+        gap: 4px;
+        font-size: var(--font-helper);
+        color: var(--muted);
+        line-height: 1.35;
+        white-space: nowrap;
+      }
+
+      .locations-subscription-details p {
+        margin: 0;
+        white-space: nowrap;
+      }
+
+      .locations-subscription-label {
+        color: var(--text);
+        font-weight: 600;
+      }
+
+      .locations-products-detail-cell {
+        padding: 10px 14px;
+        padding-left: 12px;
+      }
+
+      .locations-products-panel {
+        padding: 0;
+      }
+
+      .locations-products-list {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+        min-width: 0;
+      }
+
+      .locations-product-item {
+        display: grid;
+        grid-template-columns: 200px minmax(0, 1fr);
+        align-items: center;
+        column-gap: 8px;
+        font-size: var(--font-body);
+        color: var(--text);
+      }
+
+      .locations-product-name {
+        grid-column: 1;
+        font-weight: 600;
+        white-space: nowrap;
+      }
+
+      .locations-product-check {
+        grid-column: 2;
+        justify-self: start;
+        color: var(--green);
+        font-size: 14px;
+        line-height: 1;
+      }
+
+      .locations-product-item > .location-extend-btn.locations-product-inquire-btn {
+        grid-column: 2;
+        justify-self: start;
+        flex-shrink: 0;
       }
 
       .locations-row.empty {
@@ -3719,41 +3852,72 @@
                   <col class="locations-table__col-name" />
                   <col class="locations-table__col-status" />
                   <col class="locations-table__col-end" />
-                  <col class="locations-table__col-spacer" />
+                  <col class="locations-table__col-products" />
                 </colgroup>
                 <thead>
                   <tr>
-                    <th scope="col">
-                      <span class="locations-table__name-head">
-                        <i class="fa-solid fa-location-dot" aria-hidden="true"></i>
-                        <span>Standorte</span>
-                      </span>
-                    </th>
+                    <th scope="col" class="locations-table__name-head">Standorte</th>
                     <th scope="col" class="locations-table__status-head">Status</th>
                     <th scope="col" class="locations-table__end-head">Laufzeitende</th>
-                    <th scope="col" class="locations-table__spacer-head" aria-hidden="true"></th>
+                    <th scope="col" class="locations-table__products-head">Produkte</th>
                   </tr>
                 </thead>
-                <tbody>
+                <tbody id="locationsTableBody">
                   <tr>
                     <td class="locations-row__name">Mainz</td>
                     <td>
                       <div class="location-status-wrap">
                         <span class="location-status-chip location-status-chip--active">Aktiv</span>
-                        <span class="location-status-meta">Start: 01.01.2026 | 12 Monate</span>
                       </div>
                     </td>
                     <td>
                       <span class="location-end-open">fortlaufend</span>
                     </td>
-                    <td class="locations-table__spacer-cell" aria-hidden="true"></td>
+                    <td class="locations-products-cell">
+                      <button
+                        type="button"
+                        class="locations-products-toggle"
+                        aria-expanded="false"
+                        aria-label="Produkte für Mainz anzeigen"
+                      >
+                        <span class="locations-products-count locations-products-count--full">3/3</span>
+                        <i class="fa-solid fa-chevron-right locations-products-chevron" aria-hidden="true"></i>
+                      </button>
+                    </td>
+                  </tr>
+                  <tr class="locations-products-detail-row" data-products-for="Mainz">
+                    <td class="locations-products-detail-empty" aria-hidden="true"></td>
+                    <td class="locations-detail-meta-cell">
+                      <div class="locations-subscription-details">
+                        <p><span class="locations-subscription-label">Start:</span> 01.01.2026</p>
+                        <p><span class="locations-subscription-label">Laufzeit:</span> 12 Monate</p>
+                      </div>
+                    </td>
+                    <td class="locations-products-detail-empty" aria-hidden="true"></td>
+                    <td class="locations-products-detail-cell">
+                      <div class="locations-products-panel">
+                        <ul class="locations-products-list">
+                          <li class="locations-product-item">
+                            <span class="locations-product-name">Anfragen-Manager Abo</span>
+                            <i class="fa-solid fa-check locations-product-check" aria-label="Aktiv"></i>
+                          </li>
+                          <li class="locations-product-item">
+                            <span class="locations-product-name">Lead Kooperation</span>
+                            <i class="fa-solid fa-check locations-product-check" aria-label="Aktiv"></i>
+                          </li>
+                          <li class="locations-product-item">
+                            <span class="locations-product-name">Marketingpaket</span>
+                            <i class="fa-solid fa-check locations-product-check" aria-label="Aktiv"></i>
+                          </li>
+                        </ul>
+                      </div>
+                    </td>
                   </tr>
                   <tr>
                     <td class="locations-row__name">Frankfurt</td>
                     <td>
                       <div class="location-status-wrap">
                         <span class="location-status-chip location-status-chip--active">Aktiv</span>
-                        <span class="location-status-meta">Start: 01.03.2026 | 6 Monate</span>
                       </div>
                     </td>
                     <td>
@@ -3768,14 +3932,51 @@
                         </button>
                       </div>
                     </td>
-                    <td class="locations-table__spacer-cell" aria-hidden="true"></td>
+                    <td class="locations-products-cell">
+                      <button
+                        type="button"
+                        class="locations-products-toggle"
+                        aria-expanded="false"
+                        aria-label="Produkte für Frankfurt anzeigen"
+                      >
+                        <span class="locations-products-count locations-products-count--partial">2/3</span>
+                        <i class="fa-solid fa-chevron-right locations-products-chevron" aria-hidden="true"></i>
+                      </button>
+                    </td>
+                  </tr>
+                  <tr class="locations-products-detail-row" data-products-for="Frankfurt">
+                    <td class="locations-products-detail-empty" aria-hidden="true"></td>
+                    <td class="locations-detail-meta-cell">
+                      <div class="locations-subscription-details">
+                        <p><span class="locations-subscription-label">Start:</span> 01.03.2026</p>
+                        <p><span class="locations-subscription-label">Laufzeit:</span> 6 Monate</p>
+                      </div>
+                    </td>
+                    <td class="locations-products-detail-empty" aria-hidden="true"></td>
+                    <td class="locations-products-detail-cell">
+                      <div class="locations-products-panel">
+                        <ul class="locations-products-list">
+                          <li class="locations-product-item">
+                            <span class="locations-product-name">Anfragen-Manager Abo</span>
+                            <i class="fa-solid fa-check locations-product-check" aria-label="Aktiv"></i>
+                          </li>
+                          <li class="locations-product-item">
+                            <span class="locations-product-name">Lead Kooperation</span>
+                            <i class="fa-solid fa-check locations-product-check" aria-label="Aktiv"></i>
+                          </li>
+                          <li class="locations-product-item">
+                            <span class="locations-product-name">Marketingpaket</span>
+                            <button type="button" class="location-extend-btn locations-product-inquire-btn">Jetzt anfragen</button>
+                          </li>
+                        </ul>
+                      </div>
+                    </td>
                   </tr>
                   <tr>
                     <td class="locations-row__name">Wiesbaden</td>
                     <td>
                       <div class="location-status-wrap">
                         <span class="location-status-chip location-status-chip--active">Aktiv</span>
-                        <span class="location-status-meta">Start: 15.03.2026 | 3 Monate</span>
                       </div>
                     </td>
                     <td>
@@ -3790,14 +3991,51 @@
                         </button>
                       </div>
                     </td>
-                    <td class="locations-table__spacer-cell" aria-hidden="true"></td>
+                    <td class="locations-products-cell">
+                      <button
+                        type="button"
+                        class="locations-products-toggle"
+                        aria-expanded="false"
+                        aria-label="Produkte für Wiesbaden anzeigen"
+                      >
+                        <span class="locations-products-count locations-products-count--partial">1/3</span>
+                        <i class="fa-solid fa-chevron-right locations-products-chevron" aria-hidden="true"></i>
+                      </button>
+                    </td>
+                  </tr>
+                  <tr class="locations-products-detail-row" data-products-for="Wiesbaden">
+                    <td class="locations-products-detail-empty" aria-hidden="true"></td>
+                    <td class="locations-detail-meta-cell">
+                      <div class="locations-subscription-details">
+                        <p><span class="locations-subscription-label">Start:</span> 15.03.2026</p>
+                        <p><span class="locations-subscription-label">Laufzeit:</span> 3 Monate</p>
+                      </div>
+                    </td>
+                    <td class="locations-products-detail-empty" aria-hidden="true"></td>
+                    <td class="locations-products-detail-cell">
+                      <div class="locations-products-panel">
+                        <ul class="locations-products-list">
+                          <li class="locations-product-item">
+                            <span class="locations-product-name">Anfragen-Manager Abo</span>
+                            <i class="fa-solid fa-check locations-product-check" aria-label="Aktiv"></i>
+                          </li>
+                          <li class="locations-product-item">
+                            <span class="locations-product-name">Lead Kooperation</span>
+                            <button type="button" class="location-extend-btn locations-product-inquire-btn">Jetzt anfragen</button>
+                          </li>
+                          <li class="locations-product-item">
+                            <span class="locations-product-name">Marketingpaket</span>
+                            <button type="button" class="location-extend-btn locations-product-inquire-btn">Jetzt anfragen</button>
+                          </li>
+                        </ul>
+                      </div>
+                    </td>
                   </tr>
                   <tr>
                     <td class="locations-row__name">Berlin</td>
                     <td>
                       <div class="location-status-wrap">
                         <span class="location-status-chip location-status-chip--active">Aktiv</span>
-                        <span class="location-status-meta">Start: 01.04.2026 | 1 Monat</span>
                       </div>
                     </td>
                     <td>
@@ -3812,20 +4050,95 @@
                         </button>
                       </div>
                     </td>
-                    <td class="locations-table__spacer-cell" aria-hidden="true"></td>
+                    <td class="locations-products-cell">
+                      <button
+                        type="button"
+                        class="locations-products-toggle"
+                        aria-expanded="false"
+                        aria-label="Produkte für Berlin anzeigen"
+                      >
+                        <span class="locations-products-count locations-products-count--partial">2/3</span>
+                        <i class="fa-solid fa-chevron-right locations-products-chevron" aria-hidden="true"></i>
+                      </button>
+                    </td>
+                  </tr>
+                  <tr class="locations-products-detail-row" data-products-for="Berlin">
+                    <td class="locations-products-detail-empty" aria-hidden="true"></td>
+                    <td class="locations-detail-meta-cell">
+                      <div class="locations-subscription-details">
+                        <p><span class="locations-subscription-label">Start:</span> 01.04.2026</p>
+                        <p><span class="locations-subscription-label">Laufzeit:</span> 1 Monat</p>
+                      </div>
+                    </td>
+                    <td class="locations-products-detail-empty" aria-hidden="true"></td>
+                    <td class="locations-products-detail-cell">
+                      <div class="locations-products-panel">
+                        <ul class="locations-products-list">
+                          <li class="locations-product-item">
+                            <span class="locations-product-name">Anfragen-Manager Abo</span>
+                            <i class="fa-solid fa-check locations-product-check" aria-label="Aktiv"></i>
+                          </li>
+                          <li class="locations-product-item">
+                            <span class="locations-product-name">Lead Kooperation</span>
+                            <i class="fa-solid fa-check locations-product-check" aria-label="Aktiv"></i>
+                          </li>
+                          <li class="locations-product-item">
+                            <span class="locations-product-name">Marketingpaket</span>
+                            <button type="button" class="location-extend-btn locations-product-inquire-btn">Jetzt anfragen</button>
+                          </li>
+                        </ul>
+                      </div>
+                    </td>
                   </tr>
                   <tr>
                     <td class="locations-row__name">Kaiserslautern</td>
                     <td>
                       <div class="location-status-wrap">
                         <span class="location-status-chip location-status-chip--active">Aktiv</span>
-                        <span class="location-status-meta">Start: 10.02.2026 | 12 Monate</span>
                       </div>
                     </td>
                     <td>
                       <span class="location-end-open">fortlaufend</span>
                     </td>
-                    <td class="locations-table__spacer-cell" aria-hidden="true"></td>
+                    <td class="locations-products-cell">
+                      <button
+                        type="button"
+                        class="locations-products-toggle"
+                        aria-expanded="false"
+                        aria-label="Produkte für Kaiserslautern anzeigen"
+                      >
+                        <span class="locations-products-count locations-products-count--full">3/3</span>
+                        <i class="fa-solid fa-chevron-right locations-products-chevron" aria-hidden="true"></i>
+                      </button>
+                    </td>
+                  </tr>
+                  <tr class="locations-products-detail-row" data-products-for="Kaiserslautern">
+                    <td class="locations-products-detail-empty" aria-hidden="true"></td>
+                    <td class="locations-detail-meta-cell">
+                      <div class="locations-subscription-details">
+                        <p><span class="locations-subscription-label">Start:</span> 10.02.2026</p>
+                        <p><span class="locations-subscription-label">Laufzeit:</span> 12 Monate</p>
+                      </div>
+                    </td>
+                    <td class="locations-products-detail-empty" aria-hidden="true"></td>
+                    <td class="locations-products-detail-cell">
+                      <div class="locations-products-panel">
+                        <ul class="locations-products-list">
+                          <li class="locations-product-item">
+                            <span class="locations-product-name">Anfragen-Manager Abo</span>
+                            <i class="fa-solid fa-check locations-product-check" aria-label="Aktiv"></i>
+                          </li>
+                          <li class="locations-product-item">
+                            <span class="locations-product-name">Lead Kooperation</span>
+                            <i class="fa-solid fa-check locations-product-check" aria-label="Aktiv"></i>
+                          </li>
+                          <li class="locations-product-item">
+                            <span class="locations-product-name">Marketingpaket</span>
+                            <i class="fa-solid fa-check locations-product-check" aria-label="Aktiv"></i>
+                          </li>
+                        </ul>
+                      </div>
+                    </td>
                   </tr>
                   <tr>
                     <td class="locations-row__name">Koblenz</td>
@@ -3839,7 +4152,6 @@
                         >
                           pausiert
                         </button>
-                        <span class="location-status-meta">Start: 01.08.2025 | 6 Monate</span>
                       </div>
                     </td>
                     <td>
@@ -3854,7 +4166,45 @@
                         </button>
                       </div>
                     </td>
-                    <td class="locations-table__spacer-cell" aria-hidden="true"></td>
+                    <td class="locations-products-cell">
+                      <button
+                        type="button"
+                        class="locations-products-toggle"
+                        aria-expanded="false"
+                        aria-label="Produkte für Koblenz anzeigen"
+                      >
+                        <span class="locations-products-count locations-products-count--partial">0/3</span>
+                        <i class="fa-solid fa-chevron-right locations-products-chevron" aria-hidden="true"></i>
+                      </button>
+                    </td>
+                  </tr>
+                  <tr class="locations-products-detail-row" data-products-for="Koblenz">
+                    <td class="locations-products-detail-empty" aria-hidden="true"></td>
+                    <td class="locations-detail-meta-cell">
+                      <div class="locations-subscription-details">
+                        <p><span class="locations-subscription-label">Start:</span> 01.08.2025</p>
+                        <p><span class="locations-subscription-label">Laufzeit:</span> 6 Monate</p>
+                      </div>
+                    </td>
+                    <td class="locations-products-detail-empty" aria-hidden="true"></td>
+                    <td class="locations-products-detail-cell">
+                      <div class="locations-products-panel">
+                        <ul class="locations-products-list">
+                          <li class="locations-product-item">
+                            <span class="locations-product-name">Anfragen-Manager Abo</span>
+                            <button type="button" class="location-extend-btn locations-product-inquire-btn">Jetzt anfragen</button>
+                          </li>
+                          <li class="locations-product-item">
+                            <span class="locations-product-name">Lead Kooperation</span>
+                            <button type="button" class="location-extend-btn locations-product-inquire-btn">Jetzt anfragen</button>
+                          </li>
+                          <li class="locations-product-item">
+                            <span class="locations-product-name">Marketingpaket</span>
+                            <button type="button" class="location-extend-btn locations-product-inquire-btn">Jetzt anfragen</button>
+                          </li>
+                        </ul>
+                      </div>
+                    </td>
                   </tr>
                   <tr>
                     <td class="locations-row__name">Saarbrücken</td>
@@ -3868,7 +4218,6 @@
                         >
                           pausiert
                         </button>
-                        <span class="location-status-meta">Start: 01.01.2026 | 3 Monate</span>
                       </div>
                     </td>
                     <td>
@@ -3883,7 +4232,45 @@
                         </button>
                       </div>
                     </td>
-                    <td class="locations-table__spacer-cell" aria-hidden="true"></td>
+                    <td class="locations-products-cell">
+                      <button
+                        type="button"
+                        class="locations-products-toggle"
+                        aria-expanded="false"
+                        aria-label="Produkte für Saarbrücken anzeigen"
+                      >
+                        <span class="locations-products-count locations-products-count--partial">0/3</span>
+                        <i class="fa-solid fa-chevron-right locations-products-chevron" aria-hidden="true"></i>
+                      </button>
+                    </td>
+                  </tr>
+                  <tr class="locations-products-detail-row" data-products-for="Saarbrücken">
+                    <td class="locations-products-detail-empty" aria-hidden="true"></td>
+                    <td class="locations-detail-meta-cell">
+                      <div class="locations-subscription-details">
+                        <p><span class="locations-subscription-label">Start:</span> 01.01.2026</p>
+                        <p><span class="locations-subscription-label">Laufzeit:</span> 3 Monate</p>
+                      </div>
+                    </td>
+                    <td class="locations-products-detail-empty" aria-hidden="true"></td>
+                    <td class="locations-products-detail-cell">
+                      <div class="locations-products-panel">
+                        <ul class="locations-products-list">
+                          <li class="locations-product-item">
+                            <span class="locations-product-name">Anfragen-Manager Abo</span>
+                            <button type="button" class="location-extend-btn locations-product-inquire-btn">Jetzt anfragen</button>
+                          </li>
+                          <li class="locations-product-item">
+                            <span class="locations-product-name">Lead Kooperation</span>
+                            <button type="button" class="location-extend-btn locations-product-inquire-btn">Jetzt anfragen</button>
+                          </li>
+                          <li class="locations-product-item">
+                            <span class="locations-product-name">Marketingpaket</span>
+                            <button type="button" class="location-extend-btn locations-product-inquire-btn">Jetzt anfragen</button>
+                          </li>
+                        </ul>
+                      </div>
+                    </td>
                   </tr>
                 </tbody>
               </table>
@@ -5074,6 +5461,7 @@
       let standortToastTimer = null;
       let selectedReactivationStandort = "";
       let selectedReactivationAction = "reactivate";
+      let selectedReactivationProduct = "";
       let currentLeadNumber = "";
       let currentLeadCanEdit = false;
       const leadCommentsById = new Map();
@@ -6536,6 +6924,35 @@
         setActiveMenu(menuMeineStandorteBtn);
       }
 
+      function closeAllLocationProductPanels(exceptDetailRow = null) {
+        const tbody = document.getElementById("locationsTableBody");
+        if (!tbody) return;
+        tbody.querySelectorAll(".locations-products-detail-row.open").forEach((detailRow) => {
+          if (detailRow === exceptDetailRow) return;
+          detailRow.classList.remove("open");
+        });
+        tbody.querySelectorAll(".locations-products-toggle").forEach((toggle) => {
+          toggle.setAttribute("aria-expanded", "false");
+        });
+      }
+
+      function toggleLocationProductPanel(toggleBtn) {
+        const row = toggleBtn.closest("tr");
+        const locationName = row?.querySelector(".locations-row__name")?.textContent?.trim();
+        const tbody = document.getElementById("locationsTableBody");
+        if (!locationName || !tbody) return;
+        const detailRow = tbody.querySelector(
+          `.locations-products-detail-row[data-products-for="${locationName}"]`,
+        );
+        if (!detailRow) return;
+        const willOpen = !detailRow.classList.contains("open");
+        closeAllLocationProductPanels(willOpen ? detailRow : null);
+        if (willOpen) {
+          detailRow.classList.add("open");
+          toggleBtn.setAttribute("aria-expanded", "true");
+        }
+      }
+
       function openStandortModal() {
         if (!standortModalOverlay) return;
         standortModalOverlay.classList.add("open");
@@ -6548,29 +6965,42 @@
         standortModalOverlay.setAttribute("aria-hidden", "true");
       }
 
-      function openReactivationModal(locationName, actionType = "reactivate") {
+      function openReactivationModal(locationName, actionType = "reactivate", productName = "") {
         if (!reactivationModalOverlay) return;
         selectedReactivationStandort = String(locationName || "").trim();
-        selectedReactivationAction = actionType === "extend" ? "extend" : "reactivate";
+        selectedReactivationProduct = String(productName || "").trim();
+        selectedReactivationAction =
+          actionType === "extend" || actionType === "product" ? actionType : "reactivate";
         if (reactivationModalTitle) {
-          reactivationModalTitle.textContent =
-            selectedReactivationAction === "extend"
-              ? selectedReactivationStandort
-                ? `Gute Entscheidung für ${selectedReactivationStandort}`
-                : "Gute Entscheidung"
-              : selectedReactivationStandort
-                ? `${selectedReactivationStandort} kommt zurück`
-                : "Standort kommt zurück";
+          if (selectedReactivationAction === "product") {
+            reactivationModalTitle.textContent = selectedReactivationProduct
+              ? `Gute Entscheidung - jetzt ${selectedReactivationProduct} dazunehmen`
+              : "Gute Entscheidung - jetzt ein Produkt dazunehmen";
+          } else if (selectedReactivationAction === "extend") {
+            reactivationModalTitle.textContent = selectedReactivationStandort
+              ? `Gute Entscheidung für ${selectedReactivationStandort}`
+              : "Gute Entscheidung";
+          } else {
+            reactivationModalTitle.textContent = selectedReactivationStandort
+              ? `${selectedReactivationStandort} kommt zurück`
+              : "Standort kommt zurück";
+          }
         }
         if (reactivationModalBodyText) {
-          reactivationModalBodyText.textContent =
-            selectedReactivationAction === "extend"
-              ? selectedReactivationStandort
-                ? `Senden Sie eine Anfrage an Ihre Ansprechpartnerin um die Laufzeit für ${selectedReactivationStandort} zu verlängern. Besprechen Sie die passendste Option.`
-                : "Senden Sie eine Anfrage an Ihre Ansprechpartnerin um die Laufzeit zu verlängern. Besprechen Sie die passendste Option."
-              : selectedReactivationStandort
-                ? `Schön, dass Sie den Standort ${selectedReactivationStandort} reaktivieren möchten. Senden Sie dazu eine kurze Anfrage an Ihre Ansprechpartnerin und besprechen Sie die beste Option.`
-                : "Schön, dass Sie den Standort reaktivieren möchten. Senden Sie dazu eine kurze Anfrage an Ihre Ansprechpartnerin und besprechen Sie die beste Option.";
+          if (selectedReactivationAction === "product") {
+            reactivationModalBodyText.textContent =
+              selectedReactivationProduct && selectedReactivationStandort
+                ? `Senden Sie eine Anfrage an Ihre Ansprechpartnerin, um ${selectedReactivationProduct} für ${selectedReactivationStandort} zu buchen. Besprechen Sie die passendste Option.`
+                : "Senden Sie eine Anfrage an Ihre Ansprechpartnerin, um ein Produkt zu buchen. Besprechen Sie die passendste Option.";
+          } else if (selectedReactivationAction === "extend") {
+            reactivationModalBodyText.textContent = selectedReactivationStandort
+              ? `Senden Sie eine Anfrage an Ihre Ansprechpartnerin um die Laufzeit für ${selectedReactivationStandort} zu verlängern. Besprechen Sie die passendste Option.`
+              : "Senden Sie eine Anfrage an Ihre Ansprechpartnerin um die Laufzeit zu verlängern. Besprechen Sie die passendste Option.";
+          } else {
+            reactivationModalBodyText.textContent = selectedReactivationStandort
+              ? `Schön, dass Sie den Standort ${selectedReactivationStandort} reaktivieren möchten. Senden Sie dazu eine kurze Anfrage an Ihre Ansprechpartnerin und besprechen Sie die beste Option.`
+              : "Schön, dass Sie den Standort reaktivieren möchten. Senden Sie dazu eine kurze Anfrage an Ihre Ansprechpartnerin und besprechen Sie die beste Option.";
+          }
         }
         if (reactivationModalLocationText) {
           reactivationModalLocationText.textContent = "";
@@ -6580,7 +7010,9 @@
           reactivationRequestBtn.textContent =
             selectedReactivationAction === "extend"
               ? "Jetzt Verlängerungsanfrage senden"
-              : "Jetzt Reaktivierungsanfrage senden";
+              : selectedReactivationAction === "product"
+                ? "Jetzt Anfrage senden"
+                : "Jetzt Reaktivierungsanfrage senden";
         }
         reactivationModalOverlay.classList.add("open");
         reactivationModalOverlay.setAttribute("aria-hidden", "false");
@@ -6658,6 +7090,7 @@
           contact: task.contact,
           phone: task.phone,
           requestType: task.requestType || "new",
+          productName: task.productName || "",
         });
       }
 
@@ -6677,6 +7110,14 @@
             Anfragender Nutzer: ${escapeHtmlForSalesTask(task.contact)}<br/>
             Telefonnummer: ${escapeHtmlForSalesTask(task.phone)}`;
         }
+        if (requestType === "product") {
+          return `<span class="link">Produkt buchen - Anfrage über den Anfragen-Manager</span><br/>
+            Standortname: ${escapeHtmlForSalesTask(task.standortName)}<br/>
+            Standortadresse: ${escapeHtmlForSalesTask(task.addressLine)}<br/>
+            Produkt: ${escapeHtmlForSalesTask(task.productName)}<br/>
+            Anfragender Nutzer: ${escapeHtmlForSalesTask(task.contact)}<br/>
+            Telefonnummer: ${escapeHtmlForSalesTask(task.phone)}`;
+        }
         return `<span class="link">Vertrag abschließen für einen neuen Standort - Dein ASP möchte einen neuen Standort für den Anfragen-Manager freischalten</span><br/>
           Standortname: ${escapeHtmlForSalesTask(task.standortName)}<br/>
           Standortadresse: ${escapeHtmlForSalesTask(task.addressLine)}<br/>
@@ -6686,7 +7127,7 @@
 
       function renderSalesTaskEmployeeHtml(task) {
         const requestType = task.requestType || "new";
-        if (requestType === "extend" || requestType === "reactivate") {
+        if (requestType === "extend" || requestType === "reactivate" || requestType === "product") {
           return escapeHtmlForSalesTask(task.contact);
         }
         return "System";
@@ -7414,6 +7855,23 @@
       }
       if (meineStandortePage) {
         meineStandortePage.addEventListener("click", (event) => {
+          const productsToggle = event.target.closest(".locations-products-toggle");
+          if (productsToggle) {
+            event.stopPropagation();
+            toggleLocationProductPanel(productsToggle);
+            return;
+          }
+          const inquireBtn = event.target.closest(".locations-product-inquire-btn");
+          if (inquireBtn) {
+            event.stopPropagation();
+            const detailRow = inquireBtn.closest(".locations-products-detail-row");
+            const locationName = detailRow?.getAttribute("data-products-for") || "";
+            const productName =
+              inquireBtn.closest(".locations-product-item")?.querySelector(".locations-product-name")
+                ?.textContent || "";
+            openReactivationModal(locationName, "product", productName.trim());
+            return;
+          }
           const inactiveChip = event.target.closest(".location-status-chip--inactive");
           const actionBtn = event.target.closest(".location-extend-btn");
           if (!inactiveChip && !actionBtn) return;
@@ -7437,6 +7895,7 @@
             contact: portalUser.name,
             phone: portalUser.phone,
             requestType: selectedReactivationAction,
+            productName: selectedReactivationProduct,
           });
           openOrRefreshSalesTaskTab();
           closeReactivationModal();
