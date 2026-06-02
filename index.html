@@ -27,6 +27,7 @@
         --green-light: #98c44c;
         --green-surface: #98c44c;
         --orange: #ffa600;
+        --orange-partial-surface: rgba(255, 166, 0, 0.2);
         --amber-soft: rgba(255, 166, 0, 0.05);
         --red: #e74c3c;
         --red-light: #ff6961;
@@ -1065,7 +1066,7 @@
       }
 
       .locations-table col {
-        width: 25%;
+        width: 20%;
       }
 
       .locations-table thead th {
@@ -1117,42 +1118,52 @@
         align-items: center;
       }
 
-      .location-status-chip {
-        width: 100%;
-        box-sizing: border-box;
-        border-radius: 12px;
-        padding: 3px 10px;
+      .location-status-indicator {
         display: inline-flex;
         align-items: center;
-        justify-content: center;
-        font-size: var(--font-caption);
-        font-weight: 700;
-        line-height: 1.2;
-        border: 1px solid transparent;
+        gap: 8px;
+        border: 0;
+        background: transparent;
+        padding: 0;
+        font: inherit;
         white-space: nowrap;
       }
 
-      .location-status-chip--active {
-        background: #e8f6df;
-        color: #4a6f1f;
-        border-color: #c8e3a8;
-      }
-
-      .location-status-chip--inactive {
-        background: var(--off-white);
-        color: var(--muted);
-        border-color: var(--line);
+      button.location-status-chip--inactive {
         cursor: pointer;
       }
 
-      .location-status-chip--inactive:hover {
-        border-color: var(--primary);
+      button.location-status-chip--inactive:hover .location-status-label {
         color: var(--primary-dark);
+        font-weight: 400;
       }
 
-      .location-status-chip--inactive:focus-visible {
+      button.location-status-chip--inactive:focus-visible {
         outline: 2px solid var(--primary);
         outline-offset: 2px;
+        border-radius: 4px;
+      }
+
+      .location-status-dot {
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        flex-shrink: 0;
+      }
+
+      .location-status-dot--active {
+        background: var(--green);
+      }
+
+      .location-status-dot--inactive {
+        background: var(--muted);
+      }
+
+      .locations-table tbody td .location-status-label {
+        font-size: var(--font-body);
+        font-weight: 400;
+        line-height: 1.2;
+        color: var(--text);
       }
 
       .location-end-wrap {
@@ -1162,14 +1173,10 @@
         white-space: nowrap;
       }
 
-      .location-end-date {
+      .locations-table tbody td .location-end-date,
+      .locations-table tbody td .location-end-open {
         font-size: var(--font-helper);
         color: var(--text);
-      }
-
-      .location-end-open {
-        font-size: var(--font-helper);
-        color: var(--muted);
       }
 
       .location-extend-btn {
@@ -1197,18 +1204,62 @@
 
       .locations-products-cell {
         white-space: nowrap;
+        vertical-align: middle;
+      }
+
+      .locations-table__detail-head {
+        white-space: nowrap;
+        padding-left: 12px;
+      }
+
+      .locations-detail-nav-cell {
+        white-space: nowrap;
+        padding-left: 12px;
+      }
+
+      .locations-detail-nav-btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        border: 1px solid var(--line);
+        background: var(--white);
+        color: var(--text);
+        border-radius: 4px;
+        padding: 6px 10px;
+        cursor: pointer;
+        font: inherit;
+        line-height: 1;
+      }
+
+      .locations-detail-nav-btn:hover {
+        border-color: var(--primary);
+        color: var(--primary-dark);
+        background: var(--primary-surface);
+      }
+
+      .locations-detail-nav-btn .fa-house {
+        color: var(--primary-dark);
+        font-size: 14px;
+      }
+
+      .locations-detail-nav-btn .fa-chevron-right {
+        font-size: 11px;
+        color: var(--muted);
       }
 
       .locations-products-toggle {
-        display: inline-flex;
+        display: inline-grid;
+        grid-template-columns: 2.75rem 11px;
+        column-gap: 6px;
         align-items: center;
-        gap: 6px;
+        min-height: 22px;
         border: 0;
         background: transparent;
         padding: 0;
         cursor: pointer;
         font: inherit;
         color: inherit;
+        line-height: 1;
       }
 
       .locations-products-toggle:disabled {
@@ -1216,17 +1267,24 @@
       }
 
       .locations-products-count {
+        display: inline-flex;
+        align-items: center;
+        justify-content: flex-start;
+        box-sizing: border-box;
+        min-height: 22px;
+        padding: 2px 6px;
+        border-radius: 4px;
         font-size: var(--font-body);
-        font-weight: 700;
-        line-height: 1.2;
-      }
-
-      .locations-products-count--full {
-        color: var(--muted);
+        font-weight: 400;
+        line-height: 1;
+        text-align: left;
+        color: var(--text);
       }
 
       .locations-products-count--partial {
-        color: var(--orange);
+        width: max-content;
+        max-width: 100%;
+        background-color: var(--orange-partial-surface);
       }
 
       .locations-products-dash {
@@ -1235,7 +1293,14 @@
       }
 
       .locations-products-chevron {
+        grid-column: 2;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 11px;
+        height: 22px;
         font-size: 11px;
+        line-height: 1;
         color: var(--muted);
         transition: transform 0.2s ease;
       }
@@ -3853,6 +3918,7 @@
                   <col class="locations-table__col-status" />
                   <col class="locations-table__col-end" />
                   <col class="locations-table__col-products" />
+                  <col class="locations-table__col-detail" />
                 </colgroup>
                 <thead>
                   <tr>
@@ -3860,6 +3926,7 @@
                     <th scope="col" class="locations-table__status-head">Status</th>
                     <th scope="col" class="locations-table__end-head">Laufzeitende</th>
                     <th scope="col" class="locations-table__products-head">Produkte</th>
+                    <th scope="col" class="locations-table__detail-head">Zum Standort</th>
                   </tr>
                 </thead>
                 <tbody id="locationsTableBody">
@@ -3867,7 +3934,10 @@
                     <td class="locations-row__name">Mainz</td>
                     <td>
                       <div class="location-status-wrap">
-                        <span class="location-status-chip location-status-chip--active">Aktiv</span>
+                        <span class="location-status-indicator">
+                          <span class="location-status-dot location-status-dot--active" aria-hidden="true"></span>
+                          <span class="location-status-label location-status-label--active">Aktiv</span>
+                        </span>
                       </div>
                     </td>
                     <td>
@@ -3882,6 +3952,12 @@
                       >
                         <span class="locations-products-count locations-products-count--full">3/3</span>
                         <i class="fa-solid fa-chevron-right locations-products-chevron" aria-hidden="true"></i>
+                      </button>
+                    </td>
+                    <td class="locations-detail-nav-cell">
+                      <button type="button" class="locations-detail-nav-btn" aria-label="Zum Standort">
+                        <i class="fa-solid fa-house" aria-hidden="true"></i>
+                        <i class="fa-solid fa-chevron-right" aria-hidden="true"></i>
                       </button>
                     </td>
                   </tr>
@@ -3912,12 +3988,16 @@
                         </ul>
                       </div>
                     </td>
+                    <td class="locations-products-detail-empty" aria-hidden="true"></td>
                   </tr>
                   <tr>
                     <td class="locations-row__name">Frankfurt</td>
                     <td>
                       <div class="location-status-wrap">
-                        <span class="location-status-chip location-status-chip--active">Aktiv</span>
+                        <span class="location-status-indicator">
+                          <span class="location-status-dot location-status-dot--active" aria-hidden="true"></span>
+                          <span class="location-status-label location-status-label--active">Aktiv</span>
+                        </span>
                       </div>
                     </td>
                     <td>
@@ -3928,7 +4008,7 @@
                           class="location-extend-btn"
                           data-action="extend"
                         >
-                          jetzt verlängern
+                          verlängern
                         </button>
                       </div>
                     </td>
@@ -3941,6 +4021,12 @@
                       >
                         <span class="locations-products-count locations-products-count--partial">2/3</span>
                         <i class="fa-solid fa-chevron-right locations-products-chevron" aria-hidden="true"></i>
+                      </button>
+                    </td>
+                    <td class="locations-detail-nav-cell">
+                      <button type="button" class="locations-detail-nav-btn" aria-label="Zum Standort">
+                        <i class="fa-solid fa-house" aria-hidden="true"></i>
+                        <i class="fa-solid fa-chevron-right" aria-hidden="true"></i>
                       </button>
                     </td>
                   </tr>
@@ -3971,12 +4057,16 @@
                         </ul>
                       </div>
                     </td>
+                    <td class="locations-products-detail-empty" aria-hidden="true"></td>
                   </tr>
                   <tr>
                     <td class="locations-row__name">Wiesbaden</td>
                     <td>
                       <div class="location-status-wrap">
-                        <span class="location-status-chip location-status-chip--active">Aktiv</span>
+                        <span class="location-status-indicator">
+                          <span class="location-status-dot location-status-dot--active" aria-hidden="true"></span>
+                          <span class="location-status-label location-status-label--active">Aktiv</span>
+                        </span>
                       </div>
                     </td>
                     <td>
@@ -3987,7 +4077,7 @@
                           class="location-extend-btn"
                           data-action="extend"
                         >
-                          jetzt verlängern
+                          verlängern
                         </button>
                       </div>
                     </td>
@@ -4000,6 +4090,12 @@
                       >
                         <span class="locations-products-count locations-products-count--partial">1/3</span>
                         <i class="fa-solid fa-chevron-right locations-products-chevron" aria-hidden="true"></i>
+                      </button>
+                    </td>
+                    <td class="locations-detail-nav-cell">
+                      <button type="button" class="locations-detail-nav-btn" aria-label="Zum Standort">
+                        <i class="fa-solid fa-house" aria-hidden="true"></i>
+                        <i class="fa-solid fa-chevron-right" aria-hidden="true"></i>
                       </button>
                     </td>
                   </tr>
@@ -4030,12 +4126,16 @@
                         </ul>
                       </div>
                     </td>
+                    <td class="locations-products-detail-empty" aria-hidden="true"></td>
                   </tr>
                   <tr>
                     <td class="locations-row__name">Berlin</td>
                     <td>
                       <div class="location-status-wrap">
-                        <span class="location-status-chip location-status-chip--active">Aktiv</span>
+                        <span class="location-status-indicator">
+                          <span class="location-status-dot location-status-dot--active" aria-hidden="true"></span>
+                          <span class="location-status-label location-status-label--active">Aktiv</span>
+                        </span>
                       </div>
                     </td>
                     <td>
@@ -4046,7 +4146,7 @@
                           class="location-extend-btn"
                           data-action="extend"
                         >
-                          jetzt verlängern
+                          verlängern
                         </button>
                       </div>
                     </td>
@@ -4059,6 +4159,12 @@
                       >
                         <span class="locations-products-count locations-products-count--partial">2/3</span>
                         <i class="fa-solid fa-chevron-right locations-products-chevron" aria-hidden="true"></i>
+                      </button>
+                    </td>
+                    <td class="locations-detail-nav-cell">
+                      <button type="button" class="locations-detail-nav-btn" aria-label="Zum Standort">
+                        <i class="fa-solid fa-house" aria-hidden="true"></i>
+                        <i class="fa-solid fa-chevron-right" aria-hidden="true"></i>
                       </button>
                     </td>
                   </tr>
@@ -4089,12 +4195,16 @@
                         </ul>
                       </div>
                     </td>
+                    <td class="locations-products-detail-empty" aria-hidden="true"></td>
                   </tr>
                   <tr>
                     <td class="locations-row__name">Kaiserslautern</td>
                     <td>
                       <div class="location-status-wrap">
-                        <span class="location-status-chip location-status-chip--active">Aktiv</span>
+                        <span class="location-status-indicator">
+                          <span class="location-status-dot location-status-dot--active" aria-hidden="true"></span>
+                          <span class="location-status-label location-status-label--active">Aktiv</span>
+                        </span>
                       </div>
                     </td>
                     <td>
@@ -4109,6 +4219,12 @@
                       >
                         <span class="locations-products-count locations-products-count--full">3/3</span>
                         <i class="fa-solid fa-chevron-right locations-products-chevron" aria-hidden="true"></i>
+                      </button>
+                    </td>
+                    <td class="locations-detail-nav-cell">
+                      <button type="button" class="locations-detail-nav-btn" aria-label="Zum Standort">
+                        <i class="fa-solid fa-house" aria-hidden="true"></i>
+                        <i class="fa-solid fa-chevron-right" aria-hidden="true"></i>
                       </button>
                     </td>
                   </tr>
@@ -4139,6 +4255,7 @@
                         </ul>
                       </div>
                     </td>
+                    <td class="locations-products-detail-empty" aria-hidden="true"></td>
                   </tr>
                   <tr>
                     <td class="locations-row__name">Koblenz</td>
@@ -4146,11 +4263,12 @@
                       <div class="location-status-wrap">
                         <button
                           type="button"
-                          class="location-status-chip location-status-chip--inactive"
+                          class="location-status-indicator location-status-chip--inactive"
                           data-location="Koblenz"
                           aria-label="Koblenz reaktivieren"
                         >
-                          pausiert
+                          <span class="location-status-dot location-status-dot--inactive" aria-hidden="true"></span>
+                          <span class="location-status-label location-status-label--inactive">pausiert</span>
                         </button>
                       </div>
                     </td>
@@ -4162,7 +4280,7 @@
                           class="location-extend-btn"
                           data-action="reactivate"
                         >
-                          jetzt reaktivieren
+                          reaktivieren
                         </button>
                       </div>
                     </td>
@@ -4173,8 +4291,14 @@
                         aria-expanded="false"
                         aria-label="Produkte für Koblenz anzeigen"
                       >
-                        <span class="locations-products-count locations-products-count--partial">0/3</span>
+                        <span class="locations-products-count locations-products-count--full">0/3</span>
                         <i class="fa-solid fa-chevron-right locations-products-chevron" aria-hidden="true"></i>
+                      </button>
+                    </td>
+                    <td class="locations-detail-nav-cell">
+                      <button type="button" class="locations-detail-nav-btn" aria-label="Zum Standort">
+                        <i class="fa-solid fa-house" aria-hidden="true"></i>
+                        <i class="fa-solid fa-chevron-right" aria-hidden="true"></i>
                       </button>
                     </td>
                   </tr>
@@ -4205,6 +4329,7 @@
                         </ul>
                       </div>
                     </td>
+                    <td class="locations-products-detail-empty" aria-hidden="true"></td>
                   </tr>
                   <tr>
                     <td class="locations-row__name">Saarbrücken</td>
@@ -4212,11 +4337,12 @@
                       <div class="location-status-wrap">
                         <button
                           type="button"
-                          class="location-status-chip location-status-chip--inactive"
+                          class="location-status-indicator location-status-chip--inactive"
                           data-location="Saarbrücken"
                           aria-label="Saarbrücken reaktivieren"
                         >
-                          pausiert
+                          <span class="location-status-dot location-status-dot--inactive" aria-hidden="true"></span>
+                          <span class="location-status-label location-status-label--inactive">pausiert</span>
                         </button>
                       </div>
                     </td>
@@ -4228,7 +4354,7 @@
                           class="location-extend-btn"
                           data-action="reactivate"
                         >
-                          jetzt reaktivieren
+                          reaktivieren
                         </button>
                       </div>
                     </td>
@@ -4239,8 +4365,14 @@
                         aria-expanded="false"
                         aria-label="Produkte für Saarbrücken anzeigen"
                       >
-                        <span class="locations-products-count locations-products-count--partial">0/3</span>
+                        <span class="locations-products-count locations-products-count--full">0/3</span>
                         <i class="fa-solid fa-chevron-right locations-products-chevron" aria-hidden="true"></i>
+                      </button>
+                    </td>
+                    <td class="locations-detail-nav-cell">
+                      <button type="button" class="locations-detail-nav-btn" aria-label="Zum Standort">
+                        <i class="fa-solid fa-house" aria-hidden="true"></i>
+                        <i class="fa-solid fa-chevron-right" aria-hidden="true"></i>
                       </button>
                     </td>
                   </tr>
@@ -4271,6 +4403,7 @@
                         </ul>
                       </div>
                     </td>
+                    <td class="locations-products-detail-empty" aria-hidden="true"></td>
                   </tr>
                 </tbody>
               </table>
