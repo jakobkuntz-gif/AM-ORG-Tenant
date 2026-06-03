@@ -1,0 +1,261 @@
+            <div
+              id="statsPanelPerformance"
+              class="stats-panel"
+              role="tabpanel"
+              data-stats-panel="performance"
+            >
+              <div class="auth-card stats-card-performance">
+                <div class="stat-inner-head stat-inner-head--split">
+                  <span>Performance</span>
+                  <div class="stat-inner-head-toolbar">
+                    <label for="statsStandortSelectPerformance">Standort</label>
+                    <select
+                      id="statsStandortSelectPerformance"
+                      class="stats-standort-select"
+                      aria-label="Standort: Performance"
+                    >
+                      <option value="" selected>Alle Standorte</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="stat-inner-body stat-inner-body--performance">
+
+              <div class="stats-kpi-row stats-kpi-row--perf">
+                <div class="stats-kpi-card stats-perf-kpi-card" data-perf-metric="conversion">
+                  <div class="stats-perf-kpi-main">
+                    <span class="stats-kpi-icon conversion" aria-hidden="true"
+                      ><i class="fa-solid fa-chart-line"></i
+                    ></span>
+                    <div>
+                      <span class="stats-kpi-value" id="perfKpiConversion">32,4%</span><span class="stats-kpi-label">Umwandlungsquote (Ø)</span>
+                    </div>
+                  </div>
+                  <button
+                    type="button"
+                    class="btn btn-secondary stats-perf-detail-btn"
+                    data-perf-metric="conversion"
+                    aria-expanded="false"
+                  >
+                    Detailansicht
+                  </button>
+                </div>
+                <div class="stats-kpi-card stats-perf-kpi-card" data-perf-metric="complaints">
+                  <div class="stats-perf-kpi-main">
+                    <span class="stats-kpi-icon complaints" aria-hidden="true"
+                      ><i class="fa-solid fa-triangle-exclamation"></i
+                    ></span>
+                    <div>
+                      <span class="stats-kpi-value" id="perfKpiComplaints">2,1%</span><span class="stats-kpi-label">Reklamationsrate (Ø)</span>
+                    </div>
+                  </div>
+                  <button
+                    type="button"
+                    class="btn btn-secondary stats-perf-detail-btn"
+                    data-perf-metric="complaints"
+                    aria-expanded="false"
+                  >
+                    Detailansicht
+                  </button>
+                </div>
+                <div class="stats-kpi-card stats-perf-kpi-card" data-perf-metric="investment">
+                  <div class="stats-perf-kpi-main">
+                    <span class="stats-kpi-icon investment" aria-hidden="true"
+                      ><i class="fa-solid fa-euro-sign"></i
+                    ></span>
+                    <div>
+                      <span class="stats-kpi-value" id="perfKpiInvestment">284 €</span><span class="stats-kpi-label">Investition / Neukunde (Ø)</span>
+                    </div>
+                  </div>
+                  <button
+                    type="button"
+                    class="btn btn-secondary stats-perf-detail-btn"
+                    data-perf-metric="investment"
+                    aria-expanded="false"
+                  >
+                    Detailansicht
+                  </button>
+                </div>
+              </div>
+
+              <div class="stats-performance-stack">
+                <article class="stats-panel stats-perf-segment is-detail-hidden" data-perf-metric="conversion">
+                  <div class="stats-panel-head stats-perf-panel-head">
+                    <span class="stats-perf-panel-title">Umwandlungsquoten</span>
+                    <button
+                      type="button"
+                      class="stats-perf-detail-close"
+                      aria-label="Detailansicht schließen"
+                    >
+                      <i class="fa-solid fa-xmark" aria-hidden="true"></i>
+                    </button>
+                  </div>
+                  <div class="stats-panel-body">
+                    <div class="stats-perf-breakdown-head">
+                      <span class="stats-perf-breakdown-heading">Aufschlüsselung</span>
+                      <div class="stats-perf-viz-toggle" role="group" aria-label="Darstellungsart für Nach Standort, Mitarbeiter und Produkt">
+                        <button type="button" class="stats-perf-viz-btn is-active" data-viz-mode="bars" data-viz-scope="dimension" title="Balkendiagramm" aria-label="Balkendiagramm" aria-pressed="true">
+                          <i class="fa-solid fa-bars-progress" aria-hidden="true"></i>
+                        </button>
+                        <button type="button" class="stats-perf-viz-btn" data-viz-mode="table" data-viz-scope="dimension" title="Tabelle" aria-label="Tabelle" aria-pressed="false">
+                          <i class="fa-solid fa-table" aria-hidden="true"></i>
+                        </button>
+                      </div>
+                    </div>
+                    <div class="stats-perf-folds">
+                      <details class="stats-perf-fold" data-perf-view="standort">
+                        <summary>Nach Standort</summary>
+                        <div class="stats-perf-fold-body">
+                          <div class="stats-perf-viz"></div>
+                        </div>
+                      </details>
+                      <details class="stats-perf-fold" data-perf-view="mitarbeiter">
+                        <summary>Nach Mitarbeiter</summary>
+                        <div class="stats-perf-fold-body">
+                          <div class="stats-perf-viz"></div>
+                        </div>
+                      </details>
+                      <details class="stats-perf-fold" data-perf-view="produkt">
+                        <summary>Nach Produkt</summary>
+                        <div class="stats-perf-fold-body">
+                          <div class="stats-perf-viz"></div>
+                        </div>
+                      </details>
+                      <details class="stats-perf-fold stats-perf-combo-fold">
+                        <summary>Kombinationen &amp; Vergleich</summary>
+                        <div class="stats-perf-fold-body">
+                          <p class="stats-perf-combo-intro">Wählen Sie Analyseebene und Filter, dann <strong>Jetzt vergleichen</strong>. Die Auswertung unten folgt der gewählten Analyseebene (z.&nbsp;B. <strong>Standort → Produkt</strong> oder <strong>Standort → Mitarbeiter → Produkt</strong>) und ersetzt die vorherige Ansicht.</p>
+                          <div class="stats-perf-combo-configurator" aria-live="polite"></div>
+                          <div class="stats-perf-combo-results">
+                            <h5 class="stats-perf-combo-results-heading">Vergleich</h5>
+                            <div class="stats-perf-viz stats-perf-combo-results-viz"></div>
+                          </div>
+                        </div>
+                      </details>
+                    </div>
+                  </div>
+                </article>
+
+                <article class="stats-panel stats-perf-segment is-detail-hidden" data-perf-metric="complaints">
+                  <div class="stats-panel-head stats-perf-panel-head">
+                    <span class="stats-perf-panel-title">Reklamationsrate</span>
+                    <button
+                      type="button"
+                      class="stats-perf-detail-close"
+                      aria-label="Detailansicht schließen"
+                    >
+                      <i class="fa-solid fa-xmark" aria-hidden="true"></i>
+                    </button>
+                  </div>
+                  <div class="stats-panel-body">
+                    <div class="stats-perf-breakdown-head">
+                      <span class="stats-perf-breakdown-heading">Aufschlüsselung</span>
+                      <div class="stats-perf-viz-toggle" role="group" aria-label="Darstellungsart für Nach Standort, Mitarbeiter und Produkt">
+                        <button type="button" class="stats-perf-viz-btn is-active" data-viz-mode="bars" data-viz-scope="dimension" title="Balkendiagramm" aria-label="Balkendiagramm" aria-pressed="true">
+                          <i class="fa-solid fa-bars-progress" aria-hidden="true"></i>
+                        </button>
+                        <button type="button" class="stats-perf-viz-btn" data-viz-mode="table" data-viz-scope="dimension" title="Tabelle" aria-label="Tabelle" aria-pressed="false">
+                          <i class="fa-solid fa-table" aria-hidden="true"></i>
+                        </button>
+                      </div>
+                    </div>
+                    <div class="stats-perf-folds">
+                      <details class="stats-perf-fold" data-perf-view="complaint-status">
+                        <summary>Eingereichte Reklamationen</summary>
+                        <div class="stats-perf-fold-body">
+                          <div class="stats-perf-viz"></div>
+                        </div>
+                      </details>
+                      <details class="stats-perf-fold" data-perf-view="standort">
+                        <summary>Nach Standort</summary>
+                        <div class="stats-perf-fold-body">
+                          <div class="stats-perf-viz"></div>
+                        </div>
+                      </details>
+                      <details class="stats-perf-fold" data-perf-view="mitarbeiter">
+                        <summary>Nach Mitarbeiter</summary>
+                        <div class="stats-perf-fold-body">
+                          <div class="stats-perf-viz"></div>
+                        </div>
+                      </details>
+                      <details class="stats-perf-fold" data-perf-view="produkt">
+                        <summary>Nach Produkt</summary>
+                        <div class="stats-perf-fold-body">
+                          <div class="stats-perf-viz"></div>
+                        </div>
+                      </details>
+                      <details class="stats-perf-fold stats-perf-combo-fold">
+                        <summary>Kombinationen &amp; Vergleich</summary>
+                        <div class="stats-perf-fold-body">
+                          <p class="stats-perf-combo-intro">Wählen Sie Analyseebene und Filter, dann <strong>Jetzt vergleichen</strong>. Die Auswertung unten folgt der gewählten Analyseebene (z.&nbsp;B. <strong>Standort → Produkt</strong> oder <strong>Standort → Mitarbeiter → Produkt</strong>) und ersetzt die vorherige Ansicht.</p>
+                          <div class="stats-perf-combo-configurator" aria-live="polite"></div>
+                          <div class="stats-perf-combo-results">
+                            <h5 class="stats-perf-combo-results-heading">Vergleich</h5>
+                            <div class="stats-perf-viz stats-perf-combo-results-viz"></div>
+                          </div>
+                        </div>
+                      </details>
+                    </div>
+                  </div>
+                </article>
+
+                <article class="stats-panel stats-perf-segment is-detail-hidden" data-perf-metric="investment">
+                  <div class="stats-panel-head stats-perf-panel-head">
+                    <span class="stats-perf-panel-title">Investition pro Neukunde</span>
+                    <button
+                      type="button"
+                      class="stats-perf-detail-close"
+                      aria-label="Detailansicht schließen"
+                    >
+                      <i class="fa-solid fa-xmark" aria-hidden="true"></i>
+                    </button>
+                  </div>
+                  <div class="stats-panel-body">
+                    <div class="stats-perf-breakdown-head">
+                      <span class="stats-perf-breakdown-heading">Aufschlüsselung</span>
+                      <div class="stats-perf-viz-toggle" role="group" aria-label="Darstellungsart für Nach Standort, Mitarbeiter und Produkt">
+                        <button type="button" class="stats-perf-viz-btn is-active" data-viz-mode="bars" data-viz-scope="dimension" title="Balkendiagramm" aria-label="Balkendiagramm" aria-pressed="true">
+                          <i class="fa-solid fa-bars-progress" aria-hidden="true"></i>
+                        </button>
+                        <button type="button" class="stats-perf-viz-btn" data-viz-mode="table" data-viz-scope="dimension" title="Tabelle" aria-label="Tabelle" aria-pressed="false">
+                          <i class="fa-solid fa-table" aria-hidden="true"></i>
+                        </button>
+                      </div>
+                    </div>
+                    <div class="stats-perf-folds">
+                      <details class="stats-perf-fold" data-perf-view="standort">
+                        <summary>Nach Standort</summary>
+                        <div class="stats-perf-fold-body">
+                          <div class="stats-perf-viz"></div>
+                        </div>
+                      </details>
+                      <details class="stats-perf-fold" data-perf-view="mitarbeiter">
+                        <summary>Nach Mitarbeiter</summary>
+                        <div class="stats-perf-fold-body">
+                          <div class="stats-perf-viz"></div>
+                        </div>
+                      </details>
+                      <details class="stats-perf-fold" data-perf-view="produkt">
+                        <summary>Nach Produkt</summary>
+                        <div class="stats-perf-fold-body">
+                          <div class="stats-perf-viz"></div>
+                        </div>
+                      </details>
+                      <details class="stats-perf-fold stats-perf-combo-fold">
+                        <summary>Kombinationen &amp; Vergleich</summary>
+                        <div class="stats-perf-fold-body">
+                          <p class="stats-perf-combo-intro">Wählen Sie Analyseebene und Filter, dann <strong>Jetzt vergleichen</strong>. Die Auswertung unten folgt der gewählten Analyseebene (z.&nbsp;B. <strong>Standort → Produkt</strong> oder <strong>Standort → Mitarbeiter → Produkt</strong>) und ersetzt die vorherige Ansicht.</p>
+                          <div class="stats-perf-combo-configurator" aria-live="polite"></div>
+                          <div class="stats-perf-combo-results">
+                            <h5 class="stats-perf-combo-results-heading">Vergleich</h5>
+                            <div class="stats-perf-viz stats-perf-combo-results-viz"></div>
+                          </div>
+                        </div>
+                      </details>
+                    </div>
+                  </div>
+                </article>
+              </div>
+            </div>
+                </div>
+              </div>
+            </div>
