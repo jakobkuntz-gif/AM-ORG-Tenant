@@ -929,6 +929,245 @@
         display: block;
       }
 
+      .standort-detail-page {
+        display: none;
+        padding: 22px 24px 30px;
+      }
+
+      .standort-detail-page.open {
+        display: block;
+      }
+
+      .standort-detail-shell {
+        width: min(100%, 100%);
+      }
+
+      .standort-detail-breadcrumb {
+        display: flex;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 8px;
+        margin: 0 0 10px;
+        font-size: var(--font-body);
+        line-height: 1.35;
+      }
+
+      .standort-detail-breadcrumb__link {
+        border: 0;
+        background: transparent;
+        padding: 0;
+        color: var(--primary-dark);
+        font-size: inherit;
+        font-weight: 700;
+        cursor: pointer;
+      }
+
+      .standort-detail-breadcrumb__link:hover {
+        color: var(--primary);
+      }
+
+      .standort-detail-breadcrumb__sep {
+        color: var(--muted);
+      }
+
+      .standort-detail-breadcrumb__current {
+        color: var(--text);
+        font-weight: 600;
+      }
+
+      .standort-detail-title {
+        margin: 0 0 20px;
+        color: var(--primary-dark);
+        font-size: var(--font-page-header);
+        font-weight: var(--font-section-heading-weight);
+        line-height: 1.2;
+      }
+
+      .standort-detail-cards {
+        display: grid;
+        gap: 14px;
+      }
+
+      .standort-detail-card-body {
+        display: grid;
+        gap: 12px;
+      }
+
+      .standort-detail-list {
+        margin: 0;
+        padding: 0;
+        list-style: none;
+      }
+
+      .standort-detail-list li {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 12px;
+        padding: 10px 0;
+        border-bottom: 1px solid var(--line);
+        font-size: var(--font-body);
+        color: var(--text);
+      }
+
+      .standort-detail-list li:last-child {
+        border-bottom: 0;
+        padding-bottom: 0;
+      }
+
+      .standort-detail-list__meta {
+        color: var(--muted);
+        font-size: var(--font-helper);
+        white-space: nowrap;
+      }
+
+      .standort-detail-note {
+        margin: 0;
+        color: var(--muted);
+        font-size: var(--font-body);
+        line-height: 1.45;
+      }
+
+      .standort-users-card .auth-card__header {
+        justify-content: space-between;
+        gap: 12px;
+      }
+
+      .standort-users-card .auth-card__header-title {
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        min-width: 0;
+      }
+
+      .standort-users-card .auth-card__header-title > i[class*="fa-"] {
+        font-size: 0.92em;
+        line-height: 1;
+        flex-shrink: 0;
+      }
+
+      .standort-users-card .auth-card__header .location-add-btn {
+        flex-shrink: 0;
+      }
+
+      .standort-users-table {
+        width: 100%;
+        border-collapse: collapse;
+        table-layout: fixed;
+        min-width: 860px;
+      }
+
+      .standort-users-table thead th {
+        padding: 10px 14px;
+        background: #f3f4f6;
+        color: var(--muted);
+        font-size: var(--font-body);
+        font-weight: 400;
+        line-height: 1.35;
+        text-align: left;
+        vertical-align: middle;
+        border-bottom: 1px solid var(--line);
+      }
+
+      .standort-users-table tbody td {
+        padding: 10px 14px;
+        border-top: var(--table-separator-width) solid var(--line);
+        font-size: var(--font-body);
+        line-height: 1.35;
+        color: var(--text);
+        vertical-align: middle;
+      }
+
+      .standort-users-table col.standort-users-col-name {
+        width: 16%;
+      }
+
+      .standort-users-table col.standort-users-col-email {
+        width: 26%;
+      }
+
+      .standort-users-table col.standort-users-col-access {
+        width: 18%;
+      }
+
+      .standort-users-table col.standort-users-col-status {
+        width: 16%;
+      }
+
+      .standort-users-table col.standort-users-col-active {
+        width: 10%;
+      }
+
+      .standort-user-access-select {
+        width: 100%;
+        max-width: 168px;
+        height: 32px;
+        border: 1px solid var(--line);
+        border-radius: 4px;
+        padding: 0 28px 0 10px;
+        font-size: var(--font-body);
+        color: var(--text);
+        background: var(--white)
+          url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6'%3E%3Cpath d='M1 1l4 4 4-4' fill='none' stroke='%23707070' stroke-width='1.4' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E")
+          no-repeat right 10px center;
+        appearance: none;
+        -webkit-appearance: none;
+        cursor: pointer;
+      }
+
+      .user-active-toggle {
+        position: relative;
+        display: inline-flex;
+        align-items: center;
+        width: 44px;
+        height: 24px;
+        cursor: pointer;
+      }
+
+      .user-active-toggle input {
+        position: absolute;
+        opacity: 0;
+        width: 0;
+        height: 0;
+      }
+
+      .user-active-toggle__track {
+        position: absolute;
+        inset: 0;
+        border-radius: 999px;
+        background: #d9e2ea;
+        transition: background 0.18s ease;
+      }
+
+      .user-active-toggle__thumb {
+        position: absolute;
+        top: 3px;
+        left: 3px;
+        width: 18px;
+        height: 18px;
+        border-radius: 50%;
+        background: var(--white);
+        box-shadow: 0 1px 2px rgba(23, 44, 56, 0.22);
+        transition: transform 0.18s ease;
+      }
+
+      .user-active-toggle input:checked + .user-active-toggle__track {
+        background: var(--primary);
+      }
+
+      .user-active-toggle input:checked + .user-active-toggle__track + .user-active-toggle__thumb {
+        transform: translateX(20px);
+      }
+
+      .user-active-toggle input:focus-visible + .user-active-toggle__track {
+        outline: 2px solid var(--primary);
+        outline-offset: 2px;
+      }
+
+      .standort-users-table-wrap {
+        overflow: auto;
+      }
+
       .locations-shell {
         width: min(100%, 100%);
       }
@@ -1184,6 +1423,10 @@
 
       .location-status-dot--inactive {
         background: var(--muted);
+      }
+
+      .location-status-dot--invited {
+        background: var(--orange);
       }
 
       .locations-table tbody td .location-status-label {
@@ -4708,7 +4951,7 @@
         <header class="topbar">
           <img
             class="header-logo"
-            src="./logo-verbund-pflegehilfe.png"
+            src="/logo-verbund-pflegehilfe.png"
             alt="Verbund Pflegehilfe"
           />
           <div class="hotline">
@@ -5318,7 +5561,7 @@
                           </li>
                           <li class="locations-leistung-item">
                             <span class="locations-leistung-name">Marketingpaket</span>
-                            <button type="button" class="location-extend-btn locations-leistung-inquire-btn">Jetzt anfragen</button>
+                            <button type="button" class="location-extend-btn locations-leistung-inquire-btn">Beraten lassen</button>
                           </li>
                         </ul>
                       </div>
@@ -5383,11 +5626,11 @@
                           </li>
                           <li class="locations-leistung-item">
                             <span class="locations-leistung-name">Lead Kooperation</span>
-                            <button type="button" class="location-extend-btn locations-leistung-inquire-btn">Jetzt anfragen</button>
+                            <button type="button" class="location-extend-btn locations-leistung-inquire-btn">Beraten lassen</button>
                           </li>
                           <li class="locations-leistung-item">
                             <span class="locations-leistung-name">Marketingpaket</span>
-                            <button type="button" class="location-extend-btn locations-leistung-inquire-btn">Jetzt anfragen</button>
+                            <button type="button" class="location-extend-btn locations-leistung-inquire-btn">Beraten lassen</button>
                           </li>
                         </ul>
                       </div>
@@ -5456,7 +5699,7 @@
                           </li>
                           <li class="locations-leistung-item">
                             <span class="locations-leistung-name">Marketingpaket</span>
-                            <button type="button" class="location-extend-btn locations-leistung-inquire-btn">Jetzt anfragen</button>
+                            <button type="button" class="location-extend-btn locations-leistung-inquire-btn">Beraten lassen</button>
                           </li>
                         </ul>
                       </div>
@@ -5582,15 +5825,15 @@
                         <ul class="locations-leistungen-list">
                           <li class="locations-leistung-item">
                             <span class="locations-leistung-name">Anfragen-Manager Abo</span>
-                            <button type="button" class="location-extend-btn locations-leistung-inquire-btn">Jetzt anfragen</button>
+                            <button type="button" class="location-extend-btn locations-leistung-inquire-btn">Beraten lassen</button>
                           </li>
                           <li class="locations-leistung-item">
                             <span class="locations-leistung-name">Lead Kooperation</span>
-                            <button type="button" class="location-extend-btn locations-leistung-inquire-btn">Jetzt anfragen</button>
+                            <button type="button" class="location-extend-btn locations-leistung-inquire-btn">Beraten lassen</button>
                           </li>
                           <li class="locations-leistung-item">
                             <span class="locations-leistung-name">Marketingpaket</span>
-                            <button type="button" class="location-extend-btn locations-leistung-inquire-btn">Jetzt anfragen</button>
+                            <button type="button" class="location-extend-btn locations-leistung-inquire-btn">Beraten lassen</button>
                           </li>
                         </ul>
                       </div>
@@ -5656,15 +5899,15 @@
                         <ul class="locations-leistungen-list">
                           <li class="locations-leistung-item">
                             <span class="locations-leistung-name">Anfragen-Manager Abo</span>
-                            <button type="button" class="location-extend-btn locations-leistung-inquire-btn">Jetzt anfragen</button>
+                            <button type="button" class="location-extend-btn locations-leistung-inquire-btn">Beraten lassen</button>
                           </li>
                           <li class="locations-leistung-item">
                             <span class="locations-leistung-name">Lead Kooperation</span>
-                            <button type="button" class="location-extend-btn locations-leistung-inquire-btn">Jetzt anfragen</button>
+                            <button type="button" class="location-extend-btn locations-leistung-inquire-btn">Beraten lassen</button>
                           </li>
                           <li class="locations-leistung-item">
                             <span class="locations-leistung-name">Marketingpaket</span>
-                            <button type="button" class="location-extend-btn locations-leistung-inquire-btn">Jetzt anfragen</button>
+                            <button type="button" class="location-extend-btn locations-leistung-inquire-btn">Beraten lassen</button>
                           </li>
                         </ul>
                       </div>
@@ -5684,6 +5927,100 @@
                   <i class="fa-solid fa-chevron-right" aria-hidden="true"></i>
                 </button>
               </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section id="standortDetailPage" class="standort-detail-page" aria-labelledby="standortDetailTitle">
+          <div class="standort-detail-shell">
+            <nav class="standort-detail-breadcrumb" aria-label="Brotkrumen">
+              <button id="standortDetailBackBtn" type="button" class="standort-detail-breadcrumb__link">
+                Standort-Management
+              </button>
+              <span class="standort-detail-breadcrumb__sep" aria-hidden="true">&gt;</span>
+              <span id="standortDetailBreadcrumbName" class="standort-detail-breadcrumb__current"></span>
+            </nav>
+            <h2 id="standortDetailTitle" class="standort-detail-title"></h2>
+
+            <div class="standort-detail-cards">
+              <div class="auth-card standort-users-card">
+                <div class="auth-card__header">
+                  <div class="auth-card__header-title">
+                    <i class="fa-solid fa-users" aria-hidden="true"></i>
+                    <span>Nutzer-Verwaltung</span>
+                  </div>
+                  <button id="standortInviteUserBtn" class="location-add-btn" type="button">
+                    Nutzer einladen
+                  </button>
+                </div>
+                <div class="auth-card__body auth-card__body--flush">
+                  <div class="standort-users-table-wrap">
+                    <table class="standort-users-table">
+                      <colgroup>
+                        <col class="standort-users-col-name" />
+                        <col class="standort-users-col-email" />
+                        <col class="standort-users-col-access" />
+                        <col class="standort-users-col-status" />
+                        <col class="standort-users-col-active" />
+                      </colgroup>
+                      <thead>
+                        <tr>
+                          <th scope="col">Name</th>
+                          <th scope="col">Email</th>
+                          <th scope="col">Zugriff</th>
+                          <th scope="col">Nutzerstatus</th>
+                          <th scope="col">Aktiv</th>
+                        </tr>
+                      </thead>
+                      <tbody id="standortUsersTableBody"></tbody>
+                    </table>
+                  </div>
+                  <div class="standort-users-footer locations-footer">
+                    <span>Nutzer pro Seite:</span>
+                    <select
+                      id="standortUsersPerPageSelect"
+                      class="footer-pagination-select"
+                      aria-label="Nutzer pro Seite"
+                    >
+                      <option value="5" selected>5</option>
+                      <option value="10">10</option>
+                      <option value="25">25</option>
+                    </select>
+                    <span id="standortUsersRange">1-5 von 0</span>
+                    <button
+                      id="standortUsersPrevBtn"
+                      class="footer-nav-btn"
+                      type="button"
+                      aria-label="Vorherige Seite"
+                    >
+                      <i class="fa-solid fa-chevron-left" aria-hidden="true"></i>
+                    </button>
+                    <button
+                      id="standortUsersNextBtn"
+                      class="footer-nav-btn"
+                      type="button"
+                      aria-label="Nachste Seite"
+                    >
+                      <i class="fa-solid fa-chevron-right" aria-hidden="true"></i>
+                    </button>
+                  </div>
+                </div>
+              </div>
+
+              <div class="auth-card">
+                <div class="auth-card__header">
+                  <i class="fa-solid fa-file-contract" aria-hidden="true"></i>
+                  <span>Vertretungsregeln &amp; Vertragsverwaltung</span>
+                </div>
+                <div class="auth-card__body">
+                  <div class="standort-detail-card-body">
+                    <p class="standort-detail-note">
+                      Vertretungsregeln und Vertragsdetails für den Standort.
+                    </p>
+                    <ul id="standortDetailRulesList" class="standort-detail-list"></ul>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
@@ -6905,7 +7242,7 @@
     </script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
     <script
-      src="stats-performance.js?v=20260603s"
+      src="/stats-performance.js?v=20260603s"
       onerror="window.__statsPerformanceScriptFailed = true"
     ></script>
     <script>
@@ -6929,6 +7266,17 @@
       const overviewSection = document.getElementById("overviewSection");
       const meinKontoPage = document.getElementById("meinKontoPage");
       const meineStandortePage = document.getElementById("meineStandortePage");
+      const standortDetailPage = document.getElementById("standortDetailPage");
+      const standortDetailBackBtn = document.getElementById("standortDetailBackBtn");
+      const standortDetailTitle = document.getElementById("standortDetailTitle");
+      const standortDetailBreadcrumbName = document.getElementById("standortDetailBreadcrumbName");
+      const standortUsersTableBody = document.getElementById("standortUsersTableBody");
+      const standortUsersRange = document.getElementById("standortUsersRange");
+      const standortUsersPerPageSelect = document.getElementById("standortUsersPerPageSelect");
+      const standortUsersPrevBtn = document.getElementById("standortUsersPrevBtn");
+      const standortUsersNextBtn = document.getElementById("standortUsersNextBtn");
+      const standortInviteUserBtn = document.getElementById("standortInviteUserBtn");
+      const standortDetailRulesList = document.getElementById("standortDetailRulesList");
       const meineStatistikenPage = document.getElementById("meineStatistikenPage");
       const leadDetailPage = document.getElementById("leadDetailPage");
       const backToOverviewBtn = document.getElementById("backToOverviewBtn");
@@ -7735,7 +8083,7 @@
       let SUBTENANT_STANDORTE = [];
       const DEFAULT_PROFILE_IMAGE = "";
       const DEFAULT_LOGO_IMAGE = "";
-      const AVV_FILE_URL = "./AVV.pdf";
+      const AVV_FILE_URL = "/AVV.pdf";
       const GEBIET_BY_STANDORT = {
         Mainz: "Rheinhessen",
         Frankfurt: "Frankfurt Rhein-Main",
@@ -8173,16 +8521,26 @@
         return getFilteredLeadsForStatsScope(scope, period).length;
       }
 
-      function getFilteredLeadsForStatsScope(scope, period) {
+      function getLeadOverviewRowsForStats(scope) {
         refreshLeadTableRefs();
-        const maxDays = overviewPeriodToMaxDays(period);
-        const end = new Date();
-        end.setHours(23, 59, 59, 999);
-        const endMs = end.getTime();
         return rows.filter((row) => {
           if (!row.classList.contains("lead-row")) return false;
           if (scope && getCellValue(row, "standort") !== scope) return false;
-          if (maxDays == null) return true;
+          return true;
+        });
+      }
+
+      function getFilteredLeadsForStatsScope(scope, period) {
+        const scopedRows = getLeadOverviewRowsForStats(scope);
+        if (!period || period === "gesamt") return scopedRows;
+
+        const maxDays = overviewPeriodToMaxDays(period);
+        if (maxDays == null) return scopedRows;
+
+        const end = new Date();
+        end.setHours(23, 59, 59, 999);
+        const endMs = end.getTime();
+        return scopedRows.filter((row) => {
           const ts = parseRequestDateCell(getCellValue(row, "anfrageDatum"));
           if (!ts) return false;
           const diffDays = (endMs - ts) / 86400000;
@@ -8380,8 +8738,8 @@
       function getOverviewStatsContext(scope) {
         const period = getStatsOverviewPeriod();
         const activeStandorte = getOverviewStandortNames();
-        refreshLeadTableRefs();
-        const hasLeadTable = rows.some((row) => row.classList.contains("lead-row"));
+        const overviewRows = getLeadOverviewRowsForStats(scope || "");
+        const hasLeadTable = overviewRows.length > 0;
         const filteredLeads = hasLeadTable
           ? getFilteredLeadsForStatsScope(scope || "", period)
           : [];
@@ -8547,7 +8905,7 @@
         });
       }
 
-      function populateStatsStandortSelects() {
+      function populateStatsStandortSelects(applyScope = true) {
         const selects = getStatsStandortSelectEls();
         if (!selects.length) return;
         const standortOptions = getStatsStandortFilterOptions();
@@ -8570,8 +8928,10 @@
           const nextVal = keepVal && standortOptions.includes(keepVal) ? keepVal : "";
           sel.value = nextVal;
         });
-        const scope = selects[0].value || "";
-        applyMeineStatistikenStandortScope(scope);
+        if (applyScope) {
+          const scope = selects[0].value || "";
+          applyMeineStatistikenStandortScope(scope);
+        }
       }
 
       function buildAssignableStandorte() {
@@ -8584,7 +8944,7 @@
         const tenantLocation = (sidebarTenantName?.textContent || "").trim();
         const merged = [...locationRows, tenantLocation].filter(Boolean);
         ASSIGNABLE_STANDORTE = Array.from(new Set(merged));
-        populateStatsStandortSelects();
+        populateStatsStandortSelects(false);
         if (statsPerformanceApi?.refreshPerformanceTenantLists) {
           statsPerformanceApi.refreshPerformanceTenantLists();
         }
@@ -9054,6 +9414,345 @@
         else low?.classList.add("active");
       }
 
+      function hideAllWorkspacePages() {
+        overviewSection.style.display = "none";
+        meinKontoPage.classList.remove("open");
+        meineStandortePage.classList.remove("open");
+        standortDetailPage?.classList.remove("open");
+        meineStatistikenPage.classList.remove("open");
+        leadDetailPage.classList.remove("open");
+        drawer?.classList.remove("open");
+      }
+
+      function slugifyStandortName(name) {
+        return String(name || "")
+          .trim()
+          .toLowerCase()
+          .normalize("NFD")
+          .replace(/[\u0300-\u036f]/g, "")
+          .replace(/ß/g, "ss")
+          .replace(/[^a-z0-9]+/g, "-")
+          .replace(/^-+|-+$/g, "");
+      }
+
+      function getStandortTableRows() {
+        return Array.from(
+          document.querySelectorAll("#locationsTableBody tr:not(.locations-leistungen-detail-row)"),
+        );
+      }
+
+      function initStandortRowMetadata() {
+        getStandortTableRows().forEach((row) => {
+          const name = row.querySelector(".locations-row__name")?.textContent.trim();
+          if (!name) return;
+          const id = slugifyStandortName(name);
+          row.dataset.standortId = id;
+          row.dataset.standortName = name;
+          const navBtn = row.querySelector(".locations-detail-nav-btn");
+          if (navBtn) {
+            navBtn.setAttribute("aria-label", `Zum Standort ${name}`);
+          }
+        });
+      }
+
+      function findStandortRowById(standortId) {
+        const normalizedId = slugifyStandortName(standortId);
+        return getStandortTableRows().find((row) => row.dataset.standortId === normalizedId);
+      }
+
+      const STANDORT_USER_FIRST_NAMES = [
+        "Test",
+        "Hans",
+        "Lisa",
+        "Anna",
+        "Tom",
+        "Julia",
+        "Max",
+        "Laura",
+        "Paul",
+        "Clara",
+        "Felix",
+        "Nina",
+        "Jonas",
+        "Emilia",
+        "Robin",
+        "Sandra",
+        "Lukas",
+        "Mia",
+        "Melissa",
+        "Jakob",
+      ];
+      const STANDORT_USER_LAST_NAMES = [
+        "Müller",
+        "Schmidt",
+        "Bellmann",
+        "Weber",
+        "Brandt",
+        "Klein",
+        "Hoffmann",
+        "Kuntz",
+        "Markus",
+        "Hart",
+        "Richter",
+        "Neumann",
+        "Kropp",
+        "Stadel",
+        "Koch",
+        "Lang",
+        "Wolf",
+        "Ernst",
+        "König",
+        "Fischer",
+      ];
+      const standortUsersCache = new Map();
+      let currentStandortUsersId = "";
+      let currentStandortUsers = [];
+      let standortUsersPage = 1;
+      let standortUsersPerPage = 5;
+      let standortUsersTotalPages = 1;
+
+      function nameToStandortUserEmail(name, standortId) {
+        const local = String(name || "nutzer")
+          .trim()
+          .toLowerCase()
+          .normalize("NFD")
+          .replace(/[\u0300-\u036f]/g, "")
+          .replace(/ß/g, "ss")
+          .replace(/[^a-z0-9]+/g, ".")
+          .replace(/^\.+|\.+$/g, "");
+        const domain = `${String(standortId || "standort").replace(/[^a-z0-9-]+/g, "")}.pflegehilfe.de`;
+        return `${local || "nutzer"}@${domain}`;
+      }
+
+      function getStandortUsersForLocation(standortId, standortName) {
+        const normalizedId = slugifyStandortName(standortId || standortName);
+        if (standortUsersCache.has(normalizedId)) {
+          return standortUsersCache.get(normalizedId);
+        }
+
+        const hash = statsHashForStandort(standortName || normalizedId);
+        const totalUsers = 24 + (hash % 12);
+        const baseNames = getMitarbeiterNamesForStandort(standortName);
+        const users = [];
+
+        for (let index = 0; index < totalUsers; index += 1) {
+          const name =
+            index < baseNames.length
+              ? baseNames[index]
+              : `${STANDORT_USER_FIRST_NAMES[(index + hash) % STANDORT_USER_FIRST_NAMES.length]} ${
+                  STANDORT_USER_LAST_NAMES[(index * 3 + hash) % STANDORT_USER_LAST_NAMES.length]
+                }${index > 18 ? ` ${100 + index}` : ""}`;
+          let status;
+          if ((index + hash) % 6 === 0) {
+            status = "eingeladen";
+          } else if ((index + hash) % 9 === 0) {
+            status = "deaktiviert";
+          } else {
+            status = "aktiv";
+          }
+          users.push({
+            id: `${normalizedId}-${index}`,
+            standortId: normalizedId,
+            name,
+            email: nameToStandortUserEmail(name, normalizedId),
+            access: index === 0 || index % 7 === 0 ? "Administrator" : "Nutzer",
+            status,
+            active: status !== "deaktiviert",
+            pendingRegistration: status === "eingeladen",
+          });
+        }
+
+        standortUsersCache.set(normalizedId, users);
+        return users;
+      }
+
+      function renderStandortUserStatus(status) {
+        const statusConfig = {
+          aktiv: { dotClass: "location-status-dot--active", label: "aktiv" },
+          deaktiviert: { dotClass: "location-status-dot--inactive", label: "deaktiviert" },
+          eingeladen: { dotClass: "location-status-dot--invited", label: "eingeladen" },
+        };
+        const config = statusConfig[status] || statusConfig.aktiv;
+        return `
+          <div class="location-status-wrap">
+            <span class="location-status-indicator">
+              <span class="location-status-dot ${config.dotClass}" aria-hidden="true"></span>
+              <span class="location-status-label">${config.label}</span>
+            </span>
+          </div>
+        `;
+      }
+
+      function renderStandortUserRow(user) {
+        return `
+          <tr data-user-id="${user.id}" data-standort-id="${user.standortId}">
+            <td>${user.name}</td>
+            <td>${user.email}</td>
+            <td>
+              <select class="standort-user-access-select" aria-label="Zugriff für ${user.name}">
+                <option value="Administrator"${user.access === "Administrator" ? " selected" : ""}>Administrator</option>
+                <option value="Nutzer"${user.access === "Nutzer" ? " selected" : ""}>Nutzer</option>
+              </select>
+            </td>
+            <td class="standort-user-status-cell">${renderStandortUserStatus(user.status)}</td>
+            <td>
+              <label class="user-active-toggle" aria-label="Aktiv für ${user.name}">
+                <input type="checkbox"${user.active ? " checked" : ""} />
+                <span class="user-active-toggle__track"></span>
+                <span class="user-active-toggle__thumb"></span>
+              </label>
+            </td>
+          </tr>
+        `;
+      }
+
+      function setStandortUserActive(userId, isActive) {
+        const user = currentStandortUsers.find((entry) => entry.id === userId);
+        if (!user) return null;
+
+        const previousStatus = user.status;
+        user.active = isActive;
+
+        if (!isActive) {
+          if (previousStatus === "eingeladen" || previousStatus === "aktiv") {
+            user.status = "deaktiviert";
+          }
+        } else if (previousStatus === "deaktiviert") {
+          user.status = user.pendingRegistration ? "eingeladen" : "aktiv";
+        }
+
+        const cachedUsers = standortUsersCache.get(currentStandortUsersId);
+        const cachedUser = cachedUsers?.find((entry) => entry.id === userId);
+        if (cachedUser) {
+          cachedUser.active = user.active;
+          cachedUser.status = user.status;
+          cachedUser.pendingRegistration = user.pendingRegistration;
+        }
+
+        return user.status;
+      }
+
+      function updateStandortUserStatusCell(row, status) {
+        const statusCell = row?.querySelector(".standort-user-status-cell");
+        if (statusCell) statusCell.innerHTML = renderStandortUserStatus(status);
+      }
+
+      function updateStandortUsersPaginationControls() {
+        const total = currentStandortUsers.length;
+        standortUsersTotalPages = Math.max(1, Math.ceil(total / standortUsersPerPage));
+        if (standortUsersPage > standortUsersTotalPages) standortUsersPage = standortUsersTotalPages;
+
+        if (!standortUsersRange) return;
+        if (total === 0) {
+          standortUsersRange.textContent = "0-0 von 0";
+        } else {
+          const start = (standortUsersPage - 1) * standortUsersPerPage + 1;
+          const end = Math.min(standortUsersPage * standortUsersPerPage, total);
+          standortUsersRange.textContent = `${start}-${end} von ${total}`;
+        }
+
+        if (standortUsersPrevBtn) standortUsersPrevBtn.disabled = standortUsersPage <= 1;
+        if (standortUsersNextBtn) {
+          standortUsersNextBtn.disabled = standortUsersPage >= standortUsersTotalPages;
+        }
+      }
+
+      function renderStandortUsersTable(standortId, standortName) {
+        if (!standortUsersTableBody) return;
+        const normalizedId = slugifyStandortName(standortId || standortName);
+        currentStandortUsersId = normalizedId;
+        currentStandortUsers = getStandortUsersForLocation(normalizedId, standortName);
+        standortUsersPage = 1;
+
+        const startIndex = (standortUsersPage - 1) * standortUsersPerPage;
+        const pageUsers = currentStandortUsers.slice(startIndex, startIndex + standortUsersPerPage);
+        standortUsersTableBody.innerHTML = pageUsers.map(renderStandortUserRow).join("");
+        updateStandortUsersPaginationControls();
+      }
+
+      function refreshStandortUsersTablePage(resetPage = false) {
+        if (!standortUsersTableBody || !currentStandortUsersId) return;
+        if (resetPage) standortUsersPage = 1;
+
+        const startIndex = (standortUsersPage - 1) * standortUsersPerPage;
+        const pageUsers = currentStandortUsers.slice(startIndex, startIndex + standortUsersPerPage);
+        standortUsersTableBody.innerHTML = pageUsers.map(renderStandortUserRow).join("");
+        updateStandortUsersPaginationControls();
+      }
+
+      function renderStandortDetailCards(standortName, standortId) {
+        renderStandortUsersTable(standortId || standortName, standortName);
+        if (standortDetailRulesList) {
+          standortDetailRulesList.innerHTML = [
+            { label: "Vertretung bei Abwesenheit", meta: "Automatisch an Standortleitung" },
+            { label: "Vertragslaufzeit", meta: "12 Monate, Verlängerung aktiv" },
+            { label: "Leistungspaket", meta: "Anfragen-Manager Abo" },
+            { label: "Freigabe Reklamationen", meta: "Standortleitung + Büro" },
+          ]
+            .map(
+              (item) =>
+                `<li><span>${item.label}</span><span class="standort-detail-list__meta">${item.meta}</span></li>`,
+            )
+            .join("");
+        }
+      }
+
+      function openStandortDetailPage(standortId, options = {}) {
+        if (!standortDetailPage) return;
+        const row = findStandortRowById(standortId);
+        const standortName = row?.dataset.standortName || String(standortId || "").trim();
+        const normalizedId = slugifyStandortName(standortName);
+        if (!standortName) return;
+
+        if (standortDetailTitle) standortDetailTitle.textContent = standortName;
+        if (standortDetailBreadcrumbName) {
+          standortDetailBreadcrumbName.textContent = standortName;
+        }
+        renderStandortDetailCards(standortName, normalizedId);
+
+        hideAllWorkspacePages();
+        standortDetailPage.classList.add("open");
+        setActiveMenu(menuMeineStandorteBtn);
+
+        if (options.pushState !== false) {
+          history.pushState(
+            { page: "standort-detail", standortId: normalizedId },
+            "",
+            `/standort/${encodeURIComponent(normalizedId)}`,
+          );
+        }
+        standortDetailPage.scrollIntoView({ block: "start", behavior: "smooth" });
+      }
+
+      function closeStandortDetailPage(options = {}) {
+        if (!standortDetailPage) return;
+        standortDetailPage.classList.remove("open");
+        meineStandortePage.classList.add("open");
+        overviewSection.style.display = "none";
+        setActiveMenu(menuMeineStandorteBtn);
+        if (options.pushState !== false) {
+          history.pushState({ page: "standorte" }, "", "/standorte");
+        }
+      }
+
+      function handleAppRoute() {
+        const path = location.pathname.replace(/\/+$/, "") || "/";
+        const standortMatch = path.match(/^\/standort\/([^/]+)$/);
+        if (standortMatch) {
+          openStandortDetailPage(decodeURIComponent(standortMatch[1]), { pushState: false });
+          return;
+        }
+        if (path === "/standorte") {
+          openMeineStandortePage({ pushState: false });
+          return;
+        }
+        if (path === "/") {
+          hideAllWorkspacePages();
+          overviewSection.style.display = "";
+          setActiveMenu(menuMeineAnfragenBtn);
+        }
+      }
+
       function openLeadDetailPage(row) {
         if (!row || !leadDetailPage) return;
         lastOpenedLeadRow = row;
@@ -9080,12 +9779,8 @@
         renderLeadComments(leadNumber);
         applyLeadDetailEditabilityForStandort(standort);
 
-        overviewSection.style.display = "none";
-        meinKontoPage.classList.remove("open");
-        meineStandortePage.classList.remove("open");
-        meineStatistikenPage.classList.remove("open");
+        hideAllWorkspacePages();
         leadDetailPage.classList.add("open");
-        drawer?.classList.remove("open");
         leadDetailPage.scrollIntoView({ block: "start", behavior: "smooth" });
         setActiveMenu(menuMeineAnfragenBtn);
       }
@@ -9126,6 +9821,7 @@
 
       function closeLeadDetailPage() {
         leadDetailPage.classList.remove("open");
+        standortDetailPage?.classList.remove("open");
         meineStandortePage.classList.remove("open");
         meineStatistikenPage.classList.remove("open");
         meinKontoPage.classList.remove("open");
@@ -9138,32 +9834,29 @@
       }
 
       function openOverviewPage() {
-        leadDetailPage.classList.remove("open");
-        meinKontoPage.classList.remove("open");
-        meineStandortePage.classList.remove("open");
-        meineStatistikenPage.classList.remove("open");
+        hideAllWorkspacePages();
         overviewSection.style.display = "";
         setActiveMenu(menuMeineAnfragenBtn);
+        if (location.pathname !== "/") {
+          history.pushState({ page: "overview" }, "", "/");
+        }
       }
 
       function openMeinKontoPage() {
-        leadDetailPage.classList.remove("open");
-        meineStandortePage.classList.remove("open");
-        meineStatistikenPage.classList.remove("open");
-        overviewSection.style.display = "none";
+        hideAllWorkspacePages();
         meinKontoPage.classList.add("open");
         displayNameEditPanel.classList.remove("open");
         phoneEditPanel.classList.remove("open");
         setActiveMenu(menuMeinKontoBtn);
       }
 
-      function openMeineStandortePage() {
-        leadDetailPage.classList.remove("open");
-        meinKontoPage.classList.remove("open");
-        meineStatistikenPage.classList.remove("open");
-        overviewSection.style.display = "none";
+      function openMeineStandortePage(options = {}) {
+        hideAllWorkspacePages();
         meineStandortePage.classList.add("open");
         setActiveMenu(menuMeineStandorteBtn);
+        if (options.pushState !== false) {
+          history.pushState({ page: "standorte" }, "", "/standorte");
+        }
       }
 
       function closeAllLocationLeistungenPanels(exceptDetailRow = null) {
@@ -9807,10 +10500,7 @@
       }
 
       function openMeineStatistikenPage() {
-        leadDetailPage.classList.remove("open");
-        meinKontoPage.classList.remove("open");
-        meineStandortePage.classList.remove("open");
-        overviewSection.style.display = "none";
+        hideAllWorkspacePages();
         meineStatistikenPage.classList.add("open");
         initOverviewPeriodTabs();
         setStatsTab("overview");
@@ -10088,7 +10778,56 @@
       }
       menuMeineAnfragenBtn.addEventListener("click", openOverviewPage);
       menuMeinKontoBtn.addEventListener("click", openMeinKontoPage);
-      menuMeineStandorteBtn.addEventListener("click", openMeineStandortePage);
+      menuMeineStandorteBtn.addEventListener("click", () => openMeineStandortePage());
+      if (standortDetailBackBtn) {
+        standortDetailBackBtn.addEventListener("click", () => closeStandortDetailPage());
+      }
+      if (standortUsersPerPageSelect) {
+        standortUsersPerPageSelect.addEventListener("change", () => {
+          standortUsersPerPage = Number(standortUsersPerPageSelect.value || 5);
+          refreshStandortUsersTablePage(true);
+        });
+      }
+      if (standortUsersPrevBtn) {
+        standortUsersPrevBtn.addEventListener("click", () => {
+          if (standortUsersPage <= 1) return;
+          standortUsersPage -= 1;
+          refreshStandortUsersTablePage(false);
+        });
+      }
+      if (standortUsersNextBtn) {
+        standortUsersNextBtn.addEventListener("click", () => {
+          if (standortUsersPage >= standortUsersTotalPages) return;
+          standortUsersPage += 1;
+          refreshStandortUsersTablePage(false);
+        });
+      }
+      if (standortUsersTableBody) {
+        standortUsersTableBody.addEventListener("change", (event) => {
+          const toggle = event.target;
+          if (toggle.type !== "checkbox" || !toggle.closest(".user-active-toggle")) return;
+          const row = toggle.closest("tr");
+          const userId = row?.dataset.userId;
+          if (!userId) return;
+          const isActive = toggle.checked;
+          const nextStatus = setStandortUserActive(userId, isActive);
+          if (nextStatus) updateStandortUserStatusCell(row, nextStatus);
+        });
+      }
+      if (standortInviteUserBtn) {
+        standortInviteUserBtn.addEventListener("click", () => {
+          const standortName =
+            standortDetailTitle?.textContent?.trim() || currentStandortUsersId || "Standort";
+          showAppToast(
+            `Einladung für ${standortName} wird in diesem Clickdummy nicht versendet.`,
+            5000,
+            "Nutzer einladen",
+          );
+        });
+      }
+      window.addEventListener("popstate", () => {
+        handleAppRoute();
+      });
       if (appToastCloseBtn) {
         appToastCloseBtn.addEventListener("click", hideAppToast);
       }
@@ -10136,6 +10875,14 @@
               inquireBtn.closest(".locations-leistung-item")?.querySelector(".locations-leistung-name")
                 ?.textContent || "";
             openReactivationModal(locationName, "product", leistungName.trim());
+            return;
+          }
+          const detailNavBtn = event.target.closest(".locations-detail-nav-btn");
+          if (detailNavBtn) {
+            event.stopPropagation();
+            const row = detailNavBtn.closest("tr");
+            const standortId = row?.dataset.standortId;
+            if (standortId) openStandortDetailPage(standortId);
             return;
           }
           const inactiveChip = event.target.closest(".location-status-chip--inactive");
@@ -10347,6 +11094,7 @@
       });
 
       buildAssignableStandorte();
+      initStandortRowMetadata();
       populateLeadOverviewRows(PERF_DEMO_TARGET_COUNT);
       assignUniqueLeadNames();
       appendOrgTenantLeads();
@@ -10363,6 +11111,8 @@
       });
       applyColumnConfig();
       applyFilter(true);
+      syncOverviewStatsFromLeadTable();
+      handleAppRoute();
       applyUploadedPreviewDefaults();
       updateSidebarAvatar();
       avvVersionLink.href = AVV_FILE_URL;
