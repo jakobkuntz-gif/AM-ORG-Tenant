@@ -54,6 +54,7 @@
         --topbar-separator-height: 8px;
         --lead-detail-content-width: min(100%, 66.666vw);
         --table-edge-padding: 16px;
+        --border-radius-md: 6px;
       }
 
       * {
@@ -1028,6 +1029,520 @@
         line-height: 1.45;
       }
 
+      .standort-detail-subtitle {
+        margin: 0 0 4px;
+        color: var(--muted);
+        font-size: var(--font-body);
+        line-height: 1.45;
+      }
+
+      .standort-section-title {
+        margin: 0;
+        font-size: var(--font-section-heading);
+        font-weight: var(--font-section-heading-weight);
+        color: var(--text);
+        line-height: 1.35;
+      }
+
+      .standort-absence-section-title {
+        display: flex;
+        align-items: baseline;
+        gap: 8px;
+        flex-wrap: wrap;
+      }
+
+      .standort-absence-present-count {
+        font-weight: 400;
+        color: var(--muted);
+        font-size: var(--font-body);
+      }
+
+      .standort-absence-card__header-title {
+        display: inline-flex;
+        align-items: center;
+        gap: 12px;
+        flex-wrap: wrap;
+        min-width: 0;
+      }
+
+      .standort-absence-vertretung-badge {
+        font-size: 12px;
+        font-weight: 600;
+        line-height: 1.35;
+        color: #854f0b;
+        background: #faeeda;
+        border-radius: var(--border-radius-md);
+        padding: 2px 10px;
+        white-space: nowrap;
+      }
+
+      .standort-absence-status-btn {
+        border: 0;
+        background: transparent;
+        padding: 0;
+        font: inherit;
+        cursor: pointer;
+      }
+
+      .standort-absence-status-btn:hover .location-status-label {
+        color: var(--orange);
+      }
+
+      .standort-absence-status-btn:focus-visible {
+        outline: 2px solid var(--primary);
+        outline-offset: 2px;
+        border-radius: 4px;
+      }
+
+      .standort-absence-date-range {
+        color: var(--text);
+        font-size: var(--font-body);
+      }
+
+      .standort-absence-aktuell-cell .standort-absence-empty,
+      .standort-absence-geplant-cell .standort-absence-empty {
+        color: var(--muted);
+        font-size: var(--font-body);
+      }
+
+      .standort-absence-action-head,
+      .standort-absence-action-cell {
+        text-align: left;
+        vertical-align: middle;
+      }
+
+      .standort-absence-action-btn {
+        border: 0;
+        background: transparent;
+        padding: 0;
+        color: var(--primary-dark);
+        font-size: var(--font-body);
+        font-weight: 600;
+        line-height: 1.25;
+        cursor: pointer;
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        white-space: nowrap;
+        text-decoration: underline;
+      }
+
+      .standort-absence-action-btn:hover {
+        color: var(--primary);
+      }
+
+      .standort-absence-planned-toggle {
+        border: 0;
+        background: transparent;
+        padding: 0;
+        color: var(--text);
+        font-size: var(--font-body);
+        cursor: pointer;
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+      }
+
+      .standort-absence-planned-toggle:hover {
+        color: var(--primary);
+      }
+
+      .standort-absence-planned-chevron {
+        font-size: 12px;
+        line-height: 1;
+        color: inherit;
+        transition: transform 0.2s;
+      }
+
+      .standort-absence-planned-chevron.is-expanded {
+        transform: rotate(180deg);
+      }
+
+      .standort-absence-planned-row td {
+        background: #fafbfc;
+        padding-top: 4px;
+        padding-bottom: 8px;
+      }
+
+      .standort-absence-planned-cell {
+        padding-left: 24px;
+        vertical-align: middle;
+      }
+
+      .standort-absence-planned-cell-inner {
+        display: inline-flex;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 12px;
+      }
+
+      .standort-absence-edit-link {
+        border: 0;
+        background: transparent;
+        padding: 0;
+        color: var(--primary-dark);
+        font-size: var(--font-body);
+        font-weight: 600;
+        text-decoration: underline;
+        cursor: pointer;
+      }
+
+      .standort-absence-edit-link:hover {
+        color: var(--primary);
+      }
+
+      .location-text-link-btn {
+        border: 0;
+        background: transparent;
+        padding: 10px 14px;
+        color: var(--primary-dark);
+        font-size: var(--font-body);
+        font-weight: 600;
+        text-decoration: underline;
+        cursor: pointer;
+      }
+
+      .location-text-link-btn:hover {
+        color: var(--primary);
+      }
+
+      .standort-absence-open-end-wrap {
+        margin-top: 8px;
+      }
+
+      .standort-section-divider {
+        border-top: 1px solid var(--line);
+        margin: 18px 0;
+      }
+
+      .standort-info-banner {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 12px;
+        flex-wrap: wrap;
+        padding: 12px 14px;
+        border-radius: 6px;
+        background: var(--amber-soft);
+        border: 1px solid var(--orange-partial-surface);
+        color: var(--text);
+        font-size: var(--font-body);
+        line-height: 1.4;
+      }
+
+      .standort-info-banner__text {
+        flex: 1;
+        min-width: 220px;
+        font-weight: 600;
+      }
+
+      .standort-info-banner__text strong {
+        color: var(--orange);
+      }
+
+      .standort-info-banner--future {
+        background: var(--primary-surface);
+        border-color: var(--primary-light);
+      }
+
+      .standort-info-banner--future .standort-info-banner__text strong {
+        color: var(--primary-dark);
+      }
+
+      .standort-settings-table-wrap {
+        overflow: auto;
+        border: 1px solid var(--line);
+        border-radius: 6px;
+      }
+
+      .standort-settings-table {
+        width: 100%;
+        border-collapse: collapse;
+        table-layout: fixed;
+        min-width: 760px;
+      }
+
+      .standort-absence-table {
+        width: 100%;
+        table-layout: auto;
+        min-width: 0;
+        border-collapse: collapse;
+      }
+
+      .standort-settings-table thead th {
+        padding: 10px 14px;
+        background: #f3f4f6;
+        color: var(--muted);
+        font-size: var(--font-body);
+        font-weight: 400;
+        line-height: 1.35;
+        text-align: left;
+        vertical-align: middle;
+        border-bottom: 1px solid var(--line);
+      }
+
+      .standort-settings-table thead th .th-inner {
+        display: inline-flex;
+        align-items: center;
+        gap: 4px;
+        min-width: 0;
+        white-space: nowrap;
+      }
+
+      .standort-settings-table thead th .th-inner-label {
+        flex-shrink: 0;
+      }
+
+      .standort-settings-table .th-sort-btn {
+        flex-shrink: 0;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 24px;
+        height: 24px;
+        margin: 0;
+        padding: 0;
+        border: 0;
+        border-radius: 4px;
+        background: transparent;
+        color: var(--muted);
+        cursor: pointer;
+      }
+
+      .standort-settings-table .th-sort-btn:hover {
+        background: rgba(43, 43, 43, 0.06);
+        color: var(--text);
+      }
+
+      .standort-settings-table .th-sort-btn:focus-visible {
+        outline: 2px solid var(--primary);
+        outline-offset: 2px;
+      }
+
+      .standort-settings-table .th-sort-btn i {
+        font-size: 12px;
+        line-height: 1;
+      }
+
+      .standort-th-head-row {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        width: 100%;
+        min-width: 0;
+      }
+
+      .standort-th-head-label {
+        flex-shrink: 0;
+        color: var(--muted);
+        white-space: nowrap;
+      }
+
+      .standort-th-filter-control {
+        flex: 1;
+        min-width: 0;
+        max-width: 180px;
+        position: relative;
+      }
+
+      .standort-absence-card .standort-settings-table-wrap {
+        overflow: visible;
+      }
+
+      .standort-th-multi-select {
+        width: 100%;
+        min-width: 0;
+      }
+
+      .standort-th-multi-select .multi-select-trigger {
+        height: 28px;
+        border: 1px solid var(--line);
+        border-radius: 999px;
+        font-size: var(--font-body);
+        font-weight: 400;
+        color: var(--text);
+        padding: 0 28px 0 12px;
+      }
+
+      .standort-th-multi-select.open .multi-select-trigger {
+        border-color: var(--primary);
+      }
+
+      .standort-th-multi-select .multi-select-menu {
+        min-width: 100%;
+        z-index: 40;
+      }
+
+      .standort-settings-table tbody td {
+        padding: 10px 14px;
+        border-top: var(--table-separator-width) solid var(--line);
+        font-size: var(--font-body);
+        line-height: 1.35;
+        color: var(--text);
+        vertical-align: middle;
+      }
+
+      .standort-absence-table tbody td {
+        border: 0;
+        border-bottom: var(--table-separator-width) solid var(--line);
+      }
+
+      .standort-date-range {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        flex-wrap: wrap;
+      }
+
+      .standort-date-sep {
+        color: var(--muted);
+        font-size: var(--font-helper);
+      }
+
+      .standort-date-input,
+      .standort-text-input {
+        height: 32px;
+        border: 1px solid var(--line);
+        border-radius: 4px;
+        padding: 0 10px;
+        font-size: var(--font-body);
+        color: var(--text);
+        background: var(--white);
+      }
+
+      .standort-date-input {
+        min-width: 132px;
+      }
+
+      .standort-text-input {
+        width: 100%;
+      }
+
+      .standort-select-input {
+        width: 100%;
+        max-width: 220px;
+        height: 32px;
+        border: 1px solid var(--line);
+        border-radius: 4px;
+        padding: 0 28px 0 10px;
+        font-size: var(--font-body);
+        color: var(--text);
+        background: var(--white)
+          url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6'%3E%3Cpath d='M1 1l4 4 4-4' fill='none' stroke='%23707070' stroke-width='1.4' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E")
+          no-repeat right 10px center;
+        appearance: none;
+        -webkit-appearance: none;
+        cursor: pointer;
+      }
+
+      .standort-select-input:disabled {
+        opacity: 0.55;
+        cursor: not-allowed;
+      }
+
+      .standort-row-save-btn {
+        border: 1px solid var(--primary);
+        border-radius: 4px;
+        background: var(--white);
+        color: var(--primary-dark);
+        padding: 6px 12px;
+        font-size: var(--font-helper);
+        font-weight: 700;
+        cursor: pointer;
+        white-space: nowrap;
+      }
+
+      .standort-row-save-btn:hover {
+        background: var(--primary-surface);
+      }
+
+      .standort-form-actions {
+        display: flex;
+        justify-content: flex-end;
+        margin-top: 12px;
+      }
+
+      .standort-field-block {
+        display: grid;
+        gap: 6px;
+      }
+
+      .standort-field-block label {
+        font-size: var(--font-helper);
+        color: var(--muted);
+        font-weight: 600;
+      }
+
+      .standort-site-absence-form {
+        display: grid;
+        gap: 12px;
+        max-width: 520px;
+      }
+
+      .pill-amber {
+        background: var(--amber-soft);
+        color: var(--orange);
+      }
+
+      .pill-blue {
+        background: var(--primary-surface);
+        color: var(--primary-dark);
+      }
+
+      .standort-absence-empty {
+        color: var(--muted);
+      }
+
+      .standort-rule-summary {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 12px;
+        flex-wrap: wrap;
+        padding: 10px 12px;
+        border-radius: 6px;
+        background: var(--primary-surface);
+        border: 1px solid var(--primary-light);
+        font-size: var(--font-body);
+        line-height: 1.4;
+      }
+
+      .standort-rule-summary__text {
+        font-weight: 600;
+        color: var(--primary-dark);
+      }
+
+      .standort-end-btn {
+        border: 1px solid var(--orange);
+        border-radius: 4px;
+        background: var(--white);
+        color: var(--orange);
+        padding: 6px 12px;
+        font-size: var(--font-helper);
+        font-weight: 700;
+        cursor: pointer;
+        white-space: nowrap;
+      }
+
+      .standort-end-btn:hover {
+        background: var(--amber-soft);
+      }
+
+      .standort-end-btn--future {
+        border-color: var(--primary);
+        color: var(--primary-dark);
+      }
+
+      .standort-end-btn--future:hover {
+        background: var(--primary-surface);
+      }
+
+      .standort-vertretung-form-block {
+        display: grid;
+        gap: 12px;
+        max-width: 420px;
+      }
+
       .standort-users-card .auth-card__header {
         justify-content: space-between;
         gap: 12px;
@@ -1162,6 +1677,26 @@
       .user-active-toggle input:focus-visible + .user-active-toggle__track {
         outline: 2px solid var(--primary);
         outline-offset: 2px;
+      }
+
+      .user-active-toggle--disabled {
+        cursor: not-allowed;
+      }
+
+      .user-active-toggle--disabled input:disabled + .user-active-toggle__track {
+        background: #e8edf0;
+      }
+
+      .user-active-toggle--disabled input:disabled:checked + .user-active-toggle__track {
+        background: #b8c9d4;
+      }
+
+      .standort-forwarding-table-wrap--muted {
+        opacity: 0.58;
+      }
+
+      .standort-forwarding-table-wrap--muted .standort-settings-table tbody td {
+        color: var(--muted);
       }
 
       .standort-users-table-wrap {
@@ -1699,6 +2234,28 @@
         font-size: var(--font-label);
       }
 
+      .standort-absence-footer.locations-footer {
+        justify-content: space-between;
+        gap: 16px;
+        flex-wrap: wrap;
+      }
+
+      .standort-absence-footer__note {
+        margin: 0;
+        flex: 1;
+        min-width: min(100%, 280px);
+        color: var(--muted);
+        font-size: var(--font-body);
+        line-height: 1.45;
+      }
+
+      .standort-absence-footer__pagination {
+        display: inline-flex;
+        align-items: center;
+        gap: 14px;
+        flex-shrink: 0;
+      }
+
       .standort-modal-overlay {
         position: fixed;
         inset: 0;
@@ -1932,6 +2489,55 @@
         background: var(--primary-dark);
       }
 
+      .location-modal-actions--split {
+        justify-content: flex-end;
+        gap: 10px;
+      }
+
+      .location-cancel-btn {
+        border: 1px solid var(--line);
+        border-radius: 4px;
+        background: var(--white);
+        color: var(--text);
+        padding: 10px 14px;
+        font-size: var(--font-body);
+        font-weight: 600;
+        cursor: pointer;
+      }
+
+      .location-cancel-btn:hover {
+        background: var(--off-white);
+      }
+
+      .location-form-check {
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        font-size: var(--font-body);
+        color: var(--text);
+        font-weight: 600;
+        cursor: pointer;
+      }
+
+      .location-form-check input[type="checkbox"] {
+        width: 16px;
+        height: 16px;
+        margin: 0;
+        accent-color: var(--primary);
+        cursor: pointer;
+      }
+
+      .location-form-hint {
+        margin: 4px 0 0;
+        font-size: var(--font-helper);
+        color: var(--muted);
+        line-height: 1.4;
+      }
+
+      .standort-form-error.hidden {
+        display: none;
+      }
+
       .toast {
         position: fixed;
         right: 20px;
@@ -2015,6 +2621,147 @@
 
       .toast.hidden {
         display: none;
+      }
+
+      /* Standort role-change undo toast — bottom-right, matches sub-tenant assignee pattern */
+      .standort-role-undo-toast-stack {
+        position: fixed;
+        right: max(16px, env(safe-area-inset-right, 0px));
+        bottom: max(28px, env(safe-area-inset-bottom, 0px));
+        z-index: 1300;
+        display: flex;
+        flex-direction: column;
+        align-items: stretch;
+        gap: 10px;
+        pointer-events: none;
+        width: min(560px, calc(100vw - 32px));
+        max-width: calc(100vw - 32px);
+        box-sizing: border-box;
+      }
+
+      .standort-role-undo-toast-stack .detail-toast {
+        pointer-events: auto;
+        position: relative;
+        background: var(--white);
+        border-radius: 10px;
+        box-shadow: 0 12px 36px rgba(0, 0, 0, 0.12), 0 4px 12px rgba(0, 0, 0, 0.06);
+        width: 100%;
+        min-width: min(560px, calc(100vw - 32px));
+        max-width: 100%;
+        overflow: hidden;
+      }
+
+      .detail-toast-close {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        z-index: 1;
+        border: none;
+        background: transparent;
+        color: var(--muted);
+        cursor: pointer;
+        padding: 6px;
+        line-height: 1;
+        font-size: 16px;
+        border-radius: 4px;
+      }
+
+      .detail-toast-close:hover {
+        color: var(--text);
+        background: rgba(0, 0, 0, 0.05);
+      }
+
+      .detail-toast-body {
+        display: flex;
+        align-items: center;
+        gap: 18px;
+        padding: 28px 68px 26px 28px;
+      }
+
+      .detail-toast-icon {
+        flex-shrink: 0;
+        width: 32px;
+        height: 32px;
+        border-radius: 50%;
+        background: var(--green);
+        color: var(--white);
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 14px;
+      }
+
+      .detail-toast-icon.pending-email {
+        background: var(--white);
+        border: 2px solid var(--green);
+        color: var(--green);
+      }
+
+      .detail-toast-copy {
+        flex: 1;
+        min-width: 0;
+        text-align: left;
+      }
+
+      .detail-toast-undo-row {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 22px;
+        flex-wrap: wrap;
+        text-align: left;
+        width: 100%;
+      }
+
+      .detail-toast-undo-message {
+        margin: 0;
+        flex: 1;
+        min-width: 210px;
+        font-size: 14px;
+        color: var(--text);
+        line-height: 1.4;
+      }
+
+      .detail-toast-undo-message strong {
+        font-weight: 800;
+      }
+
+      .detail-toast-action {
+        border: 1px solid var(--orange);
+        border-radius: 6px;
+        background: var(--white);
+        color: var(--orange);
+        padding: 7px 12px;
+        font-size: 13.5px;
+        font-weight: 700;
+        cursor: pointer;
+        flex-shrink: 0;
+      }
+
+      .detail-toast-action:hover {
+        background: rgba(152, 196, 76, 0.12);
+      }
+
+      .detail-toast-bar {
+        height: 4px;
+        background: rgba(152, 196, 76, 0.2);
+      }
+
+      .detail-toast-bar-fill {
+        height: 100%;
+        width: 100%;
+        background: var(--green);
+        transform-origin: left center;
+        animation: detail-toast-progress var(--toast-progress-duration, 8s) linear forwards;
+      }
+
+      @keyframes detail-toast-progress {
+        from {
+          transform: scaleX(1);
+        }
+        to {
+          transform: scaleX(0);
+        }
       }
 
       .file-protocol-banner {
@@ -5944,6 +6691,234 @@
             <h2 id="standortDetailTitle" class="standort-detail-title"></h2>
 
             <div class="standort-detail-cards">
+              <div class="auth-card standort-absence-card">
+                <div class="auth-card__header">
+                  <i class="fa-solid fa-calendar-xmark" aria-hidden="true"></i>
+                  <div class="standort-absence-card__header-title">
+                    <span>Abwesenheiten</span>
+                    <span
+                      id="standortAbsenceVertretungBadge"
+                      class="standort-absence-vertretung-badge hidden"
+                    >
+                      Noch keine Vertretungsregel festgelegt
+                    </span>
+                  </div>
+                </div>
+                <div class="auth-card__body">
+                  <div class="standort-detail-card-body">
+                    <p class="standort-detail-subtitle">
+                      Tragen Sie Abwesenheiten für einzelne Mitarbeiter oder den gesamten Standort ein.
+                    </p>
+
+                    <div id="standortAbsenceSiteWideBanner" class="standort-info-banner hidden" role="status">
+                      <span id="standortAbsenceSiteWideBannerText" class="standort-info-banner__text"></span>
+                      <button id="standortAbsenceSiteWideEndBtn" type="button" class="standort-end-btn">
+                        Beenden
+                      </button>
+                    </div>
+
+                    <h3 class="standort-section-title standort-absence-section-title">
+                      <span>Individuelle Abwesenheiten</span>
+                      <span
+                        id="standortAbsencePresentCount"
+                        class="standort-absence-present-count"
+                        aria-live="polite"
+                      ></span>
+                    </h3>
+                    <div class="standort-settings-table-wrap">
+                      <table class="standort-settings-table standort-absence-table">
+                        <thead>
+                          <tr>
+                            <th scope="col">Name</th>
+                            <th scope="col">
+                              <div class="standort-th-head-row">
+                                <span class="standort-th-head-label">Status</span>
+                                <div
+                                  class="standort-th-filter-control"
+                                  data-absence-filter-host="status"
+                                >
+                                  <select
+                                    id="standortAbsenceStatusFilter"
+                                    aria-label="Abwesenheitsstatus filtern"
+                                  >
+                                    <option value="">Alle</option>
+                                    <option value="present">Anwesend</option>
+                                    <option value="ongoing">Abwesend (laufend)</option>
+                                    <option value="future">Geplant</option>
+                                  </select>
+                                </div>
+                                <button
+                                  id="sortStandortAbsenceStatusBtn"
+                                  type="button"
+                                  class="th-sort-btn"
+                                  title="Nach Status sortieren"
+                                  aria-label="Nach Status sortieren"
+                                >
+                                  <i class="fa-solid fa-sort" aria-hidden="true"></i>
+                                </button>
+                              </div>
+                            </th>
+                            <th scope="col">
+                              <span class="th-inner">
+                                <span class="th-inner-label">Aktuell</span>
+                                <button
+                                  id="sortStandortAbsencePeriodBtn"
+                                  type="button"
+                                  class="th-sort-btn"
+                                  title="Nach aktuellem Abwesenheitszeitraum sortieren"
+                                  aria-label="Nach aktuellem Abwesenheitszeitraum sortieren"
+                                >
+                                  <i class="fa-solid fa-sort" aria-hidden="true"></i>
+                                </button>
+                              </span>
+                            </th>
+                            <th scope="col">Geplant</th>
+                            <th scope="col" class="standort-absence-action-head">Aktion</th>
+                          </tr>
+                        </thead>
+                        <tbody id="standortIndividualAbsenceBody"></tbody>
+                      </table>
+                    </div>
+                    <div class="standort-absence-footer locations-footer">
+                      <p class="standort-absence-footer__note">
+                        Vertretung greift automatisch, wenn alle Nutzer dieses Standorts als abwesend eingetragen sind.
+                      </p>
+                      <div class="standort-absence-footer__pagination">
+                        <span>Nutzer pro Seite:</span>
+                        <select
+                          id="standortAbsencePerPageSelect"
+                          class="footer-pagination-select"
+                          aria-label="Nutzer pro Seite in Abwesenheiten"
+                        >
+                          <option value="5" selected>5</option>
+                          <option value="10">10</option>
+                          <option value="25">25</option>
+                        </select>
+                        <span id="standortAbsenceRange">1-5 von 0</span>
+                        <button
+                          id="standortAbsencePrevBtn"
+                          class="footer-nav-btn"
+                          type="button"
+                          aria-label="Vorherige Seite"
+                        >
+                          <i class="fa-solid fa-chevron-left" aria-hidden="true"></i>
+                        </button>
+                        <button
+                          id="standortAbsenceNextBtn"
+                          class="footer-nav-btn"
+                          type="button"
+                          aria-label="Nachste Seite"
+                        >
+                          <i class="fa-solid fa-chevron-right" aria-hidden="true"></i>
+                        </button>
+                      </div>
+                    </div>
+
+                    <div class="standort-section-divider"></div>
+
+                    <h3 class="standort-section-title">Standortweite Abwesenheit</h3>
+                    <div class="standort-site-absence-form">
+                      <div class="standort-field-block">
+                        <label for="standortSiteWideStartInput">Zeitraum</label>
+                        <div class="standort-date-range">
+                          <input
+                            id="standortSiteWideStartInput"
+                            class="standort-date-input"
+                            type="date"
+                            aria-label="Standortweite Abwesenheit von"
+                          />
+                          <span class="standort-date-sep">bis</span>
+                          <input
+                            id="standortSiteWideEndInput"
+                            class="standort-date-input"
+                            type="date"
+                            aria-label="Standortweite Abwesenheit bis"
+                            required
+                          />
+                        </div>
+                      </div>
+                      <div class="standort-field-block">
+                        <label for="standortSiteWideReasonInput">Grund</label>
+                        <input
+                          id="standortSiteWideReasonInput"
+                          class="standort-text-input"
+                          type="text"
+                          placeholder="z. B. Standortweite Fortbildung"
+                        />
+                      </div>
+                      <div class="standort-form-actions">
+                        <button id="standortSiteWideSaveBtn" type="button" class="location-submit-btn">
+                          Standortweite Abwesenheit speichern
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="auth-card standort-vertretung-card">
+                <div class="auth-card__header">
+                  <i class="fa-solid fa-people-arrows" aria-hidden="true"></i>
+                  <span>Vertretungsregeln</span>
+                </div>
+                <div class="auth-card__body">
+                  <div class="standort-detail-card-body">
+                    <h3 class="standort-section-title">Vertretungsregel</h3>
+                    <div class="standort-vertretung-form-block">
+                      <div class="standort-field-block">
+                        <label for="standortVertretungStandortSelect">Vertretung durch</label>
+                        <select
+                          id="standortVertretungStandortSelect"
+                          class="standort-select-input"
+                          aria-label="Vertretung durch anderen Standort"
+                        ></select>
+                      </div>
+                    </div>
+                    <p class="standort-detail-note">
+                      Vertretung greift automatisch, wenn alle Nutzer des Standorts als abwesend eingetragen sind.
+                    </p>
+                    <div id="standortVertretungActiveBanner" class="standort-rule-summary hidden" role="status">
+                      <span id="standortVertretungActiveBannerText" class="standort-rule-summary__text"></span>
+                      <button id="standortVertretungEndBtn" type="button" class="standort-end-btn">
+                        Beenden
+                      </button>
+                    </div>
+
+                    <div class="standort-section-divider"></div>
+
+                    <h3 class="standort-section-title">Weiterleitungsregeln nach Anfragetyp</h3>
+                    <div
+                      id="standortForwardingTableWrap"
+                      class="standort-forwarding-table-wrap standort-settings-table-wrap"
+                    >
+                      <table class="standort-settings-table">
+                        <colgroup>
+                          <col style="width: 55%" />
+                          <col style="width: 45%" />
+                        </colgroup>
+                        <thead>
+                          <tr>
+                            <th scope="col">Anfragetyp</th>
+                            <th scope="col">Im Vertretungsfall weiterleiten</th>
+                          </tr>
+                        </thead>
+                        <tbody id="standortForwardingTableBody"></tbody>
+                      </table>
+                    </div>
+
+                    <p class="standort-detail-note">
+                      Für die Pausierung einer Buchung wenden Sie sich bitte an Ihren Ansprechpartner.
+                    </p>
+
+                    <div class="standort-form-actions">
+                      <button id="standortVertretungSaveBtn" type="button" class="location-submit-btn">
+                        Regelwerk speichern
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
               <div class="auth-card standort-users-card">
                 <div class="auth-card__header">
                   <div class="auth-card__header-title">
@@ -6004,21 +6979,6 @@
                     >
                       <i class="fa-solid fa-chevron-right" aria-hidden="true"></i>
                     </button>
-                  </div>
-                </div>
-              </div>
-
-              <div class="auth-card">
-                <div class="auth-card__header">
-                  <i class="fa-solid fa-file-contract" aria-hidden="true"></i>
-                  <span>Vertretungsregeln &amp; Vertragsverwaltung</span>
-                </div>
-                <div class="auth-card__body">
-                  <div class="standort-detail-card-body">
-                    <p class="standort-detail-note">
-                      Vertretungsregeln und Vertragsdetails für den Standort.
-                    </p>
-                    <ul id="standortDetailRulesList" class="standort-detail-list"></ul>
                   </div>
                 </div>
               </div>
@@ -7220,6 +8180,118 @@
       </div>
     </div>
 
+    <div
+      id="standortInviteUserModalOverlay"
+      class="location-modal-overlay"
+      aria-hidden="true"
+    >
+      <div
+        class="location-modal"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="standortInviteUserModalTitle"
+      >
+        <div class="location-modal-head">
+          <h3 id="standortInviteUserModalTitle" class="location-modal-title">Nutzer einladen</h3>
+          <button
+            id="standortInviteUserModalCloseBtn"
+            class="location-modal-close"
+            type="button"
+            aria-label="Modal schließen"
+          >
+            &times;
+          </button>
+        </div>
+        <form id="standortInviteUserForm" class="location-modal-body">
+          <p id="standortInviteUserModalHelp" class="location-modal-help">
+            Laden Sie eine Person per E-Mail zu diesem Standort ein.
+          </p>
+          <div class="location-form-grid">
+            <div class="location-form-field full">
+              <label for="standortInviteEmailInput">E-Mail-Adresse</label>
+              <input
+                id="standortInviteEmailInput"
+                name="inviteEmail"
+                type="email"
+                required
+                autocomplete="email"
+                placeholder="name@beispiel.de"
+              />
+            </div>
+            <div class="location-form-field full">
+              <label class="location-form-check" for="standortInviteAdminCheckbox">
+                <input
+                  id="standortInviteAdminCheckbox"
+                  name="inviteAsAdmin"
+                  type="checkbox"
+                />
+                <span>Als Administrator einladen</span>
+              </label>
+              <p class="location-form-hint">
+                Administratoren können Nutzer verwalten und Standorteinstellungen ändern.
+              </p>
+            </div>
+          </div>
+          <p id="standortInviteUserFormError" class="standort-form-error hidden" role="alert"></p>
+          <div class="location-modal-actions location-modal-actions--split">
+            <button id="standortInviteUserCancelBtn" type="button" class="location-cancel-btn">
+              Abbrechen
+            </button>
+            <button id="standortInviteUserSubmitBtn" class="location-submit-btn" type="submit">
+              Einladung senden
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <div id="standortAbsenceModalOverlay" class="location-modal-overlay" aria-hidden="true">
+      <div
+        class="location-modal"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="standortAbsenceModalTitle"
+      >
+        <div class="location-modal-head">
+          <h3 id="standortAbsenceModalTitle" class="location-modal-title">Abwesenheit hinterlegen</h3>
+          <button
+            id="standortAbsenceModalCloseBtn"
+            class="location-modal-close"
+            type="button"
+            aria-label="Modal schließen"
+          >
+            &times;
+          </button>
+        </div>
+        <form id="standortAbsenceForm" class="location-modal-body">
+          <p id="standortAbsenceModalUserLabel" class="location-modal-help"></p>
+          <div class="location-form-grid">
+            <div class="location-form-field">
+              <label for="standortAbsenceStartInput">Von</label>
+              <input id="standortAbsenceStartInput" type="date" required />
+            </div>
+            <div class="location-form-field">
+              <label for="standortAbsenceEndInput">Bis</label>
+              <input id="standortAbsenceEndInput" type="date" />
+              <label class="location-form-check standort-absence-open-end-wrap" for="standortAbsenceOpenEndCheckbox">
+                <input id="standortAbsenceOpenEndCheckbox" type="checkbox" />
+                <span>Enddatum offen</span>
+              </label>
+            </div>
+          </div>
+          <p id="standortAbsenceFormError" class="standort-form-error hidden" role="alert"></p>
+          <div class="location-modal-actions location-modal-actions--split">
+            <button id="standortAbsenceCancelBtn" type="button" class="location-text-link-btn">
+              Abbrechen
+            </button>
+            <button id="standortAbsenceSaveBtn" class="location-submit-btn" type="submit">
+              Speichern
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+
     <div id="appToast" class="toast hidden" role="status" aria-live="polite" aria-atomic="true">
       <div class="toast__inner">
         <span class="toast__icon" aria-hidden="true"><i class="fa-solid fa-circle-check"></i></span>
@@ -7230,6 +8302,12 @@
         <button type="button" class="toast__close" aria-label="Hinweis schließen">&times;</button>
       </div>
     </div>
+
+    <div
+      id="standortRoleUndoToastStack"
+      class="standort-role-undo-toast-stack"
+      aria-live="polite"
+    ></div>
 
     <script>
       (function () {
@@ -7276,7 +8354,52 @@
       const standortUsersPrevBtn = document.getElementById("standortUsersPrevBtn");
       const standortUsersNextBtn = document.getElementById("standortUsersNextBtn");
       const standortInviteUserBtn = document.getElementById("standortInviteUserBtn");
-      const standortDetailRulesList = document.getElementById("standortDetailRulesList");
+      const standortInviteUserModalOverlay = document.getElementById("standortInviteUserModalOverlay");
+      const standortInviteUserModalCloseBtn = document.getElementById("standortInviteUserModalCloseBtn");
+      const standortInviteUserForm = document.getElementById("standortInviteUserForm");
+      const standortInviteUserModalHelp = document.getElementById("standortInviteUserModalHelp");
+      const standortInviteEmailInput = document.getElementById("standortInviteEmailInput");
+      const standortInviteAdminCheckbox = document.getElementById("standortInviteAdminCheckbox");
+      const standortInviteUserCancelBtn = document.getElementById("standortInviteUserCancelBtn");
+      const standortInviteUserFormError = document.getElementById("standortInviteUserFormError");
+      const standortAbsenceSiteWideBanner = document.getElementById("standortAbsenceSiteWideBanner");
+      const standortAbsenceSiteWideBannerText = document.getElementById("standortAbsenceSiteWideBannerText");
+      const standortAbsenceSiteWideEndBtn = document.getElementById("standortAbsenceSiteWideEndBtn");
+      const standortAbsenceStatusFilter = document.getElementById("standortAbsenceStatusFilter");
+      const standortAbsenceModalOverlay = document.getElementById("standortAbsenceModalOverlay");
+      const standortAbsenceModalCloseBtn = document.getElementById("standortAbsenceModalCloseBtn");
+      const standortAbsenceForm = document.getElementById("standortAbsenceForm");
+      const standortAbsenceModalUserLabel = document.getElementById("standortAbsenceModalUserLabel");
+      const standortAbsenceStartInput = document.getElementById("standortAbsenceStartInput");
+      const standortAbsenceEndInput = document.getElementById("standortAbsenceEndInput");
+      const standortAbsenceOpenEndCheckbox = document.getElementById("standortAbsenceOpenEndCheckbox");
+      const standortAbsenceFormError = document.getElementById("standortAbsenceFormError");
+      const standortAbsenceCancelBtn = document.getElementById("standortAbsenceCancelBtn");
+      let standortAbsenceModalUserId = "";
+      let standortAbsenceModalAbsenceId = "";
+      const standortAbsenceExpandedUserIds = new Set();
+      const sortStandortAbsencePeriodBtn = document.getElementById("sortStandortAbsencePeriodBtn");
+      const sortStandortAbsenceStatusBtn = document.getElementById("sortStandortAbsenceStatusBtn");
+      const standortAbsencePresentCount = document.getElementById("standortAbsencePresentCount");
+      const standortAbsenceVertretungBadge = document.getElementById("standortAbsenceVertretungBadge");
+      const standortIndividualAbsenceBody = document.getElementById("standortIndividualAbsenceBody");
+      const standortAbsenceRange = document.getElementById("standortAbsenceRange");
+      const standortAbsencePerPageSelect = document.getElementById("standortAbsencePerPageSelect");
+      const standortAbsencePrevBtn = document.getElementById("standortAbsencePrevBtn");
+      const standortAbsenceNextBtn = document.getElementById("standortAbsenceNextBtn");
+      const standortSiteWideStartInput = document.getElementById("standortSiteWideStartInput");
+      const standortSiteWideEndInput = document.getElementById("standortSiteWideEndInput");
+      const standortSiteWideReasonInput = document.getElementById("standortSiteWideReasonInput");
+      const standortSiteWideSaveBtn = document.getElementById("standortSiteWideSaveBtn");
+      const standortVertretungStandortSelect = document.getElementById("standortVertretungStandortSelect");
+      const standortVertretungActiveBanner = document.getElementById("standortVertretungActiveBanner");
+      const standortVertretungActiveBannerText = document.getElementById("standortVertretungActiveBannerText");
+      const standortVertretungEndBtn = document.getElementById("standortVertretungEndBtn");
+      const standortForwardingTableWrap = document.getElementById("standortForwardingTableWrap");
+      const standortForwardingTableBody = document.getElementById("standortForwardingTableBody");
+      const FORWARDING_RULES_REQUIRE_SUBSTITUTE_TOOLTIP =
+        "zunächst Vertretenden Standort auswählen";
+      const standortVertretungSaveBtn = document.getElementById("standortVertretungSaveBtn");
       const meineStatistikenPage = document.getElementById("meineStatistikenPage");
       const leadDetailPage = document.getElementById("leadDetailPage");
       const backToOverviewBtn = document.getElementById("backToOverviewBtn");
@@ -7346,8 +8469,10 @@
       const cropperCanvas = document.getElementById("cropperCanvas");
       const cropperZoom = document.getElementById("cropperZoom");
       const menuItems = Array.from(document.querySelectorAll(".menu-item"));
-      const filtersContainer = document.querySelector(".filters");
-      const filterControls = Array.from(document.querySelectorAll(".filter-control"));
+      const filtersContainer = document.querySelector(".overview-leads-filters");
+      const filterControls = Array.from(
+        document.querySelectorAll(".overview-leads-filters .filter-control"),
+      );
       let dragIndex = null;
       let leadsPerPage = Number(leadsPerPageSelect.value || 10);
       let currentLeadPage = 1;
@@ -7375,6 +8500,8 @@
       let standortSalesTaskTab = null;
       let standortSalesTaskBlobUrl = null;
       let standortToastTimer = null;
+      const STANDORT_ROLE_UNDO_DURATION_MS = 8000;
+      const standortRoleUndoToastStack = document.getElementById("standortRoleUndoToastStack");
       let selectedReactivationStandort = "";
       let selectedReactivationAction = "reactivate";
       let selectedReactivationLeistung = "";
@@ -9505,11 +10632,28 @@
         "Fischer",
       ];
       const standortUsersCache = new Map();
+      const standortAbsenceStateCache = new Map();
+      const standortVertretungStateCache = new Map();
+      const STANDORT_FORWARDING_LEAD_TYPES = [
+        { id: "krankenhaus", label: "Klinik-Anfragen" },
+        { id: "privat", label: "Privat-Anfragen" },
+        { id: "kooperation", label: "Buchungs-Anfragen" },
+      ];
       let currentStandortUsersId = "";
       let currentStandortUsers = [];
+      let currentStandortDetailName = "";
       let standortUsersPage = 1;
       let standortUsersPerPage = 5;
       let standortUsersTotalPages = 1;
+      let currentStandortAbsenceUsers = [];
+      let standortAbsenceUsersSource = [];
+      let standortAbsencePage = 1;
+      let standortAbsencePerPage = 5;
+      let standortAbsenceTotalPages = 1;
+      let standortAbsenceSortColumn = null;
+      let standortAbsenceSortDescending = null;
+      const standortAbsenceFilterState = new Map();
+      const STANDORT_ABSENCE_FILTER_IDS = ["standortAbsenceStatusFilter"];
 
       function nameToStandortUserEmail(name, standortId) {
         const local = String(name || "nutzer")
@@ -9632,6 +10776,395 @@
         return user.status;
       }
 
+      function setStandortUserAccess(userId, newAccess) {
+        const user = currentStandortUsers.find((entry) => entry.id === userId);
+        if (!user) return null;
+        user.access = newAccess;
+        const cachedUsers = standortUsersCache.get(currentStandortUsersId);
+        const cachedUser = cachedUsers?.find((entry) => entry.id === userId);
+        if (cachedUser) cachedUser.access = newAccess;
+        return user;
+      }
+
+      function syncStandortUserAccessSelect(row, access) {
+        const select = row?.querySelector(".standort-user-access-select");
+        if (select) select.value = access;
+      }
+
+      function getStandortNameForRoleToast() {
+        return (
+          standortDetailTitle?.textContent?.trim() ||
+          standortDetailBreadcrumbName?.textContent?.trim() ||
+          currentStandortUsersId ||
+          "Standort"
+        );
+      }
+
+      function clearStandortRoleUndoToasts() {
+        if (!standortRoleUndoToastStack) return;
+        standortRoleUndoToastStack.querySelectorAll(".detail-toast").forEach((toast) => {
+          if (toast._hideTimerId) {
+            clearTimeout(toast._hideTimerId);
+            toast._hideTimerId = null;
+          }
+          if (toast._emailTimerId) {
+            clearTimeout(toast._emailTimerId);
+            toast._emailTimerId = null;
+          }
+          delete toast._standortRoleUndoController;
+          delete toast._standortSubstituteUndoController;
+        });
+        standortRoleUndoToastStack.innerHTML = "";
+        if (standortVertretungStandortSelect) {
+          delete standortVertretungStandortSelect.dataset.pendingSubstituteInitial;
+        }
+      }
+
+      function sendStandortUserRoleChangeEmail(user, previousAccess, nextAccess, standortName) {
+        console.info("[Clickdummy] Rollenänderungs-E-Mail", {
+          to: user?.email,
+          name: user?.name,
+          standort: standortName,
+          previousAccess,
+          nextAccess,
+        });
+      }
+
+      function renderStandortRoleUndoToastMessage(msgEl, userName, nextAccess, standortName) {
+        if (!msgEl) return;
+        msgEl.textContent = "";
+        const nameStrong = document.createElement("strong");
+        nameStrong.textContent = userName;
+        const roleStrong = document.createElement("strong");
+        roleStrong.textContent = nextAccess;
+        msgEl.append(
+          nameStrong,
+          document.createTextNode(" ist jetzt "),
+          roleStrong,
+          document.createTextNode(` für ${standortName}. E-Mail-Benachrichtigung wird versendet.`),
+        );
+      }
+
+      function findStandortRoleUndoToastForUser(userId) {
+        if (!standortRoleUndoToastStack || !userId) return null;
+        return standortRoleUndoToastStack.querySelector(
+          `.detail-toast[data-standort-role-user-id="${CSS.escape(userId)}"]`,
+        );
+      }
+
+      function mountStandortRoleUndoToastController(
+        toast,
+        userId,
+        row,
+        initialAccess,
+        firstNextAccess,
+        userName,
+        standortName,
+      ) {
+        const closeBtn = toast.querySelector(".detail-toast-close");
+        const iconWrap = toast.querySelector(".detail-toast-icon");
+        const fill = toast.querySelector(".detail-toast-bar-fill");
+        const msg = toast.querySelector(".detail-toast-undo-message");
+        const undoBtn = toast.querySelector(".detail-toast-action");
+        let emailSendCompleted = false;
+        let onEmailAnimationEnd = null;
+
+        const clearRoleToastTimers = () => {
+          if (toast._hideTimerId) {
+            clearTimeout(toast._hideTimerId);
+            toast._hideTimerId = null;
+          }
+          if (toast._emailTimerId) {
+            clearTimeout(toast._emailTimerId);
+            toast._emailTimerId = null;
+          }
+        };
+
+        const detachEmailAnimationEnd = () => {
+          if (onEmailAnimationEnd && fill) {
+            fill.removeEventListener("animationend", onEmailAnimationEnd);
+            onEmailAnimationEnd = null;
+          }
+        };
+
+        const removeToast = () => {
+          clearRoleToastTimers();
+          detachEmailAnimationEnd();
+          delete toast._standortRoleUndoController;
+          toast.remove();
+        };
+
+        const completeEmailSend = (nextAccess) => {
+          if (emailSendCompleted) return;
+          emailSendCompleted = true;
+          clearRoleToastTimers();
+          detachEmailAnimationEnd();
+          const user = currentStandortUsers.find((entry) => entry.id === userId);
+          if (user) {
+            sendStandortUserRoleChangeEmail(user, initialAccess, nextAccess, standortName);
+          }
+          delete row?.dataset?.pendingRoleInitial;
+          removeToast();
+          showAppToast("E-Mail-Benachrichtigung wurde versendet.", 5000, "Benachrichtigung gesendet");
+        };
+
+        const startRoleToastTimers = (nextAccess) => {
+          clearRoleToastTimers();
+          detachEmailAnimationEnd();
+          emailSendCompleted = false;
+
+          renderStandortRoleUndoToastMessage(msg, userName, nextAccess, standortName);
+          toast.style.setProperty(
+            "--toast-progress-duration",
+            `${STANDORT_ROLE_UNDO_DURATION_MS / 1000}s`,
+          );
+          if (fill) {
+            fill.style.animation = "none";
+            fill.style.transform = "";
+            void fill.offsetWidth;
+            fill.style.animation = "";
+          }
+          if (iconWrap) {
+            iconWrap.classList.add("pending-email");
+          }
+
+          onEmailAnimationEnd = () => completeEmailSend(nextAccess);
+          fill?.addEventListener("animationend", onEmailAnimationEnd, { once: true });
+          toast._emailTimerId = setTimeout(
+            () => completeEmailSend(nextAccess),
+            STANDORT_ROLE_UNDO_DURATION_MS + 200,
+          );
+        };
+
+        const restart = (nextAccess) => {
+          setStandortUserAccess(userId, nextAccess);
+          syncStandortUserAccessSelect(row, nextAccess);
+          startRoleToastTimers(nextAccess);
+          if (standortRoleUndoToastStack && standortRoleUndoToastStack.firstChild !== toast) {
+            standortRoleUndoToastStack.insertBefore(toast, standortRoleUndoToastStack.firstChild);
+          }
+        };
+
+        closeBtn?.addEventListener("click", (e) => {
+          e.stopPropagation();
+          const completed = emailSendCompleted;
+          removeToast();
+          if (!completed) {
+            delete row?.dataset?.pendingRoleInitial;
+          }
+        });
+
+        undoBtn?.addEventListener("click", (e) => {
+          e.stopPropagation();
+          removeToast();
+          setStandortUserAccess(userId, initialAccess);
+          syncStandortUserAccessSelect(row, initialAccess);
+          delete row?.dataset?.pendingRoleInitial;
+          showAppToast("Zugriff wiederhergestellt. Keine E-Mail gesendet.", 5000, "Änderung rückgängig");
+        });
+
+        toast._standortRoleUndoController = { restart, removeToast };
+        startRoleToastTimers(firstNextAccess);
+      }
+
+      function showStandortUserRoleChangeToast(userId, row, initialAccess, nextAccess, userName) {
+        if (!standortRoleUndoToastStack || !row || !userId) return;
+        const standortName = getStandortNameForRoleToast();
+
+        const existingToast = findStandortRoleUndoToastForUser(userId);
+        if (existingToast?._standortRoleUndoController?.restart) {
+          existingToast._standortRoleUndoController.restart(nextAccess);
+          return;
+        }
+
+        const toast = document.createElement("div");
+        toast.className = "detail-toast";
+        toast.setAttribute("role", "status");
+        toast.dataset.standortRoleUserId = userId;
+
+        const closeBtn = document.createElement("button");
+        closeBtn.type = "button";
+        closeBtn.className = "detail-toast-close";
+        closeBtn.setAttribute("aria-label", "Hinweis schließen");
+        closeBtn.innerHTML = "&times;";
+
+        const toastBody = document.createElement("div");
+        toastBody.className = "detail-toast-body";
+
+        const iconWrap = document.createElement("span");
+        iconWrap.className = "detail-toast-icon pending-email";
+        iconWrap.innerHTML = '<i class="fa-solid fa-check" aria-hidden="true"></i>';
+
+        const copy = document.createElement("div");
+        copy.className = "detail-toast-copy";
+
+        const rowWrap = document.createElement("div");
+        rowWrap.className = "detail-toast-undo-row";
+
+        const msg = document.createElement("p");
+        msg.className = "detail-toast-undo-message";
+
+        const undoBtn = document.createElement("button");
+        undoBtn.type = "button";
+        undoBtn.className = "detail-toast-action";
+        undoBtn.textContent = "Rückgängig";
+
+        rowWrap.append(msg, undoBtn);
+        copy.appendChild(rowWrap);
+        toastBody.append(iconWrap, copy);
+
+        const bar = document.createElement("div");
+        bar.className = "detail-toast-bar";
+        const fill = document.createElement("div");
+        fill.className = "detail-toast-bar-fill";
+        bar.appendChild(fill);
+
+        toast.append(closeBtn, toastBody, bar);
+        standortRoleUndoToastStack.appendChild(toast);
+
+        mountStandortRoleUndoToastController(
+          toast,
+          userId,
+          row,
+          initialAccess,
+          nextAccess,
+          userName,
+          standortName,
+        );
+      }
+
+      function handleStandortUserAccessChange(selectEl) {
+        const row = selectEl.closest("tr");
+        const userId = row?.dataset.userId;
+        if (!userId) return;
+
+        const nextAccess = selectEl.value;
+        const user = currentStandortUsers.find((entry) => entry.id === userId);
+        if (!user) return;
+
+        const currentAccess = user.access;
+        if (currentAccess === nextAccess) return;
+
+        const initialAccess = row.dataset.pendingRoleInitial || currentAccess;
+        if (!row.dataset.pendingRoleInitial) {
+          row.dataset.pendingRoleInitial = initialAccess;
+        }
+
+        setStandortUserAccess(userId, nextAccess);
+        showStandortUserRoleChangeToast(userId, row, initialAccess, nextAccess, user.name);
+      }
+
+      function resetStandortInviteUserForm() {
+        standortInviteUserForm?.reset();
+        if (standortInviteUserFormError) {
+          standortInviteUserFormError.textContent = "";
+          standortInviteUserFormError.classList.add("hidden");
+        }
+      }
+
+      function setStandortInviteUserFormError(message) {
+        if (!standortInviteUserFormError) return;
+        if (!message) {
+          standortInviteUserFormError.textContent = "";
+          standortInviteUserFormError.classList.add("hidden");
+          return;
+        }
+        standortInviteUserFormError.textContent = message;
+        standortInviteUserFormError.classList.remove("hidden");
+      }
+
+      function emailLocalPartToDisplayName(email) {
+        const local = String(email || "").split("@")[0] || "Nutzer";
+        return local
+          .split(/[._-]+/)
+          .filter(Boolean)
+          .map((part) => part.charAt(0).toUpperCase() + part.slice(1))
+          .join(" ");
+      }
+
+      function inviteStandortUser(email, isAdministrator) {
+        const normalizedId = currentStandortUsersId;
+        if (!normalizedId) return { ok: false, error: "Kein Standort ausgewählt." };
+
+        const trimmedEmail = String(email || "").trim();
+        const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!emailPattern.test(trimmedEmail)) {
+          return { ok: false, error: "Bitte geben Sie eine gültige E-Mail-Adresse ein." };
+        }
+
+        const standortName = getStandortNameForRoleToast();
+        const users = getStandortUsersForLocation(normalizedId, standortName);
+        const emailLower = trimmedEmail.toLowerCase();
+        if (users.some((entry) => entry.email.toLowerCase() === emailLower)) {
+          return { ok: false, error: "Diese E-Mail-Adresse ist bereits für den Standort hinterlegt." };
+        }
+
+        const newUser = {
+          id: `${normalizedId}-invite-${Date.now()}`,
+          standortId: normalizedId,
+          name: emailLocalPartToDisplayName(trimmedEmail),
+          email: trimmedEmail,
+          access: isAdministrator ? "Administrator" : "Nutzer",
+          status: "eingeladen",
+          active: true,
+          pendingRegistration: true,
+        };
+
+        users.unshift(newUser);
+        standortUsersCache.set(normalizedId, users);
+        currentStandortUsers = users;
+        return { ok: true, user: newUser, standortName };
+      }
+
+      function openStandortInviteUserModal() {
+        if (!standortInviteUserModalOverlay) return;
+        const standortName = getStandortNameForRoleToast();
+        if (standortInviteUserModalHelp) {
+          standortInviteUserModalHelp.textContent = standortName
+            ? `Laden Sie eine Person per E-Mail zu ${standortName} ein.`
+            : "Laden Sie eine Person per E-Mail zu diesem Standort ein.";
+        }
+        resetStandortInviteUserForm();
+        standortInviteUserModalOverlay.classList.add("open");
+        standortInviteUserModalOverlay.setAttribute("aria-hidden", "false");
+        window.requestAnimationFrame(() => standortInviteEmailInput?.focus());
+      }
+
+      function closeStandortInviteUserModal() {
+        if (!standortInviteUserModalOverlay) return;
+        standortInviteUserModalOverlay.classList.remove("open");
+        standortInviteUserModalOverlay.setAttribute("aria-hidden", "true");
+        resetStandortInviteUserForm();
+      }
+
+      function handleStandortInviteUserSubmit(event) {
+        event.preventDefault();
+        setStandortInviteUserFormError("");
+        const email = standortInviteEmailInput?.value || "";
+        const isAdministrator = Boolean(standortInviteAdminCheckbox?.checked);
+        const result = inviteStandortUser(email, isAdministrator);
+        if (!result.ok) {
+          setStandortInviteUserFormError(result.error || "Einladung konnte nicht gesendet werden.");
+          return;
+        }
+
+        closeStandortInviteUserModal();
+        standortUsersPage = 1;
+        refreshStandortUsersTablePage(false);
+        renderStandortAbsenceCard(currentStandortDetailName, currentStandortUsersId);
+        const accessLabel = isAdministrator ? "Administrator" : "Nutzer";
+        showAppToast(
+          `Einladung als ${accessLabel} an ${result.user.email} wurde versendet.`,
+          6000,
+          "Einladung gesendet",
+        );
+        console.info("[Clickdummy] Standort-Nutzereinladung", {
+          standort: result.standortName,
+          email: result.user.email,
+          access: accessLabel,
+        });
+      }
+
       function updateStandortUserStatusCell(row, status) {
         const statusCell = row?.querySelector(".standort-user-status-cell");
         if (statusCell) statusCell.innerHTML = renderStandortUserStatus(status);
@@ -9672,6 +11205,7 @@
 
       function refreshStandortUsersTablePage(resetPage = false) {
         if (!standortUsersTableBody || !currentStandortUsersId) return;
+        clearStandortRoleUndoToasts();
         if (resetPage) standortUsersPage = 1;
 
         const startIndex = (standortUsersPage - 1) * standortUsersPerPage;
@@ -9680,21 +11214,1266 @@
         updateStandortUsersPaginationControls();
       }
 
-      function renderStandortDetailCards(standortName, standortId) {
-        renderStandortUsersTable(standortId || standortName, standortName);
-        if (standortDetailRulesList) {
-          standortDetailRulesList.innerHTML = [
-            { label: "Vertretung bei Abwesenheit", meta: "Automatisch an Standortleitung" },
-            { label: "Vertragslaufzeit", meta: "12 Monate, Verlängerung aktiv" },
-            { label: "Leistungspaket", meta: "Anfragen-Manager Abo" },
-            { label: "Freigabe Reklamationen", meta: "Standortleitung + Büro" },
-          ]
-            .map(
-              (item) =>
-                `<li><span>${item.label}</span><span class="standort-detail-list__meta">${item.meta}</span></li>`,
-            )
-            .join("");
+      function formatStandortDateDe(dateStr) {
+        if (!dateStr) return "";
+        const parts = String(dateStr).split("-");
+        if (parts.length !== 3) return dateStr;
+        return `${parts[2]}.${parts[1]}.${parts[0]}`;
+      }
+
+      function getTodayIsoDate() {
+        const now = new Date();
+        const year = now.getFullYear();
+        const month = String(now.getMonth() + 1).padStart(2, "0");
+        const day = String(now.getDate()).padStart(2, "0");
+        return `${year}-${month}-${day}`;
+      }
+
+      function getAbsenceTiming(absence) {
+        if (!absence?.startDate) return null;
+        const today = getTodayIsoDate();
+        if (absence.startDate > today) return "future";
+        if (!absence.endDate || absence.endDate >= today) return "ongoing";
+        return "past";
+      }
+
+      function getOtherStandortNames(currentStandortName) {
+        return getActiveStandortNames().filter((name) => name && name !== currentStandortName);
+      }
+
+      function getStandortAbsenceState(standortId, standortName) {
+        const normalizedId = slugifyStandortName(standortId || standortName);
+        if (standortAbsenceStateCache.has(normalizedId)) {
+          return standortAbsenceStateCache.get(normalizedId);
         }
+
+        const users = getStandortUsersForLocation(normalizedId, standortName);
+        const individual = {};
+        users.forEach((user, index) => {
+          if (index === 1) {
+            individual[user.id] = {
+              absences: [
+                {
+                  id: "demo-ongoing-1",
+                  startDate: "2026-06-01",
+                  endDate: "2026-06-30",
+                  saved: true,
+                },
+                {
+                  id: "demo-future-1",
+                  startDate: "2026-08-01",
+                  endDate: "2026-08-15",
+                  saved: true,
+                },
+              ],
+            };
+          } else if (index === 3) {
+            individual[user.id] = {
+              absences: [
+                {
+                  id: "demo-ongoing-2",
+                  startDate: "2026-06-02",
+                  endDate: "",
+                  saved: true,
+                },
+              ],
+            };
+          } else if (index === 5) {
+            individual[user.id] = {
+              absences: [
+                {
+                  id: "demo-future-2",
+                  startDate: "2026-07-15",
+                  endDate: "2026-07-20",
+                  saved: true,
+                },
+                {
+                  id: "demo-future-3",
+                  startDate: "2026-07-25",
+                  endDate: "",
+                  saved: true,
+                },
+              ],
+            };
+          } else if (index === 7) {
+            individual[user.id] = {
+              absences: [
+                {
+                  id: "demo-future-4",
+                  startDate: "2026-09-01",
+                  endDate: "2026-09-10",
+                  saved: true,
+                },
+              ],
+            };
+          }
+        });
+
+        const state = {
+          individual,
+          siteWide:
+            standortName === "Mainz"
+              ? {
+                  active: true,
+                  startDate: "2026-07-01",
+                  endDate: "2026-07-05",
+                  reason: "Standortweite Fortbildung",
+                }
+              : null,
+        };
+        standortAbsenceStateCache.set(normalizedId, state);
+        return state;
+      }
+
+      function getStandortVertretungState(standortId, standortName) {
+        const normalizedId = slugifyStandortName(standortId || standortName);
+        if (standortVertretungStateCache.has(normalizedId)) {
+          return standortVertretungStateCache.get(normalizedId);
+        }
+
+        const state = {
+          substituteStandort: "",
+          ruleActive: false,
+          activeSince: "",
+          forwarding: {
+            krankenhaus: { enabled: true },
+            privat: { enabled: true },
+            kooperation: { enabled: true },
+          },
+        };
+        standortVertretungStateCache.set(normalizedId, state);
+        return state;
+      }
+
+      function isStandortUserMarkedAbsent(absence) {
+        return Boolean(absence?.saved && absence?.startDate);
+      }
+
+      function normalizeUserAbsenceRecord(entry) {
+        if (!entry) return { absences: [] };
+        if (Array.isArray(entry.absences)) return entry;
+        if (entry.startDate) {
+          return {
+            absences: [
+              {
+                id: entry.id || "legacy-1",
+                startDate: entry.startDate,
+                endDate: entry.endDate || "",
+                saved: entry.saved !== false,
+              },
+            ],
+          };
+        }
+        return { absences: [] };
+      }
+
+      function getUserAbsenceRecord(individual, userId) {
+        return normalizeUserAbsenceRecord(individual?.[userId]);
+      }
+
+      function getUserAbsenceList(individual, userId) {
+        return getUserAbsenceRecord(individual, userId).absences.filter(
+          (absence) => absence.saved && absence.startDate,
+        );
+      }
+
+      function createAbsenceId() {
+        return `abs-${Date.now()}-${Math.random().toString(36).slice(2, 7)}`;
+      }
+
+      function getUserOngoingAbsence(individual, userId) {
+        return (
+          getUserAbsenceList(individual, userId).find(
+            (absence) => getAbsenceStatusCategory(absence) === "ongoing",
+          ) || null
+        );
+      }
+
+      function getUserFutureAbsences(individual, userId) {
+        return getUserAbsenceList(individual, userId)
+          .filter((absence) => getAbsenceStatusCategory(absence) === "future")
+          .sort((a, b) => a.startDate.localeCompare(b.startDate));
+      }
+
+      function isUserCurrentlyAbsent(individual, userId) {
+        return Boolean(getUserOngoingAbsence(individual, userId));
+      }
+
+      function getUserAbsenceFilterCategories(individual, userId) {
+        const categories = new Set(
+          getUserAbsenceList(individual, userId)
+            .map((absence) => getAbsenceStatusCategory(absence))
+            .filter((category) => category !== "past"),
+        );
+        if (!categories.has("ongoing") && !categories.has("future")) {
+          categories.add("present");
+        }
+        return categories;
+      }
+
+      function getUserAbsenceStatusSortRank(individual, userId) {
+        if (isUserCurrentlyAbsent(individual, userId)) return 0;
+        if (getUserFutureAbsences(individual, userId).length > 0) return 1;
+        return 2;
+      }
+
+      function getUserPrimaryPeriodStart(individual, userId) {
+        const ongoing = getUserOngoingAbsence(individual, userId);
+        if (ongoing) return ongoing.startDate;
+        const futureAbsences = getUserFutureAbsences(individual, userId);
+        return futureAbsences[0]?.startDate || "";
+      }
+
+      function getAbsenceStatusCategory(absence) {
+        if (!absence?.saved || !absence.startDate) return "present";
+        const timing = getAbsenceTiming(absence);
+        if (timing === "future") return "future";
+        if (timing === "ongoing") return "ongoing";
+        return "past";
+      }
+
+      function getAbsenceStatusSortRank(absence) {
+        const ranks = { future: 0, ongoing: 1, past: 3, present: 3 };
+        return ranks[getAbsenceStatusCategory(absence)] ?? 3;
+      }
+
+      function updateStandortAbsenceSortIcon(btn, isActiveColumn) {
+        const icon = btn?.querySelector("i");
+        if (!icon) return;
+        if (!isActiveColumn || standortAbsenceSortDescending === null) {
+          icon.className = "fa-solid fa-sort";
+          return;
+        }
+        icon.className = standortAbsenceSortDescending
+          ? "fa-solid fa-sort-down"
+          : "fa-solid fa-sort-up";
+      }
+
+      function updateStandortAbsenceSortIcons() {
+        updateStandortAbsenceSortIcon(
+          sortStandortAbsencePeriodBtn,
+          standortAbsenceSortColumn === "period",
+        );
+        updateStandortAbsenceSortIcon(
+          sortStandortAbsenceStatusBtn,
+          standortAbsenceSortColumn === "status",
+        );
+      }
+
+      function toggleStandortAbsenceSort(column) {
+        if (standortAbsenceSortColumn !== column) {
+          standortAbsenceSortColumn = column;
+          standortAbsenceSortDescending = false;
+        } else if (standortAbsenceSortDescending === false) {
+          standortAbsenceSortDescending = true;
+        } else {
+          standortAbsenceSortColumn = null;
+          standortAbsenceSortDescending = null;
+        }
+        applyStandortAbsenceFiltersAndSort(true);
+      }
+
+      function getStandortAbsenceFilterValues(selectId) {
+        return standortAbsenceFilterState.get(selectId) || [];
+      }
+
+      function updateStandortAbsenceMultiSelectTrigger(selectEl) {
+        if (!selectEl) return;
+        const wrapper = selectEl
+          .closest(".standort-th-filter-control")
+          ?.querySelector(`.multi-select[data-for="${selectEl.id}"]`);
+        if (!wrapper) return;
+        const triggerLabel = wrapper.querySelector(".multi-select-trigger-label");
+        if (!triggerLabel) return;
+        const selectedValues = getStandortAbsenceFilterValues(selectEl.id);
+        const placeholder = selectEl.options[0]?.textContent || "";
+        if (selectedValues.length === 0) {
+          triggerLabel.textContent = placeholder;
+          return;
+        }
+        if (selectedValues.length === 1) {
+          const selectedOption = Array.from(selectEl.options).find(
+            (opt) => opt.value === selectedValues[0],
+          );
+          triggerLabel.textContent = selectedOption ? selectedOption.textContent : selectedValues[0];
+          return;
+        }
+        triggerLabel.textContent = `${selectedValues.length} ausgewahlt`;
+      }
+
+      function restoreStandortAbsenceFilterControls() {
+        const filterHosts = [{ selectId: "standortAbsenceStatusFilter", hostKey: "status" }];
+
+        filterHosts.forEach(({ selectId, hostKey }) => {
+          const select = document.getElementById(selectId);
+          const host = document.querySelector(`[data-absence-filter-host="${hostKey}"]`);
+          if (!select || !host) return;
+          if (host.contains(select)) return;
+
+          host.appendChild(select);
+        });
+      }
+
+      function initStandortAbsenceMultiSelect(selectEl) {
+        if (!selectEl) return;
+        const control = selectEl.closest(".standort-th-filter-control");
+        if (!control) return;
+
+        if (!standortAbsenceFilterState.has(selectEl.id)) {
+          standortAbsenceFilterState.set(selectEl.id, []);
+        }
+
+        const oldWrapper = control.querySelector(`.multi-select[data-for="${selectEl.id}"]`);
+        if (oldWrapper) oldWrapper.remove();
+
+        const wrapper = document.createElement("div");
+        wrapper.className = "multi-select standort-th-multi-select";
+        wrapper.dataset.for = selectEl.id;
+
+        const trigger = document.createElement("button");
+        trigger.type = "button";
+        trigger.className = "multi-select-trigger";
+        trigger.innerHTML = '<span class="multi-select-trigger-label"></span>';
+        trigger.addEventListener("click", (event) => {
+          event.stopPropagation();
+          const willOpen = !wrapper.classList.contains("open");
+          closeAllMultiSelectMenus(selectEl.id);
+          wrapper.classList.toggle("open", willOpen);
+        });
+
+        const menu = document.createElement("div");
+        menu.className = "multi-select-menu";
+        const selectedValues = getStandortAbsenceFilterValues(selectEl.id);
+        const titleNode = document.createElement("div");
+        titleNode.className = "multi-select-title";
+        const absenceFilterTitles = {
+          standortAbsenceStatusFilter: "Status",
+        };
+        titleNode.textContent = absenceFilterTitles[selectEl.id] || "";
+        menu.appendChild(titleNode);
+
+        Array.from(selectEl.options)
+          .filter((option) => option.value !== "")
+          .forEach((option) => {
+            const optionValue = option.value;
+            const optionLabel = option.textContent;
+            const row = document.createElement("label");
+            row.className = "multi-select-option";
+            const checkbox = document.createElement("input");
+            checkbox.type = "checkbox";
+            checkbox.value = optionValue;
+            checkbox.checked = selectedValues.includes(optionValue);
+            checkbox.addEventListener("change", () => {
+              const currentValues = new Set(getStandortAbsenceFilterValues(selectEl.id));
+              if (checkbox.checked) currentValues.add(optionValue);
+              else currentValues.delete(optionValue);
+              standortAbsenceFilterState.set(selectEl.id, Array.from(currentValues));
+              updateStandortAbsenceMultiSelectTrigger(selectEl);
+              applyStandortAbsenceFiltersAndSort(true);
+            });
+
+            const textNode = document.createElement("span");
+            textNode.textContent = optionLabel;
+            row.appendChild(checkbox);
+            row.appendChild(textNode);
+            menu.appendChild(row);
+          });
+
+        wrapper.appendChild(trigger);
+        wrapper.appendChild(menu);
+        selectEl.classList.add("multi-select-native");
+        control.appendChild(wrapper);
+        updateStandortAbsenceMultiSelectTrigger(selectEl);
+      }
+
+      function resetStandortAbsenceMultiSelects() {
+        restoreStandortAbsenceFilterControls();
+        STANDORT_ABSENCE_FILTER_IDS.forEach((selectId) => {
+          standortAbsenceFilterState.set(selectId, []);
+          const select = document.getElementById(selectId);
+          if (!select) return;
+          select.value = "";
+          const control = select.closest(".standort-th-filter-control");
+          control
+            ?.querySelectorAll(`.multi-select[data-for="${selectId}"] input[type="checkbox"]`)
+            .forEach((checkbox) => {
+              checkbox.checked = false;
+            });
+          initStandortAbsenceMultiSelect(select);
+        });
+      }
+
+      function updateStandortAbsencePresentCount() {
+        if (!standortAbsencePresentCount) return;
+        if (!currentStandortUsersId) {
+          standortAbsencePresentCount.textContent = "";
+          standortAbsencePresentCount.removeAttribute("title");
+          return;
+        }
+
+        const state = getStandortAbsenceState(currentStandortUsersId, currentStandortDetailName);
+        const total = standortAbsenceUsersSource.length;
+        const absent = standortAbsenceUsersSource.filter((user) =>
+          isUserCurrentlyAbsent(state.individual, user.id),
+        ).length;
+
+        if (total === 0) {
+          standortAbsencePresentCount.textContent = "";
+          standortAbsencePresentCount.removeAttribute("title");
+          return;
+        }
+
+        standortAbsencePresentCount.textContent = `${absent}/${total}`;
+        standortAbsencePresentCount.title = `${absent} von ${total} Mitarbeitern abwesend`;
+      }
+
+      function applyStandortAbsenceFiltersAndSort(resetPage = true) {
+        if (!currentStandortUsersId) return;
+
+        const state = getStandortAbsenceState(currentStandortUsersId, currentStandortDetailName);
+        const statusFilters = getStandortAbsenceFilterValues("standortAbsenceStatusFilter");
+
+        let users = [...standortAbsenceUsersSource];
+
+        if (statusFilters.length) {
+          users = users.filter((user) => {
+            const categories = getUserAbsenceFilterCategories(state.individual, user.id);
+            return statusFilters.some((filter) => categories.has(filter));
+          });
+        }
+
+        if (standortAbsenceSortColumn === "period") {
+          users.sort((a, b) => {
+            const aStart = getUserPrimaryPeriodStart(state.individual, a.id);
+            const bStart = getUserPrimaryPeriodStart(state.individual, b.id);
+            const cmp = aStart.localeCompare(bStart);
+            const result = cmp !== 0 ? cmp : a.name.localeCompare(b.name, "de");
+            return standortAbsenceSortDescending ? -result : result;
+          });
+        } else if (standortAbsenceSortColumn === "status") {
+          users.sort((a, b) => {
+            const aRank = getUserAbsenceStatusSortRank(state.individual, a.id);
+            const bRank = getUserAbsenceStatusSortRank(state.individual, b.id);
+            const cmp = aRank - bRank;
+            const result = cmp !== 0 ? cmp : a.name.localeCompare(b.name, "de");
+            return standortAbsenceSortDescending ? -result : result;
+          });
+        } else {
+          users = sortStandortAbsenceUsersByPresence(users, state.individual);
+        }
+
+        currentStandortAbsenceUsers = users;
+        if (resetPage) standortAbsencePage = 1;
+        refreshStandortAbsenceTablePage(false);
+        updateStandortAbsenceSortIcons();
+        updateStandortAbsencePresentCount();
+      }
+
+      function sortStandortAbsenceUsersByPresence(users, individualState) {
+        return [...users].sort((a, b) => {
+          const aPresent = !isUserCurrentlyAbsent(individualState, a.id);
+          const bPresent = !isUserCurrentlyAbsent(individualState, b.id);
+          if (aPresent !== bPresent) return aPresent ? 1 : -1;
+          return a.name.localeCompare(b.name, "de");
+        });
+      }
+
+      function formatStandortDateDeShort(dateStr) {
+        if (!dateStr) return "";
+        const parts = String(dateStr).split("-");
+        if (parts.length !== 3) return dateStr;
+        return `${parts[2]}.${parts[1]}.`;
+      }
+
+      function formatAbsenceDateRangeText(absence) {
+        if (!absence?.saved || !absence.startDate) return "";
+        if (!absence.endDate) {
+          return `${formatStandortDateDeShort(absence.startDate)} – offen`;
+        }
+        return `${formatStandortDateDeShort(absence.startDate)} – ${formatStandortDateDeShort(absence.endDate)}`;
+      }
+
+      function renderAbsenceEmptyDash() {
+        return `<span class="standort-absence-empty">–</span>`;
+      }
+
+      function renderAbsencePresenceIndicator(user, ongoingAbsence) {
+        if (ongoingAbsence) {
+          return `
+            <button
+              type="button"
+              class="location-status-indicator standort-absence-status-btn"
+              data-user-id="${user.id}"
+              data-absence-id="${ongoingAbsence.id}"
+              aria-label="Abwesenheit von ${user.name} bearbeiten"
+            >
+              <span class="location-status-dot location-status-dot--invited" aria-hidden="true"></span>
+              <span class="location-status-label">Abwesend</span>
+            </button>
+          `;
+        }
+        return `
+          <span class="location-status-indicator">
+            <span class="location-status-dot location-status-dot--active" aria-hidden="true"></span>
+            <span class="location-status-label">Anwesend</span>
+          </span>
+        `;
+      }
+
+      function renderPlannedAbsenceSubRow(user, absence) {
+        return `
+          <tr class="standort-absence-planned-row" data-user-id="${user.id}" data-absence-id="${absence.id}">
+            <td></td>
+            <td></td>
+            <td></td>
+            <td class="standort-absence-planned-cell">
+              <div class="standort-absence-planned-cell-inner">
+                <span class="standort-absence-date-range">${formatAbsenceDateRangeText(absence)}</span>
+                <button
+                  type="button"
+                  class="standort-absence-edit-link"
+                  data-user-id="${user.id}"
+                  data-absence-id="${absence.id}"
+                >
+                  bearbeiten
+                </button>
+              </div>
+            </td>
+            <td class="standort-absence-action-cell" aria-hidden="true"></td>
+          </tr>
+        `;
+      }
+
+      function renderIndividualAbsenceRows(user, individualState, isExpanded) {
+        const ongoingAbsence = getUserOngoingAbsence(individualState, user.id);
+        const futureAbsences = getUserFutureAbsences(individualState, user.id);
+        const isAbsent = Boolean(ongoingAbsence);
+
+        const aktuellCell = ongoingAbsence
+          ? `<span class="standort-absence-date-range">${formatAbsenceDateRangeText(ongoingAbsence)}</span>`
+          : renderAbsenceEmptyDash();
+
+        const geplantCell =
+          futureAbsences.length > 0
+            ? `
+              <button
+                type="button"
+                class="standort-absence-planned-toggle"
+                data-user-id="${user.id}"
+                aria-expanded="${isExpanded ? "true" : "false"}"
+              >
+                <span>${futureAbsences.length} geplant</span>
+                <i
+                  class="fa-solid fa-chevron-down standort-absence-planned-chevron${isExpanded ? " is-expanded" : ""}"
+                  aria-hidden="true"
+                ></i>
+              </button>
+            `
+            : renderAbsenceEmptyDash();
+
+        const mainRow = `
+          <tr data-user-id="${user.id}" class="${isAbsent ? "standort-absence-row--absent" : "standort-absence-row--present"}">
+            <td>${user.name}</td>
+            <td>${renderAbsencePresenceIndicator(user, ongoingAbsence)}</td>
+            <td class="standort-absence-aktuell-cell">${aktuellCell}</td>
+            <td class="standort-absence-geplant-cell">${geplantCell}</td>
+            <td class="standort-absence-action-cell">
+              <button
+                type="button"
+                class="standort-absence-action-btn"
+                data-user-id="${user.id}"
+                title="Abwesenheit hinterlegen"
+                aria-label="Abwesenheit hinterlegen"
+              >
+                <i class="fa-solid fa-calendar-plus" aria-hidden="true"></i>
+                <span>Abwesenheit</span>
+              </button>
+            </td>
+          </tr>
+        `;
+
+        if (!isExpanded || futureAbsences.length === 0) return mainRow;
+        return mainRow + futureAbsences.map((absence) => renderPlannedAbsenceSubRow(user, absence)).join("");
+      }
+
+      function toggleUserPlannedAbsences(userId) {
+        if (!userId) return;
+        if (standortAbsenceExpandedUserIds.has(userId)) {
+          standortAbsenceExpandedUserIds.delete(userId);
+        } else {
+          standortAbsenceExpandedUserIds.add(userId);
+        }
+        refreshStandortAbsenceTablePage(false);
+      }
+
+      function setStandortAbsenceFormError(message) {
+        if (!standortAbsenceFormError) return;
+        if (!message) {
+          standortAbsenceFormError.textContent = "";
+          standortAbsenceFormError.classList.add("hidden");
+          return;
+        }
+        standortAbsenceFormError.textContent = message;
+        standortAbsenceFormError.classList.remove("hidden");
+      }
+
+      function syncStandortAbsenceOpenEndField() {
+        const openEnd = Boolean(standortAbsenceOpenEndCheckbox?.checked);
+        if (standortAbsenceEndInput) {
+          standortAbsenceEndInput.disabled = openEnd;
+          if (openEnd) standortAbsenceEndInput.value = "";
+        }
+      }
+
+      function openStandortAbsenceModal(userId, absenceId = "") {
+        if (!standortAbsenceModalOverlay || !userId || !currentStandortUsersId) return;
+        const user = standortAbsenceUsersSource.find((entry) => entry.id === userId);
+        if (!user) return;
+
+        const state = getStandortAbsenceState(currentStandortUsersId, currentStandortDetailName);
+        const absences = getUserAbsenceList(state.individual, userId);
+        const absence = absenceId ? absences.find((entry) => entry.id === absenceId) : null;
+        standortAbsenceModalUserId = userId;
+        standortAbsenceModalAbsenceId = absenceId || "";
+
+        if (standortAbsenceModalUserLabel) {
+          standortAbsenceModalUserLabel.textContent = user.name;
+        }
+        if (standortAbsenceStartInput) {
+          standortAbsenceStartInput.value = absence?.startDate || "";
+        }
+        if (standortAbsenceEndInput) {
+          standortAbsenceEndInput.value = absence?.endDate || "";
+        }
+        if (standortAbsenceOpenEndCheckbox) {
+          standortAbsenceOpenEndCheckbox.checked = Boolean(absence?.startDate && !absence?.endDate);
+        }
+        syncStandortAbsenceOpenEndField();
+        setStandortAbsenceFormError("");
+        standortAbsenceModalOverlay.classList.add("open");
+        standortAbsenceModalOverlay.setAttribute("aria-hidden", "false");
+        window.requestAnimationFrame(() => standortAbsenceStartInput?.focus());
+      }
+
+      function closeStandortAbsenceModal() {
+        if (!standortAbsenceModalOverlay) return;
+        standortAbsenceModalOverlay.classList.remove("open");
+        standortAbsenceModalOverlay.setAttribute("aria-hidden", "true");
+        standortAbsenceModalUserId = "";
+        standortAbsenceModalAbsenceId = "";
+        standortAbsenceForm?.reset();
+        setStandortAbsenceFormError("");
+        syncStandortAbsenceOpenEndField();
+      }
+
+      function saveStandortAbsenceFromModal() {
+        if (!standortAbsenceModalUserId || !currentStandortUsersId) return;
+
+        const startDate = standortAbsenceStartInput?.value || "";
+        const openEnd = Boolean(standortAbsenceOpenEndCheckbox?.checked);
+        const endDate = openEnd ? "" : standortAbsenceEndInput?.value || "";
+
+        if (!startDate) {
+          setStandortAbsenceFormError("Bitte geben Sie ein Startdatum für die Abwesenheit an.");
+          return;
+        }
+        if (endDate && endDate < startDate) {
+          setStandortAbsenceFormError("Das Enddatum darf nicht vor dem Startdatum liegen.");
+          return;
+        }
+
+        const state = getStandortAbsenceState(currentStandortUsersId, currentStandortDetailName);
+        const record = getUserAbsenceRecord(state.individual, standortAbsenceModalUserId);
+        if (standortAbsenceModalAbsenceId) {
+          const index = record.absences.findIndex(
+            (entry) => entry.id === standortAbsenceModalAbsenceId,
+          );
+          if (index >= 0) {
+            record.absences[index] = {
+              ...record.absences[index],
+              startDate,
+              endDate,
+              saved: true,
+            };
+          }
+        } else {
+          record.absences.push({
+            id: createAbsenceId(),
+            startDate,
+            endDate,
+            saved: true,
+          });
+        }
+        state.individual[standortAbsenceModalUserId] = record;
+        standortAbsenceStateCache.set(currentStandortUsersId, state);
+
+        closeStandortAbsenceModal();
+        applyStandortAbsenceFiltersAndSort(false);
+        showAppToast("Abwesenheit wurde gespeichert.", 4000, "Abwesenheit gespeichert");
+      }
+
+      function updateSiteWideAbsenceBanner(siteWide) {
+        if (!standortAbsenceSiteWideBanner || !standortAbsenceSiteWideBannerText) return;
+        if (!siteWide?.active) {
+          standortAbsenceSiteWideBanner.classList.add("hidden");
+          standortAbsenceSiteWideBanner.classList.remove("standort-info-banner--future");
+          standortAbsenceSiteWideBannerText.textContent = "";
+          if (standortAbsenceSiteWideEndBtn) {
+            standortAbsenceSiteWideEndBtn.classList.remove("standort-end-btn--future");
+          }
+          return;
+        }
+
+        const isFuture = getAbsenceTiming(siteWide) === "future";
+        const headline = isFuture
+          ? "Standortweite Abwesenheit geplant"
+          : "Standortweite Abwesenheit aktiv";
+        standortAbsenceSiteWideBannerText.innerHTML = `<strong>${headline}</strong> — ${formatStandortDateDe(siteWide.startDate)} bis ${formatStandortDateDe(siteWide.endDate)}: ${siteWide.reason || "Ohne Angabe"}`;
+        standortAbsenceSiteWideBanner.classList.toggle("standort-info-banner--future", isFuture);
+        if (standortAbsenceSiteWideEndBtn) {
+          standortAbsenceSiteWideEndBtn.classList.toggle("standort-end-btn--future", isFuture);
+        }
+        standortAbsenceSiteWideBanner.classList.remove("hidden");
+      }
+
+      function updateStandortAbsencePaginationControls() {
+        const total = currentStandortAbsenceUsers.length;
+        standortAbsenceTotalPages = Math.max(1, Math.ceil(total / standortAbsencePerPage));
+        if (standortAbsencePage > standortAbsenceTotalPages) {
+          standortAbsencePage = standortAbsenceTotalPages;
+        }
+
+        if (!standortAbsenceRange) return;
+        if (total === 0) {
+          standortAbsenceRange.textContent = "0-0 von 0";
+        } else {
+          const start = (standortAbsencePage - 1) * standortAbsencePerPage + 1;
+          const end = Math.min(standortAbsencePage * standortAbsencePerPage, total);
+          standortAbsenceRange.textContent = `${start}-${end} von ${total}`;
+        }
+
+        if (standortAbsencePrevBtn) standortAbsencePrevBtn.disabled = standortAbsencePage <= 1;
+        if (standortAbsenceNextBtn) {
+          standortAbsenceNextBtn.disabled = standortAbsencePage >= standortAbsenceTotalPages;
+        }
+      }
+
+      function refreshStandortAbsenceTablePage(resetPage = false) {
+        if (!standortIndividualAbsenceBody || !currentStandortUsersId) return;
+        if (resetPage) standortAbsencePage = 1;
+
+        const state = getStandortAbsenceState(currentStandortUsersId, currentStandortDetailName);
+        const startIndex = (standortAbsencePage - 1) * standortAbsencePerPage;
+        const pageUsers = currentStandortAbsenceUsers.slice(
+          startIndex,
+          startIndex + standortAbsencePerPage,
+        );
+        standortIndividualAbsenceBody.innerHTML = pageUsers
+          .map((user) =>
+            renderIndividualAbsenceRows(
+              user,
+              state.individual,
+              standortAbsenceExpandedUserIds.has(user.id),
+            ),
+          )
+          .join("");
+        updateStandortAbsencePaginationControls();
+      }
+
+      function renderStandortAbsenceCard(standortName, standortId) {
+        const normalizedId = slugifyStandortName(standortId || standortName);
+        currentStandortUsersId = normalizedId;
+        currentStandortDetailName = standortName;
+        const state = getStandortAbsenceState(normalizedId, standortName);
+        standortAbsenceUsersSource = getStandortUsersForLocation(normalizedId, standortName).filter(
+          (user) => user.status !== "deaktiviert",
+        );
+        standortAbsenceExpandedUserIds.clear();
+        resetStandortAbsenceMultiSelects();
+        standortAbsenceSortColumn = "status";
+        standortAbsenceSortDescending = false;
+        applyStandortAbsenceFiltersAndSort(true);
+
+        updateSiteWideAbsenceBanner(state.siteWide);
+
+        if (standortSiteWideStartInput) {
+          standortSiteWideStartInput.value = state.siteWide?.startDate || "";
+        }
+        if (standortSiteWideEndInput) {
+          standortSiteWideEndInput.value = state.siteWide?.endDate || "";
+        }
+        if (standortSiteWideReasonInput) {
+          standortSiteWideReasonInput.value = state.siteWide?.reason || "";
+        }
+        updateStandortAbsenceVertretungBadge();
+      }
+
+      function saveSiteWideAbsence() {
+        if (!currentStandortUsersId) return;
+        const startDate = standortSiteWideStartInput?.value || "";
+        const endDate = standortSiteWideEndInput?.value || "";
+        const reason = (standortSiteWideReasonInput?.value || "").trim();
+
+        if (!startDate || !endDate) {
+          showAppToast("Bitte Start- und Enddatum für die standortweite Abwesenheit angeben.", 5000, "Abwesenheit");
+          return;
+        }
+        if (endDate < startDate) {
+          showAppToast("Das Enddatum darf nicht vor dem Startdatum liegen.", 5000, "Abwesenheit");
+          return;
+        }
+        if (!reason) {
+          showAppToast("Bitte geben Sie einen Grund für die standortweite Abwesenheit an.", 5000, "Abwesenheit");
+          return;
+        }
+
+        const state = getStandortAbsenceState(currentStandortUsersId, currentStandortDetailName);
+        state.siteWide = { active: true, startDate, endDate, reason };
+        standortAbsenceStateCache.set(currentStandortUsersId, state);
+        updateSiteWideAbsenceBanner(state.siteWide);
+        showAppToast("Standortweite Abwesenheit wurde gespeichert.", 5000, "Abwesenheit gespeichert");
+      }
+
+      function endSiteWideAbsence() {
+        if (!currentStandortUsersId) return;
+        const state = getStandortAbsenceState(currentStandortUsersId, currentStandortDetailName);
+        state.siteWide = null;
+        standortAbsenceStateCache.set(currentStandortUsersId, state);
+        updateSiteWideAbsenceBanner(null);
+        if (standortSiteWideStartInput) standortSiteWideStartInput.value = "";
+        if (standortSiteWideEndInput) standortSiteWideEndInput.value = "";
+        if (standortSiteWideReasonInput) standortSiteWideReasonInput.value = "";
+        showAppToast("Standortweite Abwesenheit wurde beendet.", 4000, "Abwesenheit beendet");
+      }
+
+      function isVertretungSubstituteStandortSelected() {
+        const selected = standortVertretungStandortSelect?.value || "";
+        if (selected) return true;
+        if (!currentStandortUsersId) return false;
+        const state = getStandortVertretungState(currentStandortUsersId, currentStandortDetailName);
+        return Boolean(state.substituteStandort);
+      }
+
+      function updateStandortAbsenceVertretungBadge() {
+        if (!standortAbsenceVertretungBadge) return;
+        const showBadge = !isVertretungSubstituteStandortSelected();
+        standortAbsenceVertretungBadge.classList.toggle("hidden", !showBadge);
+      }
+
+      function updateForwardingTableAvailability() {
+        const interactionsEnabled = isVertretungSubstituteStandortSelected();
+        if (standortForwardingTableWrap) {
+          standortForwardingTableWrap.classList.toggle(
+            "standort-forwarding-table-wrap--muted",
+            !interactionsEnabled,
+          );
+        }
+        if (!standortForwardingTableBody) return;
+        standortForwardingTableBody.querySelectorAll(".forwarding-enabled").forEach((input) => {
+          input.disabled = !interactionsEnabled;
+          const label = input.closest(".user-active-toggle");
+          if (!label) return;
+          label.classList.toggle("user-active-toggle--disabled", !interactionsEnabled);
+          if (!interactionsEnabled) {
+            label.title = FORWARDING_RULES_REQUIRE_SUBSTITUTE_TOOLTIP;
+          } else {
+            label.removeAttribute("title");
+          }
+        });
+      }
+
+      function renderForwardingRuleRow(leadType, rule, interactionsDisabled = false) {
+        const enabled = rule?.enabled !== false;
+        const disabledAttr = interactionsDisabled ? " disabled" : "";
+        const toggleClass = interactionsDisabled ? " user-active-toggle--disabled" : "";
+        const titleAttr = interactionsDisabled
+          ? ` title="${FORWARDING_RULES_REQUIRE_SUBSTITUTE_TOOLTIP}"`
+          : "";
+        return `
+          <tr data-forwarding-id="${leadType.id}">
+            <td>${leadType.label}</td>
+            <td>
+              <label class="user-active-toggle${toggleClass}" aria-label="Weiterleitung für ${leadType.label}"${titleAttr}>
+                <input type="checkbox" class="forwarding-enabled"${enabled ? " checked" : ""}${disabledAttr} />
+                <span class="user-active-toggle__track"></span>
+                <span class="user-active-toggle__thumb"></span>
+              </label>
+            </td>
+          </tr>
+        `;
+      }
+
+      function updateVertretungActiveBanner(state, standortName) {
+        if (!standortVertretungActiveBanner || !standortVertretungActiveBannerText) return;
+        if (!state?.substituteStandort) {
+          standortVertretungActiveBanner.classList.add("hidden");
+          standortVertretungActiveBannerText.textContent = "";
+          return;
+        }
+        const since = state.activeSince ? ` — aktiv seit ${formatStandortDateDe(state.activeSince)}` : "";
+        standortVertretungActiveBannerText.textContent = `${state.substituteStandort} vertritt ${standortName}${since}`;
+        standortVertretungActiveBanner.classList.remove("hidden");
+      }
+
+      function populateVertretungStandortSelect(standortName, selectedValue) {
+        if (!standortVertretungStandortSelect) return;
+        const options = getOtherStandortNames(standortName);
+        standortVertretungStandortSelect.innerHTML = [
+          '<option value="">Bitte wählen...</option>',
+          ...options.map(
+            (name) =>
+              `<option value="${name}"${name === selectedValue ? " selected" : ""}>${name}</option>`,
+          ),
+        ].join("");
+        delete standortVertretungStandortSelect.dataset.pendingSubstituteInitial;
+      }
+
+      function getStandortAdministrator(standortName) {
+        const normalizedId = slugifyStandortName(standortName);
+        const users = getStandortUsersForLocation(normalizedId, standortName);
+        return (
+          users.find(
+            (user) => user.access === "Administrator" && user.status !== "deaktiviert",
+          ) || users.find((user) => user.status !== "deaktiviert") || null
+        );
+      }
+
+      function sendSubstituteStandortAdminEmail(
+        substituteStandortName,
+        originalStandortName,
+        adminUser,
+      ) {
+        console.info("[Clickdummy] Vertretungs-E-Mail an Standort-Administrator", {
+          to: adminUser?.email,
+          adminName: adminUser?.name,
+          substituteStandort: substituteStandortName,
+          representsStandort: originalStandortName,
+        });
+      }
+
+      function syncVertretungSubstituteInState(substituteStandort, options = {}) {
+        const state = getStandortVertretungState(currentStandortUsersId, currentStandortDetailName);
+        state.substituteStandort = substituteStandort;
+        state.ruleActive = Boolean(substituteStandort);
+        if (!substituteStandort) {
+          state.activeSince = "";
+        } else if (options.setActiveSince) {
+          state.activeSince = options.setActiveSince;
+        }
+        standortVertretungStateCache.set(currentStandortUsersId, state);
+        updateVertretungActiveBanner(state, currentStandortDetailName);
+        updateForwardingTableAvailability();
+        updateStandortAbsenceVertretungBadge();
+        return state;
+      }
+
+      function findStandortSubstituteUndoToast() {
+        if (!standortRoleUndoToastStack || !currentStandortUsersId) return null;
+        return standortRoleUndoToastStack.querySelector(
+          `.detail-toast[data-standort-substitute-id="${CSS.escape(currentStandortUsersId)}"]`,
+        );
+      }
+
+      function renderStandortSubstituteUndoToastMessage(
+        msgEl,
+        substituteStandort,
+        originalStandortName,
+        adminUser,
+      ) {
+        if (!msgEl) return;
+        msgEl.textContent = "";
+        const substituteStrong = document.createElement("strong");
+        substituteStrong.textContent = substituteStandort;
+        const originalStrong = document.createElement("strong");
+        originalStrong.textContent = originalStandortName;
+        const adminLabel = adminUser?.name ? ` (${adminUser.name})` : "";
+        msgEl.append(
+          substituteStrong,
+          document.createTextNode(" vertritt "),
+          originalStrong,
+          document.createTextNode(
+            ` bei Abwesenheit. Der Administrator des vertretenden Standorts${adminLabel} wird per E-Mail benachrichtigt.`,
+          ),
+        );
+      }
+
+      function mountStandortSubstituteUndoToastController(
+        toast,
+        initialSubstitute,
+        firstNextSubstitute,
+        originalStandortName,
+      ) {
+        const closeBtn = toast.querySelector(".detail-toast-close");
+        const iconWrap = toast.querySelector(".detail-toast-icon");
+        const fill = toast.querySelector(".detail-toast-bar-fill");
+        const msg = toast.querySelector(".detail-toast-undo-message");
+        const undoBtn = toast.querySelector(".detail-toast-action");
+        let emailSendCompleted = false;
+        let onEmailAnimationEnd = null;
+
+        const clearSubstituteToastTimers = () => {
+          if (toast._hideTimerId) {
+            clearTimeout(toast._hideTimerId);
+            toast._hideTimerId = null;
+          }
+          if (toast._emailTimerId) {
+            clearTimeout(toast._emailTimerId);
+            toast._emailTimerId = null;
+          }
+        };
+
+        const detachEmailAnimationEnd = () => {
+          if (onEmailAnimationEnd && fill) {
+            fill.removeEventListener("animationend", onEmailAnimationEnd);
+            onEmailAnimationEnd = null;
+          }
+        };
+
+        const removeToast = () => {
+          clearSubstituteToastTimers();
+          detachEmailAnimationEnd();
+          delete toast._standortSubstituteUndoController;
+          toast.remove();
+        };
+
+        const completeEmailSend = (nextSubstitute) => {
+          if (emailSendCompleted) return;
+          emailSendCompleted = true;
+          clearSubstituteToastTimers();
+          detachEmailAnimationEnd();
+          const adminUser = getStandortAdministrator(nextSubstitute);
+          sendSubstituteStandortAdminEmail(nextSubstitute, originalStandortName, adminUser);
+          syncVertretungSubstituteInState(nextSubstitute, {
+            setActiveSince: new Date().toISOString().slice(0, 10),
+          });
+          if (standortVertretungStandortSelect) {
+            delete standortVertretungStandortSelect.dataset.pendingSubstituteInitial;
+          }
+          removeToast();
+          showAppToast("E-Mail-Benachrichtigung wurde versendet.", 5000, "Benachrichtigung gesendet");
+        };
+
+        const startSubstituteToastTimers = (nextSubstitute) => {
+          clearSubstituteToastTimers();
+          detachEmailAnimationEnd();
+          emailSendCompleted = false;
+
+          const adminUser = getStandortAdministrator(nextSubstitute);
+          renderStandortSubstituteUndoToastMessage(
+            msg,
+            nextSubstitute,
+            originalStandortName,
+            adminUser,
+          );
+          toast.style.setProperty(
+            "--toast-progress-duration",
+            `${STANDORT_ROLE_UNDO_DURATION_MS / 1000}s`,
+          );
+          if (fill) {
+            fill.style.animation = "none";
+            fill.style.transform = "";
+            void fill.offsetWidth;
+            fill.style.animation = "";
+          }
+          if (iconWrap) {
+            iconWrap.classList.add("pending-email");
+          }
+
+          onEmailAnimationEnd = () => completeEmailSend(nextSubstitute);
+          fill?.addEventListener("animationend", onEmailAnimationEnd, { once: true });
+          toast._emailTimerId = setTimeout(
+            () => completeEmailSend(nextSubstitute),
+            STANDORT_ROLE_UNDO_DURATION_MS + 200,
+          );
+        };
+
+        const restart = (nextSubstitute) => {
+          if (standortVertretungStandortSelect) {
+            standortVertretungStandortSelect.value = nextSubstitute;
+          }
+          syncVertretungSubstituteInState(nextSubstitute);
+          startSubstituteToastTimers(nextSubstitute);
+          if (standortRoleUndoToastStack && standortRoleUndoToastStack.firstChild !== toast) {
+            standortRoleUndoToastStack.insertBefore(toast, standortRoleUndoToastStack.firstChild);
+          }
+        };
+
+        closeBtn?.addEventListener("click", (e) => {
+          e.stopPropagation();
+          const completed = emailSendCompleted;
+          removeToast();
+          if (!completed && standortVertretungStandortSelect) {
+            delete standortVertretungStandortSelect.dataset.pendingSubstituteInitial;
+          }
+        });
+
+        undoBtn?.addEventListener("click", (e) => {
+          e.stopPropagation();
+          removeToast();
+          if (standortVertretungStandortSelect) {
+            standortVertretungStandortSelect.value = initialSubstitute;
+            delete standortVertretungStandortSelect.dataset.pendingSubstituteInitial;
+          }
+          syncVertretungSubstituteInState(initialSubstitute);
+          showAppToast(
+            "Vertretungsstandort wiederhergestellt. Keine E-Mail gesendet.",
+            5000,
+            "Änderung rückgängig",
+          );
+        });
+
+        toast._standortSubstituteUndoController = { restart, removeToast };
+        startSubstituteToastTimers(firstNextSubstitute);
+      }
+
+      function showStandortSubstituteChangeToast(initialSubstitute, nextSubstitute) {
+        if (!standortRoleUndoToastStack || !nextSubstitute || !currentStandortUsersId) return;
+        const originalStandortName = currentStandortDetailName || getStandortNameForRoleToast();
+
+        const existingToast = findStandortSubstituteUndoToast();
+        if (existingToast?._standortSubstituteUndoController?.restart) {
+          existingToast._standortSubstituteUndoController.restart(nextSubstitute);
+          return;
+        }
+
+        const toast = document.createElement("div");
+        toast.className = "detail-toast";
+        toast.setAttribute("role", "status");
+        toast.dataset.standortSubstituteId = currentStandortUsersId;
+
+        const closeBtn = document.createElement("button");
+        closeBtn.type = "button";
+        closeBtn.className = "detail-toast-close";
+        closeBtn.setAttribute("aria-label", "Hinweis schließen");
+        closeBtn.innerHTML = "&times;";
+
+        const toastBody = document.createElement("div");
+        toastBody.className = "detail-toast-body";
+
+        const iconWrap = document.createElement("span");
+        iconWrap.className = "detail-toast-icon pending-email";
+        iconWrap.innerHTML = '<i class="fa-solid fa-check" aria-hidden="true"></i>';
+
+        const copy = document.createElement("div");
+        copy.className = "detail-toast-copy";
+
+        const rowWrap = document.createElement("div");
+        rowWrap.className = "detail-toast-undo-row";
+
+        const msg = document.createElement("p");
+        msg.className = "detail-toast-undo-message";
+
+        const undoBtn = document.createElement("button");
+        undoBtn.type = "button";
+        undoBtn.className = "detail-toast-action";
+        undoBtn.textContent = "Rückgängig";
+
+        rowWrap.append(msg, undoBtn);
+        copy.appendChild(rowWrap);
+        toastBody.append(iconWrap, copy);
+
+        const bar = document.createElement("div");
+        bar.className = "detail-toast-bar";
+        const fill = document.createElement("div");
+        fill.className = "detail-toast-bar-fill";
+        bar.appendChild(fill);
+
+        toast.append(closeBtn, toastBody, bar);
+        standortRoleUndoToastStack.appendChild(toast);
+
+        mountStandortSubstituteUndoToastController(
+          toast,
+          initialSubstitute,
+          nextSubstitute,
+          originalStandortName,
+        );
+      }
+
+      function handleVertretungStandortSelectChange() {
+        if (!standortVertretungStandortSelect || !currentStandortUsersId) return;
+
+        const nextSubstitute = standortVertretungStandortSelect.value || "";
+        const state = getStandortVertretungState(currentStandortUsersId, currentStandortDetailName);
+        const committedSubstitute = state.substituteStandort || "";
+
+        if (nextSubstitute === committedSubstitute) return;
+
+        if (!nextSubstitute) {
+          const pendingToast = findStandortSubstituteUndoToast();
+          pendingToast?._standortSubstituteUndoController?.removeToast?.();
+          delete standortVertretungStandortSelect.dataset.pendingSubstituteInitial;
+          syncVertretungSubstituteInState("");
+          return;
+        }
+
+        const initialSubstitute =
+          standortVertretungStandortSelect.dataset.pendingSubstituteInitial ?? committedSubstitute;
+        if (!standortVertretungStandortSelect.dataset.pendingSubstituteInitial) {
+          standortVertretungStandortSelect.dataset.pendingSubstituteInitial = initialSubstitute;
+        }
+
+        syncVertretungSubstituteInState(nextSubstitute);
+        showStandortSubstituteChangeToast(initialSubstitute, nextSubstitute);
+      }
+
+      function renderStandortVertretungCard(standortName, standortId) {
+        const normalizedId = slugifyStandortName(standortId || standortName);
+        const state = getStandortVertretungState(normalizedId, standortName);
+
+        populateVertretungStandortSelect(standortName, state.substituteStandort);
+        updateVertretungActiveBanner(state, standortName);
+
+        const forwardingInteractionsDisabled = !Boolean(state.substituteStandort);
+        if (standortForwardingTableBody) {
+          standortForwardingTableBody.innerHTML = STANDORT_FORWARDING_LEAD_TYPES.map((leadType) =>
+            renderForwardingRuleRow(
+              leadType,
+              state.forwarding[leadType.id],
+              forwardingInteractionsDisabled,
+            ),
+          ).join("");
+        }
+        updateForwardingTableAvailability();
+        updateStandortAbsenceVertretungBadge();
+      }
+
+      function collectForwardingRulesFromUi() {
+        const state = getStandortVertretungState(currentStandortUsersId, currentStandortDetailName);
+        if (standortForwardingTableBody) {
+          standortForwardingTableBody.querySelectorAll("tr[data-forwarding-id]").forEach((row) => {
+            const id = row.dataset.forwardingId;
+            const enabled = Boolean(row.querySelector(".forwarding-enabled")?.checked);
+            state.forwarding[id] = { enabled };
+          });
+        }
+        standortVertretungStateCache.set(currentStandortUsersId, state);
+        return state;
+      }
+
+      function saveStandortVertretungRules() {
+        if (!currentStandortUsersId) return;
+        collectForwardingRulesFromUi();
+        showAppToast("Weiterleitungsregeln wurden gespeichert.", 5000, "Regelwerk gespeichert");
+      }
+
+      function endStandortVertretungRule() {
+        if (!currentStandortUsersId) return;
+        const pendingToast = findStandortSubstituteUndoToast();
+        pendingToast?._standortSubstituteUndoController?.removeToast?.();
+        if (standortVertretungStandortSelect) {
+          standortVertretungStandortSelect.value = "";
+          delete standortVertretungStandortSelect.dataset.pendingSubstituteInitial;
+        }
+        syncVertretungSubstituteInState("");
+        showAppToast("Vertretungsregel wurde beendet.", 4000, "Vertretung beendet");
+      }
+
+      function renderStandortDetailCards(standortName, standortId) {
+        currentStandortDetailName = standortName;
+        currentStandortUsersId = slugifyStandortName(standortId || standortName);
+        renderStandortAbsenceCard(standortName, standortId);
+        renderStandortVertretungCard(standortName, standortId);
+        renderStandortUsersTable(standortId || standortName, standortName);
       }
 
       function openStandortDetailPage(standortId, options = {}) {
@@ -9726,6 +12505,9 @@
 
       function closeStandortDetailPage(options = {}) {
         if (!standortDetailPage) return;
+        clearStandortRoleUndoToasts();
+        closeStandortInviteUserModal();
+        closeStandortAbsenceModal();
         standortDetailPage.classList.remove("open");
         meineStandortePage.classList.add("open");
         overviewSection.style.display = "none";
@@ -10804,26 +13586,131 @@
       }
       if (standortUsersTableBody) {
         standortUsersTableBody.addEventListener("change", (event) => {
-          const toggle = event.target;
-          if (toggle.type !== "checkbox" || !toggle.closest(".user-active-toggle")) return;
-          const row = toggle.closest("tr");
+          const target = event.target;
+          if (target.classList?.contains("standort-user-access-select")) {
+            handleStandortUserAccessChange(target);
+            return;
+          }
+          if (target.type !== "checkbox" || !target.closest(".user-active-toggle")) return;
+          const row = target.closest("tr");
           const userId = row?.dataset.userId;
           if (!userId) return;
-          const isActive = toggle.checked;
+          const isActive = target.checked;
           const nextStatus = setStandortUserActive(userId, isActive);
           if (nextStatus) updateStandortUserStatusCell(row, nextStatus);
         });
       }
       if (standortInviteUserBtn) {
-        standortInviteUserBtn.addEventListener("click", () => {
-          const standortName =
-            standortDetailTitle?.textContent?.trim() || currentStandortUsersId || "Standort";
-          showAppToast(
-            `Einladung für ${standortName} wird in diesem Clickdummy nicht versendet.`,
-            5000,
-            "Nutzer einladen",
-          );
+        standortInviteUserBtn.addEventListener("click", openStandortInviteUserModal);
+      }
+      if (standortIndividualAbsenceBody) {
+        standortIndividualAbsenceBody.addEventListener("click", (event) => {
+          const plannedToggle = event.target.closest(".standort-absence-planned-toggle");
+          if (plannedToggle) {
+            toggleUserPlannedAbsences(plannedToggle.dataset.userId);
+            return;
+          }
+          const editBtn = event.target.closest(".standort-absence-status-btn");
+          if (editBtn) {
+            openStandortAbsenceModal(editBtn.dataset.userId, editBtn.dataset.absenceId);
+            return;
+          }
+          const editLink = event.target.closest(".standort-absence-edit-link");
+          if (editLink) {
+            openStandortAbsenceModal(editLink.dataset.userId, editLink.dataset.absenceId);
+            return;
+          }
+          const actionBtn = event.target.closest(".standort-absence-action-btn");
+          if (actionBtn) {
+            openStandortAbsenceModal(actionBtn.dataset.userId);
+          }
         });
+      }
+      if (standortAbsenceOpenEndCheckbox) {
+        standortAbsenceOpenEndCheckbox.addEventListener("change", syncStandortAbsenceOpenEndField);
+      }
+      if (standortAbsenceForm) {
+        standortAbsenceForm.addEventListener("submit", (event) => {
+          event.preventDefault();
+          saveStandortAbsenceFromModal();
+        });
+      }
+      if (standortAbsenceModalCloseBtn) {
+        standortAbsenceModalCloseBtn.addEventListener("click", closeStandortAbsenceModal);
+      }
+      if (standortAbsenceCancelBtn) {
+        standortAbsenceCancelBtn.addEventListener("click", closeStandortAbsenceModal);
+      }
+      if (standortAbsenceModalOverlay) {
+        standortAbsenceModalOverlay.addEventListener("click", (event) => {
+          if (event.target === standortAbsenceModalOverlay) closeStandortAbsenceModal();
+        });
+      }
+      restoreStandortAbsenceFilterControls();
+      STANDORT_ABSENCE_FILTER_IDS.forEach((selectId) => {
+        const select = document.getElementById(selectId);
+        if (select) initStandortAbsenceMultiSelect(select);
+      });
+      if (sortStandortAbsencePeriodBtn) {
+        sortStandortAbsencePeriodBtn.addEventListener("click", (event) => {
+          event.stopPropagation();
+          toggleStandortAbsenceSort("period");
+        });
+      }
+      if (sortStandortAbsenceStatusBtn) {
+        sortStandortAbsenceStatusBtn.addEventListener("click", (event) => {
+          event.stopPropagation();
+          toggleStandortAbsenceSort("status");
+        });
+      }
+      if (standortAbsencePerPageSelect) {
+        standortAbsencePerPageSelect.addEventListener("change", () => {
+          standortAbsencePerPage = Number(standortAbsencePerPageSelect.value || 5);
+          refreshStandortAbsenceTablePage(true);
+        });
+      }
+      if (standortAbsencePrevBtn) {
+        standortAbsencePrevBtn.addEventListener("click", () => {
+          if (standortAbsencePage <= 1) return;
+          standortAbsencePage -= 1;
+          refreshStandortAbsenceTablePage(false);
+        });
+      }
+      if (standortAbsenceNextBtn) {
+        standortAbsenceNextBtn.addEventListener("click", () => {
+          if (standortAbsencePage >= standortAbsenceTotalPages) return;
+          standortAbsencePage += 1;
+          refreshStandortAbsenceTablePage(false);
+        });
+      }
+      if (standortSiteWideSaveBtn) {
+        standortSiteWideSaveBtn.addEventListener("click", saveSiteWideAbsence);
+      }
+      if (standortAbsenceSiteWideEndBtn) {
+        standortAbsenceSiteWideEndBtn.addEventListener("click", endSiteWideAbsence);
+      }
+      if (standortVertretungStandortSelect) {
+        standortVertretungStandortSelect.addEventListener("change", handleVertretungStandortSelectChange);
+      }
+      if (standortVertretungSaveBtn) {
+        standortVertretungSaveBtn.addEventListener("click", saveStandortVertretungRules);
+      }
+      if (standortVertretungEndBtn) {
+        standortVertretungEndBtn.addEventListener("click", endStandortVertretungRule);
+      }
+      if (standortInviteUserModalCloseBtn) {
+        standortInviteUserModalCloseBtn.addEventListener("click", closeStandortInviteUserModal);
+      }
+      if (standortInviteUserCancelBtn) {
+        standortInviteUserCancelBtn.addEventListener("click", closeStandortInviteUserModal);
+      }
+      if (standortInviteUserModalOverlay) {
+        standortInviteUserModalOverlay.addEventListener("click", (event) => {
+          if (event.target === standortInviteUserModalOverlay) closeStandortInviteUserModal();
+        });
+      }
+      if (standortInviteUserForm) {
+        standortInviteUserForm.addEventListener("submit", handleStandortInviteUserSubmit);
       }
       window.addEventListener("popstate", () => {
         handleAppRoute();
@@ -11110,6 +13997,11 @@
         }
       });
       applyColumnConfig();
+      restoreStandortAbsenceFilterControls();
+      STANDORT_ABSENCE_FILTER_IDS.forEach((selectId) => {
+        const select = document.getElementById(selectId);
+        if (select) initStandortAbsenceMultiSelect(select);
+      });
       applyFilter(true);
       syncOverviewStatsFromLeadTable();
       handleAppRoute();
