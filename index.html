@@ -55,6 +55,7 @@
         --lead-detail-content-width: min(100%, 66.666vw);
         --table-edge-padding: 16px;
         --border-radius-md: 6px;
+        --color-background-secondary: #f8f8f8;
       }
 
       * {
@@ -1885,6 +1886,38 @@
       .locations-table tbody td.locations-row__name {
         padding-left: 14px;
         white-space: nowrap;
+        max-width: 300px;
+      }
+
+      .standort-name-truncate {
+        display: inline-block;
+        max-width: 300px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        vertical-align: bottom;
+      }
+
+      .multi-select-trigger-label .standort-name-truncate,
+      .stats-standort-multiselect-trigger-label .standort-name-truncate {
+        max-width: 100%;
+      }
+
+      #meineStatistikenPage .stats-standort-multiselect-menu .multi-select-option-label.standort-name-truncate,
+      #meineStatistikenPage .stats-standort-multiselect-menu .standort-name-truncate {
+        flex: 1;
+        min-width: 0;
+        max-width: 100% !important;
+      }
+
+      .stats-ov-table td .standort-name-truncate,
+      .stats-ov-accordion-label .standort-name-truncate,
+      .stats-ov-accordion-sublabel .standort-name-truncate {
+        max-width: 300px;
+      }
+
+      select.standort-select-truncate {
+        max-width: 300px;
       }
 
       .locations-table__status-head {
@@ -3027,21 +3060,123 @@
         flex-shrink: 0;
       }
 
-      #statsPanelOverview .stats-kpi-row--overview {
+      #meineStatistikenPage .stat-standort-filter {
+        position: relative;
+        width: 380px;
+        max-width: 100%;
+      }
+
+      #meineStatistikenPage .stats-standort-multiselect {
+        width: 380px;
+        max-width: 100%;
+      }
+
+      #meineStatistikenPage .stats-standort-multiselect .multi-select-trigger {
+        width: 100%;
+        height: 34px;
+        border: 1px solid rgba(255, 255, 255, 0.4);
+        border-radius: 4px;
+        background: rgba(255, 255, 255, 0.96);
+        color: #222;
+        font-size: 13px;
+        padding: 0 30px 0 10px;
+      }
+
+      #meineStatistikenPage .stats-standort-multiselect-menu {
+        width: 380px;
+        max-width: 100%;
+        min-width: 0;
+        box-sizing: border-box;
+      }
+
+      #meineStatistikenPage .stats-standort-multiselect.open .multi-select-trigger {
+        border-color: rgba(255, 255, 255, 0.72);
+      }
+
+      #meineStatistikenPage .stats-standort-multiselect-divider {
+        border-bottom: 1px solid #edf2f5;
+        margin: 2px 0 4px;
+      }
+
+      #meineStatistikenPage .stats-standort-multiselect-all {
+        font-weight: 600;
+      }
+
+      #meineStatistikenPage .stats-standort-multiselect-menu .multi-select-option input[type="checkbox"]:indeterminate {
+        background-color: #98c44c;
+        border-color: #98c44c;
+        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath d='M2.5 6h7' fill='none' stroke='%23ffffff' stroke-width='1.8' stroke-linecap='round'/%3E%3C/svg%3E");
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: 12px 12px;
+      }
+
+      #meineStatistikenPage .stat-inner-head-toolbar .stats-standort-multiselect-menu .multi-select-option {
+        color: #2b2b2b;
+      }
+
+      #meineStatistikenPage .stat-inner-head-toolbar .stats-standort-multiselect-menu .multi-select-option span {
+        color: #2b2b2b;
+        flex: 1;
+        min-width: 0;
+      }
+
+      #meineStatistikenPage .stats-standort-multiselect-menu .multi-select-option input[type="checkbox"] {
+        flex-shrink: 0;
+      }
+
+      #statsPanelOverview .stat-head-perf-title {
+        flex-shrink: 0;
+        font-weight: var(--font-section-heading-weight);
+        font-size: var(--font-section-heading);
+      }
+
+      #statsPanelOverview .stats-kpi-row--summary {
         display: grid;
         grid-template-columns: repeat(4, minmax(0, 1fr));
+        align-items: stretch;
         gap: 14px;
         margin-bottom: 0;
       }
 
       @media (max-width: 1100px) {
-        #statsPanelOverview .stats-kpi-row--overview {
+        #statsPanelOverview .stats-kpi-row--summary {
           grid-template-columns: repeat(2, minmax(0, 1fr));
         }
       }
 
       @media (max-width: 640px) {
-        #statsPanelOverview .stats-kpi-row--overview {
+        #statsPanelOverview .stats-kpi-row--summary {
+          grid-template-columns: 1fr;
+        }
+      }
+
+      #statsPanelOverview .stats-ov-summary-kpi-card .stats-perf-kpi-text {
+        padding-bottom: 0;
+        margin-bottom: 0;
+        border-bottom: none;
+      }
+
+      #statsPanelOverview .stats-ov-summary-kpi-card .stats-perf-kpi-sparkline {
+        display: none !important;
+      }
+
+      #statsPanelOverview .stats-kpi-row--perf {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        align-items: stretch;
+        gap: 14px;
+        margin-bottom: 18px;
+      }
+
+      @media (max-width: 1100px) {
+        #statsPanelOverview .stats-kpi-row--perf {
+          grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
+      }
+
+      @media (max-width: 640px) {
+        #statsPanelOverview .stats-kpi-row--perf {
           grid-template-columns: 1fr;
         }
 
@@ -3052,41 +3187,524 @@
         }
       }
 
-      #statsPanelOverview .stats-overview-kpi-card {
-        padding: 18px 16px;
-        gap: 0;
+      #statsPanelOverview .stat-inner-body--overview {
+        display: flex;
+        flex-direction: column;
+        gap: 18px;
       }
 
-      #statsPanelOverview .stats-overview-kpi-text {
+      #statsPanelOverview .stats-perf-kpi-card {
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        align-items: stretch;
+        align-self: stretch;
+        height: 100%;
+        min-width: 0;
+        min-height: 100%;
+        padding: 18px 16px 14px;
+        gap: 0;
+        overflow: hidden;
+      }
+
+      #statsPanelOverview .stats-ov-kpi-card[hidden] {
+        display: none !important;
+      }
+
+      #statsPanelOverview .stats-perf-kpi-sparkline {
+        position: absolute;
+        left: 0;
+        right: 0;
+        width: 100%;
+        height: 32%;
+        bottom: calc(14px + 40px + 14px);
+        z-index: 0;
+        pointer-events: none;
+      }
+
+      #statsPanelOverview .stats-perf-kpi-text {
         display: flex;
         flex-direction: column;
         align-items: flex-start;
         gap: 6px;
         min-width: 0;
+        padding-bottom: 14px;
+        margin-bottom: 14px;
+        border-bottom: 1px solid var(--line);
+        position: relative;
+        z-index: 1;
       }
 
-      #statsPanelOverview .stats-overview-kpi-title {
+      #statsPanelOverview .stats-ov-kpi-card .stats-ov-kpi-body {
+        display: flex;
+        flex-direction: column;
+        flex: 1 1 auto;
+        flex-grow: 1;
+        min-width: 0;
+        min-height: 0;
+        position: relative;
+        z-index: 1;
+      }
+
+      #statsPanelOverview .stats-ov-kpi-card .stats-perf-kpi-text {
+        flex: 1 1 auto;
+        flex-grow: 1;
+        padding-bottom: 0;
+        margin-bottom: 0;
+        border-bottom: none;
+      }
+
+      #statsPanelOverview .stats-ov-kpi-card .stats-perf-kpi-sparkline {
+        bottom: 0;
+      }
+
+      #statsPanelOverview .stats-ov-kpi-footer {
+        margin-top: auto;
+        flex-shrink: 0;
+        width: 100%;
+        border-top: 1px solid var(--line);
+        padding-top: 14px;
+        position: relative;
+        z-index: 1;
+      }
+
+      #statsPanelOverview .stats-ov-kpi-footer .stats-perf-detail-btn {
         margin: 0;
-        font-size: 14px;
-        font-weight: 500;
-        line-height: 1.35;
+      }
+
+      #statsPanelOverview .stats-perf-kpi-title,
+      #statsPanelOverview .stats-perf-kpi-card .stats-kpi-value,
+      #statsPanelOverview .stats-perf-kpi-helper,
+      #statsPanelOverview .stats-ov-status-rows {
+        position: relative;
+        z-index: 1;
+      }
+
+      #statsPanelOverview .stats-perf-kpi-title {
+        margin: 0;
+        font-size: var(--type-body-lg);
+        font-weight: var(--font-section-heading-weight);
+        line-height: 1.3;
         color: var(--text);
       }
 
-      #statsPanelOverview .stats-overview-kpi-value {
+      #statsPanelOverview .stats-perf-kpi-card .stats-kpi-value {
+        display: block;
         margin: 0;
-        font-size: 22px;
-        font-weight: 500;
+        font-size: var(--type-heading-md);
+        font-weight: var(--font-section-heading-weight);
         line-height: 1.25;
         color: var(--text);
       }
 
-      #statsPanelOverview .stats-overview-kpi-helper {
+      #statsPanelOverview .stats-perf-kpi-helper {
         margin: 0;
-        font-size: 11px;
+        font-size: var(--type-body-sm);
         font-weight: 400;
         line-height: 1.35;
         color: var(--muted);
+      }
+
+      #statsPanelOverview .stats-ov-status-rows {
+        display: flex;
+        flex-direction: column;
+        gap: 4px;
+        width: 100%;
+      }
+
+      #statsPanelOverview .stats-ov-status-row {
+        position: relative;
+        display: grid;
+        grid-template-columns: 1fr auto auto;
+        align-items: center;
+        gap: 8px 10px;
+        padding: 4px 8px;
+        font-size: var(--type-body-sm);
+        line-height: 1.35;
+        border-radius: var(--border-radius-md);
+        overflow: hidden;
+      }
+
+      #statsPanelOverview .stats-ov-status-row-fill {
+        position: absolute;
+        left: 0;
+        top: 0;
+        bottom: 0;
+        width: var(--stats-ov-status-pct, 0%);
+        border-radius: var(--border-radius-md);
+        background: rgba(74, 143, 168, 0.15);
+        pointer-events: none;
+        z-index: 0;
+      }
+
+      #statsPanelOverview .stats-ov-status-row > :not(.stats-ov-status-row-fill) {
+        position: relative;
+        z-index: 1;
+      }
+
+      #statsPanelOverview .stats-ov-kpi-card[data-ov-metric="standort"] .stats-perf-kpi-sparkline,
+      #statsPanelOverview .stats-ov-kpi-card[data-ov-metric="bedarfsart"] .stats-perf-kpi-sparkline,
+      #statsPanelOverview .stats-ov-kpi-card[data-ov-metric="gebiet"] .stats-perf-kpi-sparkline,
+      #statsPanelOverview .stats-ov-kpi-card[data-ov-metric="status"] .stats-perf-kpi-sparkline {
+        display: none !important;
+      }
+
+      #statsPanelOverview .stats-ov-status-label {
+        color: var(--text);
+        font-weight: 500;
+      }
+
+      #statsPanelOverview .stats-ov-status-value {
+        color: var(--text);
+        font-weight: var(--font-section-heading-weight);
+        font-variant-numeric: tabular-nums;
+        text-align: right;
+      }
+
+      #statsPanelOverview .stats-ov-status-pct {
+        color: var(--muted);
+        font-variant-numeric: tabular-nums;
+        text-align: right;
+        min-width: 3.2em;
+      }
+
+      #statsPanelOverview .stats-perf-detail-btn {
+        position: relative;
+        z-index: 1;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        width: 100%;
+        margin: auto 0 0;
+        padding: 10px 14px;
+        font-size: var(--font-body);
+        font-weight: 600;
+        flex-shrink: 0;
+      }
+
+      #statsPanelOverview .stats-perf-kpi-card.is-detail-open .stats-perf-detail-btn {
+        background: var(--primary);
+        border-color: var(--primary);
+        color: var(--white);
+      }
+
+      #statsPanelOverview .stats-overview-stack {
+        display: flex;
+        flex-direction: column;
+        gap: 18px;
+      }
+
+      #statsPanelOverview .stats-ov-segment.stats-panel {
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        background: var(--white);
+        box-shadow: 0 1px 2px rgba(23, 44, 56, 0.06);
+        overflow: hidden;
+        margin-bottom: 0;
+      }
+
+      #statsPanelOverview .stats-card-overview {
+        margin-bottom: 18px;
+        position: relative;
+      }
+
+      #statsPanelOverview .stats-perf-consolidated-export-anchor {
+        position: absolute;
+        right: 16px;
+        bottom: 16px;
+        z-index: 3;
+      }
+
+      #statsPanelOverview .stats-card-overview.is-ov-consolidated-view .stat-inner-body--overview {
+        padding-bottom: 52px;
+      }
+
+      #statsPanelOverview .stats-perf-viz-toggle {
+        display: inline-flex;
+        align-items: center;
+        gap: 4px;
+        padding: 3px;
+        border: 1px solid var(--line-subtle);
+        border-radius: 8px;
+        background: var(--white);
+      }
+
+      #statsPanelOverview .stats-perf-viz-btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 32px;
+        height: 32px;
+        padding: 0;
+        border: none;
+        border-radius: 6px;
+        background: transparent;
+        color: var(--muted);
+        cursor: pointer;
+        transition: background 0.15s ease, color 0.15s ease;
+      }
+
+      #statsPanelOverview .stats-perf-viz-btn:hover {
+        background: var(--primary-surface);
+        color: var(--primary);
+      }
+
+      #statsPanelOverview .stats-perf-viz-btn.is-active {
+        background: var(--primary);
+        color: var(--white);
+      }
+
+      #statsPanelOverview .stats-perf-viz-btn:focus-visible {
+        outline: 2px solid var(--primary);
+        outline-offset: 2px;
+      }
+
+      #statsPanelOverview .stats-perf-export-toggle .stats-perf-export-btn {
+        cursor: pointer;
+      }
+
+      #statsPanelOverview .stats-perf-export-toggle .stats-perf-export-btn:hover {
+        background: var(--primary);
+        color: var(--white);
+      }
+
+      #statsPanelOverview .stats-ov-segment .stats-panel-head {
+        padding: 14px 18px;
+        background: var(--primary);
+        color: var(--white);
+      }
+
+      #statsPanelOverview .stats-ov-segment {
+        position: relative;
+      }
+
+      #statsPanelOverview .stats-ov-segment .stats-panel-body {
+        padding: 16px 18px 52px;
+      }
+
+      #statsPanelOverview .stats-ov-detail-export-anchor {
+        position: absolute;
+        right: 16px;
+        bottom: 16px;
+        z-index: 3;
+      }
+
+      #statsPanelOverview .stats-perf-panel-head {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 12px;
+      }
+
+      #statsPanelOverview .stats-perf-panel-title {
+        flex: 1;
+        min-width: 0;
+        font-weight: var(--font-section-heading-weight);
+      }
+
+      #statsPanelOverview .stats-perf-detail-close {
+        flex-shrink: 0;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 32px;
+        height: 32px;
+        padding: 0;
+        border: none;
+        border-radius: 6px;
+        background: rgba(255, 255, 255, 0.15);
+        color: var(--white);
+        cursor: pointer;
+        transition: background 0.15s ease;
+      }
+
+      #statsPanelOverview .stats-perf-detail-close:hover {
+        background: rgba(255, 255, 255, 0.28);
+      }
+
+      #statsPanelOverview .stats-perf-breakdown-head {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 12px;
+        margin-bottom: 12px;
+      }
+
+      #statsPanelOverview .stats-perf-breakdown-heading {
+        font-size: var(--font-section-heading);
+        font-weight: var(--font-section-heading-weight);
+        color: #30506b;
+      }
+
+      #statsPanelOverview .stats-ov-segment.is-detail-hidden {
+        display: none;
+      }
+
+      #statsPanelOverview .stats-ov-segment.stats-panel:not(.is-detail-hidden) {
+        display: block;
+      }
+
+      #statsPanelOverview .stats-ov-cell-pct {
+        color: var(--muted);
+        font-weight: 400;
+      }
+
+      #statsPanelOverview .stats-ov-cell-empty {
+        color: var(--muted);
+      }
+
+      #statsPanelOverview .stats-ov-detail-table-wrap {
+        overflow-x: auto;
+      }
+
+      #statsPanelOverview .stats-ov-accordion {
+        display: flex;
+        flex-direction: column;
+        border: 1px solid var(--line);
+        border-radius: 6px;
+        overflow: hidden;
+        background: var(--white);
+      }
+
+      #statsPanelOverview .stats-ov-accordion-item + .stats-ov-accordion-item {
+        border-top: 1px solid var(--line);
+      }
+
+      #statsPanelOverview .stats-ov-accordion-trigger {
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 12px;
+        width: 100%;
+        padding: 4px 14px;
+        border: 0;
+        background: transparent;
+        font-family: inherit;
+        font-size: var(--font-body);
+        color: var(--text);
+        text-align: left;
+        cursor: pointer;
+        overflow: hidden;
+        border-radius: var(--border-radius-md);
+      }
+
+      #statsPanelOverview .stats-ov-accordion-trigger:hover {
+        background: transparent;
+      }
+
+      #statsPanelOverview .stats-ov-accordion-track {
+        position: relative;
+        flex: 1 1 auto;
+        min-width: 0;
+        min-height: 28px;
+        display: flex;
+        align-items: center;
+      }
+
+      #statsPanelOverview .stats-ov-accordion-row-fill {
+        position: absolute;
+        left: 0;
+        top: 50%;
+        height: 28px;
+        transform: translateY(-50%);
+        width: var(--stats-ov-acc-pct, 0%);
+        border-radius: var(--border-radius-md);
+        pointer-events: none;
+        z-index: 0;
+      }
+
+      #statsPanelOverview .stats-ov-accordion-row-fill--parent {
+        background: rgba(74, 143, 168, 0.15);
+      }
+
+      #statsPanelOverview .stats-ov-accordion-row-fill--child {
+        background: rgba(74, 143, 168, 0.25);
+      }
+
+      #statsPanelOverview .stats-ov-accordion-label,
+      #statsPanelOverview .stats-ov-accordion-sublabel {
+        position: relative;
+        z-index: 1;
+        flex: 1 1 auto;
+        min-width: 0;
+      }
+
+      #statsPanelOverview .stats-ov-accordion-meta {
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        flex-shrink: 0;
+        font-variant-numeric: tabular-nums;
+      }
+
+      #statsPanelOverview .stats-ov-accordion-total {
+        font-weight: var(--font-section-heading-weight);
+        text-align: right;
+        min-width: 2.5em;
+      }
+
+      #statsPanelOverview .stats-ov-accordion-chevron {
+        color: var(--primary);
+        font-size: 12px;
+        transition: transform 0.15s ease;
+      }
+
+      #statsPanelOverview .stats-ov-accordion-item.is-expanded .stats-ov-accordion-chevron {
+        transform: rotate(180deg);
+      }
+
+      #statsPanelOverview .stats-ov-accordion-panel {
+        padding: 0 14px 10px;
+      }
+
+      #statsPanelOverview .stats-ov-accordion-subrow {
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 12px;
+        padding: 4px 8px 4px 24px;
+        font-size: var(--font-body);
+        color: var(--text);
+        overflow: hidden;
+        border-radius: var(--border-radius-md);
+        background: transparent;
+      }
+
+      #statsPanelOverview .stats-ov-accordion-subrow + .stats-ov-accordion-subrow {
+        border-top: 1px solid #edf2f5;
+      }
+
+      #statsPanelOverview .stats-ov-flat-bar-row {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 12px;
+        padding: 4px 14px;
+        font-size: var(--font-body);
+        color: var(--text);
+        overflow: hidden;
+        border-radius: var(--border-radius-md);
+        background: transparent;
+      }
+
+      #statsPanelOverview .stats-ov-flat-bar-row + .stats-ov-flat-bar-row {
+        border-top: 1px solid var(--line);
+      }
+
+      #statsPanelOverview .stats-ov-accordion-subvalue {
+        flex-shrink: 0;
+        text-align: right;
+        font-variant-numeric: tabular-nums;
+        white-space: nowrap;
+      }
+
+      #statsPanelOverview .stats-ov-table th.num,
+      #statsPanelOverview .stats-ov-table td.num {
+        text-align: right;
+        white-space: nowrap;
       }
 
       #statsPanelPerformance.stats-panel {
@@ -3912,7 +4530,7 @@
               min-width: 0;
               padding: 18px 16px 14px;
               gap: 0;
-              overflow: hidden;
+              overflow: visible;
             }
 
             #statsPanelPerformance .stats-perf-kpi-sparkline{
@@ -3939,11 +4557,20 @@
               z-index: 1;
             }
 
+            #statsPanelPerformance .stats-perf-kpi-title-row,
             #statsPanelPerformance .stats-perf-kpi-title,
             #statsPanelPerformance .stats-perf-kpi-card .stats-kpi-value,
             #statsPanelPerformance .stats-perf-kpi-helper{
               position: relative;
               z-index: 1;
+            }
+
+            #statsPanelPerformance .stats-perf-kpi-title-row{
+              display: flex;
+              align-items: center;
+              gap: 6px;
+              width: 100%;
+              min-width: 0;
             }
 
             #statsPanelPerformance .stats-perf-kpi-title{
@@ -3952,6 +4579,49 @@
               font-weight: var(--font-section-heading-weight);
               line-height: 1.3;
               color: var(--text);
+              min-width: 0;
+            }
+
+            #statsPanelPerformance .stats-perf-kpi-info{
+              position: relative;
+              display: inline-flex;
+              align-items: center;
+              flex-shrink: 0;
+              color: var(--muted);
+              font-size: 14px;
+              line-height: 1;
+              cursor: help;
+            }
+
+            #statsPanelPerformance .stats-perf-kpi-tooltip{
+              position: absolute;
+              bottom: calc(100% + 8px);
+              left: 50%;
+              transform: translateX(-50%);
+              width: max-content;
+              max-width: 260px;
+              padding: 8px 12px;
+              background: #f8f8f8;
+              color: var(--text);
+              font-size: 13px;
+              font-weight: 400;
+              line-height: 1.4;
+              border-radius: var(--border-radius-md);
+              border: 1px solid var(--line);
+              box-shadow: 0 4px 12px rgba(23, 44, 56, 0.12);
+              white-space: normal;
+              text-align: left;
+              opacity: 0;
+              visibility: hidden;
+              pointer-events: none;
+              transition: opacity 0.15s ease, visibility 0.15s ease;
+              z-index: 30;
+            }
+
+            #statsPanelPerformance .stats-perf-kpi-info:hover .stats-perf-kpi-tooltip,
+            #statsPanelPerformance .stats-perf-kpi-info:focus-within .stats-perf-kpi-tooltip{
+              opacity: 1;
+              visibility: visible;
             }
 
             #statsPanelPerformance .stats-perf-kpi-card .stats-kpi-value{
@@ -5588,7 +6258,7 @@
         <div class="user-card">
           <div id="sidebarAvatar" class="avatar">JK</div>
           <div id="sidebarUserName" class="user-name">Jakob Kuntz</div>
-          <div id="sidebarTenantName" class="user-meta">Carelink Solutions</div>
+          <div id="sidebarTenantName" class="user-meta">Hesena Management GmbH (Verwaltungssitz)</div>
         </div>
 
         <nav class="menu">
@@ -6187,7 +6857,7 @@
                 </thead>
                 <tbody id="locationsTableBody">
                   <tr>
-                    <td class="locations-row__name">Mainz</td>
+                    <td class="locations-row__name">Hesena Management Domizil an der Jade</td>
                     <td>
                       <div class="location-status-wrap">
                         <span class="location-status-indicator">
@@ -6204,7 +6874,7 @@
                         type="button"
                         class="locations-leistungen-toggle"
                         aria-expanded="false"
-                        aria-label="Leistungen für Mainz anzeigen"
+                        aria-label="Leistungen für Hesena Management Domizil an der Jade anzeigen"
                       >
                         <span class="locations-leistungen-count locations-leistungen-count--full">3/3</span>
                         <i class="fa-solid fa-chevron-right locations-leistungen-chevron" aria-hidden="true"></i>
@@ -6217,7 +6887,7 @@
                       </button>
                     </td>
                   </tr>
-                  <tr class="locations-leistungen-detail-row" data-leistungen-for="Mainz">
+                  <tr class="locations-leistungen-detail-row" data-leistungen-for="Hesena Management Domizil an der Jade">
                     <td class="locations-leistungen-detail-empty" aria-hidden="true"></td>
                     <td class="locations-detail-meta-cell">
                       <div class="locations-subscription-details">
@@ -6247,7 +6917,7 @@
                     <td class="locations-leistungen-detail-empty" aria-hidden="true"></td>
                   </tr>
                   <tr>
-                    <td class="locations-row__name">Frankfurt</td>
+                    <td class="locations-row__name">Hesena Management Domizil am Ostplatz</td>
                     <td>
                       <div class="location-status-wrap">
                         <span class="location-status-indicator">
@@ -6259,13 +6929,7 @@
                     <td>
                       <div class="location-end-wrap">
                         <span class="location-end-date">31.08.2026</span>
-                        <button
-                          type="button"
-                          class="location-extend-btn"
-                          data-action="extend"
-                        >
-                          verlängern
-                        </button>
+                        <button type="button" class="location-extend-btn" data-action="extend">verlängern</button>
                       </div>
                     </td>
                     <td class="locations-leistungen-cell">
@@ -6273,7 +6937,7 @@
                         type="button"
                         class="locations-leistungen-toggle"
                         aria-expanded="false"
-                        aria-label="Leistungen für Frankfurt anzeigen"
+                        aria-label="Leistungen für Hesena Management Domizil am Ostplatz anzeigen"
                       >
                         <span class="locations-leistungen-count locations-leistungen-count--partial">2/3</span>
                         <i class="fa-solid fa-chevron-right locations-leistungen-chevron" aria-hidden="true"></i>
@@ -6286,7 +6950,7 @@
                       </button>
                     </td>
                   </tr>
-                  <tr class="locations-leistungen-detail-row" data-leistungen-for="Frankfurt">
+                  <tr class="locations-leistungen-detail-row" data-leistungen-for="Hesena Management Domizil am Ostplatz">
                     <td class="locations-leistungen-detail-empty" aria-hidden="true"></td>
                     <td class="locations-detail-meta-cell">
                       <div class="locations-subscription-details">
@@ -6316,145 +6980,7 @@
                     <td class="locations-leistungen-detail-empty" aria-hidden="true"></td>
                   </tr>
                   <tr>
-                    <td class="locations-row__name">Wiesbaden</td>
-                    <td>
-                      <div class="location-status-wrap">
-                        <span class="location-status-indicator">
-                          <span class="location-status-dot location-status-dot--active" aria-hidden="true"></span>
-                          <span class="location-status-label location-status-label--active">Aktiv</span>
-                        </span>
-                      </div>
-                    </td>
-                    <td>
-                      <div class="location-end-wrap">
-                        <span class="location-end-date">14.06.2026</span>
-                        <button
-                          type="button"
-                          class="location-extend-btn"
-                          data-action="extend"
-                        >
-                          verlängern
-                        </button>
-                      </div>
-                    </td>
-                    <td class="locations-leistungen-cell">
-                      <button
-                        type="button"
-                        class="locations-leistungen-toggle"
-                        aria-expanded="false"
-                        aria-label="Leistungen für Wiesbaden anzeigen"
-                      >
-                        <span class="locations-leistungen-count locations-leistungen-count--partial">1/3</span>
-                        <i class="fa-solid fa-chevron-right locations-leistungen-chevron" aria-hidden="true"></i>
-                      </button>
-                    </td>
-                    <td class="locations-detail-nav-cell">
-                      <button type="button" class="locations-detail-nav-btn" aria-label="Zum Standort">
-                        <i class="fa-solid fa-house" aria-hidden="true"></i>
-                        <i class="fa-solid fa-chevron-right" aria-hidden="true"></i>
-                      </button>
-                    </td>
-                  </tr>
-                  <tr class="locations-leistungen-detail-row" data-leistungen-for="Wiesbaden">
-                    <td class="locations-leistungen-detail-empty" aria-hidden="true"></td>
-                    <td class="locations-detail-meta-cell">
-                      <div class="locations-subscription-details">
-                        <p><span class="locations-subscription-label">Start:</span> 15.03.2026</p>
-                        <p><span class="locations-subscription-label">Laufzeit:</span> 3 Monate</p>
-                      </div>
-                    </td>
-                    <td class="locations-leistungen-detail-empty" aria-hidden="true"></td>
-                    <td class="locations-leistungen-detail-cell">
-                      <div class="locations-leistungen-panel">
-                        <ul class="locations-leistungen-list">
-                          <li class="locations-leistung-item">
-                            <span class="locations-leistung-name">Anfragen-Manager Abo</span>
-                            <i class="fa-solid fa-check locations-leistung-check" aria-label="Aktiv"></i>
-                          </li>
-                          <li class="locations-leistung-item">
-                            <span class="locations-leistung-name">Lead Kooperation</span>
-                            <button type="button" class="location-extend-btn locations-leistung-inquire-btn">Beraten lassen</button>
-                          </li>
-                          <li class="locations-leistung-item">
-                            <span class="locations-leistung-name">Marketingpaket</span>
-                            <button type="button" class="location-extend-btn locations-leistung-inquire-btn">Beraten lassen</button>
-                          </li>
-                        </ul>
-                      </div>
-                    </td>
-                    <td class="locations-leistungen-detail-empty" aria-hidden="true"></td>
-                  </tr>
-                  <tr>
-                    <td class="locations-row__name">Berlin</td>
-                    <td>
-                      <div class="location-status-wrap">
-                        <span class="location-status-indicator">
-                          <span class="location-status-dot location-status-dot--active" aria-hidden="true"></span>
-                          <span class="location-status-label location-status-label--active">Aktiv</span>
-                        </span>
-                      </div>
-                    </td>
-                    <td>
-                      <div class="location-end-wrap">
-                        <span class="location-end-date">30.04.2026</span>
-                        <button
-                          type="button"
-                          class="location-extend-btn"
-                          data-action="extend"
-                        >
-                          verlängern
-                        </button>
-                      </div>
-                    </td>
-                    <td class="locations-leistungen-cell">
-                      <button
-                        type="button"
-                        class="locations-leistungen-toggle"
-                        aria-expanded="false"
-                        aria-label="Leistungen für Berlin anzeigen"
-                      >
-                        <span class="locations-leistungen-count locations-leistungen-count--partial">2/3</span>
-                        <i class="fa-solid fa-chevron-right locations-leistungen-chevron" aria-hidden="true"></i>
-                      </button>
-                    </td>
-                    <td class="locations-detail-nav-cell">
-                      <button type="button" class="locations-detail-nav-btn" aria-label="Zum Standort">
-                        <i class="fa-solid fa-house" aria-hidden="true"></i>
-                        <i class="fa-solid fa-chevron-right" aria-hidden="true"></i>
-                      </button>
-                    </td>
-                  </tr>
-                  <tr class="locations-leistungen-detail-row" data-leistungen-for="Berlin">
-                    <td class="locations-leistungen-detail-empty" aria-hidden="true"></td>
-                    <td class="locations-detail-meta-cell">
-                      <div class="locations-subscription-details">
-                        <p><span class="locations-subscription-label">Start:</span> 01.04.2026</p>
-                        <p><span class="locations-subscription-label">Laufzeit:</span> 1 Monat</p>
-                      </div>
-                    </td>
-                    <td class="locations-leistungen-detail-empty" aria-hidden="true"></td>
-                    <td class="locations-leistungen-detail-cell">
-                      <div class="locations-leistungen-panel">
-                        <ul class="locations-leistungen-list">
-                          <li class="locations-leistung-item">
-                            <span class="locations-leistung-name">Anfragen-Manager Abo</span>
-                            <i class="fa-solid fa-check locations-leistung-check" aria-label="Aktiv"></i>
-                          </li>
-                          <li class="locations-leistung-item">
-                            <span class="locations-leistung-name">Lead Kooperation</span>
-                            <i class="fa-solid fa-check locations-leistung-check" aria-label="Aktiv"></i>
-                          </li>
-                          <li class="locations-leistung-item">
-                            <span class="locations-leistung-name">Marketingpaket</span>
-                            <button type="button" class="location-extend-btn locations-leistung-inquire-btn">Beraten lassen</button>
-                          </li>
-                        </ul>
-                      </div>
-                    </td>
-                    <td class="locations-leistungen-detail-empty" aria-hidden="true"></td>
-                  </tr>
-                  <tr>
-                    <td class="locations-row__name">Kaiserslautern</td>
+                    <td class="locations-row__name">Hesena Management Domizil an der Werre</td>
                     <td>
                       <div class="location-status-wrap">
                         <span class="location-status-indicator">
@@ -6471,7 +6997,7 @@
                         type="button"
                         class="locations-leistungen-toggle"
                         aria-expanded="false"
-                        aria-label="Leistungen für Kaiserslautern anzeigen"
+                        aria-label="Leistungen für Hesena Management Domizil an der Werre anzeigen"
                       >
                         <span class="locations-leistungen-count locations-leistungen-count--full">3/3</span>
                         <i class="fa-solid fa-chevron-right locations-leistungen-chevron" aria-hidden="true"></i>
@@ -6484,11 +7010,11 @@
                       </button>
                     </td>
                   </tr>
-                  <tr class="locations-leistungen-detail-row" data-leistungen-for="Kaiserslautern">
+                  <tr class="locations-leistungen-detail-row" data-leistungen-for="Hesena Management Domizil an der Werre">
                     <td class="locations-leistungen-detail-empty" aria-hidden="true"></td>
                     <td class="locations-detail-meta-cell">
                       <div class="locations-subscription-details">
-                        <p><span class="locations-subscription-label">Start:</span> 10.02.2026</p>
+                        <p><span class="locations-subscription-label">Start:</span> 15.02.2026</p>
                         <p><span class="locations-subscription-label">Laufzeit:</span> 12 Monate</p>
                       </div>
                     </td>
@@ -6514,14 +7040,380 @@
                     <td class="locations-leistungen-detail-empty" aria-hidden="true"></td>
                   </tr>
                   <tr>
-                    <td class="locations-row__name">Koblenz</td>
+                    <td class="locations-row__name">Hesena Management Domizil an der Eise</td>
+                    <td>
+                      <div class="location-status-wrap">
+                        <span class="location-status-indicator">
+                          <span class="location-status-dot location-status-dot--active" aria-hidden="true"></span>
+                          <span class="location-status-label location-status-label--active">Aktiv</span>
+                        </span>
+                      </div>
+                    </td>
+                    <td>
+                      <span class="location-end-open">fortlaufend</span>
+                    </td>
+                    <td class="locations-leistungen-cell">
+                      <button
+                        type="button"
+                        class="locations-leistungen-toggle"
+                        aria-expanded="false"
+                        aria-label="Leistungen für Hesena Management Domizil an der Eise anzeigen"
+                      >
+                        <span class="locations-leistungen-count locations-leistungen-count--full">3/3</span>
+                        <i class="fa-solid fa-chevron-right locations-leistungen-chevron" aria-hidden="true"></i>
+                      </button>
+                    </td>
+                    <td class="locations-detail-nav-cell">
+                      <button type="button" class="locations-detail-nav-btn" aria-label="Zum Standort">
+                        <i class="fa-solid fa-house" aria-hidden="true"></i>
+                        <i class="fa-solid fa-chevron-right" aria-hidden="true"></i>
+                      </button>
+                    </td>
+                  </tr>
+                  <tr class="locations-leistungen-detail-row" data-leistungen-for="Hesena Management Domizil an der Eise">
+                    <td class="locations-leistungen-detail-empty" aria-hidden="true"></td>
+                    <td class="locations-detail-meta-cell">
+                      <div class="locations-subscription-details">
+                        <p><span class="locations-subscription-label">Start:</span> 01.01.2026</p>
+                        <p><span class="locations-subscription-label">Laufzeit:</span> 12 Monate</p>
+                      </div>
+                    </td>
+                    <td class="locations-leistungen-detail-empty" aria-hidden="true"></td>
+                    <td class="locations-leistungen-detail-cell">
+                      <div class="locations-leistungen-panel">
+                        <ul class="locations-leistungen-list">
+                          <li class="locations-leistung-item">
+                            <span class="locations-leistung-name">Anfragen-Manager Abo</span>
+                            <i class="fa-solid fa-check locations-leistung-check" aria-label="Aktiv"></i>
+                          </li>
+                          <li class="locations-leistung-item">
+                            <span class="locations-leistung-name">Lead Kooperation</span>
+                            <i class="fa-solid fa-check locations-leistung-check" aria-label="Aktiv"></i>
+                          </li>
+                          <li class="locations-leistung-item">
+                            <span class="locations-leistung-name">Marketingpaket</span>
+                            <i class="fa-solid fa-check locations-leistung-check" aria-label="Aktiv"></i>
+                          </li>
+                        </ul>
+                      </div>
+                    </td>
+                    <td class="locations-leistungen-detail-empty" aria-hidden="true"></td>
+                  </tr>
+                  <tr>
+                    <td class="locations-row__name">Hesena Management Alt-Mariendorf</td>
+                    <td>
+                      <div class="location-status-wrap">
+                        <span class="location-status-indicator">
+                          <span class="location-status-dot location-status-dot--active" aria-hidden="true"></span>
+                          <span class="location-status-label location-status-label--active">Aktiv</span>
+                        </span>
+                      </div>
+                    </td>
+                    <td>
+                      <div class="location-end-wrap">
+                        <span class="location-end-date">31.08.2026</span>
+                        <button type="button" class="location-extend-btn" data-action="extend">verlängern</button>
+                      </div>
+                    </td>
+                    <td class="locations-leistungen-cell">
+                      <button
+                        type="button"
+                        class="locations-leistungen-toggle"
+                        aria-expanded="false"
+                        aria-label="Leistungen für Hesena Management Alt-Mariendorf anzeigen"
+                      >
+                        <span class="locations-leistungen-count locations-leistungen-count--partial">2/3</span>
+                        <i class="fa-solid fa-chevron-right locations-leistungen-chevron" aria-hidden="true"></i>
+                      </button>
+                    </td>
+                    <td class="locations-detail-nav-cell">
+                      <button type="button" class="locations-detail-nav-btn" aria-label="Zum Standort">
+                        <i class="fa-solid fa-house" aria-hidden="true"></i>
+                        <i class="fa-solid fa-chevron-right" aria-hidden="true"></i>
+                      </button>
+                    </td>
+                  </tr>
+                  <tr class="locations-leistungen-detail-row" data-leistungen-for="Hesena Management Alt-Mariendorf">
+                    <td class="locations-leistungen-detail-empty" aria-hidden="true"></td>
+                    <td class="locations-detail-meta-cell">
+                      <div class="locations-subscription-details">
+                        <p><span class="locations-subscription-label">Start:</span> 01.03.2026</p>
+                        <p><span class="locations-subscription-label">Laufzeit:</span> 6 Monate</p>
+                      </div>
+                    </td>
+                    <td class="locations-leistungen-detail-empty" aria-hidden="true"></td>
+                    <td class="locations-leistungen-detail-cell">
+                      <div class="locations-leistungen-panel">
+                        <ul class="locations-leistungen-list">
+                          <li class="locations-leistung-item">
+                            <span class="locations-leistung-name">Anfragen-Manager Abo</span>
+                            <i class="fa-solid fa-check locations-leistung-check" aria-label="Aktiv"></i>
+                          </li>
+                          <li class="locations-leistung-item">
+                            <span class="locations-leistung-name">Lead Kooperation</span>
+                            <i class="fa-solid fa-check locations-leistung-check" aria-label="Aktiv"></i>
+                          </li>
+                          <li class="locations-leistung-item">
+                            <span class="locations-leistung-name">Marketingpaket</span>
+                            <button type="button" class="location-extend-btn locations-leistung-inquire-btn">Beraten lassen</button>
+                          </li>
+                        </ul>
+                      </div>
+                    </td>
+                    <td class="locations-leistungen-detail-empty" aria-hidden="true"></td>
+                  </tr>
+                  <tr>
+                    <td class="locations-row__name">Hesena Management Haus Hermesgarten</td>
+                    <td>
+                      <div class="location-status-wrap">
+                        <span class="location-status-indicator">
+                          <span class="location-status-dot location-status-dot--active" aria-hidden="true"></span>
+                          <span class="location-status-label location-status-label--active">Aktiv</span>
+                        </span>
+                      </div>
+                    </td>
+                    <td>
+                      <span class="location-end-open">fortlaufend</span>
+                    </td>
+                    <td class="locations-leistungen-cell">
+                      <button
+                        type="button"
+                        class="locations-leistungen-toggle"
+                        aria-expanded="false"
+                        aria-label="Leistungen für Hesena Management Haus Hermesgarten anzeigen"
+                      >
+                        <span class="locations-leistungen-count locations-leistungen-count--full">3/3</span>
+                        <i class="fa-solid fa-chevron-right locations-leistungen-chevron" aria-hidden="true"></i>
+                      </button>
+                    </td>
+                    <td class="locations-detail-nav-cell">
+                      <button type="button" class="locations-detail-nav-btn" aria-label="Zum Standort">
+                        <i class="fa-solid fa-house" aria-hidden="true"></i>
+                        <i class="fa-solid fa-chevron-right" aria-hidden="true"></i>
+                      </button>
+                    </td>
+                  </tr>
+                  <tr class="locations-leistungen-detail-row" data-leistungen-for="Hesena Management Haus Hermesgarten">
+                    <td class="locations-leistungen-detail-empty" aria-hidden="true"></td>
+                    <td class="locations-detail-meta-cell">
+                      <div class="locations-subscription-details">
+                        <p><span class="locations-subscription-label">Start:</span> 15.02.2026</p>
+                        <p><span class="locations-subscription-label">Laufzeit:</span> 12 Monate</p>
+                      </div>
+                    </td>
+                    <td class="locations-leistungen-detail-empty" aria-hidden="true"></td>
+                    <td class="locations-leistungen-detail-cell">
+                      <div class="locations-leistungen-panel">
+                        <ul class="locations-leistungen-list">
+                          <li class="locations-leistung-item">
+                            <span class="locations-leistung-name">Anfragen-Manager Abo</span>
+                            <i class="fa-solid fa-check locations-leistung-check" aria-label="Aktiv"></i>
+                          </li>
+                          <li class="locations-leistung-item">
+                            <span class="locations-leistung-name">Lead Kooperation</span>
+                            <i class="fa-solid fa-check locations-leistung-check" aria-label="Aktiv"></i>
+                          </li>
+                          <li class="locations-leistung-item">
+                            <span class="locations-leistung-name">Marketingpaket</span>
+                            <i class="fa-solid fa-check locations-leistung-check" aria-label="Aktiv"></i>
+                          </li>
+                        </ul>
+                      </div>
+                    </td>
+                    <td class="locations-leistungen-detail-empty" aria-hidden="true"></td>
+                  </tr>
+                  <tr>
+                    <td class="locations-row__name">Hesena Management Domizil am Gartenplatz</td>
+                    <td>
+                      <div class="location-status-wrap">
+                        <span class="location-status-indicator">
+                          <span class="location-status-dot location-status-dot--active" aria-hidden="true"></span>
+                          <span class="location-status-label location-status-label--active">Aktiv</span>
+                        </span>
+                      </div>
+                    </td>
+                    <td>
+                      <span class="location-end-open">fortlaufend</span>
+                    </td>
+                    <td class="locations-leistungen-cell">
+                      <button
+                        type="button"
+                        class="locations-leistungen-toggle"
+                        aria-expanded="false"
+                        aria-label="Leistungen für Hesena Management Domizil am Gartenplatz anzeigen"
+                      >
+                        <span class="locations-leistungen-count locations-leistungen-count--full">3/3</span>
+                        <i class="fa-solid fa-chevron-right locations-leistungen-chevron" aria-hidden="true"></i>
+                      </button>
+                    </td>
+                    <td class="locations-detail-nav-cell">
+                      <button type="button" class="locations-detail-nav-btn" aria-label="Zum Standort">
+                        <i class="fa-solid fa-house" aria-hidden="true"></i>
+                        <i class="fa-solid fa-chevron-right" aria-hidden="true"></i>
+                      </button>
+                    </td>
+                  </tr>
+                  <tr class="locations-leistungen-detail-row" data-leistungen-for="Hesena Management Domizil am Gartenplatz">
+                    <td class="locations-leistungen-detail-empty" aria-hidden="true"></td>
+                    <td class="locations-detail-meta-cell">
+                      <div class="locations-subscription-details">
+                        <p><span class="locations-subscription-label">Start:</span> 01.01.2026</p>
+                        <p><span class="locations-subscription-label">Laufzeit:</span> 12 Monate</p>
+                      </div>
+                    </td>
+                    <td class="locations-leistungen-detail-empty" aria-hidden="true"></td>
+                    <td class="locations-leistungen-detail-cell">
+                      <div class="locations-leistungen-panel">
+                        <ul class="locations-leistungen-list">
+                          <li class="locations-leistung-item">
+                            <span class="locations-leistung-name">Anfragen-Manager Abo</span>
+                            <i class="fa-solid fa-check locations-leistung-check" aria-label="Aktiv"></i>
+                          </li>
+                          <li class="locations-leistung-item">
+                            <span class="locations-leistung-name">Lead Kooperation</span>
+                            <i class="fa-solid fa-check locations-leistung-check" aria-label="Aktiv"></i>
+                          </li>
+                          <li class="locations-leistung-item">
+                            <span class="locations-leistung-name">Marketingpaket</span>
+                            <i class="fa-solid fa-check locations-leistung-check" aria-label="Aktiv"></i>
+                          </li>
+                        </ul>
+                      </div>
+                    </td>
+                    <td class="locations-leistungen-detail-empty" aria-hidden="true"></td>
+                  </tr>
+                  <tr>
+                    <td class="locations-row__name">Hesena Care GmbH Palais Dorndorf</td>
+                    <td>
+                      <div class="location-status-wrap">
+                        <span class="location-status-indicator">
+                          <span class="location-status-dot location-status-dot--active" aria-hidden="true"></span>
+                          <span class="location-status-label location-status-label--active">Aktiv</span>
+                        </span>
+                      </div>
+                    </td>
+                    <td>
+                      <div class="location-end-wrap">
+                        <span class="location-end-date">31.08.2026</span>
+                        <button type="button" class="location-extend-btn" data-action="extend">verlängern</button>
+                      </div>
+                    </td>
+                    <td class="locations-leistungen-cell">
+                      <button
+                        type="button"
+                        class="locations-leistungen-toggle"
+                        aria-expanded="false"
+                        aria-label="Leistungen für Hesena Care GmbH Palais Dorndorf anzeigen"
+                      >
+                        <span class="locations-leistungen-count locations-leistungen-count--partial">2/3</span>
+                        <i class="fa-solid fa-chevron-right locations-leistungen-chevron" aria-hidden="true"></i>
+                      </button>
+                    </td>
+                    <td class="locations-detail-nav-cell">
+                      <button type="button" class="locations-detail-nav-btn" aria-label="Zum Standort">
+                        <i class="fa-solid fa-house" aria-hidden="true"></i>
+                        <i class="fa-solid fa-chevron-right" aria-hidden="true"></i>
+                      </button>
+                    </td>
+                  </tr>
+                  <tr class="locations-leistungen-detail-row" data-leistungen-for="Hesena Care GmbH Palais Dorndorf">
+                    <td class="locations-leistungen-detail-empty" aria-hidden="true"></td>
+                    <td class="locations-detail-meta-cell">
+                      <div class="locations-subscription-details">
+                        <p><span class="locations-subscription-label">Start:</span> 01.03.2026</p>
+                        <p><span class="locations-subscription-label">Laufzeit:</span> 6 Monate</p>
+                      </div>
+                    </td>
+                    <td class="locations-leistungen-detail-empty" aria-hidden="true"></td>
+                    <td class="locations-leistungen-detail-cell">
+                      <div class="locations-leistungen-panel">
+                        <ul class="locations-leistungen-list">
+                          <li class="locations-leistung-item">
+                            <span class="locations-leistung-name">Anfragen-Manager Abo</span>
+                            <i class="fa-solid fa-check locations-leistung-check" aria-label="Aktiv"></i>
+                          </li>
+                          <li class="locations-leistung-item">
+                            <span class="locations-leistung-name">Lead Kooperation</span>
+                            <i class="fa-solid fa-check locations-leistung-check" aria-label="Aktiv"></i>
+                          </li>
+                          <li class="locations-leistung-item">
+                            <span class="locations-leistung-name">Marketingpaket</span>
+                            <button type="button" class="location-extend-btn locations-leistung-inquire-btn">Beraten lassen</button>
+                          </li>
+                        </ul>
+                      </div>
+                    </td>
+                    <td class="locations-leistungen-detail-empty" aria-hidden="true"></td>
+                  </tr>
+                  <tr>
+                    <td class="locations-row__name">Hesena Management Seniorenzentrum Borgentreich</td>
+                    <td>
+                      <div class="location-status-wrap">
+                        <span class="location-status-indicator">
+                          <span class="location-status-dot location-status-dot--active" aria-hidden="true"></span>
+                          <span class="location-status-label location-status-label--active">Aktiv</span>
+                        </span>
+                      </div>
+                    </td>
+                    <td>
+                      <span class="location-end-open">fortlaufend</span>
+                    </td>
+                    <td class="locations-leistungen-cell">
+                      <button
+                        type="button"
+                        class="locations-leistungen-toggle"
+                        aria-expanded="false"
+                        aria-label="Leistungen für Hesena Management Seniorenzentrum Borgentreich anzeigen"
+                      >
+                        <span class="locations-leistungen-count locations-leistungen-count--full">3/3</span>
+                        <i class="fa-solid fa-chevron-right locations-leistungen-chevron" aria-hidden="true"></i>
+                      </button>
+                    </td>
+                    <td class="locations-detail-nav-cell">
+                      <button type="button" class="locations-detail-nav-btn" aria-label="Zum Standort">
+                        <i class="fa-solid fa-house" aria-hidden="true"></i>
+                        <i class="fa-solid fa-chevron-right" aria-hidden="true"></i>
+                      </button>
+                    </td>
+                  </tr>
+                  <tr class="locations-leistungen-detail-row" data-leistungen-for="Hesena Management Seniorenzentrum Borgentreich">
+                    <td class="locations-leistungen-detail-empty" aria-hidden="true"></td>
+                    <td class="locations-detail-meta-cell">
+                      <div class="locations-subscription-details">
+                        <p><span class="locations-subscription-label">Start:</span> 15.02.2026</p>
+                        <p><span class="locations-subscription-label">Laufzeit:</span> 12 Monate</p>
+                      </div>
+                    </td>
+                    <td class="locations-leistungen-detail-empty" aria-hidden="true"></td>
+                    <td class="locations-leistungen-detail-cell">
+                      <div class="locations-leistungen-panel">
+                        <ul class="locations-leistungen-list">
+                          <li class="locations-leistung-item">
+                            <span class="locations-leistung-name">Anfragen-Manager Abo</span>
+                            <i class="fa-solid fa-check locations-leistung-check" aria-label="Aktiv"></i>
+                          </li>
+                          <li class="locations-leistung-item">
+                            <span class="locations-leistung-name">Lead Kooperation</span>
+                            <i class="fa-solid fa-check locations-leistung-check" aria-label="Aktiv"></i>
+                          </li>
+                          <li class="locations-leistung-item">
+                            <span class="locations-leistung-name">Marketingpaket</span>
+                            <i class="fa-solid fa-check locations-leistung-check" aria-label="Aktiv"></i>
+                          </li>
+                        </ul>
+                      </div>
+                    </td>
+                    <td class="locations-leistungen-detail-empty" aria-hidden="true"></td>
+                  </tr>
+                  <tr>
+                    <td class="locations-row__name">Hesena Management Domizil Lindenhof in Wilhelmshaven</td>
                     <td>
                       <div class="location-status-wrap">
                         <button
                           type="button"
                           class="location-status-indicator location-status-chip--inactive"
-                          data-location="Koblenz"
-                          aria-label="Koblenz reaktivieren"
+                          data-location="Hesena Management Domizil Lindenhof in Wilhelmshaven"
+                          aria-label="Hesena Management Domizil Lindenhof in Wilhelmshaven reaktivieren"
                         >
                           <span class="location-status-dot location-status-dot--inactive" aria-hidden="true"></span>
                           <span class="location-status-label location-status-label--inactive">pausiert</span>
@@ -6531,13 +7423,7 @@
                     <td>
                       <div class="location-end-wrap">
                         <span class="location-end-date">31.01.2026</span>
-                        <button
-                          type="button"
-                          class="location-extend-btn"
-                          data-action="reactivate"
-                        >
-                          reaktivieren
-                        </button>
+                        <button type="button" class="location-extend-btn" data-action="reactivate">reaktivieren</button>
                       </div>
                     </td>
                     <td class="locations-leistungen-cell">
@@ -6545,7 +7431,7 @@
                         type="button"
                         class="locations-leistungen-toggle"
                         aria-expanded="false"
-                        aria-label="Leistungen für Koblenz anzeigen"
+                        aria-label="Leistungen für Hesena Management Domizil Lindenhof in Wilhelmshaven anzeigen"
                       >
                         <span class="locations-leistungen-count locations-leistungen-count--full">0/3</span>
                         <i class="fa-solid fa-chevron-right locations-leistungen-chevron" aria-hidden="true"></i>
@@ -6558,7 +7444,7 @@
                       </button>
                     </td>
                   </tr>
-                  <tr class="locations-leistungen-detail-row" data-leistungen-for="Koblenz">
+                  <tr class="locations-leistungen-detail-row" data-leistungen-for="Hesena Management Domizil Lindenhof in Wilhelmshaven">
                     <td class="locations-leistungen-detail-empty" aria-hidden="true"></td>
                     <td class="locations-detail-meta-cell">
                       <div class="locations-subscription-details">
@@ -6588,14 +7474,14 @@
                     <td class="locations-leistungen-detail-empty" aria-hidden="true"></td>
                   </tr>
                   <tr>
-                    <td class="locations-row__name">Saarbrücken</td>
+                    <td class="locations-row__name">Hesena Management Domizil Karl-Hinrichs-Stift</td>
                     <td>
                       <div class="location-status-wrap">
                         <button
                           type="button"
                           class="location-status-indicator location-status-chip--inactive"
-                          data-location="Saarbrücken"
-                          aria-label="Saarbrücken reaktivieren"
+                          data-location="Hesena Management Domizil Karl-Hinrichs-Stift"
+                          aria-label="Hesena Management Domizil Karl-Hinrichs-Stift reaktivieren"
                         >
                           <span class="location-status-dot location-status-dot--inactive" aria-hidden="true"></span>
                           <span class="location-status-label location-status-label--inactive">pausiert</span>
@@ -6604,14 +7490,8 @@
                     </td>
                     <td>
                       <div class="location-end-wrap">
-                        <span class="location-end-date">31.03.2026</span>
-                        <button
-                          type="button"
-                          class="location-extend-btn"
-                          data-action="reactivate"
-                        >
-                          reaktivieren
-                        </button>
+                        <span class="location-end-date">31.01.2026</span>
+                        <button type="button" class="location-extend-btn" data-action="reactivate">reaktivieren</button>
                       </div>
                     </td>
                     <td class="locations-leistungen-cell">
@@ -6619,7 +7499,7 @@
                         type="button"
                         class="locations-leistungen-toggle"
                         aria-expanded="false"
-                        aria-label="Leistungen für Saarbrücken anzeigen"
+                        aria-label="Leistungen für Hesena Management Domizil Karl-Hinrichs-Stift anzeigen"
                       >
                         <span class="locations-leistungen-count locations-leistungen-count--full">0/3</span>
                         <i class="fa-solid fa-chevron-right locations-leistungen-chevron" aria-hidden="true"></i>
@@ -6632,12 +7512,80 @@
                       </button>
                     </td>
                   </tr>
-                  <tr class="locations-leistungen-detail-row" data-leistungen-for="Saarbrücken">
+                  <tr class="locations-leistungen-detail-row" data-leistungen-for="Hesena Management Domizil Karl-Hinrichs-Stift">
                     <td class="locations-leistungen-detail-empty" aria-hidden="true"></td>
                     <td class="locations-detail-meta-cell">
                       <div class="locations-subscription-details">
-                        <p><span class="locations-subscription-label">Start:</span> 01.01.2026</p>
-                        <p><span class="locations-subscription-label">Laufzeit:</span> 3 Monate</p>
+                        <p><span class="locations-subscription-label">Start:</span> 01.08.2025</p>
+                        <p><span class="locations-subscription-label">Laufzeit:</span> 6 Monate</p>
+                      </div>
+                    </td>
+                    <td class="locations-leistungen-detail-empty" aria-hidden="true"></td>
+                    <td class="locations-leistungen-detail-cell">
+                      <div class="locations-leistungen-panel">
+                        <ul class="locations-leistungen-list">
+                          <li class="locations-leistung-item">
+                            <span class="locations-leistung-name">Anfragen-Manager Abo</span>
+                            <button type="button" class="location-extend-btn locations-leistung-inquire-btn">Beraten lassen</button>
+                          </li>
+                          <li class="locations-leistung-item">
+                            <span class="locations-leistung-name">Lead Kooperation</span>
+                            <button type="button" class="location-extend-btn locations-leistung-inquire-btn">Beraten lassen</button>
+                          </li>
+                          <li class="locations-leistung-item">
+                            <span class="locations-leistung-name">Marketingpaket</span>
+                            <button type="button" class="location-extend-btn locations-leistung-inquire-btn">Beraten lassen</button>
+                          </li>
+                        </ul>
+                      </div>
+                    </td>
+                    <td class="locations-leistungen-detail-empty" aria-hidden="true"></td>
+                  </tr>
+                  <tr>
+                    <td class="locations-row__name">Hesena Management Seniorenpark Diekholzen</td>
+                    <td>
+                      <div class="location-status-wrap">
+                        <button
+                          type="button"
+                          class="location-status-indicator location-status-chip--inactive"
+                          data-location="Hesena Management Seniorenpark Diekholzen"
+                          aria-label="Hesena Management Seniorenpark Diekholzen reaktivieren"
+                        >
+                          <span class="location-status-dot location-status-dot--inactive" aria-hidden="true"></span>
+                          <span class="location-status-label location-status-label--inactive">pausiert</span>
+                        </button>
+                      </div>
+                    </td>
+                    <td>
+                      <div class="location-end-wrap">
+                        <span class="location-end-date">31.01.2026</span>
+                        <button type="button" class="location-extend-btn" data-action="reactivate">reaktivieren</button>
+                      </div>
+                    </td>
+                    <td class="locations-leistungen-cell">
+                      <button
+                        type="button"
+                        class="locations-leistungen-toggle"
+                        aria-expanded="false"
+                        aria-label="Leistungen für Hesena Management Seniorenpark Diekholzen anzeigen"
+                      >
+                        <span class="locations-leistungen-count locations-leistungen-count--full">0/3</span>
+                        <i class="fa-solid fa-chevron-right locations-leistungen-chevron" aria-hidden="true"></i>
+                      </button>
+                    </td>
+                    <td class="locations-detail-nav-cell">
+                      <button type="button" class="locations-detail-nav-btn" aria-label="Zum Standort">
+                        <i class="fa-solid fa-house" aria-hidden="true"></i>
+                        <i class="fa-solid fa-chevron-right" aria-hidden="true"></i>
+                      </button>
+                    </td>
+                  </tr>
+                  <tr class="locations-leistungen-detail-row" data-leistungen-for="Hesena Management Seniorenpark Diekholzen">
+                    <td class="locations-leistungen-detail-empty" aria-hidden="true"></td>
+                    <td class="locations-detail-meta-cell">
+                      <div class="locations-subscription-details">
+                        <p><span class="locations-subscription-label">Start:</span> 01.08.2025</p>
+                        <p><span class="locations-subscription-label">Laufzeit:</span> 6 Monate</p>
                       </div>
                     </td>
                     <td class="locations-leistungen-detail-empty" aria-hidden="true"></td>
@@ -6665,8 +7613,8 @@
               </table>
               <div class="locations-footer">
                 <span>Standorte pro Seite:</span>
-                <span>7</span>
-                <span>1-7 von 7</span>
+                <span>12</span>
+                <span>1-12 von 12</span>
                 <button type="button" aria-label="Vorherige Seite">
                   <i class="fa-solid fa-chevron-left" aria-hidden="true"></i>
                 </button>
@@ -7023,13 +7971,13 @@
               data-stats-panel="overview"
               aria-labelledby="stats-tab-overview"
             >
-              <div class="auth-card stats-kpi-shell stats-card-kpi">
+              <div class="auth-card stats-card-overview">
                 <div class="stat-inner-head stat-inner-head--split stat-inner-head--overview">
-                  <span class="stat-head-kpi-title">KPI-Übersicht</span>
+                  <span class="stat-head-perf-title">Übersicht</span>
                   <div
                     class="stats-overview-period-tabs"
                     role="tablist"
-                    aria-label="Zeitraum für KPI-Übersicht"
+                    aria-label="Zeitraum für Übersicht"
                   >
                     <button
                       type="button"
@@ -7039,6 +7987,15 @@
                       aria-selected="true"
                     >
                       Gesamt
+                    </button>
+                    <button
+                      type="button"
+                      class="stats-overview-period-tab"
+                      role="tab"
+                      data-overview-period="day"
+                      aria-selected="false"
+                    >
+                      1T
                     </button>
                     <button
                       type="button"
@@ -7068,70 +8025,242 @@
                       60T
                     </button>
                   </div>
-                  <div class="stat-inner-head-toolbar">
-                    <label for="statsStandortSelectKpi">Standort</label>
-                    <select
-                      id="statsStandortSelectKpi"
-                      class="stats-standort-select"
-                      aria-label="Standort: KPI-Ansicht"
+                  <div class="stat-inner-head-toolbar stat-standort-toolbar">
+                    <label for="statsStandortSelectOverview">Standort</label>
+                    <div class="stat-standort-filter">
+                      <select
+                        id="statsStandortSelectOverview"
+                        class="stats-standort-select multi-select-native"
+                        aria-label="Standort: Übersicht"
+                      >
+                        <option value="" selected>Alle Standorte</option>
+                      </select>
+                    </div>
+                  </div>
+                </div>
+                <div class="stat-inner-body stat-inner-body--overview">
+                  <div class="stats-kpi-row stats-kpi-row--summary">
+                    <div
+                      class="stats-kpi-card stats-perf-kpi-card stats-ov-summary-kpi-card"
+                      data-ov-summary="activeStandorte"
                     >
-                      <option value="" selected>Alle Standorte</option>
-                    </select>
+                      <div class="stats-perf-kpi-text">
+                        <span class="stats-perf-kpi-title">Aktive Standorte</span>
+                        <span class="stats-kpi-value" id="ovSummaryActiveStandorte">0</span>
+                      </div>
+                    </div>
+                    <div
+                      class="stats-kpi-card stats-perf-kpi-card stats-ov-summary-kpi-card"
+                      data-ov-summary="pausedStandorte"
+                    >
+                      <div class="stats-perf-kpi-text">
+                        <span class="stats-perf-kpi-title">Pausierte Standorte</span>
+                        <span class="stats-kpi-value" id="ovSummaryPausedStandorte">0</span>
+                      </div>
+                    </div>
+                    <div
+                      class="stats-kpi-card stats-perf-kpi-card stats-ov-summary-kpi-card"
+                      data-ov-summary="usersPerStandort"
+                    >
+                      <div class="stats-perf-kpi-text">
+                        <span class="stats-perf-kpi-title">Nutzer / Standort</span>
+                        <span class="stats-kpi-value" id="ovSummaryUsersPerStandort">0,0</span>
+                        <span class="stats-perf-kpi-helper">im Durchschnitt</span>
+                      </div>
+                    </div>
+                    <div
+                      class="stats-kpi-card stats-perf-kpi-card stats-ov-summary-kpi-card"
+                      data-ov-summary="requests"
+                    >
+                      <div class="stats-perf-kpi-text">
+                        <span class="stats-perf-kpi-title">Anfragen insgesamt</span>
+                        <span class="stats-kpi-value" id="ovSummaryRequests">0</span>
+                      </div>
+                    </div>
                   </div>
-                </div>
-                <div class="stat-inner-body stat-inner-body--kpi">
-                  <div class="stats-kpi-row stats-kpi-row--overview">
-                    <div class="stats-kpi-card stats-overview-kpi-card">
-                      <div class="stats-overview-kpi-text">
-                        <span class="stats-overview-kpi-title">Aktive Standorte</span>
-                        <span class="stats-overview-kpi-value" id="statsKpiActiveStandorte">0</span>
+                  <div class="stats-kpi-row stats-kpi-row--perf">
+                    <div
+                      class="stats-kpi-card stats-perf-kpi-card stats-ov-kpi-card"
+                      data-ov-metric="status"
+                    >
+                      <div class="stats-ov-kpi-body">
+                        <div class="stats-perf-kpi-text">
+                          <span class="stats-perf-kpi-title">Ø Anfragen / Status</span>
+                          <div class="stats-ov-status-rows" id="ovKpiStatusRows"></div>
+                        </div>
+                      </div>
+                      <div class="stats-ov-kpi-footer">
+                        <button
+                          type="button"
+                          class="btn btn-secondary stats-perf-detail-btn stats-ov-detail-btn"
+                          data-ov-metric="status"
+                          aria-expanded="false"
+                        >
+                          Detailansicht
+                          <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+                        </button>
                       </div>
                     </div>
-                    <div class="stats-kpi-card stats-overview-kpi-card">
-                      <div class="stats-overview-kpi-text">
-                        <span class="stats-overview-kpi-title">Pausierte Standorte</span>
-                        <span class="stats-overview-kpi-value" id="statsKpiPausedStandorte">0</span>
+                    <div
+                      class="stats-kpi-card stats-perf-kpi-card stats-ov-kpi-card"
+                      data-ov-metric="standort"
+                    >
+                      <div class="stats-ov-kpi-body">
+                        <div class="stats-perf-kpi-text">
+                          <span class="stats-perf-kpi-title">Ø Anfragen / Standort</span>
+                          <span class="stats-kpi-value" id="ovKpiStandort">0,0</span>
+                          <span class="stats-perf-kpi-helper">im Durchschnitt</span>
+                        </div>
+                      </div>
+                      <div class="stats-ov-kpi-footer">
+                        <button
+                          type="button"
+                          class="btn btn-secondary stats-perf-detail-btn stats-ov-detail-btn"
+                          data-ov-metric="standort"
+                          aria-expanded="false"
+                        >
+                          Detailansicht
+                          <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+                        </button>
                       </div>
                     </div>
-                    <div class="stats-kpi-card stats-overview-kpi-card">
-                      <div class="stats-overview-kpi-text">
-                        <span class="stats-overview-kpi-title">Nutzer / Standort</span>
-                        <span class="stats-overview-kpi-value" id="statsKpiUsersPerStandort">0</span>
-                        <span class="stats-overview-kpi-helper">im Durchschnitt</span>
+                    <div
+                      id="ovCardBedarfsart"
+                      class="stats-kpi-card stats-perf-kpi-card stats-ov-kpi-card"
+                      data-ov-metric="bedarfsart"
+                    >
+                      <div class="stats-ov-kpi-body">
+                        <div class="stats-perf-kpi-text">
+                          <span class="stats-perf-kpi-title">Ø Anfragen / Bedarfsart</span>
+                          <span class="stats-kpi-value" id="ovKpiBedarfsart">0,0</span>
+                          <span class="stats-perf-kpi-helper">im Durchschnitt</span>
+                        </div>
+                      </div>
+                      <div class="stats-ov-kpi-footer">
+                        <button
+                          type="button"
+                          class="btn btn-secondary stats-perf-detail-btn stats-ov-detail-btn"
+                          data-ov-metric="bedarfsart"
+                          aria-expanded="false"
+                        >
+                          Detailansicht
+                          <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+                        </button>
                       </div>
                     </div>
-                    <div class="stats-kpi-card stats-overview-kpi-card">
-                      <div class="stats-overview-kpi-text">
-                        <span class="stats-overview-kpi-title">Erhaltene Anfragen</span>
-                        <span class="stats-overview-kpi-value" id="statsKpiRequests">0</span>
+                    <div
+                      id="ovCardGebiet"
+                      class="stats-kpi-card stats-perf-kpi-card stats-ov-kpi-card"
+                      data-ov-metric="gebiet"
+                      hidden
+                    >
+                      <div class="stats-ov-kpi-body">
+                        <div class="stats-perf-kpi-text">
+                          <span class="stats-perf-kpi-title">Ø Anfragen / Gebiet</span>
+                          <span class="stats-kpi-value" id="ovKpiGebiet">0,0</span>
+                          <span class="stats-perf-kpi-helper">im Durchschnitt</span>
+                        </div>
+                      </div>
+                      <div class="stats-ov-kpi-footer">
+                        <button
+                          type="button"
+                          class="btn btn-secondary stats-perf-detail-btn stats-ov-detail-btn"
+                          data-ov-metric="gebiet"
+                          aria-expanded="false"
+                        >
+                          Detailansicht
+                          <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+                        </button>
                       </div>
                     </div>
                   </div>
-                </div>
-              </div>
 
-              <div class="auth-card stats-card-kennzahlen">
-                <div class="stat-inner-head">
-                  <span>Kennzahlen</span>
-                </div>
-                <div class="stat-inner-body">
-                  <div class="stat-two-col">
-                    <div class="stat-chart-col">
-                      <h4 class="stat-chart-title">Anfragen je Quelle</h4>
-                      <div class="stat-hbar-scroll" data-kenn-chart="quelle"></div>
-                    </div>
-                    <div class="stat-chart-col">
-                      <h4 class="stat-chart-title">Anfragen je Produkt</h4>
-                      <div class="stat-hbar-scroll" data-kenn-chart="produkt"></div>
-                    </div>
-                    <div class="stat-chart-col">
-                      <h4 class="stat-chart-title" id="statsKennStandortTitle">Anfragen je Standort</h4>
-                      <div class="stat-hbar-scroll" data-kenn-chart="standort"></div>
-                    </div>
-                    <div class="stat-chart-col">
-                      <h4 class="stat-chart-title">Anfragen je Mitarbeiter</h4>
-                      <div class="stat-hbar-scroll" data-kenn-chart="mitarbeiter"></div>
-                    </div>
+                  <div class="stats-overview-stack">
+                    <article
+                      class="stats-panel stats-perf-segment stats-ov-segment is-detail-hidden"
+                      data-ov-metric="status"
+                    >
+                      <div class="stats-panel-head stats-perf-panel-head">
+                        <span class="stats-perf-panel-title">Ø Anfragen / Status</span>
+                        <button
+                          type="button"
+                          class="stats-perf-detail-close"
+                          aria-label="Detailansicht schließen"
+                        >
+                          <i class="fa-solid fa-xmark" aria-hidden="true"></i>
+                        </button>
+                      </div>
+                      <div class="stats-panel-body">
+                        <div class="stats-perf-breakdown-head">
+                          <span class="stats-perf-breakdown-heading">Aufschlüsselung</span>
+                        </div>
+                        <div class="stats-ov-detail-table-wrap" data-ov-detail-table="status"></div>
+                      </div>
+                    </article>
+                    <article
+                      class="stats-panel stats-perf-segment stats-ov-segment is-detail-hidden"
+                      data-ov-metric="standort"
+                    >
+                      <div class="stats-panel-head stats-perf-panel-head">
+                        <span class="stats-perf-panel-title">Ø Anfragen / Standort</span>
+                        <button
+                          type="button"
+                          class="stats-perf-detail-close"
+                          aria-label="Detailansicht schließen"
+                        >
+                          <i class="fa-solid fa-xmark" aria-hidden="true"></i>
+                        </button>
+                      </div>
+                      <div class="stats-panel-body">
+                        <div class="stats-perf-breakdown-head">
+                          <span class="stats-perf-breakdown-heading">Aufschlüsselung</span>
+                        </div>
+                        <div class="stats-ov-detail-table-wrap" data-ov-detail-table="standort"></div>
+                      </div>
+                    </article>
+                    <article
+                      class="stats-panel stats-perf-segment stats-ov-segment is-detail-hidden"
+                      data-ov-metric="bedarfsart"
+                    >
+                      <div class="stats-panel-head stats-perf-panel-head">
+                        <span class="stats-perf-panel-title">Ø Anfragen / Bedarfsart</span>
+                        <button
+                          type="button"
+                          class="stats-perf-detail-close"
+                          aria-label="Detailansicht schließen"
+                        >
+                          <i class="fa-solid fa-xmark" aria-hidden="true"></i>
+                        </button>
+                      </div>
+                      <div class="stats-panel-body">
+                        <div class="stats-perf-breakdown-head">
+                          <span class="stats-perf-breakdown-heading">Aufschlüsselung</span>
+                        </div>
+                        <div class="stats-ov-detail-table-wrap" data-ov-detail-table="bedarfsart"></div>
+                      </div>
+                    </article>
+                    <article
+                      class="stats-panel stats-perf-segment stats-ov-segment is-detail-hidden"
+                      data-ov-metric="gebiet"
+                      hidden
+                    >
+                      <div class="stats-panel-head stats-perf-panel-head">
+                        <span class="stats-perf-panel-title">Ø Anfragen / Gebiet</span>
+                        <button
+                          type="button"
+                          class="stats-perf-detail-close"
+                          aria-label="Detailansicht schließen"
+                        >
+                          <i class="fa-solid fa-xmark" aria-hidden="true"></i>
+                        </button>
+                      </div>
+                      <div class="stats-panel-body">
+                        <div class="stats-perf-breakdown-head">
+                          <span class="stats-perf-breakdown-heading">Aufschlüsselung</span>
+                        </div>
+                        <div class="stats-ov-detail-table-wrap" data-ov-detail-table="gebiet"></div>
+                      </div>
+                    </article>
                   </div>
                 </div>
               </div>
@@ -7197,15 +8326,17 @@
                       60T
                     </button>
                   </div>
-                  <div class="stat-inner-head-toolbar">
+                  <div class="stat-inner-head-toolbar stat-standort-toolbar">
                     <label for="statsStandortSelectPerformance">Standort</label>
-                    <select
-                      id="statsStandortSelectPerformance"
-                      class="stats-standort-select"
-                      aria-label="Standort: Performance"
-                    >
-                      <option value="" selected>Alle Standorte</option>
-                    </select>
+                    <div class="stat-standort-filter">
+                      <select
+                        id="statsStandortSelectPerformance"
+                        class="stats-standort-select multi-select-native"
+                        aria-label="Standort: Performance"
+                      >
+                        <option value="" selected>Alle Standorte</option>
+                      </select>
+                    </div>
                   </div>
                 </div>
                 <div class="stat-inner-body stat-inner-body--performance">
@@ -7213,7 +8344,13 @@
               <div class="stats-kpi-row stats-kpi-row--perf">
                 <div class="stats-kpi-card stats-perf-kpi-card" data-perf-metric="conversion">
                   <div class="stats-perf-kpi-text">
-                    <span class="stats-perf-kpi-title">Umwandlungsquote</span>
+                    <div class="stats-perf-kpi-title-row">
+                      <span class="stats-perf-kpi-title">Umwandlungsquote</span>
+                      <span class="stats-perf-kpi-info" tabindex="0" aria-label="Info zu Umwandlungsquote">
+                        <i class="fa-solid fa-circle-info" aria-hidden="true"></i>
+                        <span class="stats-perf-kpi-tooltip" role="tooltip">Anteil der gewonnenen Anfragen an allen Anfragen – reklamierte Anfragen werden nicht berücksichtigt.</span>
+                      </span>
+                    </div>
                     <span class="stats-kpi-value" id="perfKpiConversion">20,6%</span>
                     <span class="stats-perf-kpi-helper">im Durchschnitt</span>
                   </div>
@@ -7229,7 +8366,13 @@
                 </div>
                 <div class="stats-kpi-card stats-perf-kpi-card" data-perf-metric="complaints">
                   <div class="stats-perf-kpi-text">
-                    <span class="stats-perf-kpi-title">Reklamationsrate</span>
+                    <div class="stats-perf-kpi-title-row">
+                      <span class="stats-perf-kpi-title">Reklamationsrate</span>
+                      <span class="stats-perf-kpi-info" tabindex="0" aria-label="Info zu Reklamationsrate">
+                        <i class="fa-solid fa-circle-info" aria-hidden="true"></i>
+                        <span class="stats-perf-kpi-tooltip" role="tooltip">Anteil der Reklamationen an allen bezahlten Anfragen – zurückgezogene Reklamationen werden nicht berücksichtigt.</span>
+                      </span>
+                    </div>
                     <span class="stats-kpi-value" id="perfKpiComplaints">7,8%</span>
                     <span class="stats-perf-kpi-helper">im Durchschnitt</span>
                   </div>
@@ -7245,7 +8388,13 @@
                 </div>
                 <div class="stats-kpi-card stats-perf-kpi-card" data-perf-metric="investment">
                   <div class="stats-perf-kpi-text">
-                    <span class="stats-perf-kpi-title">Investition / Neukunde</span>
+                    <div class="stats-perf-kpi-title-row">
+                      <span class="stats-perf-kpi-title">Investition / Neukunde</span>
+                      <span class="stats-perf-kpi-info" tabindex="0" aria-label="Info zu Investition pro Neukunde">
+                        <i class="fa-solid fa-circle-info" aria-hidden="true"></i>
+                        <span class="stats-perf-kpi-tooltip" role="tooltip">Durchschnittliche Investition pro gewonnenem Neukunden – berechnet aus den Kosten für Buchungs-Anfragen und der Anfragen-Manager Pauschale geteilt durch alle gewonnenen Anfragen.</span>
+                      </span>
+                    </div>
                     <span class="stats-kpi-value" id="perfKpiInvestment">6.378 €</span>
                     <span class="stats-perf-kpi-helper">im Durchschnitt</span>
                   </div>
@@ -7261,7 +8410,13 @@
                 </div>
                 <div class="stats-kpi-card stats-perf-kpi-card" data-perf-metric="timeToContact">
                   <div class="stats-perf-kpi-text">
-                    <span class="stats-perf-kpi-title">Reaktionszeit</span>
+                    <div class="stats-perf-kpi-title-row">
+                      <span class="stats-perf-kpi-title">Reaktionszeit</span>
+                      <span class="stats-perf-kpi-info" tabindex="0" aria-label="Info zu Reaktionszeit">
+                        <i class="fa-solid fa-circle-info" aria-hidden="true"></i>
+                        <span class="stats-perf-kpi-tooltip" role="tooltip">Durchschnittliche Zeit zwischen Eingang einer Anfrage und der ersten Statusänderung.</span>
+                      </span>
+                    </div>
                     <span class="stats-kpi-value" id="perfKpiTimeToContact">4,2 Std.</span>
                     <span class="stats-perf-kpi-helper">im Durchschnitt</span>
                   </div>
@@ -7277,7 +8432,13 @@
                 </div>
                 <div class="stats-kpi-card stats-perf-kpi-card" data-perf-metric="responseRate">
                   <div class="stats-perf-kpi-text">
-                    <span class="stats-perf-kpi-title">Kontaktquote</span>
+                    <div class="stats-perf-kpi-title-row">
+                      <span class="stats-perf-kpi-title">Kontaktquote</span>
+                      <span class="stats-perf-kpi-info" tabindex="0" aria-label="Info zu Kontaktquote">
+                        <i class="fa-solid fa-circle-info" aria-hidden="true"></i>
+                        <span class="stats-perf-kpi-tooltip" role="tooltip">Anteil der Anfragen, bei denen eine Statusänderung oder Rückmeldung auf eine Klinik- oder Privatanfrage erfolgte – unabhängig vom Ergebnis.</span>
+                      </span>
+                    </div>
                     <span class="stats-kpi-value" id="perfKpiResponseRate">76,7%</span>
                     <span class="stats-perf-kpi-helper">im Durchschnitt</span>
                   </div>
@@ -7293,7 +8454,13 @@
                 </div>
                 <div class="stats-kpi-card stats-perf-kpi-card" data-perf-metric="handlingTime">
                   <div class="stats-perf-kpi-text">
-                    <span class="stats-perf-kpi-title">Gesamtbearbeitungszeit</span>
+                    <div class="stats-perf-kpi-title-row">
+                      <span class="stats-perf-kpi-title">Gesamtbearbeitungszeit</span>
+                      <span class="stats-perf-kpi-info" tabindex="0" aria-label="Info zu Gesamtbearbeitungszeit">
+                        <i class="fa-solid fa-circle-info" aria-hidden="true"></i>
+                        <span class="stats-perf-kpi-tooltip" role="tooltip">Durchschnittliche Zeit zwischen Eingang einer Anfrage und ihrem Abschluss – gemessen bis zum Status &quot;Gewonnen&quot; oder &quot;Geschlossen&quot;.</span>
+                      </span>
+                    </div>
                     <span class="stats-kpi-value" id="perfKpiHandlingTime">35,6 Std.</span>
                     <span class="stats-perf-kpi-helper">im Durchschnitt</span>
                   </div>
@@ -7822,23 +8989,34 @@
                   <label for="detailStandortSelect">Standort:</label>
                   <select id="detailStandortSelect" class="detail-select">
                     <option>Bitte wahlen...</option>
-                    <option>Mainz</option>
-                    <option>Frankfurt</option>
-                    <option>Wiesbaden</option>
-                    <option>Berlin</option>
-                    <option>Kaiserslautern</option>
-                    <option>Carelink Solutions</option>
+                    <option>Hesena Management Domizil an der Jade</option>
+                    <option>Hesena Management Domizil am Ostplatz</option>
+                    <option>Hesena Management Domizil an der Werre</option>
+                    <option>Hesena Management Domizil an der Eise</option>
+                    <option>Hesena Management Alt-Mariendorf</option>
+                    <option>Hesena Management Haus Hermesgarten</option>
+                    <option>Hesena Management Domizil am Gartenplatz</option>
+                    <option>Hesena Care GmbH Palais Dorndorf</option>
+                    <option>Hesena Management Seniorenzentrum Borgentreich</option>
+                    <option>Hesena Management GmbH (Verwaltungssitz)</option>
                   </select>
                 </div>
                 <div class="detail-control">
                   <label for="detailGebietSelect">Gebiet:</label>
                   <select id="detailGebietSelect" class="detail-select">
-                    <option>Rheinhessen</option>
-                    <option>Frankfurt Rhein-Main</option>
-                    <option>Rheingau-Taunus</option>
-                    <option>Berlin Mitte</option>
-                    <option>Pfalz</option>
-                    <option>Verbundgebiet Rhein-Main</option>
+                    <option>Betreuungsgebiet Nord</option>
+                    <option>Betreuungsgebiet West</option>
+                    <option>Betreuungsgebiet Mitte</option>
+                    <option>Betreuungsgebiet Süd</option>
+                    <option>Betreuungsgebiet Ost</option>
+                    <option>Betreuungsgebiet Nordwest</option>
+                    <option>Betreuungsgebiet Weser</option>
+                    <option>Betreuungsgebiet Harz</option>
+                    <option>Betreuungsgebiet Ostwestfalen</option>
+                    <option>Betreuungsgebiet Küste</option>
+                    <option>Betreuungsgebiet Oldenburg</option>
+                    <option>Betreuungsgebiet Holzminden</option>
+                    <option>Verwaltungsgebiet Hesena</option>
                   </select>
                 </div>
                 <div class="detail-control">
@@ -8320,8 +9498,20 @@
     </script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
     <script
+      src="/standort-name-display.js?v=20260609truncate30"
+      onerror="window.__standortNameDisplayScriptFailed = true"
+    ></script>
+    <script
       src="/stats-performance.js?v=20260603s"
       onerror="window.__statsPerformanceScriptFailed = true"
+    ></script>
+    <script
+      src="/stats-overview.js?v=20260609truncate"
+      onerror="window.__statsOverviewScriptFailed = true"
+    ></script>
+    <script
+      src="/stats-standort-multiselect.js?v=20260609truncate"
+      onerror="window.__statsStandortMultiselectScriptFailed = true"
     ></script>
     <script>
       const drawer = document.getElementById("drawer");
@@ -8489,13 +9679,18 @@
       ];
       const standortSalesTasks = [];
       const LOCATION_ADDRESSES = {
-        Mainz: "Marktplatz 1, 55116 Mainz",
-        Frankfurt: "Berliner Straße 90, 60311 Frankfurt",
-        Wiesbaden: "Schlossplatz 1, 65183 Wiesbaden",
-        Berlin: "Unter den Linden 1, 10117 Berlin",
-        Kaiserslautern: "Rathausplatz 1, 67655 Kaiserslautern",
-        Koblenz: "Löhrstraße 66, 56068 Koblenz",
-        Saarbrücken: "Schlossplatz 15, 66119 Saarbrücken",
+        "Hesena Management Domizil an der Jade": "Jadeallee 12, Wilhelmshaven",
+        "Hesena Management Domizil am Ostplatz": "Osternburg 45, Oldenburg",
+        "Hesena Management Domizil an der Werre": "Werrestraße 8, Löhne",
+        "Hesena Management Domizil an der Eise": "Eisstraße 3, Bramsche",
+        "Hesena Management Alt-Mariendorf": "Mariendorfer Damm 66, Berlin",
+        "Hesena Management Haus Hermesgarten": "Hermesgarten 14, Hannover",
+        "Hesena Management Domizil am Gartenplatz": "Gartenplatz 2, Hameln",
+        "Hesena Care GmbH Palais Dorndorf": "Schlossstraße 1, Dorndorf",
+        "Hesena Management Seniorenzentrum Borgentreich": "Kirchstraße 19, Borgentreich",
+        "Hesena Management Domizil Lindenhof in Wilhelmshaven": "Lindenstraße 22, Wilhelmshaven",
+        "Hesena Management Domizil Karl-Hinrichs-Stift": "Stiftstraße 5, Oldenburg",
+        "Hesena Management Seniorenpark Diekholzen": "Parkweg 7, Diekholzen",
       };
       let standortSalesTaskTab = null;
       let standortSalesTaskBlobUrl = null;
@@ -8524,15 +9719,17 @@
       }
 
       const PERF_DEMO_STANDORTS = [
-        "Mainz",
-        "Frankfurt",
-        "Wiesbaden",
-        "Berlin",
-        "Kaiserslautern",
-        "Koblenz",
-        "Saarbrücken",
+        "Hesena Management Domizil an der Jade",
+        "Hesena Management Domizil am Ostplatz",
+        "Hesena Management Domizil an der Werre",
+        "Hesena Management Domizil an der Eise",
+        "Hesena Management Alt-Mariendorf",
+        "Hesena Management Haus Hermesgarten",
+        "Hesena Management Domizil am Gartenplatz",
+        "Hesena Care GmbH Palais Dorndorf",
+        "Hesena Management Seniorenzentrum Borgentreich",
       ];
-      const PERF_DEMO_STANDORT_WEIGHTS = [22, 20, 14, 18, 10, 8, 8];
+      const PERF_DEMO_STANDORT_WEIGHTS = [14, 13, 12, 11, 10, 9, 9, 8, 8];
       const PERF_DEMO_BEDARF_POOL = [
         "Ambulante Pflege",
         "Pflegedienst",
@@ -8554,16 +9751,11 @@
       const ORG_TENANT_LEAD_COUNT = 20;
 
       function getTenantOrgStandortName() {
-        return (sidebarTenantName?.textContent || "Carelink Solutions").trim();
+        return (sidebarTenantName?.textContent || "Hesena Management GmbH (Verwaltungssitz)").trim();
       }
 
       function getStatsStandortFilterOptions() {
-        const active = getActiveStandortNames();
-        const tenantOrg = getTenantOrgStandortName();
-        if (tenantOrg && !active.includes(tenantOrg)) {
-          return [...active, tenantOrg];
-        }
-        return active;
+        return getActiveStandortNames();
       }
 
       function getOverviewStandortNames() {
@@ -8659,9 +9851,14 @@
       }
 
       function buildPerfDemoStandortSequence(count) {
+        const activeStandorte = getActiveStandortNames();
+        const weightByName = new Map(
+          PERF_DEMO_STANDORTS.map((name, index) => [name, PERF_DEMO_STANDORT_WEIGHTS[index] || 1]),
+        );
+        const standorte = activeStandorte.length ? activeStandorte : PERF_DEMO_STANDORTS;
         const sequence = [];
-        PERF_DEMO_STANDORTS.forEach((name, index) => {
-          const weight = PERF_DEMO_STANDORT_WEIGHTS[index] || 1;
+        standorte.forEach((name) => {
+          const weight = weightByName.get(name) || 4;
           for (let i = 0; i < weight; i += 1) sequence.push(name);
         });
         const result = [];
@@ -8752,26 +9949,26 @@
         const orgOwners = getMitarbeiterNamesForStandort(tenantOrg);
         const orgDates = buildOrgTenantAnfrageDates(ORG_TENANT_LEAD_COUNT);
         const orgBedarfsorte = [
-          "55116 Mainz",
-          "60311 Frankfurt",
-          "65183 Wiesbaden",
-          "55122 Mainz Bretzenheim",
-          "60313 Frankfurt Innenstadt",
-          "55232 Alzey",
-          "61462 Königstein",
-          "65428 Rüsselsheim",
-          "64521 Groß-Gerau",
-          "55278 Dexheim",
-          "65307 Bad Schwalbach",
-          "55268 Nieder-Olm",
-          "60329 Frankfurt Westend",
-          "55124 Mainz Gonsenheim",
-          "65451 Kelsterbach",
-          "55283 Nierstein",
-          "65375 Oestrich-Winkel",
-          "55270 Klein-Winternheim",
-          "60385 Frankfurt Bornheim",
-          "55128 Mainz Mombach",
+          "26382 Wilhelmshaven",
+          "26121 Oldenburg",
+          "32545 Bad Oeynhausen",
+          "49565 Bramsche",
+          "30159 Hannover",
+          "31785 Hameln",
+          "36469 Bad Salzungen",
+          "37671 Höxter",
+          "26316 Varel",
+          "49377 Vechta",
+          "31655 Stadthagen",
+          "27283 Verden",
+          "27711 Osterholz-Scharmbeck",
+          "26389 Wangerland",
+          "31535 Neustadt am Rübenberge",
+          "27239 Twistringen",
+          "49624 Löningen",
+          "27356 Rotenburg",
+          "27432 Sottrum",
+          "31603 Diepholz",
         ];
         const priorities = ["Mittel", "Hoch", "Niedrig", "Mittel", "Hoch"];
         const fragment = document.createDocumentFragment();
@@ -8801,7 +9998,11 @@
           if (bedarfsortCell) bedarfsortCell.textContent = orgBedarfsorte[i % orgBedarfsorte.length];
           const standortCell = clone.querySelector('[data-col="standort"]');
           if (standortCell) {
-            standortCell.textContent = tenantOrg;
+            if (typeof StandortNameDisplay !== "undefined") {
+              StandortNameDisplay.setStandortCellDisplay(standortCell, tenantOrg);
+            } else {
+              standortCell.textContent = tenantOrg;
+            }
           }
           const sourceCell = clone.querySelector('[data-col="quelle"]');
           if (sourceCell) sourceCell.textContent = LEAD_SOURCES[i % LEAD_SOURCES.length];
@@ -9211,18 +10412,25 @@
       const DEFAULT_PROFILE_IMAGE = "";
       const DEFAULT_LOGO_IMAGE = "";
       const AVV_FILE_URL = "/AVV.pdf";
-      const GEBIET_BY_STANDORT = {
-        Mainz: "Rheinhessen",
-        Frankfurt: "Frankfurt Rhein-Main",
-        Wiesbaden: "Rheingau-Taunus",
-        Berlin: "Berlin Mitte",
-        Kaiserslautern: "Pfalz",
-        "Carelink Solutions": "Verbundgebiet Rhein-Main",
+            const GEBIET_BY_STANDORT = {
+        "Hesena Management Domizil an der Jade": "Betreuungsgebiet Nord",
+        "Hesena Management Domizil am Ostplatz": "Betreuungsgebiet West",
+        "Hesena Management Domizil an der Werre": "Betreuungsgebiet Mitte",
+        "Hesena Management Domizil an der Eise": "Betreuungsgebiet Süd",
+        "Hesena Management Alt-Mariendorf": "Betreuungsgebiet Ost",
+        "Hesena Management Haus Hermesgarten": "Betreuungsgebiet Nordwest",
+        "Hesena Management Domizil am Gartenplatz": "Betreuungsgebiet Weser",
+        "Hesena Care GmbH Palais Dorndorf": "Betreuungsgebiet Harz",
+        "Hesena Management Seniorenzentrum Borgentreich": "Betreuungsgebiet Ostwestfalen",
+        "Hesena Management Domizil Lindenhof in Wilhelmshaven": "Betreuungsgebiet Küste",
+        "Hesena Management Domizil Karl-Hinrichs-Stift": "Betreuungsgebiet Oldenburg",
+        "Hesena Management Seniorenpark Diekholzen": "Betreuungsgebiet Holzminden",
+        "Hesena Management GmbH (Verwaltungssitz)": "Verwaltungsgebiet Hesena",
       };
 
       function resolveGebietForStandort(standort) {
         const key = (standort || "").trim();
-        return GEBIET_BY_STANDORT[key] || "Rheinhessen";
+        return GEBIET_BY_STANDORT[key] || "Betreuungsgebiet Nord";
       }
 
       let uploadedProfileImage = DEFAULT_PROFILE_IMAGE;
@@ -9263,7 +10471,20 @@
 
       function getCellValue(row, key) {
         const cell = row.querySelector(`[data-col="${key}"]`);
-        return cell ? cell.textContent.trim() : "-";
+        if (!cell) return "-";
+        if (key === "standort" && typeof StandortNameDisplay !== "undefined") {
+          const full = StandortNameDisplay.getStandortFullName(cell);
+          return full || "-";
+        }
+        return cell.textContent.trim();
+      }
+
+      function readStandortNameFromCell(cell) {
+        if (!cell) return "";
+        if (typeof StandortNameDisplay !== "undefined") {
+          return StandortNameDisplay.getStandortFullName(cell);
+        }
+        return cell.textContent.trim();
       }
 
       function formatGermanRequestDatetime(date) {
@@ -9375,7 +10596,11 @@
             bedarfsortCell.textContent = LEAD_BEDARFSORTE[index % LEAD_BEDARFSORTE.length];
           }
           if (standortCell) {
-            standortCell.textContent = standort;
+            if (typeof StandortNameDisplay !== "undefined") {
+              StandortNameDisplay.setStandortCellDisplay(standortCell, standort);
+            } else {
+              standortCell.textContent = standort;
+            }
           }
           if (sourceCell) {
             sourceCell.textContent = LEAD_SOURCES[index % LEAD_SOURCES.length];
@@ -9392,6 +10617,8 @@
       }
 
       let statsPerformanceApi = null;
+      let statsOverviewApi = null;
+      let statsStandortMultiselectApi = null;
 
       const STATS_DETAIL_PRODUCT_ROWS = [
         "Unbekannt",
@@ -9423,13 +10650,17 @@
         "Tagespflege",
         "Betreutes Wohnen",
       ];
-      const STATS_MITARBEITER_BY_STANDORT = {
-        Mainz: ["Melissa Kropp", "Anna Schmidt", "Tom Weber", "Julia Brandt"],
-        Frankfurt: ["Robin Stadel", "Laura Klein", "Max Hoffmann"],
-        Wiesbaden: ["Sandra Koch", "Felix Lang", "Nina Wolf"],
-        Berlin: ["Jakob Kuntz", "Jonas Markus", "Emilia Hart", "Paul Richter", "Clara Neumann"],
-        Kaiserslautern: ["Lukas Ernst", "Mia König"],
-        "Carelink Solutions": ["Jakob Kuntz", "Melissa Kropp", "Robin Stadel", "Anna Schmidt"],
+            const STATS_MITARBEITER_BY_STANDORT = {
+        "Hesena Management Domizil an der Jade": ["Melissa Kropp", "Anna Schmidt", "Tom Weber"],
+        "Hesena Management Domizil am Ostplatz": ["Robin Stadel", "Laura Klein", "Max Hoffmann"],
+        "Hesena Management Domizil an der Werre": ["Sandra Koch", "Felix Lang", "Nina Wolf"],
+        "Hesena Management Domizil an der Eise": ["Jakob Kuntz", "Jonas Markus", "Emilia Hart"],
+        "Hesena Management Alt-Mariendorf": ["Lukas Ernst", "Mia König", "Paul Richter"],
+        "Hesena Management Haus Hermesgarten": ["Clara Neumann", "Tim Fischer", "Lea Schulz"],
+        "Hesena Management Domizil am Gartenplatz": ["Marco Brenner", "Hannah Vogt", "Oskar Hahn"],
+        "Hesena Care GmbH Palais Dorndorf": ["Eva Lindner", "Noah Berger", "Mira Stein"],
+        "Hesena Management Seniorenzentrum Borgentreich": ["Jonas Hartmann", "Lena Krüger", "Finn Wolff"],
+        "Hesena Management GmbH (Verwaltungssitz)": ["Jakob Kuntz", "Melissa Kropp", "Robin Stadel", "Anna Schmidt"],
       };
 
       function statsHashForStandort(standort) {
@@ -9559,7 +10790,13 @@
       function getActiveStandortNames() {
         return getStandortLocationRows()
           .filter((row) => !isStandortRowPaused(row))
-          .map((row) => row.querySelector(".locations-row__name")?.textContent.trim())
+          .map((row) => readStandortNameFromCell(row.querySelector(".locations-row__name")))
+          .filter(Boolean);
+      }
+
+      function getAllStandortNamesFromManagement() {
+        return getStandortLocationRows()
+          .map((row) => readStandortNameFromCell(row.querySelector(".locations-row__name")))
           .filter(Boolean);
       }
 
@@ -9621,7 +10858,8 @@
         const rows = getStandortLocationRows();
         if (scope) {
           const row = rows.find(
-            (entry) => entry.querySelector(".locations-row__name")?.textContent.trim() === scope,
+            (entry) =>
+              readStandortNameFromCell(entry.querySelector(".locations-row__name")) === scope,
           );
           if (!row) return { active: 0, paused: 0 };
           const paused = isStandortRowPaused(row);
@@ -9638,10 +10876,13 @@
 
       function getUsersPerActiveStandort(scope) {
         if (scope) return getMitarbeiterNamesForStandort(scope).length;
-        const { active } = getStandortStatusCounts("");
-        const users = getAllMitarbeiterLabelsAcrossStandorte().length;
-        if (!active) return 0;
-        return Math.round((users / active) * 10) / 10;
+        const allStandorte = getAllStandortNamesFromManagement();
+        if (!allStandorte.length) return 0;
+        let totalUsers = 0;
+        allStandorte.forEach((name) => {
+          totalUsers += getMitarbeiterNamesForStandort(name).length;
+        });
+        return Math.round((totalUsers / allStandorte.length) * 10) / 10;
       }
 
       function countLeadsForOverviewScope(scope, period) {
@@ -9673,6 +10914,461 @@
           const diffDays = (endMs - ts) / 86400000;
           return diffDays >= 0 && diffDays <= maxDays;
         });
+      }
+
+      const OVERVIEW_STATUS_BUCKETS = [
+        "Neu",
+        "In Bearbeitung",
+        "Gewonnen",
+        "Geschlossen",
+        "Reklamation",
+      ];
+
+      function getLeadRowOverviewStatus(row) {
+        return String(row?.dataset?.status || getCellValue(row, "status") || "").trim();
+      }
+
+      function bucketLeadOverviewStatus(rawStatus) {
+        const status = String(rawStatus || "").trim();
+        if (!status || status === "-") return null;
+        if (status.includes("Reklamation")) return "Reklamation";
+        if (OVERVIEW_STATUS_BUCKETS.includes(status)) return status;
+        return null;
+      }
+
+      function getOverviewStatusActiveStandorte() {
+        return (
+          statsStandortMultiselectApi?.getActiveStandorte() ?? getStatsStandortFilterOptions()
+        ).filter(Boolean);
+      }
+
+      function getFilteredLeadsForOverviewStatusStats(period) {
+        const activeStandorte = getOverviewStatusActiveStandorte();
+        const seen = new Set();
+        const result = [];
+        activeStandorte.forEach((name) => {
+          getFilteredLeadsForStatsScope(name, period).forEach((row) => {
+            if (seen.has(row)) return;
+            seen.add(row);
+            result.push(row);
+          });
+        });
+        return result;
+      }
+
+      function aggregateOverviewStatusRows(leads) {
+        const counts = new Map(OVERVIEW_STATUS_BUCKETS.map((label) => [label, 0]));
+        leads.forEach((row) => {
+          let bucket = bucketLeadOverviewStatus(getLeadRowOverviewStatus(row));
+          if (!bucket) bucket = "Geschlossen";
+          counts.set(bucket, (counts.get(bucket) || 0) + 1);
+        });
+        const total = leads.length;
+        return {
+          total,
+          rows: OVERVIEW_STATUS_BUCKETS.map((label) => {
+            const count = counts.get(label) || 0;
+            return {
+              label,
+              count,
+              pct: total ? Math.round((count / total) * 100) : 0,
+            };
+          }),
+        };
+      }
+
+      function getOverviewStatusCountsForStats(period) {
+        return aggregateOverviewStatusRows(getFilteredLeadsForOverviewStatusStats(period));
+      }
+
+      function getOverviewStatusMatrixByStandort(period) {
+        return getOverviewRequestData(period).statusMatrix;
+      }
+
+      const OVERVIEW_BEDARFSART_LABELS = [
+        "Pflegedienst",
+        "Vollstationäre Pflege",
+        "Kurzzeitpflege",
+        "Betreutes Wohnen",
+      ];
+      const OVERVIEW_GEBIET_LABELS = [
+        "Kein Gebiet zugeordnet",
+        "Innenstadt / Zentrum",
+        "Nord-West",
+        "Süd-Ost",
+        "Umland / Außenbereich",
+      ];
+      const OVERVIEW_GEBIET_WEIGHTS = [0, 38, 24, 22, 16];
+            const OVERVIEW_BEDARFSART_PROFILES = {
+        "Hesena Management Domizil an der Jade": [52, 38, 10, 0],
+        "Hesena Management Domizil am Ostplatz": [65, 35, 0, 0],
+        "Hesena Management Domizil an der Werre": [48, 34, 12, 6],
+        "Hesena Management Domizil an der Eise": [44, 36, 0, 20],
+        "Hesena Management Alt-Mariendorf": [58, 32, 10, 0],
+        "Hesena Management Haus Hermesgarten": [54, 36, 10, 0],
+        "Hesena Management Domizil am Gartenplatz": [46, 34, 12, 8],
+        "Hesena Care GmbH Palais Dorndorf": [50, 30, 12, 8],
+        "Hesena Management Seniorenzentrum Borgentreich": [52, 28, 12, 8],
+        "Hesena Management Domizil Lindenhof in Wilhelmshaven": [48, 32, 14, 6],
+        "Hesena Management Domizil Karl-Hinrichs-Stift": [56, 30, 10, 4],
+        "Hesena Management Seniorenpark Diekholzen": [42, 38, 12, 8],
+        "Hesena Management GmbH (Verwaltungssitz)": [50, 30, 12, 8],
+      };
+      const OVERVIEW_GEBIET_PROFILES = {
+        "Hesena Management Domizil an der Jade": [0, 32, 27, 23, 18],
+        "Hesena Management Domizil am Ostplatz": [0, 45, 25, 18, 12],
+        "Hesena Management Domizil an der Werre": [0, 36, 24, 21, 19],
+        "Hesena Management Domizil an der Eise": [0, 42, 18, 26, 14],
+        "Hesena Management Alt-Mariendorf": [0, 28, 28, 22, 22],
+        "Hesena Management Haus Hermesgarten": [0, 34, 26, 22, 18],
+        "Hesena Management Domizil am Gartenplatz": [0, 30, 24, 24, 22],
+        "Hesena Care GmbH Palais Dorndorf": [0, 38, 22, 22, 18],
+        "Hesena Management Seniorenzentrum Borgentreich": [0, 40, 20, 24, 16],
+        "Hesena Management Domizil Lindenhof in Wilhelmshaven": [0, 33, 25, 23, 19],
+        "Hesena Management Domizil Karl-Hinrichs-Stift": [0, 35, 23, 22, 20],
+        "Hesena Management Seniorenpark Diekholzen": [0, 31, 27, 24, 18],
+        "Hesena Management GmbH (Verwaltungssitz)": [0, 38, 22, 22, 18],
+      };
+
+      function overviewHashLabel(label) {
+        let h = 0;
+        const s = String(label || "");
+        for (let i = 0; i < s.length; i += 1) h = (h + s.charCodeAt(i) * (i + 1)) % 97;
+        return h;
+      }
+
+      function normalizeOverviewBedarfsartValue(raw) {
+        const val = String(raw || "").trim();
+        if (!val || val === "-") return null;
+        if (val === "Pflegedienst") return "Pflegedienst";
+        if (val.includes("Vollstation") || val.includes("Stationäre") || val === "Stationare Pflege") {
+          return "Vollstationäre Pflege";
+        }
+        if (val.includes("Kurzzeit")) return "Kurzzeitpflege";
+        if (val.includes("Betreut")) return "Betreutes Wohnen";
+        if (
+          val.includes("Ambulant") ||
+          val.includes("Pflege") ||
+          val.includes("Haushalt") ||
+          val.includes("Betreuung")
+        ) {
+          return "Pflegedienst";
+        }
+        return "Pflegedienst";
+      }
+
+      function normalizeOverviewGebietValue(raw) {
+        const val = String(raw || "").trim();
+        if (!val || val === "-") return "Kein Gebiet zugeordnet";
+        const match = OVERVIEW_GEBIET_LABELS.find(
+          (label) => label.toLowerCase() === val.toLowerCase() || val.toLowerCase().includes(label.toLowerCase()),
+        );
+        return match || "Kein Gebiet zugeordnet";
+      }
+
+      function getOverviewBedarfsartWeights(standortName) {
+        const preset = OVERVIEW_BEDARFSART_PROFILES[standortName];
+        if (preset) return preset.slice();
+        const h = overviewHashLabel(standortName);
+        const weights = OVERVIEW_BEDARFSART_LABELS.map((_, i) => {
+          const slot = (h + i * 17) % 5;
+          return slot === 0 ? 0 : 12 + ((h >> i) % 28);
+        });
+        if (!weights.some((w) => w > 0)) {
+          weights[0] = 55;
+          weights[1] = 45;
+        }
+        return weights;
+      }
+
+      function getOverviewGebietWeights(standortName) {
+        const preset = OVERVIEW_GEBIET_PROFILES[standortName];
+        if (preset) return preset.slice();
+        const h = overviewHashLabel(standortName);
+        return [
+          0,
+          28 + (h % 18),
+          22 + (h % 14),
+          20 + (h % 12),
+          18 + (h % 10),
+        ];
+      }
+
+      function buildOverviewGebietChildrenForStandort(standortName, total) {
+        const weights = getOverviewGebietWeights(standortName);
+        const counts = distributeProportional(total, weights);
+        return OVERVIEW_GEBIET_LABELS.map((label, i) => ({
+          label,
+          count: counts[i] || 0,
+        }));
+      }
+
+      function buildOverviewStandortGebietGroupsFromTotals(standortTotals) {
+        return (standortTotals || []).map((row) => ({
+          label: row.name,
+          total: row.count,
+          children: buildOverviewGebietChildrenForStandort(row.name, row.count),
+        }));
+      }
+
+      function scaleOverviewScopeRequests(scope, period, model) {
+        const core = getStatsScopeCoreFromModel(scope, model);
+        if (!period || period === "gesamt") return core.requests;
+        return scaleOverviewRequestsByPeriod(core.requests, period);
+      }
+
+      function buildMockOverviewStandortTotals(period, activeStandorte) {
+        const model = buildStatsStandortSlices();
+        return activeStandorte.map((name) => ({
+          name,
+          count: scaleOverviewScopeRequests(name, period, model),
+        }));
+      }
+
+      function buildMockBedarfsartMatrix(standortTotals) {
+        return standortTotals.map((row) => {
+          const weights = getOverviewBedarfsartWeights(row.name);
+          const activeIndices = weights.map((w, i) => (w > 0 ? i : -1)).filter((i) => i >= 0);
+          const activeWeights = activeIndices.map((i) => weights[i]);
+          const parts = distributeProportional(row.count, activeWeights);
+          const cells = {};
+          OVERVIEW_BEDARFSART_LABELS.forEach((col, i) => {
+            if (weights[i] <= 0) {
+              cells[col] = null;
+              return;
+            }
+            const partIndex = activeIndices.indexOf(i);
+            cells[col] = parts[partIndex] || 0;
+          });
+          return { label: row.name, cells, total: row.count };
+        });
+      }
+
+      function buildMockGebietRows(total, standortName) {
+        const weights = standortName
+          ? getOverviewGebietWeights(standortName)
+          : OVERVIEW_GEBIET_WEIGHTS;
+        const counts = distributeProportional(total, weights);
+        return OVERVIEW_GEBIET_LABELS.map((label, i) => ({
+          label,
+          count: counts[i] || 0,
+        }));
+      }
+
+      function buildMockStandortGebietGroups(standortTotals) {
+        return buildOverviewStandortGebietGroupsFromTotals(standortTotals);
+      }
+
+      function filterOverviewLeadsForStandort(leads, standortName, activeStandorte) {
+        return leads.filter(
+          (row) =>
+            normalizeOverviewStandortValue(getCellValue(row, "standort"), activeStandorte) ===
+            standortName,
+        );
+      }
+
+      function buildOverviewStandortTotalsFromLeads(leads, activeStandorte) {
+        const rows = buildStandortKennzahlenRows(leads, activeStandorte);
+        const totals = rows.map((row) => ({ name: row.label, count: row.count }));
+        const namedSum = totals.reduce((sum, row) => sum + row.count, 0);
+        const diff = leads.length - namedSum;
+        if (diff > 0) {
+          const unassigned = totals.find((row) => row.name === OVERVIEW_UNASSIGNED_STANDORT);
+          if (unassigned) unassigned.count += diff;
+          else totals.push({ name: OVERVIEW_UNASSIGNED_STANDORT, count: diff });
+        }
+        return totals.filter((row) => row.count > 0);
+      }
+
+      function buildOverviewBedarfsartMatrixFromLeads(leads, activeStandorte) {
+        return activeStandorte.map((standortName) => {
+          const standortLeads = filterOverviewLeadsForStandort(leads, standortName, activeStandorte);
+          const total = standortLeads.length;
+          const counts = new Map(OVERVIEW_BEDARFSART_LABELS.map((label) => [label, 0]));
+          standortLeads.forEach((row) => {
+            const bucket = normalizeOverviewBedarfsartValue(getCellValue(row, "bedarf"));
+            if (bucket) counts.set(bucket, (counts.get(bucket) || 0) + 1);
+          });
+          const cells = {};
+          OVERVIEW_BEDARFSART_LABELS.forEach((col) => {
+            const count = counts.get(col) || 0;
+            cells[col] = count > 0 ? count : null;
+          });
+          return { label: standortName, cells, total };
+        });
+      }
+
+      function buildOverviewGebietRowsFromLeads(leads) {
+        const counts = new Map(OVERVIEW_GEBIET_LABELS.map((label) => [label, 0]));
+        leads.forEach((row) => {
+          const bucket = normalizeOverviewGebietValue(getCellValue(row, "bedarfsort"));
+          counts.set(bucket, (counts.get(bucket) || 0) + 1);
+        });
+        return OVERVIEW_GEBIET_LABELS.map((label) => ({
+          label,
+          count: counts.get(label) || 0,
+        }));
+      }
+
+      function buildOverviewStandortGebietGroupsFromLeads(leads, activeStandorte) {
+        return activeStandorte
+          .map((standortName) => {
+            const standortLeads = filterOverviewLeadsForStandort(leads, standortName, activeStandorte);
+            const total = standortLeads.length;
+            if (!total) return null;
+            const counts = new Map(OVERVIEW_GEBIET_LABELS.map((label) => [label, 0]));
+            standortLeads.forEach((row) => {
+              const bucket = normalizeOverviewGebietValue(getCellValue(row, "bedarfsort"));
+              counts.set(bucket, (counts.get(bucket) || 0) + 1);
+            });
+            return {
+              label: standortName,
+              total,
+              children: OVERVIEW_GEBIET_LABELS.map((label) => ({
+                label,
+                count: counts.get(label) || 0,
+              })),
+            };
+          })
+          .filter(Boolean);
+      }
+
+      function getOverviewRequestData(period) {
+        const activeStandorte = getOverviewStatusActiveStandorte();
+        const hasLeadTable = getLeadOverviewRowsForStats("").length > 0;
+        const singleStandort =
+          statsStandortMultiselectApi?.isSingleStandortSelected?.() ?? false;
+        const selectedStandort = singleStandort ? activeStandorte[0] : null;
+
+        if (hasLeadTable) {
+          const leads = getFilteredLeadsForOverviewStatusStats(period);
+          const total = leads.length;
+          const status = aggregateOverviewStatusRows(leads);
+          const standortTotals = buildOverviewStandortTotalsFromLeads(leads, activeStandorte);
+          const bedarfsartMatrix = buildMockBedarfsartMatrix(standortTotals);
+          const gebietRows = buildMockGebietRows(total, selectedStandort);
+          const standortGebietGroups = buildOverviewStandortGebietGroupsFromTotals(standortTotals);
+          const statusMatrix = activeStandorte.map((name) => {
+            const scopedLeads = filterOverviewLeadsForStandort(leads, name, activeStandorte);
+            const payload = aggregateOverviewStatusRows(scopedLeads);
+            const cells = {};
+            payload.rows.forEach((row) => {
+              cells[row.label] = row.count;
+            });
+            return { label: name, cells, total: payload.total };
+          });
+          return {
+            total,
+            status,
+            statusMatrix,
+            standortTotals,
+            bedarfsartMatrix,
+            gebietRows,
+            standortGebietGroups,
+          };
+        }
+
+        const standortTotals = buildMockOverviewStandortTotals(period, activeStandorte);
+        const total = standortTotals.reduce((sum, row) => sum + row.count, 0);
+        const statusWeights = [12, 28, 19, 34, 7];
+        const statusCounts = distributeProportional(total, statusWeights);
+        const status = {
+          total,
+          rows: OVERVIEW_STATUS_BUCKETS.map((label, i) => ({
+            label,
+            count: statusCounts[i] || 0,
+            pct: total ? Math.round(((statusCounts[i] || 0) / total) * 100) : 0,
+          })),
+        };
+        const statusMatrix = standortTotals.map((row) => {
+          const rowStatusCounts = distributeProportional(row.count, statusWeights);
+          const cells = {};
+          OVERVIEW_STATUS_BUCKETS.forEach((label, i) => {
+            cells[label] = rowStatusCounts[i] || 0;
+          });
+          return { label: row.name, cells, total: row.count };
+        });
+        return {
+          total,
+          status,
+          statusMatrix,
+          standortTotals,
+          bedarfsartMatrix: buildMockBedarfsartMatrix(standortTotals),
+          gebietRows: buildMockGebietRows(total, selectedStandort),
+          standortGebietGroups: buildOverviewStandortGebietGroupsFromTotals(standortTotals),
+        };
+      }
+
+      function getStandortStatusCountsForNames(standortNames) {
+        let active = 0;
+        let paused = 0;
+        const rows = getStandortLocationRows();
+        (standortNames || []).forEach((name) => {
+          const row = rows.find(
+            (entry) => readStandortNameFromCell(entry.querySelector(".locations-row__name")) === name,
+          );
+          if (!row) return;
+          if (isStandortRowPaused(row)) paused += 1;
+          else active += 1;
+        });
+        return { active, paused };
+      }
+
+      function getOverviewSummaryStandortStatusCounts() {
+        const selection = statsStandortMultiselectApi?.getSelection?.() ?? {
+          isAll: true,
+          selected: [],
+        };
+        if (selection.isAll) {
+          return getStandortStatusCounts("");
+        }
+        return getStandortStatusCountsForNames(selection.selected);
+      }
+
+      function getUsersPerStandortAverageForStandorte(standortNames) {
+        const names = (standortNames || []).filter(Boolean);
+        if (!names.length) return 0;
+        if (names.length === 1) {
+          return getMitarbeiterNamesForStandort(names[0]).length;
+        }
+        let totalUsers = 0;
+        names.forEach((name) => {
+          totalUsers += getMitarbeiterNamesForStandort(name).length;
+        });
+        return Math.round((totalUsers / names.length) * 10) / 10;
+      }
+
+      function getUsersPerStandortForNames(standortNames) {
+        const names = (standortNames || []).filter(Boolean);
+        if (!names.length) return 0;
+        if (names.length === 1) {
+          return getMitarbeiterNamesForStandort(names[0]).length;
+        }
+        const { active } = getStandortStatusCountsForNames(names);
+        if (!active) return 0;
+        let totalUsers = 0;
+        names.forEach((name) => {
+          totalUsers += getMitarbeiterNamesForStandort(name).length;
+        });
+        return Math.round((totalUsers / active) * 10) / 10;
+      }
+
+      function getOverviewSummaryKpis(period) {
+        const selection = statsStandortMultiselectApi?.getSelection?.() ?? {
+          isAll: true,
+          selected: [],
+        };
+        const statusCounts = getOverviewSummaryStandortStatusCounts();
+        const requests = getOverviewRequestData(period).total;
+        const usersPerStandort = selection.isAll
+          ? getUsersPerStandortAverageForStandorte(getAllStandortNamesFromManagement())
+          : getUsersPerStandortForNames(selection.selected);
+        return {
+          usersPerStandort,
+          requests,
+          activeStandorte: statusCounts.active,
+          pausedStandorte: statusCounts.paused,
+        };
       }
 
       function buildKennzahlenFromFilteredLeads(filteredLeads, scope, activeStandorte) {
@@ -9708,8 +11404,7 @@
       }
 
       function syncOverviewStatsFromLeadTable() {
-        const scope = document.getElementById("statsStandortSelectKpi")?.value || "";
-        applyMeineStatistikenStandortScope(scope);
+        applyMeineStatistikenStandortScope();
       }
 
       function aggregateLeadRowsByField(leads, field, activeStandorte) {
@@ -9762,28 +11457,6 @@
         return String(Math.round(value));
       }
 
-      let overviewPeriodTabsInit = false;
-
-      function initOverviewPeriodTabs() {
-        if (overviewPeriodTabsInit) return;
-        const tabs = document.querySelectorAll("#statsPanelOverview .stats-overview-period-tab");
-        if (!tabs.length) return;
-        overviewPeriodTabsInit = true;
-        tabs.forEach((tab) => {
-          tab.addEventListener("click", () => {
-            const period = tab.dataset.overviewPeriod;
-            if (!period || period === getStatsOverviewPeriod()) return;
-            tabs.forEach((item) => {
-              const active = item.dataset.overviewPeriod === period;
-              item.classList.toggle("is-active", active);
-              item.setAttribute("aria-selected", active ? "true" : "false");
-            });
-            const scope = document.getElementById("statsStandortSelectKpi")?.value || "";
-            applyMeineStatistikenStandortScope(scope);
-          });
-        });
-      }
-
       function getStatsTenantOrgLabel() {
         const t = (sidebarTenantName?.textContent || "").trim();
         return t || "Organisation";
@@ -9791,7 +11464,16 @@
 
       function buildStatsStandortSlices() {
         const aggregate = { ...STATS_AGGREGATE_CORE };
-        const standorte = Array.isArray(SUBTENANT_STANDORTE) ? SUBTENANT_STANDORTE.filter(Boolean) : [];
+        const allStandorte = Array.isArray(SUBTENANT_STANDORTE)
+          ? SUBTENANT_STANDORTE.filter(Boolean)
+          : [];
+        const pausedNames = new Set(
+          getStandortLocationRows()
+            .filter(isStandortRowPaused)
+            .map((row) => readStandortNameFromCell(row.querySelector(".locations-row__name")))
+            .filter(Boolean),
+        );
+        const standorte = allStandorte.filter((name) => !pausedNames.has(name));
         let orgLabel = getStatsTenantOrgLabel();
         if (standorte.includes(orgLabel)) orgLabel = `${orgLabel} (Zentrale)`;
 
@@ -10008,64 +11690,40 @@
         });
       }
 
-      function applyMeineStatistikenStandortScope(scope) {
+      function applyMeineStatistikenStandortScope() {
         if (!meineStatistikenPage) return;
-        const payload = getStatsScopePayload(scope || "");
-        renderStatsKpiCard(payload);
-        const kenn = meineStatistikenPage.querySelector(".stats-card-kennzahlen");
-        if (kenn) renderStatsKennzahlenCard(kenn, payload);
+        if (statsOverviewApi?.syncOverviewKpis) {
+          statsOverviewApi.syncOverviewKpis();
+        }
         if (statsPerformanceApi?.syncPerformanceSummaryKpis) {
           statsPerformanceApi.syncPerformanceSummaryKpis();
         }
       }
 
-      function getStatsStandortSelectEls() {
-        if (!meineStatistikenPage) return [];
-        const ids = ["statsStandortSelectKpi", "statsStandortSelectPerformance"];
-        return ids.map((id) => meineStatistikenPage.querySelector(`#${id}`)).filter(Boolean);
-      }
-
-      function syncStatsStandortSelectsToValue(scope) {
-        const v = scope || "";
-        getStatsStandortSelectEls().forEach((sel) => {
-          if (sel.value !== v) sel.value = v;
-        });
+      function getStatsStandortSelectionDeps() {
+        return {
+          getStandortSelection: () =>
+            statsStandortMultiselectApi?.getSelection() ?? { isAll: true, selected: [] },
+          isSingleStandortSelected: () => statsStandortMultiselectApi?.isSingleStandortSelected() ?? false,
+          getActiveStandorte: () =>
+            statsStandortMultiselectApi?.getActiveStandorte() ?? getStatsStandortFilterOptions(),
+        };
       }
 
       function populateStatsStandortSelects(applyScope = true) {
-        const selects = getStatsStandortSelectEls();
-        if (!selects.length) return;
-        const standortOptions = getStatsStandortFilterOptions();
-        const prevRaw =
-          selects.map((s) => s.value).find((val) => val && standortOptions.includes(val)) || "";
-        const prev = selects[0] ? selects[0].value : "";
-        const keepVal = prevRaw || prev;
-        selects.forEach((sel) => {
-          sel.replaceChildren();
-          const optAll = document.createElement("option");
-          optAll.value = "";
-          optAll.textContent = "Alle Standorte";
-          sel.appendChild(optAll);
-          standortOptions.forEach((standort) => {
-            const o = document.createElement("option");
-            o.value = standort;
-            o.textContent = standort;
-            sel.appendChild(o);
-          });
-          const nextVal = keepVal && standortOptions.includes(keepVal) ? keepVal : "";
-          sel.value = nextVal;
-        });
-        if (applyScope) {
-          const scope = selects[0].value || "";
-          applyMeineStatistikenStandortScope(scope);
+        if (statsStandortMultiselectApi?.refreshOptions) {
+          statsStandortMultiselectApi.refreshOptions(applyScope);
         }
       }
 
       function buildAssignableStandorte() {
+        if (typeof StandortNameDisplay !== "undefined") {
+          StandortNameDisplay.decorateStandortNameCells(meineStandortePage);
+        }
         const locationRows = Array.from(
           document.querySelectorAll("#meineStandortePage .locations-row__name"),
         )
-          .map((node) => node.textContent.trim())
+          .map((node) => readStandortNameFromCell(node))
           .filter(Boolean);
         SUBTENANT_STANDORTE = [...locationRows];
         const tenantLocation = (sidebarTenantName?.textContent || "").trim();
@@ -10080,15 +11738,24 @@
       function syncStandortSelectOptions() {
         if (!detailStandortSelect) return;
         const detailOptions = ['<option>Bitte wahlen...</option>']
-          .concat(ASSIGNABLE_STANDORTE.map((standort) => `<option>${standort}</option>`))
+          .concat(
+            ASSIGNABLE_STANDORTE.map((standort) =>
+              typeof StandortNameDisplay !== "undefined"
+                ? StandortNameDisplay.standortOptionHtml(standort)
+                : `<option>${standort}</option>`,
+            ),
+          )
           .join("");
         detailStandortSelect.innerHTML = detailOptions;
+        detailStandortSelect.classList.add("standort-select-truncate");
 
         if (locationFilter) {
           const filterOptions = ['<option value="">Standort</option>']
             .concat(
-              ASSIGNABLE_STANDORTE.map(
-                (standort) => `<option value="${standort}">${standort}</option>`,
+              ASSIGNABLE_STANDORTE.map((standort) =>
+                typeof StandortNameDisplay !== "undefined"
+                  ? StandortNameDisplay.standortOptionHtml(standort)
+                  : `<option value="${standort}">${standort}</option>`,
               ),
             )
             .join("");
@@ -10114,16 +11781,31 @@
         const placeholder = selectEl.options[0]?.textContent || "";
         if (selectedValues.length === 0) {
           triggerLabel.textContent = placeholder;
+          triggerLabel.removeAttribute("title");
+          triggerLabel.classList.remove(StandortNameDisplay?.CLASS || "");
+          delete triggerLabel.dataset.standortFullName;
+          triggerLabel.style.display = "";
+          triggerLabel.style.maxWidth = "";
           return;
         }
         if (selectedValues.length === 1) {
           const selectedOption = Array.from(selectEl.options).find(
             (opt) => (opt.value || opt.textContent) === selectedValues[0],
           );
-          triggerLabel.textContent = selectedOption ? selectedOption.textContent : selectedValues[0];
+          const fullName = selectedOption?.value || selectedValues[0];
+          if (typeof StandortNameDisplay !== "undefined") {
+            StandortNameDisplay.setStandortLabelElement(triggerLabel, fullName);
+          } else {
+            triggerLabel.textContent = selectedOption ? selectedOption.textContent : selectedValues[0];
+          }
           return;
         }
         triggerLabel.textContent = `${selectedValues.length} ausgewahlt`;
+        triggerLabel.removeAttribute("title");
+        triggerLabel.classList.remove(StandortNameDisplay?.CLASS || "");
+        delete triggerLabel.dataset.standortFullName;
+        triggerLabel.style.display = "";
+        triggerLabel.style.maxWidth = "";
       }
 
       function initMultiSelect(selectEl) {
@@ -10178,7 +11860,12 @@
             });
 
             const textNode = document.createElement("span");
-            textNode.textContent = optionLabel;
+            if (typeof StandortNameDisplay !== "undefined") {
+              textNode.className = "multi-select-option-label";
+              StandortNameDisplay.applyStandortNameElementState(textNode, optionValue);
+            } else {
+              textNode.textContent = optionLabel;
+            }
             row.appendChild(checkbox);
             row.appendChild(textNode);
             menu.appendChild(row);
@@ -10570,7 +12257,7 @@
 
       function initStandortRowMetadata() {
         getStandortTableRows().forEach((row) => {
-          const name = row.querySelector(".locations-row__name")?.textContent.trim();
+          const name = readStandortNameFromCell(row.querySelector(".locations-row__name"));
           if (!name) return;
           const id = slugifyStandortName(name);
           row.dataset.standortId = id;
@@ -11312,7 +12999,7 @@
         const state = {
           individual,
           siteWide:
-            standortName === "Mainz"
+            standortName === "Hesena Management Domizil an der Jade"
               ? {
                   active: true,
                   startDate: "2026-07-01",
@@ -12120,11 +13807,15 @@
         const options = getOtherStandortNames(standortName);
         standortVertretungStandortSelect.innerHTML = [
           '<option value="">Bitte wählen...</option>',
-          ...options.map(
-            (name) =>
-              `<option value="${name}"${name === selectedValue ? " selected" : ""}>${name}</option>`,
-          ),
+          ...options.map((name) => {
+            const selected = name === selectedValue ? "selected" : "";
+            if (typeof StandortNameDisplay !== "undefined") {
+              return StandortNameDisplay.standortOptionHtml(name, selected);
+            }
+            return `<option value="${name}"${selected ? " selected" : ""}>${name}</option>`;
+          }),
         ].join("");
+        standortVertretungStandortSelect.classList.add("standort-select-truncate");
         delete standortVertretungStandortSelect.dataset.pendingSubstituteInitial;
       }
 
@@ -12655,7 +14346,9 @@
 
       function toggleLocationLeistungenPanel(toggleBtn) {
         const row = toggleBtn.closest("tr");
-        const locationName = row?.querySelector(".locations-row__name")?.textContent?.trim();
+        const locationName = row?.querySelector(".locations-row__name")
+          ? readStandortNameFromCell(row.querySelector(".locations-row__name"))
+          : "";
         const tbody = document.getElementById("locationsTableBody");
         if (!locationName || !tbody) return;
         const detailRow = tbody.querySelector(
@@ -13276,6 +14969,9 @@
         document.querySelectorAll(".stats-panel").forEach((panel) => {
           panel.classList.toggle("active", panel.dataset.statsPanel === tabKey);
         });
+        if (tabKey === "overview" && statsOverviewApi?.syncOverviewKpis) {
+          statsOverviewApi.syncOverviewKpis();
+        }
         if (tabKey === "performance" && statsPerformanceApi?.syncPerformanceSummaryKpis) {
           statsPerformanceApi.syncPerformanceSummaryKpis();
         }
@@ -13284,7 +14980,6 @@
       function openMeineStatistikenPage() {
         hideAllWorkspacePages();
         meineStatistikenPage.classList.add("open");
-        initOverviewPeriodTabs();
         setStatsTab("overview");
         syncOverviewStatsFromLeadTable();
         setActiveMenu(menuMeineStatistikenBtn);
@@ -13779,7 +15474,7 @@
           const row = triggerNode.closest("tr");
           const locationName =
             triggerNode.getAttribute("data-location") ||
-            row?.querySelector(".locations-row__name")?.textContent ||
+            readStandortNameFromCell(row?.querySelector(".locations-row__name")) ||
             "";
           const actionType = actionBtn?.getAttribute("data-action") || "reactivate";
           openReactivationModal(locationName, actionType);
@@ -13839,15 +15534,6 @@
       }
       if (menuMeineStatistikenBtn) {
         menuMeineStatistikenBtn.addEventListener("click", openMeineStatistikenPage);
-      }
-      if (meineStatistikenPage) {
-        meineStatistikenPage.addEventListener("change", (event) => {
-          const target = event.target;
-          if (!target?.classList?.contains("stats-standort-select")) return;
-          const scope = target.value || "";
-          syncStatsStandortSelectsToValue(scope);
-          applyMeineStatistikenStandortScope(scope);
-        });
       }
       document.querySelectorAll(".stats-tab").forEach((tab) => {
         tab.addEventListener("click", () => {
@@ -13987,7 +15673,9 @@
       appendOrgTenantLeads();
       ensureLeadPerformanceDemoData();
       applyLeadOverviewVisualStyles();
-      initOverviewPeriodTabs();
+      if (typeof StandortNameDisplay !== "undefined") {
+        StandortNameDisplay.decorateStandortNameCells(document.getElementById("leadBody"));
+      }
       syncStandortSelectOptions();
       MULTI_FILTER_IDS.forEach((filterId) => {
         const select = document.getElementById(filterId);
@@ -14013,6 +15701,24 @@
       updateAvvConsentUI();
 
       try {
+        if (window.__statsStandortMultiselectScriptFailed) {
+          console.error(
+            "stats-standort-multiselect.js konnte nicht geladen werden. Bitte npm run start:clickdummy verwenden.",
+          );
+        } else if (typeof initStatsStandortMultiselect === "function") {
+          statsStandortMultiselectApi = initStatsStandortMultiselect({
+            selectIds: ["statsStandortSelectOverview", "statsStandortSelectPerformance"],
+            getOptions: getStatsStandortFilterOptions,
+            onChange: () => applyMeineStatistikenStandortScope(),
+          });
+          statsStandortMultiselectApi.boot();
+          statsStandortMultiselectApi.refreshOptions(false);
+        }
+      } catch (standortMsError) {
+        console.error("Standort-Multiselect konnte nicht gestartet werden:", standortMsError);
+      }
+
+      try {
         if (window.__statsPerformanceScriptFailed) {
           console.error(
             "stats-performance.js konnte nicht geladen werden. Bitte npm run start:clickdummy verwenden.",
@@ -14028,6 +15734,7 @@
             getMitarbeiterLabels: getAllMitarbeiterLabelsAcrossStandorte,
             getLeadBedarfProducts: () => STATS_DETAIL_PRODUCT_ROWS.slice(),
             getReklamationRecords: () => REKLAMATION_RECORDS.slice(),
+            ...getStatsStandortSelectionDeps(),
           });
           statsPerformanceApi.boot();
         } else {
@@ -14037,6 +15744,32 @@
         }
       } catch (perfBootError) {
         console.error("Performance-Modul konnte nicht gestartet werden:", perfBootError);
+      }
+
+      try {
+        if (window.__statsOverviewScriptFailed) {
+          console.error(
+            "stats-overview.js konnte nicht geladen werden. Bitte npm run start:clickdummy verwenden.",
+          );
+        } else if (typeof initStatsOverviewModule === "function") {
+          statsOverviewApi = initStatsOverviewModule({
+            getStandorte: () => {
+              const subs = Array.isArray(SUBTENANT_STANDORTE) ? SUBTENANT_STANDORTE : [];
+              const tenantOrg = getTenantOrgStandortName();
+              return tenantOrg ? [...subs, tenantOrg] : subs;
+            },
+            scaleByPeriod: scaleOverviewRequestsByPeriod,
+            getOverviewRequestData: (period) => getOverviewRequestData(period),
+            getStatusCountsFromLeads: (period) => getOverviewRequestData(period).status,
+            getStatusMatrixByStandort: (period) => getOverviewRequestData(period).statusMatrix,
+            getOverviewSummaryKpis: (period) => getOverviewSummaryKpis(period),
+            formatOverviewSummaryKpi: formatOverviewKpiValue,
+            ...getStatsStandortSelectionDeps(),
+          });
+          statsOverviewApi.boot();
+        }
+      } catch (ovBootError) {
+        console.error("Übersicht-Modul konnte nicht gestartet werden:", ovBootError);
       }
     </script>
   </body>

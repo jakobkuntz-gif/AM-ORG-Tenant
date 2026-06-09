@@ -7,6 +7,8 @@
     const getMitarbeiterLabels = deps.getMitarbeiterLabels;
     const getLeadBedarfProducts = deps.getLeadBedarfProducts;
     const getReklamationRecords = deps.getReklamationRecords || (() => []);
+    const getStandortSelection = deps.getStandortSelection || (() => ({ isAll: true, selected: [] }));
+    const getActiveStandorte = deps.getActiveStandorte || (() => getStandorte().filter(Boolean));
 
     const SUCCESSFUL_COMPLAINT_STATUS = "Reklamation erfolgreich - geschlossen";
     const REJECTED_COMPLAINT_STATUS = "Reklamation abgelehnt - geschlossen";
@@ -57,10 +59,10 @@
                 },
               },
               standort: {
-                flat: { Mainz: 38.2, Frankfurt: 31.8, "Kein Standort": 28.6 },
+                flat: { Hesena Management Domizil an der Jade: 38.2, Hesena Management Domizil am Ostplatz: 31.8, "Kein Standort": 28.6 },
                 nested: {
-                  Mainz: { "Stationäre Pflege": 42.0, "Std. Betreuung": 35.5 },
-                  Frankfurt: { "Betreutes Wohnen": 29.4, Haushaltshilfe: 34.1 },
+                  Hesena Management Domizil an der Jade: { "Stationäre Pflege": 42.0, "Std. Betreuung": 35.5 },
+                  Hesena Management Domizil am Ostplatz: { "Betreutes Wohnen": 29.4, Haushaltshilfe: 34.1 },
                   "Kein Standort": { Unbekannt: 26.2 },
                 },
               },
@@ -85,10 +87,10 @@
                 },
               },
               standort: {
-                flat: { Mainz: 1.6, Frankfurt: 2.3, "Kein Standort": 2.4 },
+                flat: { Hesena Management Domizil an der Jade: 1.6, Hesena Management Domizil am Ostplatz: 2.3, "Kein Standort": 2.4 },
                 nested: {
-                  Mainz: { "Stationäre Pflege": 1.2, "Std. Betreuung": 2.0 },
-                  Frankfurt: { "Betreutes Wohnen": 2.8, Haushaltshilfe: 1.9 },
+                  Hesena Management Domizil an der Jade: { "Stationäre Pflege": 1.2, "Std. Betreuung": 2.0 },
+                  Hesena Management Domizil am Ostplatz: { "Betreutes Wohnen": 2.8, Haushaltshilfe: 1.9 },
                   "Kein Standort": { Unbekannt: 2.7 },
                 },
               },
@@ -113,10 +115,10 @@
                 },
               },
               standort: {
-                flat: { Mainz: 265, Frankfurt: 292, "Kein Standort": 298 },
+                flat: { Hesena Management Domizil an der Jade: 265, Hesena Management Domizil am Ostplatz: 292, "Kein Standort": 298 },
                 nested: {
-                  Mainz: { "Stationäre Pflege": 248, "Std. Betreuung": 279 },
-                  Frankfurt: { "Betreutes Wohnen": 305, Haushaltshilfe: 278 },
+                  Hesena Management Domizil an der Jade: { "Stationäre Pflege": 248, "Std. Betreuung": 279 },
+                  Hesena Management Domizil am Ostplatz: { "Betreutes Wohnen": 305, Haushaltshilfe: 278 },
                   "Kein Standort": { Unbekannt: 312 },
                 },
               },
@@ -150,42 +152,42 @@
 
           const DEMO_GEBIET_EMPLOYEE_STATS = [
             {
-              standort: "Mainz",
+              standort: "Hesena Management Domizil an der Jade",
               mitarbeiter: "Jakob Kuntz",
               conversion: { standort: 38.2, employee: 39.5, produkt: { "Stationäre Pflege": 42.0, "Std. Betreuung": 33.8 } },
               complaints: { standort: 1.6, employee: 1.4, produkt: { "Stationäre Pflege": 1.1, "Std. Betreuung": 1.8 } },
               investment: { standort: 265, employee: 258, produkt: { "Stationäre Pflege": 255, "Std. Betreuung": 284 } },
             },
             {
-              standort: "Mainz",
+              standort: "Hesena Management Domizil an der Jade",
               mitarbeiter: "Jonas Markus",
               conversion: { standort: 38.2, employee: 37.2, produkt: { Haushaltshilfe: 37.0, "Betreutes Wohnen": 36.5 } },
               complaints: { standort: 1.6, employee: 1.7, produkt: { Haushaltshilfe: 1.7, "Betreutes Wohnen": 1.5 } },
               investment: { standort: 265, employee: 272, produkt: { Haushaltshilfe: 275, "Betreutes Wohnen": 268 } },
             },
             {
-              standort: "Berlin",
+              standort: "Hesena Management Alt-Mariendorf",
               mitarbeiter: "Marie Becker",
               conversion: { standort: 33.5, employee: 34.8, produkt: { "Betreutes Wohnen": 35.2, Kurzzeitpflege: 32.1 } },
               complaints: { standort: 2.0, employee: 1.9, produkt: { "Betreutes Wohnen": 2.1, Kurzzeitpflege: 1.7 } },
               investment: { standort: 278, employee: 271, produkt: { "Betreutes Wohnen": 268, Kurzzeitpflege: 282 } },
             },
             {
-              standort: "Berlin",
+              standort: "Hesena Management Alt-Mariendorf",
               mitarbeiter: "Tim Wagner",
               conversion: { standort: 33.5, employee: 32.1, produkt: { Tagespflege: 31.4, Haushaltshilfe: 33.0 } },
               complaints: { standort: 2.0, employee: 2.1, produkt: { Tagespflege: 2.2, Haushaltshilfe: 1.9 } },
               investment: { standort: 278, employee: 285, produkt: { Tagespflege: 288, Haushaltshilfe: 279 } },
             },
             {
-              standort: "Hamburg",
+              standort: "Hesena Management Haus Hermesgarten",
               mitarbeiter: "Sara Hoffmann",
               conversion: { standort: 29.8, employee: 31.2, produkt: { "Std. Betreuung": 32.0, Pflegedienst: 29.8 } },
               complaints: { standort: 2.2, employee: 2.0, produkt: { "Std. Betreuung": 1.9, Pflegedienst: 2.1 } },
               investment: { standort: 288, employee: 295, produkt: { "Std. Betreuung": 292, Pflegedienst: 301 } },
             },
             {
-              standort: "Hamburg",
+              standort: "Hesena Management Haus Hermesgarten",
               mitarbeiter: "Felix Braun",
               conversion: { standort: 29.8, employee: 28.4, produkt: { Bewerbung: 30.1, Haushaltshilfe: 26.8 } },
               complaints: { standort: 2.2, employee: 2.3, produkt: { Bewerbung: 2.4, Haushaltshilfe: 2.1 } },
@@ -203,7 +205,7 @@
           /** Gebiete ohne Mitarbeiter — Gebiet-Durchschnitt inkl. zugehöriger Produkte. */
           const DEMO_GEBIET_ONLY_STATS = [
             {
-              standort: "Koln",
+              standort: "Hesena Management Domizil an der Werre",
               conversion: {
                 standort: 27.4,
                 produkt: { Bewerbung: 30.1, "24 Stunden Betreuung": 26.5, "Betreutes Wohnen": 28.2 },
@@ -218,7 +220,7 @@
               },
             },
             {
-              standort: "Frankfurt",
+              standort: "Hesena Management Domizil am Ostplatz",
               conversion: {
                 standort: 31.8,
                 produkt: { "Betreutes Wohnen": 31.5, Haushaltshilfe: 34.1, "Ambulante Pflege": 30.4 },
@@ -233,7 +235,7 @@
               },
             },
             {
-              standort: "Munchen",
+              standort: "Hesena Management Domizil am Gartenplatz",
               conversion: {
                 standort: 36.1,
                 produkt: { "Std. Betreuung": 38.0, Pflegedienst: 34.2, Kurzzeitpflege: 35.5 },
@@ -784,8 +786,11 @@
               const diffDays = (end.getTime() - date.getTime()) / 86400000;
               return diffDays >= 0 && diffDays <= maxDays;
             });
-            const scope = document.getElementById("statsStandortSelectPerformance")?.value || "";
-            if (scope) filtered = filtered.filter((row) => getCellValue(row, "standort") === scope);
+            const { isAll } = getStandortSelection();
+            if (!isAll) {
+              const active = new Set(getActiveStandorte().filter(Boolean));
+              filtered = filtered.filter((row) => active.has(getCellValue(row, "standort")));
+            }
             return filtered;
           }
 
@@ -921,9 +926,10 @@
             const maxDays = periodToMaxDays(period);
             const end = new Date();
             end.setHours(23, 59, 59, 999);
-            const scope = getPerformanceStandortScope();
+            const { isAll } = getStandortSelection();
+            const active = isAll ? null : new Set(getActiveStandorte().filter(Boolean));
             return records.filter((record) => {
-              if (scope && record.standort !== scope) return false;
+              if (active && !active.has(record.standort)) return false;
               if (maxDays == null) return true;
               const diffDays = (end.getTime() - record.submittedAtMs) / 86400000;
               return diffDays >= 0 && diffDays <= maxDays;
@@ -1372,10 +1378,6 @@
             return base;
           }
 
-          function getPerformanceStandortScope() {
-            return document.getElementById("statsStandortSelectPerformance")?.value || "";
-          }
-
           function getManagedStandortKeys() {
             return getStandorte().filter(Boolean);
           }
@@ -1524,8 +1526,10 @@
           }
 
           function getStandortKeys(metric, period) {
-            const scope = getPerformanceStandortScope();
-            if (scope) return [scope];
+            const { isAll } = getStandortSelection();
+            if (!isAll) {
+              return getActiveStandorte().filter(Boolean);
+            }
             return getManagedStandortKeys();
           }
 

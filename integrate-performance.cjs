@@ -68,7 +68,7 @@ perfJs = perfJs.replace(/\bgebiet\b/g, (match, offset, str) => {
 perfJs = perfJs.replace(/PERF_BASE_DATA = \{[\s\S]*?\n      \};\n\n      function getPerfHierarchy/m, (block) => {
   return block
     .replace(/\bgebiet:/g, "standort:")
-    .replace(/Darmstadt/g, "Mainz")
+    .replace(/Hesena Management Domizil an der Jade/g, "Hesena Management Domizil an der Jade")
     .replace(/"Kein Gebiet"/g, '"Kein Standort"');
 });
 
