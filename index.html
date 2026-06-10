@@ -6482,6 +6482,8 @@
                 <option value="">Status</option>
                 <option>Neu</option>
                 <option>In Bearbeitung</option>
+                <option>Reklamation in Bearbeitung</option>
+                <option>Gewonnen</option>
                 <option>Geschlossen</option>
               </select>
             </div>
@@ -9966,8 +9968,19 @@
           needsClosed: true,
           reklOutcome: "successful",
         });
-        add(5, "Geschlossen", { hasFirstAction: true, contacted: true, needsClosed: true });
-        add(5, "In Bearbeitung", { hasFirstAction: true, contacted: true });
+        add(1, PERF_REJECTED_COMPLAINT_STATUS, {
+          hasFirstAction: true,
+          contacted: true,
+          needsClosed: true,
+          reklOutcome: "rejected",
+        });
+        add(1, PERF_PENDING_COMPLAINT_STATUS, {
+          hasFirstAction: true,
+          contacted: true,
+          reklOutcome: "pending",
+        });
+        add(4, "Geschlossen", { hasFirstAction: true, contacted: true, needsClosed: true });
+        add(4, "In Bearbeitung", { hasFirstAction: true, contacted: true });
         add(2, "In Bearbeitung", { hasFirstAction: false, contacted: false });
         add(3, "Neu", { hasFirstAction: false, contacted: false });
         return shuffleWithSeed(profiles, "org-tenant-status-profiles");
@@ -10158,6 +10171,20 @@
         )
           return "done";
         return "progress";
+      }
+
+      // Maps a lead's raw status to the value used by the #statusFilter dropdown.
+      // The closed Reklamation variants are bundled under the "Geschlossen" option;
+      // every other status filters on its exact value (Gewonnen stays separate).
+      function leadStatusFilterGroup(statusText) {
+        const status = String(statusText || "").trim();
+        if (
+          status === "Geschlossen" ||
+          status === PERF_SUCCESSFUL_COMPLAINT_STATUS ||
+          status === PERF_REJECTED_COMPLAINT_STATUS
+        )
+          return "Geschlossen";
+        return status;
       }
 
       function setLeadRowStatus(row, statusText) {
@@ -15205,7 +15232,8 @@
           const rowOwner = getCellValue(row, "zustandigkeit");
           const needMatches = selectedNeeds.length === 0 || selectedNeeds.includes(rowNeed);
           const statusMatches =
-            selectedStatuses.length === 0 || selectedStatuses.includes(row.dataset.status);
+            selectedStatuses.length === 0 ||
+            selectedStatuses.includes(leadStatusFilterGroup(row.dataset.status));
           const locationMatches =
             selectedLocations.length === 0 || selectedLocations.includes(rowLocation);
           const sourceMatches = selectedSources.length === 0 || selectedSources.includes(rowSource);
