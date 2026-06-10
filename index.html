@@ -23,9 +23,9 @@
         --white: #ffffff;
         --off-white: #f2f0eb;
         --green: #98c44c;
-        --green-dark: #98c44c;
-        --green-light: #98c44c;
-        --green-surface: #98c44c;
+        --green-dark: #77993c;
+        --green-light: #cbe1a5;
+        --green-surface: #eaf3db;
         --orange: #ffa600;
         --orange-partial-surface: rgba(255, 166, 0, 0.2);
         --amber-soft: rgba(255, 166, 0, 0.05);
@@ -662,16 +662,27 @@
       }
 
       .status.new {
-        color: var(--orange);
-      }
+        color: #FFA600;
+      } /* Neu — action, urgent */
 
       .status.progress {
-        color: var(--primary);
-      }
+        color: #4C8BA5;
+      } /* In Bearbeitung — active */
+
+      .status.pending {
+        color: #4C8BA5;
+        font-weight: 400;
+      } /* Reklamation in Bearbeitung — lightweight blue */
+
+      .status.won {
+        color: #77993C;
+        font-weight: 400;
+      } /* Gewonnen — lightweight positive, dark green for contrast */
 
       .status.done {
-        color: var(--green);
-      }
+        color: #707070;
+        font-weight: 400;
+      } /* Geschlossen & closed Reklamationen — recede */
 
       .table-footer {
         display: flex;
@@ -1920,6 +1931,10 @@
         max-width: 300px;
       }
 
+      .detail-control .standort-select-truncate {
+        max-width: none;
+      }
+
       .locations-table__status-head {
         width: auto;
         white-space: nowrap;
@@ -2002,6 +2017,30 @@
         font-weight: 400;
         line-height: 1.2;
         color: var(--text);
+      }
+
+      /* Absent Standort: stack a second status line below the dot+label.
+         Only applied to absent rows, so non-absent row height is untouched. */
+      .location-status-wrap--absent {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 3px;
+      }
+
+      .location-absence-note {
+        font-size: 13px;
+        line-height: 1.2;
+        white-space: nowrap;
+      }
+
+      .location-absence-note--vertretung {
+        font-weight: 400;
+        color: #b97a00;
+      }
+
+      .location-absence-note--none {
+        font-weight: 700;
+        color: #e74c3c;
       }
 
       .location-end-wrap {
@@ -5985,6 +6024,8 @@
         font-size: var(--font-body);
         height: 44px;
         padding: 0 12px;
+        width: 100%;
+        min-width: 0;
       }
 
       .detail-select:disabled {
@@ -9498,7 +9539,7 @@
     </script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
     <script
-      src="/standort-name-display.js?v=20260609truncate30"
+      src="/standort-name-display.js?v=20260610detailfullname"
       onerror="window.__standortNameDisplayScriptFailed = true"
     ></script>
     <script
@@ -10107,9 +10148,15 @@
       function leadStatusCssClass(statusText) {
         const status = String(statusText || "").trim();
         if (status === "Neu") return "new";
-        if (status === "In Bearbeitung" || status.includes("Reklamation")) return "progress";
-        if (status === "Gewonnen") return "done";
-        if (status === "Geschlossen") return "done";
+        if (status === "In Bearbeitung") return "progress";
+        if (status === PERF_PENDING_COMPLAINT_STATUS) return "pending";
+        if (status === "Gewonnen") return "won";
+        if (
+          status === "Geschlossen" ||
+          status === PERF_SUCCESSFUL_COMPLAINT_STATUS ||
+          status === PERF_REJECTED_COMPLAINT_STATUS
+        )
+          return "done";
         return "progress";
       }
 
@@ -10518,12 +10565,7 @@
         }
       }
 
-      function sortLeadsByRequestDate() {
-        if (anfrageDatumSortDescending === null) {
-          anfrageDatumSortDescending = false;
-        } else {
-          anfrageDatumSortDescending = !anfrageDatumSortDescending;
-        }
+      function applyAnfrageDatumSort() {
         refreshLeadTableRefs();
         const sorted = [...rows].sort((a, b) => {
           const ta = parseRequestDateCell(getCellValue(a, "anfrageDatum"));
@@ -10534,6 +10576,15 @@
         sorted.forEach((row) => leadBody.appendChild(row));
         refreshLeadTableRefs();
         updateAnfrageDatumSortIcon();
+      }
+
+      function sortLeadsByRequestDate() {
+        if (anfrageDatumSortDescending === null) {
+          anfrageDatumSortDescending = false;
+        } else {
+          anfrageDatumSortDescending = !anfrageDatumSortDescending;
+        }
+        applyAnfrageDatumSort();
         applyFilter(true);
       }
 
@@ -11741,7 +11792,7 @@
           .concat(
             ASSIGNABLE_STANDORTE.map((standort) =>
               typeof StandortNameDisplay !== "undefined"
-                ? StandortNameDisplay.standortOptionHtml(standort)
+                ? StandortNameDisplay.standortOptionHtml(standort, "", { truncate: false })
                 : `<option>${standort}</option>`,
             ),
           )
@@ -12321,6 +12372,39 @@
       const standortUsersCache = new Map();
       const standortAbsenceStateCache = new Map();
       const standortVertretungStateCache = new Map();
+
+      // Demo data: which Standorte currently have a site-wide absence (today = 2026-06-10).
+      // - Jade keeps a FUTURE-dated entry (not currently active); its overview "absent"
+      //   state comes from the "all users absent" mechanism instead (see below).
+      // - Ostplatz has an ACTIVE site-wide absence -> overview shows state 3.
+      const DEMO_SITEWIDE_ABSENCE = {
+        "Hesena Management Domizil an der Jade": {
+          active: true,
+          startDate: "2026-07-01",
+          endDate: "2026-07-05",
+          reason: "Standortweite Fortbildung",
+        },
+        "Hesena Management Domizil am Ostplatz": {
+          active: true,
+          startDate: "2026-06-05",
+          endDate: "2026-06-30",
+          reason: "Standortweite Abwesenheit",
+        },
+      };
+
+      // Demo data: Standorte where EVERY user has an ongoing individual absence.
+      // This is the second "absent" mechanism (the automatic-Vertretung trigger).
+      const DEMO_ALL_USERS_ABSENT = new Set(["Hesena Management Domizil an der Jade"]);
+
+      // Demo data: Standorte with an active Vertretungsregel (substitute Standort).
+      // Jade is automatically covered by Werre; Ostplatz is left without a rule.
+      const DEMO_VERTRETUNG_RULE = {
+        "Hesena Management Domizil an der Jade": {
+          substituteStandort: "Hesena Management Domizil an der Werre",
+          ruleActive: true,
+          activeSince: "2026-06-01",
+        },
+      };
       const STANDORT_FORWARDING_LEAD_TYPES = [
         { id: "krankenhaus", label: "Klinik-Anfragen" },
         { id: "privat", label: "Privat-Anfragen" },
@@ -12936,7 +13020,21 @@
 
         const users = getStandortUsersForLocation(normalizedId, standortName);
         const individual = {};
+        const allUsersAbsent = DEMO_ALL_USERS_ABSENT.has(standortName);
         users.forEach((user, index) => {
+          if (allUsersAbsent) {
+            individual[user.id] = {
+              absences: [
+                {
+                  id: `demo-allabsent-${index}`,
+                  startDate: "2026-06-01",
+                  endDate: "2026-06-21",
+                  saved: true,
+                },
+              ],
+            };
+            return;
+          }
           if (index === 1) {
             individual[user.id] = {
               absences: [
@@ -12998,15 +13096,9 @@
 
         const state = {
           individual,
-          siteWide:
-            standortName === "Hesena Management Domizil an der Jade"
-              ? {
-                  active: true,
-                  startDate: "2026-07-01",
-                  endDate: "2026-07-05",
-                  reason: "Standortweite Fortbildung",
-                }
-              : null,
+          siteWide: DEMO_SITEWIDE_ABSENCE[standortName]
+            ? { ...DEMO_SITEWIDE_ABSENCE[standortName] }
+            : null,
         };
         standortAbsenceStateCache.set(normalizedId, state);
         return state;
@@ -13018,10 +13110,11 @@
           return standortVertretungStateCache.get(normalizedId);
         }
 
+        const demoRule = DEMO_VERTRETUNG_RULE[standortName] || {};
         const state = {
-          substituteStandort: "",
-          ruleActive: false,
-          activeSince: "",
+          substituteStandort: demoRule.substituteStandort || "",
+          ruleActive: demoRule.ruleActive || false,
+          activeSince: demoRule.activeSince || "",
           forwarding: {
             krankenhaus: { enabled: true },
             privat: { enabled: true },
@@ -13084,6 +13177,67 @@
 
       function isUserCurrentlyAbsent(individual, userId) {
         return Boolean(getUserOngoingAbsence(individual, userId));
+      }
+
+      // A Standort counts as "currently absent" if a site-wide absence is ongoing
+      // today, OR every (non-deactivated) user is currently absent — the same
+      // condition that triggers the automatic Vertretung.
+      function isSiteWideAbsenceCurrentlyActive(state) {
+        const siteWide = state?.siteWide;
+        if (!siteWide || siteWide.active === false || !siteWide.startDate) return false;
+        return (
+          getAbsenceTiming({
+            saved: true,
+            startDate: siteWide.startDate,
+            endDate: siteWide.endDate,
+          }) === "ongoing"
+        );
+      }
+
+      function areAllStandortUsersAbsent(standortId, standortName, state) {
+        const users = getStandortUsersForLocation(standortId, standortName).filter(
+          (user) => user.status !== "deaktiviert",
+        );
+        if (users.length === 0) return false;
+        return users.every((user) => isUserCurrentlyAbsent(state.individual, user.id));
+      }
+
+      function isStandortCurrentlyAbsent(standortId, standortName) {
+        const state = getStandortAbsenceState(standortId, standortName);
+        return (
+          isSiteWideAbsenceCurrentlyActive(state) ||
+          areAllStandortUsersAbsent(standortId, standortName, state)
+        );
+      }
+
+      function standortHasActiveVertretung(standortId, standortName) {
+        return Boolean(getStandortVertretungState(standortId, standortName).substituteStandort);
+      }
+
+      // Adds a second status line ("Abwesend …") to the overview Status cell for
+      // Standorte that are currently absent. Idempotent; leaves non-absent rows untouched.
+      function decorateLocationsOverviewAbsence() {
+        getStandortTableRows().forEach((row) => {
+          const wrap = row.querySelector(".location-status-wrap");
+          if (!wrap) return;
+          wrap.querySelector(".location-absence-note")?.remove();
+          wrap.classList.remove("location-status-wrap--absent");
+
+          const name = row.dataset.standortName;
+          const id = row.dataset.standortId;
+          if (!name || !isStandortCurrentlyAbsent(id, name)) return;
+
+          const hasVertretung = standortHasActiveVertretung(id, name);
+          const note = document.createElement("span");
+          note.className = `location-absence-note ${
+            hasVertretung ? "location-absence-note--vertretung" : "location-absence-note--none"
+          }`;
+          note.textContent = hasVertretung
+            ? "Abwesend – Vertretung aktiv"
+            : "Abwesend – keine Vertretung";
+          wrap.classList.add("location-status-wrap--absent");
+          wrap.appendChild(note);
+        });
       }
 
       function getUserAbsenceFilterCategories(individual, userId) {
@@ -14327,6 +14481,10 @@
         hideAllWorkspacePages();
         meineStandortePage.classList.add("open");
         setActiveMenu(menuMeineStandorteBtn);
+        // Recompute absence status lines from the live cached state every time the
+        // overview is shown, so changes made on detail pages (set/end Vertretung,
+        // add/end absences) are reflected without a reload.
+        decorateLocationsOverviewAbsence();
         if (options.pushState !== false) {
           history.pushState({ page: "standorte" }, "", "/standorte");
         }
@@ -15668,6 +15826,7 @@
 
       buildAssignableStandorte();
       initStandortRowMetadata();
+      decorateLocationsOverviewAbsence();
       populateLeadOverviewRows(PERF_DEMO_TARGET_COUNT);
       assignUniqueLeadNames();
       appendOrgTenantLeads();
@@ -15690,6 +15849,8 @@
         const select = document.getElementById(selectId);
         if (select) initStandortAbsenceMultiSelect(select);
       });
+      anfrageDatumSortDescending = true;
+      applyAnfrageDatumSort();
       applyFilter(true);
       syncOverviewStatsFromLeadTable();
       handleAppRoute();

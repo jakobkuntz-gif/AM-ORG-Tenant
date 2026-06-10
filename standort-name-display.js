@@ -54,11 +54,11 @@
     return `<span class="${CLASS}" data-standort-full-name="${escapeAttr(full)}"${title}>${escapeHtml(full)}</span>`;
   }
 
-  function standortOptionHtml(fullName, extraAttrs = "") {
+  function standortOptionHtml(fullName, extraAttrs = "", options = {}) {
     const full = String(fullName || "").trim();
     if (!full) return "";
-    const display = truncateStandortName(full);
-    const title = isStandortNameTruncated(full) ? ` title="${escapeAttr(full)}"` : "";
+    const display = options.truncate === false ? full : truncateStandortName(full);
+    const title = display !== full ? ` title="${escapeAttr(full)}"` : "";
     return `<option value="${escapeAttr(full)}"${title}${extraAttrs ? ` ${extraAttrs}` : ""}>${escapeHtml(display)}</option>`;
   }
 
