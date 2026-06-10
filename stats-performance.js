@@ -59,10 +59,10 @@
                 },
               },
               standort: {
-                flat: { Hesena Management Domizil an der Jade: 38.2, Hesena Management Domizil am Ostplatz: 31.8, "Kein Standort": 28.6 },
+                flat: { "Hesena Management Domizil an der Jade": 38.2, "Hesena Management Domizil am Ostplatz": 31.8, "Kein Standort": 28.6 },
                 nested: {
-                  Hesena Management Domizil an der Jade: { "Stationäre Pflege": 42.0, "Std. Betreuung": 35.5 },
-                  Hesena Management Domizil am Ostplatz: { "Betreutes Wohnen": 29.4, Haushaltshilfe: 34.1 },
+                  "Hesena Management Domizil an der Jade": { "Stationäre Pflege": 42.0, "Std. Betreuung": 35.5 },
+                  "Hesena Management Domizil am Ostplatz": { "Betreutes Wohnen": 29.4, Haushaltshilfe: 34.1 },
                   "Kein Standort": { Unbekannt: 26.2 },
                 },
               },
@@ -87,10 +87,10 @@
                 },
               },
               standort: {
-                flat: { Hesena Management Domizil an der Jade: 1.6, Hesena Management Domizil am Ostplatz: 2.3, "Kein Standort": 2.4 },
+                flat: { "Hesena Management Domizil an der Jade": 1.6, "Hesena Management Domizil am Ostplatz": 2.3, "Kein Standort": 2.4 },
                 nested: {
-                  Hesena Management Domizil an der Jade: { "Stationäre Pflege": 1.2, "Std. Betreuung": 2.0 },
-                  Hesena Management Domizil am Ostplatz: { "Betreutes Wohnen": 2.8, Haushaltshilfe: 1.9 },
+                  "Hesena Management Domizil an der Jade": { "Stationäre Pflege": 1.2, "Std. Betreuung": 2.0 },
+                  "Hesena Management Domizil am Ostplatz": { "Betreutes Wohnen": 2.8, Haushaltshilfe: 1.9 },
                   "Kein Standort": { Unbekannt: 2.7 },
                 },
               },
@@ -115,10 +115,10 @@
                 },
               },
               standort: {
-                flat: { Hesena Management Domizil an der Jade: 265, Hesena Management Domizil am Ostplatz: 292, "Kein Standort": 298 },
+                flat: { "Hesena Management Domizil an der Jade": 265, "Hesena Management Domizil am Ostplatz": 292, "Kein Standort": 298 },
                 nested: {
-                  Hesena Management Domizil an der Jade: { "Stationäre Pflege": 248, "Std. Betreuung": 279 },
-                  Hesena Management Domizil am Ostplatz: { "Betreutes Wohnen": 305, Haushaltshilfe: 278 },
+                  "Hesena Management Domizil an der Jade": { "Stationäre Pflege": 248, "Std. Betreuung": 279 },
+                  "Hesena Management Domizil am Ostplatz": { "Betreutes Wohnen": 305, Haushaltshilfe: 278 },
                   "Kein Standort": { Unbekannt: 312 },
                 },
               },
@@ -375,7 +375,58 @@
             "7d": "7T",
             "30d": "30T",
             "60d": "60T",
+            custom: "Zeitraum",
           };
+
+          // Fixed demo data start used for the "Gesamt" range ("seit 01.01.2026").
+          const PERF_DATA_START_ISO = "2026-01-01";
+
+          // Whether a higher value is an improvement (drives delta colour).
+          const PERF_METRIC_HIGHER_IS_BETTER = {
+            conversion: true,
+            responseRate: true,
+            complaints: false,
+            investment: false,
+            timeToContact: false,
+            handlingTime: false,
+          };
+
+          // Custom range + comparison state. Reset on every panel open (no persistence).
+          const perfRangeState = {
+            customStart: null, // ISO yyyy-mm-dd
+            customEnd: null,
+            compare: false,
+            compareMode: "previous", // "previous" | "custom"
+            compStart: null,
+            compEnd: null,
+          };
+
+          function perfPad2(n) {
+            return String(n).padStart(2, "0");
+          }
+          function perfToday() {
+            const d = new Date();
+            d.setHours(0, 0, 0, 0);
+            return d;
+          }
+          function perfIsoToDate(iso) {
+            const [y, m, d] = String(iso).split("-").map(Number);
+            return new Date(y, (m || 1) - 1, d || 1);
+          }
+          function perfDateToIso(d) {
+            return `${d.getFullYear()}-${perfPad2(d.getMonth() + 1)}-${perfPad2(d.getDate())}`;
+          }
+          function perfFormatDe(d) {
+            return `${perfPad2(d.getDate())}.${perfPad2(d.getMonth() + 1)}.${d.getFullYear()}`;
+          }
+          function perfAddDays(d, n) {
+            const x = new Date(d);
+            x.setDate(x.getDate() + n);
+            return x;
+          }
+          function perfDaysBetween(a, b) {
+            return Math.round((b.getTime() - a.getTime()) / 86400000);
+          }
 
           function getPerformancePeriod() {
             const active = document.querySelector(
@@ -384,8 +435,63 @@
             return active?.dataset?.perfPeriod || "gesamt";
           }
 
+          // Resolves the active period (preset or custom) to a concrete date range.
+          function getResolvedPerfRange() {
+            const period = getPerformancePeriod();
+            const today = perfToday();
+            if (period === "custom" && perfRangeState.customStart && perfRangeState.customEnd) {
+              return {
+                start: perfIsoToDate(perfRangeState.customStart),
+                end: perfIsoToDate(perfRangeState.customEnd),
+                isGesamt: false,
+              };
+            }
+            if (period === "gesamt") {
+              return { start: perfIsoToDate(PERF_DATA_START_ISO), end: today, isGesamt: true };
+            }
+            const maxDays = periodToMaxDays(period) || 0;
+            return { start: perfAddDays(today, -maxDays), end: today, isGesamt: false };
+          }
+
+          function formatPerfRangeLabel(range) {
+            if (!range) return "";
+            if (range.isGesamt) return `seit ${perfFormatDe(range.start)}`;
+            return `${perfFormatDe(range.start)} – ${perfFormatDe(range.end)}`;
+          }
+
+          // Comparison range: explicit custom pair, or the equal-length period
+          // immediately before the selected range.
+          function getResolvedCompareRange() {
+            if (
+              perfRangeState.compareMode === "custom" &&
+              perfRangeState.compStart &&
+              perfRangeState.compEnd
+            ) {
+              return {
+                start: perfIsoToDate(perfRangeState.compStart),
+                end: perfIsoToDate(perfRangeState.compEnd),
+                isGesamt: false,
+                custom: true,
+              };
+            }
+            const cur = getResolvedPerfRange();
+            const lenDays = Math.max(0, perfDaysBetween(cur.start, cur.end));
+            const end = perfAddDays(cur.start, -1);
+            const start = perfAddDays(end, -lenDays);
+            return { start, end, isGesamt: false, custom: false };
+          }
+
+          // Deterministic scale factor (~0.82–1.18) seeded by range + metric, so each
+          // range/comparison shows plausible, stable, range-specific numbers.
+          function perfRangeScaleFactor(range, metric) {
+            if (!range || range.isGesamt) return 1;
+            const lenDays = Math.max(1, perfDaysBetween(range.start, range.end));
+            const seed = hashLabelSeed(`${perfDateToIso(range.start)}|${lenDays}|${metric}`);
+            return 0.82 + ((seed % 361) / 1000);
+          }
+
           function getPerformancePeriodLabel() {
-            return PERF_PERIOD_TAB_LABELS[getPerformancePeriod()] || "Gesamt";
+            return formatPerfRangeLabel(getResolvedPerfRange());
           }
 
           function setPerformancePeriodTab(period) {
@@ -398,6 +504,29 @@
               });
           }
 
+          function updatePerfCustomVisibility() {
+            const panel = document.getElementById("perfCustomRange");
+            if (panel) panel.hidden = getPerformancePeriod() !== "custom";
+          }
+
+          function updatePerfRangeLine() {
+            const el = document.getElementById("perfRangeValue");
+            if (el) el.textContent = formatPerfRangeLabel(getResolvedPerfRange());
+            updatePerfCompareRangeLine();
+          }
+
+          function updatePerfCompareRangeLine() {
+            const el = document.getElementById("perfCompareRangeValue");
+            if (!el) return;
+            if (!perfRangeState.compare) {
+              el.textContent = "";
+              return;
+            }
+            const comp = getResolvedCompareRange();
+            const suffix = comp.custom ? "(benutzerdefiniert)" : "(vorheriger Zeitraum)";
+            el.textContent = `vs. ${formatPerfRangeLabel(comp)} ${suffix}`;
+          }
+
           function initPerformancePeriodTabs() {
             document
               .querySelectorAll("#statsPanelPerformance .stats-perf-period-tab")
@@ -406,9 +535,151 @@
                   const period = tab.dataset.perfPeriod;
                   if (!period || period === getPerformancePeriod()) return;
                   setPerformancePeriodTab(period);
+                  if (period === "custom") {
+                    if (!perfRangeState.customStart || !perfRangeState.customEnd) {
+                      const today = perfToday();
+                      perfRangeState.customStart = perfDateToIso(perfAddDays(today, -30));
+                      perfRangeState.customEnd = perfDateToIso(today);
+                    }
+                    const vonEl = document.getElementById("perfCustomVon");
+                    const bisEl = document.getElementById("perfCustomBis");
+                    if (vonEl) vonEl.value = perfRangeState.customStart;
+                    if (bisEl) bisEl.value = perfRangeState.customEnd;
+                    const err = document.getElementById("perfCustomError");
+                    if (err) {
+                      err.hidden = true;
+                      err.textContent = "";
+                    }
+                  }
+                  updatePerfCustomVisibility();
                   syncPerformanceSummaryKpis();
                 });
               });
+          }
+
+          function applyPerfCustomRange() {
+            const vonEl = document.getElementById("perfCustomVon");
+            const bisEl = document.getElementById("perfCustomBis");
+            const err = document.getElementById("perfCustomError");
+            if (!vonEl || !bisEl) return;
+            const von = vonEl.value;
+            const bis = bisEl.value;
+            const showError = (msg) => {
+              if (err) {
+                err.textContent = msg;
+                err.hidden = false;
+              }
+            };
+            if (!von || !bis) return showError("Bitte Von- und Bis-Datum wählen.");
+            if (von > bis) return showError("Das Von-Datum darf nicht nach dem Bis-Datum liegen.");
+            if (err) {
+              err.hidden = true;
+              err.textContent = "";
+            }
+            perfRangeState.customStart = von;
+            perfRangeState.customEnd = bis;
+            syncPerformanceSummaryKpis();
+          }
+
+          function applyPerfCompareCustomRange() {
+            const vonEl = document.getElementById("perfCompareVon");
+            const bisEl = document.getElementById("perfCompareBis");
+            const err = document.getElementById("perfCompareError");
+            if (!vonEl || !bisEl) return;
+            const von = vonEl.value;
+            const bis = bisEl.value;
+            const showError = (msg) => {
+              if (err) {
+                err.textContent = msg;
+                err.hidden = false;
+              }
+            };
+            if (!von || !bis) return showError("Bitte Von- und Bis-Datum wählen.");
+            if (von > bis) return showError("Das Von-Datum darf nicht nach dem Bis-Datum liegen.");
+            if (err) {
+              err.hidden = true;
+              err.textContent = "";
+            }
+            perfRangeState.compStart = von;
+            perfRangeState.compEnd = bis;
+            syncPerformanceSummaryKpis();
+          }
+
+          function initPerformancePeriodControls() {
+            const applyBtn = document.getElementById("perfCustomApply");
+            if (applyBtn && !applyBtn.dataset.bound) {
+              applyBtn.dataset.bound = "1";
+              applyBtn.addEventListener("click", applyPerfCustomRange);
+            }
+            const toggle = document.getElementById("perfCompareToggle");
+            if (toggle && !toggle.dataset.bound) {
+              toggle.dataset.bound = "1";
+              toggle.addEventListener("change", () => {
+                perfRangeState.compare = toggle.checked;
+                const opts = document.getElementById("perfCompareOptions");
+                if (opts) opts.hidden = !toggle.checked;
+                syncPerformanceSummaryKpis();
+              });
+            }
+            document
+              .querySelectorAll('#statsPanelPerformance input[name="perfCompareMode"]')
+              .forEach((radio) => {
+                if (radio.dataset.bound) return;
+                radio.dataset.bound = "1";
+                radio.addEventListener("change", () => {
+                  if (!radio.checked) return;
+                  perfRangeState.compareMode = radio.value;
+                  const customWrap = document.getElementById("perfCompareCustom");
+                  if (customWrap) customWrap.hidden = radio.value !== "custom";
+                  if (radio.value === "custom") {
+                    if (!perfRangeState.compStart || !perfRangeState.compEnd) {
+                      const prev = getResolvedCompareRange();
+                      perfRangeState.compStart = perfDateToIso(prev.start);
+                      perfRangeState.compEnd = perfDateToIso(prev.end);
+                    }
+                    const vonEl = document.getElementById("perfCompareVon");
+                    const bisEl = document.getElementById("perfCompareBis");
+                    if (vonEl) vonEl.value = perfRangeState.compStart;
+                    if (bisEl) bisEl.value = perfRangeState.compEnd;
+                  }
+                  syncPerformanceSummaryKpis();
+                });
+              });
+            const compApply = document.getElementById("perfCompareApply");
+            if (compApply && !compApply.dataset.bound) {
+              compApply.dataset.bound = "1";
+              compApply.addEventListener("click", applyPerfCompareCustomRange);
+            }
+          }
+
+          function resetPerformanceControls() {
+            perfRangeState.customStart = null;
+            perfRangeState.customEnd = null;
+            perfRangeState.compare = false;
+            perfRangeState.compareMode = "previous";
+            perfRangeState.compStart = null;
+            perfRangeState.compEnd = null;
+            setPerformancePeriodTab("gesamt");
+            const toggle = document.getElementById("perfCompareToggle");
+            if (toggle) toggle.checked = false;
+            const opts = document.getElementById("perfCompareOptions");
+            if (opts) opts.hidden = true;
+            const compCustom = document.getElementById("perfCompareCustom");
+            if (compCustom) compCustom.hidden = true;
+            document
+              .querySelectorAll('#statsPanelPerformance input[name="perfCompareMode"]')
+              .forEach((radio) => {
+                radio.checked = radio.value === "previous";
+              });
+            ["perfCustomError", "perfCompareError"].forEach((id) => {
+              const err = document.getElementById(id);
+              if (err) {
+                err.hidden = true;
+                err.textContent = "";
+              }
+            });
+            updatePerfCustomVisibility();
+            syncPerformanceSummaryKpis();
           }
 
           const PERF_EXPORT_LEVEL = "standort-mitarbeiter-produkt";
@@ -777,15 +1048,28 @@
 
           function getLeadsInPerformancePeriod(period) {
             const rows = Array.from(document.querySelectorAll("#leadBody tr.lead-row"));
-            const maxDays = periodToMaxDays(period);
-            let filtered = maxDays == null ? rows : rows.filter((row) => {
-              const date = perfParseAnfrageDatum(getCellValue(row, "anfrageDatum"));
-              if (!date) return false;
-              const end = new Date();
-              end.setHours(23, 59, 59, 999);
-              const diffDays = (end.getTime() - date.getTime()) / 86400000;
-              return diffDays >= 0 && diffDays <= maxDays;
-            });
+            let filtered;
+            if (period === "custom") {
+              const range = getResolvedPerfRange();
+              const startMs = new Date(range.start).setHours(0, 0, 0, 0);
+              const endMs = new Date(range.end).setHours(23, 59, 59, 999);
+              filtered = rows.filter((row) => {
+                const date = perfParseAnfrageDatum(getCellValue(row, "anfrageDatum"));
+                if (!date) return false;
+                const t = date.getTime();
+                return t >= startMs && t <= endMs;
+              });
+            } else {
+              const maxDays = periodToMaxDays(period);
+              filtered = maxDays == null ? rows : rows.filter((row) => {
+                const date = perfParseAnfrageDatum(getCellValue(row, "anfrageDatum"));
+                if (!date) return false;
+                const end = new Date();
+                end.setHours(23, 59, 59, 999);
+                const diffDays = (end.getTime() - date.getTime()) / 86400000;
+                return diffDays >= 0 && diffDays <= maxDays;
+              });
+            }
             const { isAll } = getStandortSelection();
             if (!isAll) {
               const active = new Set(getActiveStandorte().filter(Boolean));
@@ -3050,19 +3334,86 @@
             return `${value.toFixed(1).replace(".", ",")}%`;
           }
 
-          function syncPerformanceSummaryKpis() {
-            const period = getPerformancePeriod();
-            const leads = getLeadsInPerformancePeriod(period);
+          // Real "Gesamt" value for a metric (respects the Standort filter).
+          function getPerfBaseMetricValue(metric) {
+            const leads = getLeadsInPerformancePeriod("gesamt");
             leads.forEach(ensureLeadRowPrice);
+            return computeGroupMetricFromLeads(leads, metric, "gesamt");
+          }
+
+          function clampPerfMetricValue(metric, value) {
+            if (value == null || Number.isNaN(value)) return null;
+            if (perfMetricUnit(metric) === "%") return Math.min(100, Math.max(0, value));
+            return Math.max(0, value);
+          }
+
+          // Displayed value for a range = real base scaled by the deterministic
+          // range/metric factor (Gesamt factor is 1, i.e. the real base value).
+          function getPerfMetricValueForRange(metric, range) {
+            const base = getPerfBaseMetricValue(metric);
+            if (base == null) return null;
+            return clampPerfMetricValue(metric, base * perfRangeScaleFactor(range, metric));
+          }
+
+          function formatPerfDelta(deltaPct) {
+            const rounded = Math.round(deltaPct);
+            return `${rounded > 0 ? "+" : ""}${rounded} %`;
+          }
+
+          function perfDeltaColor(metric, deltaPct) {
+            if (Math.round(deltaPct) === 0) return "#707070";
+            const higherIsBetter = PERF_METRIC_HIGHER_IS_BETTER[metric] !== false;
+            const improved = deltaPct > 0 === higherIsBetter;
+            return improved ? "#77993C" : "#E74C3C";
+          }
+
+          function renderPerfKpiComparison(metric, valueEl, currentValue) {
+            const card = valueEl.closest(".stats-perf-kpi-card");
+            if (!card) return;
+            const textWrap = valueEl.closest(".stats-perf-kpi-text") || card;
+            let deltaEl = card.querySelector(".stats-perf-kpi-delta");
+            let compareEl = card.querySelector(".stats-perf-kpi-compare");
+            if (!perfRangeState.compare) {
+              if (deltaEl) deltaEl.remove();
+              if (compareEl) compareEl.remove();
+              return;
+            }
+            const compareValue = getPerfMetricValueForRange(metric, getResolvedCompareRange());
+            if (!deltaEl) {
+              deltaEl = document.createElement("span");
+              deltaEl.className = "stats-perf-kpi-delta";
+              valueEl.insertAdjacentElement("afterend", deltaEl);
+            }
+            if (!compareEl) {
+              compareEl = document.createElement("span");
+              compareEl.className = "stats-perf-kpi-compare";
+              const helper = textWrap.querySelector(".stats-perf-kpi-helper");
+              if (helper) helper.insertAdjacentElement("afterend", compareEl);
+              else textWrap.appendChild(compareEl);
+            }
+            if (currentValue == null || compareValue == null || !compareValue) {
+              deltaEl.textContent = "–";
+              deltaEl.style.color = "#707070";
+              compareEl.textContent = `Vergleich: ${formatPerfSummaryKpi(metric, compareValue, compareValue == null ? 0 : 1)}`;
+              return;
+            }
+            const deltaPct = ((currentValue - compareValue) / compareValue) * 100;
+            deltaEl.textContent = formatPerfDelta(deltaPct);
+            deltaEl.style.color = perfDeltaColor(metric, deltaPct);
+            compareEl.textContent = `Vergleich: ${formatPerfSummaryKpi(metric, compareValue, 1)}`;
+          }
+
+          function syncPerformanceSummaryKpis() {
+            const range = getResolvedPerfRange();
+            const hasLeads = getLeadsInPerformancePeriod("gesamt").length > 0;
             PERF_SUMMARY_METRICS.forEach(([metric, elementId]) => {
               const el = document.getElementById(elementId);
               if (!el) return;
-              el.textContent = formatPerfSummaryKpi(
-                metric,
-                computeGroupMetricFromLeads(leads, metric, period),
-                leads.length,
-              );
+              const value = getPerfMetricValueForRange(metric, range);
+              el.textContent = formatPerfSummaryKpi(metric, value, hasLeads ? 1 : 0);
+              renderPerfKpiComparison(metric, el, value);
             });
+            updatePerfRangeLine();
             syncPerformanceSparklines();
             refreshAllPerformanceSegments();
           }
@@ -3071,6 +3422,7 @@
     function boot() {
       refreshPerformanceTenantLists();
       initPerformancePeriodTabs();
+      initPerformancePeriodControls();
       try {
         removePerfConsolidatedSummaryBlocks();
         ensureConsolidatedExportButton();
@@ -3084,6 +3436,7 @@
     return {
       refreshPerformanceTenantLists,
       syncPerformanceSummaryKpis,
+      resetPerformanceControls,
       boot,
     };
   }

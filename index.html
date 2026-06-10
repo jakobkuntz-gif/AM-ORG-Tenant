@@ -1941,7 +1941,8 @@
         padding-left: 12px;
       }
 
-      .locations-table__end-head {
+      .locations-table__leistungsbereiche-head,
+      .locations-table__login-head {
         width: auto;
         white-space: nowrap;
         padding-left: 12px;
@@ -2043,45 +2044,19 @@
         color: #e74c3c;
       }
 
-      .location-end-wrap {
-        display: inline-flex;
-        align-items: center;
-        gap: 8px;
+      .locations-leistungsbereiche-cell {
         white-space: nowrap;
+        vertical-align: middle;
       }
 
-      .locations-table tbody td .location-end-date,
-      .locations-table tbody td .location-end-open {
-        font-size: var(--font-helper);
+      .locations-last-login-cell {
+        white-space: nowrap;
+        font-size: var(--font-body);
         color: var(--text);
       }
 
-      .location-extend-btn {
-        border: 1px solid var(--primary);
-        background: var(--white);
-        color: var(--primary-dark);
-        border-radius: 4px;
-        padding: 2px 8px;
-        font-size: var(--font-helper);
-        font-weight: 600;
-        line-height: 1.2;
-        cursor: pointer;
-        white-space: nowrap;
-      }
-
-      .location-extend-btn:hover {
-        background: var(--primary-surface);
-      }
-
-      .locations-table__leistungen-head {
-        width: auto;
-        white-space: nowrap;
-        padding-left: 12px;
-      }
-
-      .locations-leistungen-cell {
-        white-space: nowrap;
-        vertical-align: middle;
+      .locations-last-login-cell.locations-last-login--never {
+        color: var(--muted);
       }
 
       .locations-table__detail-head {
@@ -2126,7 +2101,7 @@
 
       .locations-leistungen-toggle {
         display: inline-grid;
-        grid-template-columns: 2.75rem 11px;
+        grid-template-columns: auto 11px;
         column-gap: 6px;
         align-items: center;
         min-height: 22px;
@@ -2143,7 +2118,7 @@
         cursor: default;
       }
 
-      .locations-leistungen-count {
+      .locations-leistungsbereiche-count {
         display: inline-flex;
         align-items: center;
         justify-content: flex-start;
@@ -2156,17 +2131,6 @@
         line-height: 1;
         text-align: left;
         color: var(--text);
-      }
-
-      .locations-leistungen-count--partial {
-        width: max-content;
-        max-width: 100%;
-        background-color: var(--orange-partial-surface);
-      }
-
-      .locations-leistungen-dash {
-        color: var(--muted);
-        font-size: var(--font-body);
       }
 
       .locations-leistungen-chevron {
@@ -2204,80 +2168,32 @@
         padding: 0;
       }
 
-      .locations-detail-meta-cell {
-        padding: 10px 14px;
-        padding-left: 12px;
-        vertical-align: top;
-        white-space: nowrap;
-      }
-
-      .locations-subscription-details {
-        margin: 0;
-        display: flex;
-        flex-direction: column;
-        gap: 4px;
-        font-size: var(--font-helper);
-        color: var(--muted);
-        line-height: 1.35;
-        white-space: nowrap;
-      }
-
-      .locations-subscription-details p {
-        margin: 0;
-        white-space: nowrap;
-      }
-
-      .locations-subscription-label {
-        color: var(--text);
-        font-weight: 600;
-      }
-
-      .locations-leistungen-detail-cell {
-        padding: 10px 14px;
+      .locations-leistungsbereiche-detail-cell {
+        padding: 4px 14px 8px;
         padding-left: 12px;
       }
 
-      .locations-leistungen-panel {
+      .locations-leistungsbereiche-panel {
         padding: 0;
       }
 
-      .locations-leistungen-list {
+      .locations-leistungsbereiche-list {
         list-style: none;
         margin: 0;
         padding: 0;
-        display: flex;
-        flex-direction: column;
-        gap: 8px;
         min-width: 0;
       }
 
-      .locations-leistung-item {
-        display: grid;
-        grid-template-columns: 200px minmax(0, 1fr);
-        align-items: center;
-        column-gap: 8px;
-        font-size: var(--font-body);
-        color: var(--text);
-      }
-
-      .locations-leistung-name {
-        grid-column: 1;
-        font-weight: 600;
-        white-space: nowrap;
-      }
-
-      .locations-leistung-check {
-        grid-column: 2;
-        justify-self: start;
-        color: var(--green);
+      .locations-leistungsbereiche-item {
         font-size: 14px;
-        line-height: 1;
+        color: var(--text);
+        line-height: 1.35;
+        padding: 8px 0;
+        border-top: 1px solid #d9d9d9;
       }
 
-      .locations-leistung-item > .location-extend-btn.locations-leistung-inquire-btn {
-        grid-column: 2;
-        justify-self: start;
-        flex-shrink: 0;
+      .locations-leistungsbereiche-item:first-child {
+        border-top: 0;
       }
 
       .locations-row.empty {
@@ -3047,6 +2963,183 @@
           flex: 1 1 100%;
           justify-content: flex-start;
         }
+      }
+
+      /* Performance period controls: resolved range, custom range, comparison */
+      #statsPanelPerformance [hidden] {
+        display: none !important;
+      }
+
+      #statsPanelPerformance .stats-perf-period-controls {
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+        padding-bottom: 14px;
+        margin-bottom: 4px;
+        border-bottom: 1px solid #d9d9d9;
+      }
+
+      #statsPanelPerformance .stats-perf-range-line {
+        font-size: 13px;
+        color: #707070;
+      }
+
+      #statsPanelPerformance .stats-perf-range-value {
+        color: #2b2b2b;
+        font-weight: 500;
+      }
+
+      #statsPanelPerformance .stats-perf-custom,
+      #statsPanelPerformance .stats-perf-compare-custom {
+        display: flex;
+        align-items: flex-end;
+        flex-wrap: wrap;
+        gap: 12px;
+      }
+
+      #statsPanelPerformance .stats-perf-date-field {
+        display: flex;
+        flex-direction: column;
+        gap: 4px;
+      }
+
+      #statsPanelPerformance .stats-perf-date-field label {
+        font-size: 14px;
+        font-weight: 700;
+        color: #2b2b2b;
+      }
+
+      #statsPanelPerformance .stats-perf-date-input {
+        border: 1px solid #d9d9d9;
+        border-radius: 6px;
+        padding: 6px 10px;
+        font-size: 14px;
+        font-family: inherit;
+        color: #2b2b2b;
+        background: #fff;
+      }
+
+      #statsPanelPerformance .stats-perf-apply-btn {
+        border: 0;
+        border-radius: 6px;
+        padding: 8px 16px;
+        font-size: 14px;
+        font-weight: 700;
+        font-family: inherit;
+        color: #fff;
+        background: #4c8ba5;
+        cursor: pointer;
+      }
+
+      #statsPanelPerformance .stats-perf-apply-btn:hover {
+        background: #3e7287;
+      }
+
+      #statsPanelPerformance .stats-perf-date-error {
+        flex-basis: 100%;
+        font-size: 14px;
+        color: #e74c3c;
+      }
+
+      #statsPanelPerformance .stats-perf-compare-bar {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+      }
+
+      #statsPanelPerformance .stats-perf-compare-toggle {
+        position: relative;
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        cursor: pointer;
+        font-size: 14px;
+        font-weight: 700;
+        color: #2b2b2b;
+        user-select: none;
+        align-self: flex-start;
+      }
+
+      #statsPanelPerformance .stats-perf-compare-toggle input {
+        position: absolute;
+        opacity: 0;
+        width: 0;
+        height: 0;
+      }
+
+      #statsPanelPerformance .stats-perf-compare-track {
+        position: relative;
+        width: 38px;
+        height: 22px;
+        border-radius: 999px;
+        background: #d9d9d9;
+        transition: background 0.15s ease;
+        flex: 0 0 auto;
+      }
+
+      #statsPanelPerformance .stats-perf-compare-track::after {
+        content: "";
+        position: absolute;
+        top: 2px;
+        left: 2px;
+        width: 18px;
+        height: 18px;
+        border-radius: 50%;
+        background: #fff;
+        transition: transform 0.15s ease;
+      }
+
+      #statsPanelPerformance .stats-perf-compare-toggle input:checked + .stats-perf-compare-track {
+        background: #4c8ba5;
+      }
+
+      #statsPanelPerformance
+        .stats-perf-compare-toggle
+        input:checked
+        + .stats-perf-compare-track::after {
+        transform: translateX(16px);
+      }
+
+      #statsPanelPerformance .stats-perf-compare-options {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+      }
+
+      #statsPanelPerformance .stats-perf-compare-modes {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        gap: 8px 18px;
+      }
+
+      #statsPanelPerformance .stats-perf-compare-radio {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        font-size: 14px;
+        color: #2b2b2b;
+        cursor: pointer;
+      }
+
+      #statsPanelPerformance .stats-perf-compare-range {
+        font-size: 13px;
+        color: #2b2b2b;
+      }
+
+      #statsPanelPerformance .stats-perf-kpi-delta {
+        margin-left: 8px;
+        font-size: 14px;
+        font-weight: 700;
+        white-space: nowrap;
+        vertical-align: middle;
+      }
+
+      #statsPanelPerformance .stats-perf-kpi-compare {
+        display: block;
+        font-size: 13px;
+        color: #707070;
+        margin-top: 2px;
       }
 
       #statsPanelOverview.stats-panel.active {
@@ -6884,23 +6977,34 @@
               <table class="locations-table">
                 <colgroup>
                   <col class="locations-table__col-name" />
+                  <col class="locations-table__col-leistungsbereiche" />
                   <col class="locations-table__col-status" />
-                  <col class="locations-table__col-end" />
-                  <col class="locations-table__col-leistungen" />
+                  <col class="locations-table__col-login" />
                   <col class="locations-table__col-detail" />
                 </colgroup>
                 <thead>
                   <tr>
                     <th scope="col" class="locations-table__name-head">Standorte</th>
+                    <th scope="col" class="locations-table__leistungsbereiche-head">Leistungsbereiche</th>
                     <th scope="col" class="locations-table__status-head">Status</th>
-                    <th scope="col" class="locations-table__end-head">Laufzeitende</th>
-                    <th scope="col" class="locations-table__leistungen-head">Leistungen</th>
+                    <th scope="col" class="locations-table__login-head">Letzter Login</th>
                     <th scope="col" class="locations-table__detail-head">Zum Standort</th>
                   </tr>
                 </thead>
                 <tbody id="locationsTableBody">
                   <tr>
                     <td class="locations-row__name">Hesena Management Domizil an der Jade</td>
+                    <td class="locations-leistungsbereiche-cell">
+                      <button
+                        type="button"
+                        class="locations-leistungen-toggle"
+                        aria-expanded="false"
+                        aria-label="Leistungsbereiche für Hesena Management Domizil an der Jade anzeigen"
+                      >
+                        <span class="locations-leistungsbereiche-count"></span>
+                        <i class="fa-solid fa-chevron-right locations-leistungen-chevron" aria-hidden="true"></i>
+                      </button>
+                    </td>
                     <td>
                       <div class="location-status-wrap">
                         <span class="location-status-indicator">
@@ -6909,20 +7013,7 @@
                         </span>
                       </div>
                     </td>
-                    <td>
-                      <span class="location-end-open">fortlaufend</span>
-                    </td>
-                    <td class="locations-leistungen-cell">
-                      <button
-                        type="button"
-                        class="locations-leistungen-toggle"
-                        aria-expanded="false"
-                        aria-label="Leistungen für Hesena Management Domizil an der Jade anzeigen"
-                      >
-                        <span class="locations-leistungen-count locations-leistungen-count--full">3/3</span>
-                        <i class="fa-solid fa-chevron-right locations-leistungen-chevron" aria-hidden="true"></i>
-                      </button>
-                    </td>
+                    <td class="locations-last-login-cell"></td>
                     <td class="locations-detail-nav-cell">
                       <button type="button" class="locations-detail-nav-btn" aria-label="Zum Standort">
                         <i class="fa-solid fa-house" aria-hidden="true"></i>
@@ -6932,35 +7023,25 @@
                   </tr>
                   <tr class="locations-leistungen-detail-row" data-leistungen-for="Hesena Management Domizil an der Jade">
                     <td class="locations-leistungen-detail-empty" aria-hidden="true"></td>
-                    <td class="locations-detail-meta-cell">
-                      <div class="locations-subscription-details">
-                        <p><span class="locations-subscription-label">Start:</span> 01.01.2026</p>
-                        <p><span class="locations-subscription-label">Laufzeit:</span> 12 Monate</p>
+                    <td class="locations-leistungsbereiche-detail-cell" colspan="4">
+                      <div class="locations-leistungsbereiche-panel">
+                        <ul class="locations-leistungsbereiche-list"></ul>
                       </div>
                     </td>
-                    <td class="locations-leistungen-detail-empty" aria-hidden="true"></td>
-                    <td class="locations-leistungen-detail-cell">
-                      <div class="locations-leistungen-panel">
-                        <ul class="locations-leistungen-list">
-                          <li class="locations-leistung-item">
-                            <span class="locations-leistung-name">Anfragen-Manager Abo</span>
-                            <i class="fa-solid fa-check locations-leistung-check" aria-label="Aktiv"></i>
-                          </li>
-                          <li class="locations-leistung-item">
-                            <span class="locations-leistung-name">Lead Kooperation</span>
-                            <i class="fa-solid fa-check locations-leistung-check" aria-label="Aktiv"></i>
-                          </li>
-                          <li class="locations-leistung-item">
-                            <span class="locations-leistung-name">Marketingpaket</span>
-                            <i class="fa-solid fa-check locations-leistung-check" aria-label="Aktiv"></i>
-                          </li>
-                        </ul>
-                      </div>
-                    </td>
-                    <td class="locations-leistungen-detail-empty" aria-hidden="true"></td>
                   </tr>
                   <tr>
                     <td class="locations-row__name">Hesena Management Domizil am Ostplatz</td>
+                    <td class="locations-leistungsbereiche-cell">
+                      <button
+                        type="button"
+                        class="locations-leistungen-toggle"
+                        aria-expanded="false"
+                        aria-label="Leistungsbereiche für Hesena Management Domizil am Ostplatz anzeigen"
+                      >
+                        <span class="locations-leistungsbereiche-count"></span>
+                        <i class="fa-solid fa-chevron-right locations-leistungen-chevron" aria-hidden="true"></i>
+                      </button>
+                    </td>
                     <td>
                       <div class="location-status-wrap">
                         <span class="location-status-indicator">
@@ -6969,23 +7050,7 @@
                         </span>
                       </div>
                     </td>
-                    <td>
-                      <div class="location-end-wrap">
-                        <span class="location-end-date">31.08.2026</span>
-                        <button type="button" class="location-extend-btn" data-action="extend">verlängern</button>
-                      </div>
-                    </td>
-                    <td class="locations-leistungen-cell">
-                      <button
-                        type="button"
-                        class="locations-leistungen-toggle"
-                        aria-expanded="false"
-                        aria-label="Leistungen für Hesena Management Domizil am Ostplatz anzeigen"
-                      >
-                        <span class="locations-leistungen-count locations-leistungen-count--partial">2/3</span>
-                        <i class="fa-solid fa-chevron-right locations-leistungen-chevron" aria-hidden="true"></i>
-                      </button>
-                    </td>
+                    <td class="locations-last-login-cell"></td>
                     <td class="locations-detail-nav-cell">
                       <button type="button" class="locations-detail-nav-btn" aria-label="Zum Standort">
                         <i class="fa-solid fa-house" aria-hidden="true"></i>
@@ -6995,35 +7060,25 @@
                   </tr>
                   <tr class="locations-leistungen-detail-row" data-leistungen-for="Hesena Management Domizil am Ostplatz">
                     <td class="locations-leistungen-detail-empty" aria-hidden="true"></td>
-                    <td class="locations-detail-meta-cell">
-                      <div class="locations-subscription-details">
-                        <p><span class="locations-subscription-label">Start:</span> 01.03.2026</p>
-                        <p><span class="locations-subscription-label">Laufzeit:</span> 6 Monate</p>
+                    <td class="locations-leistungsbereiche-detail-cell" colspan="4">
+                      <div class="locations-leistungsbereiche-panel">
+                        <ul class="locations-leistungsbereiche-list"></ul>
                       </div>
                     </td>
-                    <td class="locations-leistungen-detail-empty" aria-hidden="true"></td>
-                    <td class="locations-leistungen-detail-cell">
-                      <div class="locations-leistungen-panel">
-                        <ul class="locations-leistungen-list">
-                          <li class="locations-leistung-item">
-                            <span class="locations-leistung-name">Anfragen-Manager Abo</span>
-                            <i class="fa-solid fa-check locations-leistung-check" aria-label="Aktiv"></i>
-                          </li>
-                          <li class="locations-leistung-item">
-                            <span class="locations-leistung-name">Lead Kooperation</span>
-                            <i class="fa-solid fa-check locations-leistung-check" aria-label="Aktiv"></i>
-                          </li>
-                          <li class="locations-leistung-item">
-                            <span class="locations-leistung-name">Marketingpaket</span>
-                            <button type="button" class="location-extend-btn locations-leistung-inquire-btn">Beraten lassen</button>
-                          </li>
-                        </ul>
-                      </div>
-                    </td>
-                    <td class="locations-leistungen-detail-empty" aria-hidden="true"></td>
                   </tr>
                   <tr>
                     <td class="locations-row__name">Hesena Management Domizil an der Werre</td>
+                    <td class="locations-leistungsbereiche-cell">
+                      <button
+                        type="button"
+                        class="locations-leistungen-toggle"
+                        aria-expanded="false"
+                        aria-label="Leistungsbereiche für Hesena Management Domizil an der Werre anzeigen"
+                      >
+                        <span class="locations-leistungsbereiche-count"></span>
+                        <i class="fa-solid fa-chevron-right locations-leistungen-chevron" aria-hidden="true"></i>
+                      </button>
+                    </td>
                     <td>
                       <div class="location-status-wrap">
                         <span class="location-status-indicator">
@@ -7032,20 +7087,7 @@
                         </span>
                       </div>
                     </td>
-                    <td>
-                      <span class="location-end-open">fortlaufend</span>
-                    </td>
-                    <td class="locations-leistungen-cell">
-                      <button
-                        type="button"
-                        class="locations-leistungen-toggle"
-                        aria-expanded="false"
-                        aria-label="Leistungen für Hesena Management Domizil an der Werre anzeigen"
-                      >
-                        <span class="locations-leistungen-count locations-leistungen-count--full">3/3</span>
-                        <i class="fa-solid fa-chevron-right locations-leistungen-chevron" aria-hidden="true"></i>
-                      </button>
-                    </td>
+                    <td class="locations-last-login-cell"></td>
                     <td class="locations-detail-nav-cell">
                       <button type="button" class="locations-detail-nav-btn" aria-label="Zum Standort">
                         <i class="fa-solid fa-house" aria-hidden="true"></i>
@@ -7055,35 +7097,25 @@
                   </tr>
                   <tr class="locations-leistungen-detail-row" data-leistungen-for="Hesena Management Domizil an der Werre">
                     <td class="locations-leistungen-detail-empty" aria-hidden="true"></td>
-                    <td class="locations-detail-meta-cell">
-                      <div class="locations-subscription-details">
-                        <p><span class="locations-subscription-label">Start:</span> 15.02.2026</p>
-                        <p><span class="locations-subscription-label">Laufzeit:</span> 12 Monate</p>
+                    <td class="locations-leistungsbereiche-detail-cell" colspan="4">
+                      <div class="locations-leistungsbereiche-panel">
+                        <ul class="locations-leistungsbereiche-list"></ul>
                       </div>
                     </td>
-                    <td class="locations-leistungen-detail-empty" aria-hidden="true"></td>
-                    <td class="locations-leistungen-detail-cell">
-                      <div class="locations-leistungen-panel">
-                        <ul class="locations-leistungen-list">
-                          <li class="locations-leistung-item">
-                            <span class="locations-leistung-name">Anfragen-Manager Abo</span>
-                            <i class="fa-solid fa-check locations-leistung-check" aria-label="Aktiv"></i>
-                          </li>
-                          <li class="locations-leistung-item">
-                            <span class="locations-leistung-name">Lead Kooperation</span>
-                            <i class="fa-solid fa-check locations-leistung-check" aria-label="Aktiv"></i>
-                          </li>
-                          <li class="locations-leistung-item">
-                            <span class="locations-leistung-name">Marketingpaket</span>
-                            <i class="fa-solid fa-check locations-leistung-check" aria-label="Aktiv"></i>
-                          </li>
-                        </ul>
-                      </div>
-                    </td>
-                    <td class="locations-leistungen-detail-empty" aria-hidden="true"></td>
                   </tr>
                   <tr>
                     <td class="locations-row__name">Hesena Management Domizil an der Eise</td>
+                    <td class="locations-leistungsbereiche-cell">
+                      <button
+                        type="button"
+                        class="locations-leistungen-toggle"
+                        aria-expanded="false"
+                        aria-label="Leistungsbereiche für Hesena Management Domizil an der Eise anzeigen"
+                      >
+                        <span class="locations-leistungsbereiche-count"></span>
+                        <i class="fa-solid fa-chevron-right locations-leistungen-chevron" aria-hidden="true"></i>
+                      </button>
+                    </td>
                     <td>
                       <div class="location-status-wrap">
                         <span class="location-status-indicator">
@@ -7092,20 +7124,7 @@
                         </span>
                       </div>
                     </td>
-                    <td>
-                      <span class="location-end-open">fortlaufend</span>
-                    </td>
-                    <td class="locations-leistungen-cell">
-                      <button
-                        type="button"
-                        class="locations-leistungen-toggle"
-                        aria-expanded="false"
-                        aria-label="Leistungen für Hesena Management Domizil an der Eise anzeigen"
-                      >
-                        <span class="locations-leistungen-count locations-leistungen-count--full">3/3</span>
-                        <i class="fa-solid fa-chevron-right locations-leistungen-chevron" aria-hidden="true"></i>
-                      </button>
-                    </td>
+                    <td class="locations-last-login-cell"></td>
                     <td class="locations-detail-nav-cell">
                       <button type="button" class="locations-detail-nav-btn" aria-label="Zum Standort">
                         <i class="fa-solid fa-house" aria-hidden="true"></i>
@@ -7115,35 +7134,25 @@
                   </tr>
                   <tr class="locations-leistungen-detail-row" data-leistungen-for="Hesena Management Domizil an der Eise">
                     <td class="locations-leistungen-detail-empty" aria-hidden="true"></td>
-                    <td class="locations-detail-meta-cell">
-                      <div class="locations-subscription-details">
-                        <p><span class="locations-subscription-label">Start:</span> 01.01.2026</p>
-                        <p><span class="locations-subscription-label">Laufzeit:</span> 12 Monate</p>
+                    <td class="locations-leistungsbereiche-detail-cell" colspan="4">
+                      <div class="locations-leistungsbereiche-panel">
+                        <ul class="locations-leistungsbereiche-list"></ul>
                       </div>
                     </td>
-                    <td class="locations-leistungen-detail-empty" aria-hidden="true"></td>
-                    <td class="locations-leistungen-detail-cell">
-                      <div class="locations-leistungen-panel">
-                        <ul class="locations-leistungen-list">
-                          <li class="locations-leistung-item">
-                            <span class="locations-leistung-name">Anfragen-Manager Abo</span>
-                            <i class="fa-solid fa-check locations-leistung-check" aria-label="Aktiv"></i>
-                          </li>
-                          <li class="locations-leistung-item">
-                            <span class="locations-leistung-name">Lead Kooperation</span>
-                            <i class="fa-solid fa-check locations-leistung-check" aria-label="Aktiv"></i>
-                          </li>
-                          <li class="locations-leistung-item">
-                            <span class="locations-leistung-name">Marketingpaket</span>
-                            <i class="fa-solid fa-check locations-leistung-check" aria-label="Aktiv"></i>
-                          </li>
-                        </ul>
-                      </div>
-                    </td>
-                    <td class="locations-leistungen-detail-empty" aria-hidden="true"></td>
                   </tr>
                   <tr>
                     <td class="locations-row__name">Hesena Management Alt-Mariendorf</td>
+                    <td class="locations-leistungsbereiche-cell">
+                      <button
+                        type="button"
+                        class="locations-leistungen-toggle"
+                        aria-expanded="false"
+                        aria-label="Leistungsbereiche für Hesena Management Alt-Mariendorf anzeigen"
+                      >
+                        <span class="locations-leistungsbereiche-count"></span>
+                        <i class="fa-solid fa-chevron-right locations-leistungen-chevron" aria-hidden="true"></i>
+                      </button>
+                    </td>
                     <td>
                       <div class="location-status-wrap">
                         <span class="location-status-indicator">
@@ -7152,23 +7161,7 @@
                         </span>
                       </div>
                     </td>
-                    <td>
-                      <div class="location-end-wrap">
-                        <span class="location-end-date">31.08.2026</span>
-                        <button type="button" class="location-extend-btn" data-action="extend">verlängern</button>
-                      </div>
-                    </td>
-                    <td class="locations-leistungen-cell">
-                      <button
-                        type="button"
-                        class="locations-leistungen-toggle"
-                        aria-expanded="false"
-                        aria-label="Leistungen für Hesena Management Alt-Mariendorf anzeigen"
-                      >
-                        <span class="locations-leistungen-count locations-leistungen-count--partial">2/3</span>
-                        <i class="fa-solid fa-chevron-right locations-leistungen-chevron" aria-hidden="true"></i>
-                      </button>
-                    </td>
+                    <td class="locations-last-login-cell"></td>
                     <td class="locations-detail-nav-cell">
                       <button type="button" class="locations-detail-nav-btn" aria-label="Zum Standort">
                         <i class="fa-solid fa-house" aria-hidden="true"></i>
@@ -7178,35 +7171,25 @@
                   </tr>
                   <tr class="locations-leistungen-detail-row" data-leistungen-for="Hesena Management Alt-Mariendorf">
                     <td class="locations-leistungen-detail-empty" aria-hidden="true"></td>
-                    <td class="locations-detail-meta-cell">
-                      <div class="locations-subscription-details">
-                        <p><span class="locations-subscription-label">Start:</span> 01.03.2026</p>
-                        <p><span class="locations-subscription-label">Laufzeit:</span> 6 Monate</p>
+                    <td class="locations-leistungsbereiche-detail-cell" colspan="4">
+                      <div class="locations-leistungsbereiche-panel">
+                        <ul class="locations-leistungsbereiche-list"></ul>
                       </div>
                     </td>
-                    <td class="locations-leistungen-detail-empty" aria-hidden="true"></td>
-                    <td class="locations-leistungen-detail-cell">
-                      <div class="locations-leistungen-panel">
-                        <ul class="locations-leistungen-list">
-                          <li class="locations-leistung-item">
-                            <span class="locations-leistung-name">Anfragen-Manager Abo</span>
-                            <i class="fa-solid fa-check locations-leistung-check" aria-label="Aktiv"></i>
-                          </li>
-                          <li class="locations-leistung-item">
-                            <span class="locations-leistung-name">Lead Kooperation</span>
-                            <i class="fa-solid fa-check locations-leistung-check" aria-label="Aktiv"></i>
-                          </li>
-                          <li class="locations-leistung-item">
-                            <span class="locations-leistung-name">Marketingpaket</span>
-                            <button type="button" class="location-extend-btn locations-leistung-inquire-btn">Beraten lassen</button>
-                          </li>
-                        </ul>
-                      </div>
-                    </td>
-                    <td class="locations-leistungen-detail-empty" aria-hidden="true"></td>
                   </tr>
                   <tr>
                     <td class="locations-row__name">Hesena Management Haus Hermesgarten</td>
+                    <td class="locations-leistungsbereiche-cell">
+                      <button
+                        type="button"
+                        class="locations-leistungen-toggle"
+                        aria-expanded="false"
+                        aria-label="Leistungsbereiche für Hesena Management Haus Hermesgarten anzeigen"
+                      >
+                        <span class="locations-leistungsbereiche-count"></span>
+                        <i class="fa-solid fa-chevron-right locations-leistungen-chevron" aria-hidden="true"></i>
+                      </button>
+                    </td>
                     <td>
                       <div class="location-status-wrap">
                         <span class="location-status-indicator">
@@ -7215,20 +7198,7 @@
                         </span>
                       </div>
                     </td>
-                    <td>
-                      <span class="location-end-open">fortlaufend</span>
-                    </td>
-                    <td class="locations-leistungen-cell">
-                      <button
-                        type="button"
-                        class="locations-leistungen-toggle"
-                        aria-expanded="false"
-                        aria-label="Leistungen für Hesena Management Haus Hermesgarten anzeigen"
-                      >
-                        <span class="locations-leistungen-count locations-leistungen-count--full">3/3</span>
-                        <i class="fa-solid fa-chevron-right locations-leistungen-chevron" aria-hidden="true"></i>
-                      </button>
-                    </td>
+                    <td class="locations-last-login-cell"></td>
                     <td class="locations-detail-nav-cell">
                       <button type="button" class="locations-detail-nav-btn" aria-label="Zum Standort">
                         <i class="fa-solid fa-house" aria-hidden="true"></i>
@@ -7238,35 +7208,25 @@
                   </tr>
                   <tr class="locations-leistungen-detail-row" data-leistungen-for="Hesena Management Haus Hermesgarten">
                     <td class="locations-leistungen-detail-empty" aria-hidden="true"></td>
-                    <td class="locations-detail-meta-cell">
-                      <div class="locations-subscription-details">
-                        <p><span class="locations-subscription-label">Start:</span> 15.02.2026</p>
-                        <p><span class="locations-subscription-label">Laufzeit:</span> 12 Monate</p>
+                    <td class="locations-leistungsbereiche-detail-cell" colspan="4">
+                      <div class="locations-leistungsbereiche-panel">
+                        <ul class="locations-leistungsbereiche-list"></ul>
                       </div>
                     </td>
-                    <td class="locations-leistungen-detail-empty" aria-hidden="true"></td>
-                    <td class="locations-leistungen-detail-cell">
-                      <div class="locations-leistungen-panel">
-                        <ul class="locations-leistungen-list">
-                          <li class="locations-leistung-item">
-                            <span class="locations-leistung-name">Anfragen-Manager Abo</span>
-                            <i class="fa-solid fa-check locations-leistung-check" aria-label="Aktiv"></i>
-                          </li>
-                          <li class="locations-leistung-item">
-                            <span class="locations-leistung-name">Lead Kooperation</span>
-                            <i class="fa-solid fa-check locations-leistung-check" aria-label="Aktiv"></i>
-                          </li>
-                          <li class="locations-leistung-item">
-                            <span class="locations-leistung-name">Marketingpaket</span>
-                            <i class="fa-solid fa-check locations-leistung-check" aria-label="Aktiv"></i>
-                          </li>
-                        </ul>
-                      </div>
-                    </td>
-                    <td class="locations-leistungen-detail-empty" aria-hidden="true"></td>
                   </tr>
                   <tr>
                     <td class="locations-row__name">Hesena Management Domizil am Gartenplatz</td>
+                    <td class="locations-leistungsbereiche-cell">
+                      <button
+                        type="button"
+                        class="locations-leistungen-toggle"
+                        aria-expanded="false"
+                        aria-label="Leistungsbereiche für Hesena Management Domizil am Gartenplatz anzeigen"
+                      >
+                        <span class="locations-leistungsbereiche-count"></span>
+                        <i class="fa-solid fa-chevron-right locations-leistungen-chevron" aria-hidden="true"></i>
+                      </button>
+                    </td>
                     <td>
                       <div class="location-status-wrap">
                         <span class="location-status-indicator">
@@ -7275,20 +7235,7 @@
                         </span>
                       </div>
                     </td>
-                    <td>
-                      <span class="location-end-open">fortlaufend</span>
-                    </td>
-                    <td class="locations-leistungen-cell">
-                      <button
-                        type="button"
-                        class="locations-leistungen-toggle"
-                        aria-expanded="false"
-                        aria-label="Leistungen für Hesena Management Domizil am Gartenplatz anzeigen"
-                      >
-                        <span class="locations-leistungen-count locations-leistungen-count--full">3/3</span>
-                        <i class="fa-solid fa-chevron-right locations-leistungen-chevron" aria-hidden="true"></i>
-                      </button>
-                    </td>
+                    <td class="locations-last-login-cell"></td>
                     <td class="locations-detail-nav-cell">
                       <button type="button" class="locations-detail-nav-btn" aria-label="Zum Standort">
                         <i class="fa-solid fa-house" aria-hidden="true"></i>
@@ -7298,35 +7245,25 @@
                   </tr>
                   <tr class="locations-leistungen-detail-row" data-leistungen-for="Hesena Management Domizil am Gartenplatz">
                     <td class="locations-leistungen-detail-empty" aria-hidden="true"></td>
-                    <td class="locations-detail-meta-cell">
-                      <div class="locations-subscription-details">
-                        <p><span class="locations-subscription-label">Start:</span> 01.01.2026</p>
-                        <p><span class="locations-subscription-label">Laufzeit:</span> 12 Monate</p>
+                    <td class="locations-leistungsbereiche-detail-cell" colspan="4">
+                      <div class="locations-leistungsbereiche-panel">
+                        <ul class="locations-leistungsbereiche-list"></ul>
                       </div>
                     </td>
-                    <td class="locations-leistungen-detail-empty" aria-hidden="true"></td>
-                    <td class="locations-leistungen-detail-cell">
-                      <div class="locations-leistungen-panel">
-                        <ul class="locations-leistungen-list">
-                          <li class="locations-leistung-item">
-                            <span class="locations-leistung-name">Anfragen-Manager Abo</span>
-                            <i class="fa-solid fa-check locations-leistung-check" aria-label="Aktiv"></i>
-                          </li>
-                          <li class="locations-leistung-item">
-                            <span class="locations-leistung-name">Lead Kooperation</span>
-                            <i class="fa-solid fa-check locations-leistung-check" aria-label="Aktiv"></i>
-                          </li>
-                          <li class="locations-leistung-item">
-                            <span class="locations-leistung-name">Marketingpaket</span>
-                            <i class="fa-solid fa-check locations-leistung-check" aria-label="Aktiv"></i>
-                          </li>
-                        </ul>
-                      </div>
-                    </td>
-                    <td class="locations-leistungen-detail-empty" aria-hidden="true"></td>
                   </tr>
                   <tr>
                     <td class="locations-row__name">Hesena Care GmbH Palais Dorndorf</td>
+                    <td class="locations-leistungsbereiche-cell">
+                      <button
+                        type="button"
+                        class="locations-leistungen-toggle"
+                        aria-expanded="false"
+                        aria-label="Leistungsbereiche für Hesena Care GmbH Palais Dorndorf anzeigen"
+                      >
+                        <span class="locations-leistungsbereiche-count"></span>
+                        <i class="fa-solid fa-chevron-right locations-leistungen-chevron" aria-hidden="true"></i>
+                      </button>
+                    </td>
                     <td>
                       <div class="location-status-wrap">
                         <span class="location-status-indicator">
@@ -7335,23 +7272,7 @@
                         </span>
                       </div>
                     </td>
-                    <td>
-                      <div class="location-end-wrap">
-                        <span class="location-end-date">31.08.2026</span>
-                        <button type="button" class="location-extend-btn" data-action="extend">verlängern</button>
-                      </div>
-                    </td>
-                    <td class="locations-leistungen-cell">
-                      <button
-                        type="button"
-                        class="locations-leistungen-toggle"
-                        aria-expanded="false"
-                        aria-label="Leistungen für Hesena Care GmbH Palais Dorndorf anzeigen"
-                      >
-                        <span class="locations-leistungen-count locations-leistungen-count--partial">2/3</span>
-                        <i class="fa-solid fa-chevron-right locations-leistungen-chevron" aria-hidden="true"></i>
-                      </button>
-                    </td>
+                    <td class="locations-last-login-cell"></td>
                     <td class="locations-detail-nav-cell">
                       <button type="button" class="locations-detail-nav-btn" aria-label="Zum Standort">
                         <i class="fa-solid fa-house" aria-hidden="true"></i>
@@ -7361,35 +7282,25 @@
                   </tr>
                   <tr class="locations-leistungen-detail-row" data-leistungen-for="Hesena Care GmbH Palais Dorndorf">
                     <td class="locations-leistungen-detail-empty" aria-hidden="true"></td>
-                    <td class="locations-detail-meta-cell">
-                      <div class="locations-subscription-details">
-                        <p><span class="locations-subscription-label">Start:</span> 01.03.2026</p>
-                        <p><span class="locations-subscription-label">Laufzeit:</span> 6 Monate</p>
+                    <td class="locations-leistungsbereiche-detail-cell" colspan="4">
+                      <div class="locations-leistungsbereiche-panel">
+                        <ul class="locations-leistungsbereiche-list"></ul>
                       </div>
                     </td>
-                    <td class="locations-leistungen-detail-empty" aria-hidden="true"></td>
-                    <td class="locations-leistungen-detail-cell">
-                      <div class="locations-leistungen-panel">
-                        <ul class="locations-leistungen-list">
-                          <li class="locations-leistung-item">
-                            <span class="locations-leistung-name">Anfragen-Manager Abo</span>
-                            <i class="fa-solid fa-check locations-leistung-check" aria-label="Aktiv"></i>
-                          </li>
-                          <li class="locations-leistung-item">
-                            <span class="locations-leistung-name">Lead Kooperation</span>
-                            <i class="fa-solid fa-check locations-leistung-check" aria-label="Aktiv"></i>
-                          </li>
-                          <li class="locations-leistung-item">
-                            <span class="locations-leistung-name">Marketingpaket</span>
-                            <button type="button" class="location-extend-btn locations-leistung-inquire-btn">Beraten lassen</button>
-                          </li>
-                        </ul>
-                      </div>
-                    </td>
-                    <td class="locations-leistungen-detail-empty" aria-hidden="true"></td>
                   </tr>
                   <tr>
                     <td class="locations-row__name">Hesena Management Seniorenzentrum Borgentreich</td>
+                    <td class="locations-leistungsbereiche-cell">
+                      <button
+                        type="button"
+                        class="locations-leistungen-toggle"
+                        aria-expanded="false"
+                        aria-label="Leistungsbereiche für Hesena Management Seniorenzentrum Borgentreich anzeigen"
+                      >
+                        <span class="locations-leistungsbereiche-count"></span>
+                        <i class="fa-solid fa-chevron-right locations-leistungen-chevron" aria-hidden="true"></i>
+                      </button>
+                    </td>
                     <td>
                       <div class="location-status-wrap">
                         <span class="location-status-indicator">
@@ -7398,20 +7309,7 @@
                         </span>
                       </div>
                     </td>
-                    <td>
-                      <span class="location-end-open">fortlaufend</span>
-                    </td>
-                    <td class="locations-leistungen-cell">
-                      <button
-                        type="button"
-                        class="locations-leistungen-toggle"
-                        aria-expanded="false"
-                        aria-label="Leistungen für Hesena Management Seniorenzentrum Borgentreich anzeigen"
-                      >
-                        <span class="locations-leistungen-count locations-leistungen-count--full">3/3</span>
-                        <i class="fa-solid fa-chevron-right locations-leistungen-chevron" aria-hidden="true"></i>
-                      </button>
-                    </td>
+                    <td class="locations-last-login-cell"></td>
                     <td class="locations-detail-nav-cell">
                       <button type="button" class="locations-detail-nav-btn" aria-label="Zum Standort">
                         <i class="fa-solid fa-house" aria-hidden="true"></i>
@@ -7421,35 +7319,25 @@
                   </tr>
                   <tr class="locations-leistungen-detail-row" data-leistungen-for="Hesena Management Seniorenzentrum Borgentreich">
                     <td class="locations-leistungen-detail-empty" aria-hidden="true"></td>
-                    <td class="locations-detail-meta-cell">
-                      <div class="locations-subscription-details">
-                        <p><span class="locations-subscription-label">Start:</span> 15.02.2026</p>
-                        <p><span class="locations-subscription-label">Laufzeit:</span> 12 Monate</p>
+                    <td class="locations-leistungsbereiche-detail-cell" colspan="4">
+                      <div class="locations-leistungsbereiche-panel">
+                        <ul class="locations-leistungsbereiche-list"></ul>
                       </div>
                     </td>
-                    <td class="locations-leistungen-detail-empty" aria-hidden="true"></td>
-                    <td class="locations-leistungen-detail-cell">
-                      <div class="locations-leistungen-panel">
-                        <ul class="locations-leistungen-list">
-                          <li class="locations-leistung-item">
-                            <span class="locations-leistung-name">Anfragen-Manager Abo</span>
-                            <i class="fa-solid fa-check locations-leistung-check" aria-label="Aktiv"></i>
-                          </li>
-                          <li class="locations-leistung-item">
-                            <span class="locations-leistung-name">Lead Kooperation</span>
-                            <i class="fa-solid fa-check locations-leistung-check" aria-label="Aktiv"></i>
-                          </li>
-                          <li class="locations-leistung-item">
-                            <span class="locations-leistung-name">Marketingpaket</span>
-                            <i class="fa-solid fa-check locations-leistung-check" aria-label="Aktiv"></i>
-                          </li>
-                        </ul>
-                      </div>
-                    </td>
-                    <td class="locations-leistungen-detail-empty" aria-hidden="true"></td>
                   </tr>
                   <tr>
                     <td class="locations-row__name">Hesena Management Domizil Lindenhof in Wilhelmshaven</td>
+                    <td class="locations-leistungsbereiche-cell">
+                      <button
+                        type="button"
+                        class="locations-leistungen-toggle"
+                        aria-expanded="false"
+                        aria-label="Leistungsbereiche für Hesena Management Domizil Lindenhof in Wilhelmshaven anzeigen"
+                      >
+                        <span class="locations-leistungsbereiche-count"></span>
+                        <i class="fa-solid fa-chevron-right locations-leistungen-chevron" aria-hidden="true"></i>
+                      </button>
+                    </td>
                     <td>
                       <div class="location-status-wrap">
                         <button
@@ -7463,23 +7351,7 @@
                         </button>
                       </div>
                     </td>
-                    <td>
-                      <div class="location-end-wrap">
-                        <span class="location-end-date">31.01.2026</span>
-                        <button type="button" class="location-extend-btn" data-action="reactivate">reaktivieren</button>
-                      </div>
-                    </td>
-                    <td class="locations-leistungen-cell">
-                      <button
-                        type="button"
-                        class="locations-leistungen-toggle"
-                        aria-expanded="false"
-                        aria-label="Leistungen für Hesena Management Domizil Lindenhof in Wilhelmshaven anzeigen"
-                      >
-                        <span class="locations-leistungen-count locations-leistungen-count--full">0/3</span>
-                        <i class="fa-solid fa-chevron-right locations-leistungen-chevron" aria-hidden="true"></i>
-                      </button>
-                    </td>
+                    <td class="locations-last-login-cell"></td>
                     <td class="locations-detail-nav-cell">
                       <button type="button" class="locations-detail-nav-btn" aria-label="Zum Standort">
                         <i class="fa-solid fa-house" aria-hidden="true"></i>
@@ -7489,35 +7361,25 @@
                   </tr>
                   <tr class="locations-leistungen-detail-row" data-leistungen-for="Hesena Management Domizil Lindenhof in Wilhelmshaven">
                     <td class="locations-leistungen-detail-empty" aria-hidden="true"></td>
-                    <td class="locations-detail-meta-cell">
-                      <div class="locations-subscription-details">
-                        <p><span class="locations-subscription-label">Start:</span> 01.08.2025</p>
-                        <p><span class="locations-subscription-label">Laufzeit:</span> 6 Monate</p>
+                    <td class="locations-leistungsbereiche-detail-cell" colspan="4">
+                      <div class="locations-leistungsbereiche-panel">
+                        <ul class="locations-leistungsbereiche-list"></ul>
                       </div>
                     </td>
-                    <td class="locations-leistungen-detail-empty" aria-hidden="true"></td>
-                    <td class="locations-leistungen-detail-cell">
-                      <div class="locations-leistungen-panel">
-                        <ul class="locations-leistungen-list">
-                          <li class="locations-leistung-item">
-                            <span class="locations-leistung-name">Anfragen-Manager Abo</span>
-                            <button type="button" class="location-extend-btn locations-leistung-inquire-btn">Beraten lassen</button>
-                          </li>
-                          <li class="locations-leistung-item">
-                            <span class="locations-leistung-name">Lead Kooperation</span>
-                            <button type="button" class="location-extend-btn locations-leistung-inquire-btn">Beraten lassen</button>
-                          </li>
-                          <li class="locations-leistung-item">
-                            <span class="locations-leistung-name">Marketingpaket</span>
-                            <button type="button" class="location-extend-btn locations-leistung-inquire-btn">Beraten lassen</button>
-                          </li>
-                        </ul>
-                      </div>
-                    </td>
-                    <td class="locations-leistungen-detail-empty" aria-hidden="true"></td>
                   </tr>
                   <tr>
                     <td class="locations-row__name">Hesena Management Domizil Karl-Hinrichs-Stift</td>
+                    <td class="locations-leistungsbereiche-cell">
+                      <button
+                        type="button"
+                        class="locations-leistungen-toggle"
+                        aria-expanded="false"
+                        aria-label="Leistungsbereiche für Hesena Management Domizil Karl-Hinrichs-Stift anzeigen"
+                      >
+                        <span class="locations-leistungsbereiche-count"></span>
+                        <i class="fa-solid fa-chevron-right locations-leistungen-chevron" aria-hidden="true"></i>
+                      </button>
+                    </td>
                     <td>
                       <div class="location-status-wrap">
                         <button
@@ -7531,23 +7393,7 @@
                         </button>
                       </div>
                     </td>
-                    <td>
-                      <div class="location-end-wrap">
-                        <span class="location-end-date">31.01.2026</span>
-                        <button type="button" class="location-extend-btn" data-action="reactivate">reaktivieren</button>
-                      </div>
-                    </td>
-                    <td class="locations-leistungen-cell">
-                      <button
-                        type="button"
-                        class="locations-leistungen-toggle"
-                        aria-expanded="false"
-                        aria-label="Leistungen für Hesena Management Domizil Karl-Hinrichs-Stift anzeigen"
-                      >
-                        <span class="locations-leistungen-count locations-leistungen-count--full">0/3</span>
-                        <i class="fa-solid fa-chevron-right locations-leistungen-chevron" aria-hidden="true"></i>
-                      </button>
-                    </td>
+                    <td class="locations-last-login-cell"></td>
                     <td class="locations-detail-nav-cell">
                       <button type="button" class="locations-detail-nav-btn" aria-label="Zum Standort">
                         <i class="fa-solid fa-house" aria-hidden="true"></i>
@@ -7557,35 +7403,25 @@
                   </tr>
                   <tr class="locations-leistungen-detail-row" data-leistungen-for="Hesena Management Domizil Karl-Hinrichs-Stift">
                     <td class="locations-leistungen-detail-empty" aria-hidden="true"></td>
-                    <td class="locations-detail-meta-cell">
-                      <div class="locations-subscription-details">
-                        <p><span class="locations-subscription-label">Start:</span> 01.08.2025</p>
-                        <p><span class="locations-subscription-label">Laufzeit:</span> 6 Monate</p>
+                    <td class="locations-leistungsbereiche-detail-cell" colspan="4">
+                      <div class="locations-leistungsbereiche-panel">
+                        <ul class="locations-leistungsbereiche-list"></ul>
                       </div>
                     </td>
-                    <td class="locations-leistungen-detail-empty" aria-hidden="true"></td>
-                    <td class="locations-leistungen-detail-cell">
-                      <div class="locations-leistungen-panel">
-                        <ul class="locations-leistungen-list">
-                          <li class="locations-leistung-item">
-                            <span class="locations-leistung-name">Anfragen-Manager Abo</span>
-                            <button type="button" class="location-extend-btn locations-leistung-inquire-btn">Beraten lassen</button>
-                          </li>
-                          <li class="locations-leistung-item">
-                            <span class="locations-leistung-name">Lead Kooperation</span>
-                            <button type="button" class="location-extend-btn locations-leistung-inquire-btn">Beraten lassen</button>
-                          </li>
-                          <li class="locations-leistung-item">
-                            <span class="locations-leistung-name">Marketingpaket</span>
-                            <button type="button" class="location-extend-btn locations-leistung-inquire-btn">Beraten lassen</button>
-                          </li>
-                        </ul>
-                      </div>
-                    </td>
-                    <td class="locations-leistungen-detail-empty" aria-hidden="true"></td>
                   </tr>
                   <tr>
                     <td class="locations-row__name">Hesena Management Seniorenpark Diekholzen</td>
+                    <td class="locations-leistungsbereiche-cell">
+                      <button
+                        type="button"
+                        class="locations-leistungen-toggle"
+                        aria-expanded="false"
+                        aria-label="Leistungsbereiche für Hesena Management Seniorenpark Diekholzen anzeigen"
+                      >
+                        <span class="locations-leistungsbereiche-count"></span>
+                        <i class="fa-solid fa-chevron-right locations-leistungen-chevron" aria-hidden="true"></i>
+                      </button>
+                    </td>
                     <td>
                       <div class="location-status-wrap">
                         <button
@@ -7599,23 +7435,7 @@
                         </button>
                       </div>
                     </td>
-                    <td>
-                      <div class="location-end-wrap">
-                        <span class="location-end-date">31.01.2026</span>
-                        <button type="button" class="location-extend-btn" data-action="reactivate">reaktivieren</button>
-                      </div>
-                    </td>
-                    <td class="locations-leistungen-cell">
-                      <button
-                        type="button"
-                        class="locations-leistungen-toggle"
-                        aria-expanded="false"
-                        aria-label="Leistungen für Hesena Management Seniorenpark Diekholzen anzeigen"
-                      >
-                        <span class="locations-leistungen-count locations-leistungen-count--full">0/3</span>
-                        <i class="fa-solid fa-chevron-right locations-leistungen-chevron" aria-hidden="true"></i>
-                      </button>
-                    </td>
+                    <td class="locations-last-login-cell"></td>
                     <td class="locations-detail-nav-cell">
                       <button type="button" class="locations-detail-nav-btn" aria-label="Zum Standort">
                         <i class="fa-solid fa-house" aria-hidden="true"></i>
@@ -7625,32 +7445,11 @@
                   </tr>
                   <tr class="locations-leistungen-detail-row" data-leistungen-for="Hesena Management Seniorenpark Diekholzen">
                     <td class="locations-leistungen-detail-empty" aria-hidden="true"></td>
-                    <td class="locations-detail-meta-cell">
-                      <div class="locations-subscription-details">
-                        <p><span class="locations-subscription-label">Start:</span> 01.08.2025</p>
-                        <p><span class="locations-subscription-label">Laufzeit:</span> 6 Monate</p>
+                    <td class="locations-leistungsbereiche-detail-cell" colspan="4">
+                      <div class="locations-leistungsbereiche-panel">
+                        <ul class="locations-leistungsbereiche-list"></ul>
                       </div>
                     </td>
-                    <td class="locations-leistungen-detail-empty" aria-hidden="true"></td>
-                    <td class="locations-leistungen-detail-cell">
-                      <div class="locations-leistungen-panel">
-                        <ul class="locations-leistungen-list">
-                          <li class="locations-leistung-item">
-                            <span class="locations-leistung-name">Anfragen-Manager Abo</span>
-                            <button type="button" class="location-extend-btn locations-leistung-inquire-btn">Beraten lassen</button>
-                          </li>
-                          <li class="locations-leistung-item">
-                            <span class="locations-leistung-name">Lead Kooperation</span>
-                            <button type="button" class="location-extend-btn locations-leistung-inquire-btn">Beraten lassen</button>
-                          </li>
-                          <li class="locations-leistung-item">
-                            <span class="locations-leistung-name">Marketingpaket</span>
-                            <button type="button" class="location-extend-btn locations-leistung-inquire-btn">Beraten lassen</button>
-                          </li>
-                        </ul>
-                      </div>
-                    </td>
-                    <td class="locations-leistungen-detail-empty" aria-hidden="true"></td>
                   </tr>
                 </tbody>
               </table>
@@ -8368,6 +8167,15 @@
                     >
                       60T
                     </button>
+                    <button
+                      type="button"
+                      class="stats-perf-period-tab"
+                      role="tab"
+                      data-perf-period="custom"
+                      aria-selected="false"
+                    >
+                      Zeitraum
+                    </button>
                   </div>
                   <div class="stat-inner-head-toolbar stat-standort-toolbar">
                     <label for="statsStandortSelectPerformance">Standort</label>
@@ -8383,6 +8191,61 @@
                   </div>
                 </div>
                 <div class="stat-inner-body stat-inner-body--performance">
+
+              <div class="stats-perf-period-controls">
+                <div class="stats-perf-range-line">
+                  Ausgewählter Zeitraum:
+                  <span class="stats-perf-range-value" id="perfRangeValue">—</span>
+                </div>
+                <div class="stats-perf-custom" id="perfCustomRange" hidden>
+                  <div class="stats-perf-date-field">
+                    <label for="perfCustomVon">Von</label>
+                    <input type="date" id="perfCustomVon" class="stats-perf-date-input" />
+                  </div>
+                  <div class="stats-perf-date-field">
+                    <label for="perfCustomBis">Bis</label>
+                    <input type="date" id="perfCustomBis" class="stats-perf-date-input" />
+                  </div>
+                  <button type="button" class="btn-info stats-perf-apply-btn" id="perfCustomApply">
+                    Anwenden
+                  </button>
+                  <span class="stats-perf-date-error" id="perfCustomError" role="alert" hidden></span>
+                </div>
+                <div class="stats-perf-compare-bar">
+                  <label class="stats-perf-compare-toggle">
+                    <input type="checkbox" id="perfCompareToggle" />
+                    <span class="stats-perf-compare-track" aria-hidden="true"></span>
+                    <span>Vergleichen</span>
+                  </label>
+                  <div class="stats-perf-compare-options" id="perfCompareOptions" hidden>
+                    <div class="stats-perf-compare-modes">
+                      <label class="stats-perf-compare-radio">
+                        <input type="radio" name="perfCompareMode" value="previous" checked />
+                        Vorheriger Zeitraum
+                      </label>
+                      <label class="stats-perf-compare-radio">
+                        <input type="radio" name="perfCompareMode" value="custom" />
+                        Benutzerdefiniert
+                      </label>
+                      <span class="stats-perf-compare-range" id="perfCompareRangeValue"></span>
+                    </div>
+                    <div class="stats-perf-compare-custom" id="perfCompareCustom" hidden>
+                      <div class="stats-perf-date-field">
+                        <label for="perfCompareVon">Von</label>
+                        <input type="date" id="perfCompareVon" class="stats-perf-date-input" />
+                      </div>
+                      <div class="stats-perf-date-field">
+                        <label for="perfCompareBis">Bis</label>
+                        <input type="date" id="perfCompareBis" class="stats-perf-date-input" />
+                      </div>
+                      <button type="button" class="btn-info stats-perf-apply-btn" id="perfCompareApply">
+                        Anwenden
+                      </button>
+                      <span class="stats-perf-date-error" id="perfCompareError" role="alert" hidden></span>
+                    </div>
+                  </div>
+                </div>
+              </div>
 
               <div class="stats-kpi-row stats-kpi-row--perf">
                 <div class="stats-kpi-card stats-perf-kpi-card" data-perf-metric="conversion">
@@ -9545,7 +9408,7 @@
       onerror="window.__standortNameDisplayScriptFailed = true"
     ></script>
     <script
-      src="/stats-performance.js?v=20260603s"
+      src="/stats-performance.js?v=20260610-zeitraum"
       onerror="window.__statsPerformanceScriptFailed = true"
     ></script>
     <script
@@ -12432,6 +12295,80 @@
           activeSince: "2026-06-01",
         },
       };
+
+      // Demo data: the care service areas (fachliches Angebot) a Standort offers.
+      // Vocabulary mirrors the leads' Bedarf values. Most Standorte have 2-4
+      // Bereiche, at least one has only 1. Objects stay extensible (capacity
+      // fields will be added later) — always render against objects, not strings.
+      const DEMO_LEISTUNGSBEREICHE = {
+        "Hesena Management Domizil an der Jade": [
+          "Vollstationäre Pflege",
+          "Kurzzeitpflege",
+          "Tagespflege",
+        ],
+        "Hesena Management Domizil am Ostplatz": ["Vollstationäre Pflege", "Betreutes Wohnen"],
+        "Hesena Management Domizil an der Werre": [
+          "Vollstationäre Pflege",
+          "Kurzzeitpflege",
+          "Tagespflege",
+          "Betreutes Wohnen",
+        ],
+        "Hesena Management Domizil an der Eise": ["Tagespflege"],
+        "Hesena Management Alt-Mariendorf": ["Vollstationäre Pflege", "Kurzzeitpflege"],
+        "Hesena Management Haus Hermesgarten": [
+          "Vollstationäre Pflege",
+          "Tagespflege",
+          "Betreutes Wohnen",
+        ],
+        "Hesena Management Domizil am Gartenplatz": ["Betreutes Wohnen", "Tagespflege"],
+        "Hesena Care GmbH Palais Dorndorf": [
+          "Vollstationäre Pflege",
+          "Kurzzeitpflege",
+          "Tagespflege",
+          "24 Stunden Betreuung",
+        ],
+        "Hesena Management Seniorenzentrum Borgentreich": [
+          "Vollstationäre Pflege",
+          "Kurzzeitpflege",
+        ],
+        "Hesena Management Domizil Lindenhof in Wilhelmshaven": [
+          "Vollstationäre Pflege",
+          "Tagespflege",
+        ],
+        "Hesena Management Domizil Karl-Hinrichs-Stift": [
+          "Vollstationäre Pflege",
+          "Kurzzeitpflege",
+          "Tagespflege",
+        ],
+        "Hesena Management Seniorenpark Diekholzen": ["Betreutes Wohnen"],
+      };
+
+      // Demo data: most recent login of any user of the Standort, as a relative
+      // value. One Standort has never been logged into ("Noch nie").
+      const DEMO_LETZTER_LOGIN = {
+        "Hesena Management Domizil an der Jade": "vor 2 Std.",
+        "Hesena Management Domizil am Ostplatz": "vor 5 Std.",
+        "Hesena Management Domizil an der Werre": "vor 1 Tag",
+        "Hesena Management Domizil an der Eise": "vor 3 Tagen",
+        "Hesena Management Alt-Mariendorf": "vor 6 Tagen",
+        "Hesena Management Haus Hermesgarten": "vor 2 Wochen",
+        "Hesena Management Domizil am Gartenplatz": "vor 4 Std.",
+        "Hesena Care GmbH Palais Dorndorf": "vor 6 Wochen",
+        "Hesena Management Seniorenzentrum Borgentreich": "vor 3 Wochen",
+        "Hesena Management Domizil Lindenhof in Wilhelmshaven": "vor 8 Wochen",
+        "Hesena Management Domizil Karl-Hinrichs-Stift": "Noch nie",
+        "Hesena Management Seniorenpark Diekholzen": "vor 5 Monaten",
+      };
+
+      function getStandortLeistungsbereiche(standortName) {
+        const names = DEMO_LEISTUNGSBEREICHE[standortName] || ["Vollstationäre Pflege"];
+        return names.map((name) => ({ name }));
+      }
+
+      function getStandortLetzterLogin(standortName) {
+        return DEMO_LETZTER_LOGIN[standortName] || "Noch nie";
+      }
+
       const STANDORT_FORWARDING_LEAD_TYPES = [
         { id: "krankenhaus", label: "Klinik-Anfragen" },
         { id: "privat", label: "Privat-Anfragen" },
@@ -13264,6 +13201,44 @@
             : "Abwesend – keine Vertretung";
           wrap.classList.add("location-status-wrap--absent");
           wrap.appendChild(note);
+        });
+      }
+
+      // Fills the Leistungsbereiche count + expandable list and the Letzter-Login
+      // cell for every overview row from the demo getters. Idempotent.
+      function decorateLocationsLeistungsbereicheAndLogin() {
+        getStandortTableRows().forEach((row) => {
+          const name =
+            row.dataset.standortName ||
+            readStandortNameFromCell(row.querySelector(".locations-row__name"));
+          if (!name) return;
+
+          const bereiche = getStandortLeistungsbereiche(name);
+          const countEl = row.querySelector(".locations-leistungsbereiche-count");
+          if (countEl) countEl.textContent = String(bereiche.length);
+
+          const detailRow = row.nextElementSibling;
+          const list =
+            detailRow && detailRow.classList.contains("locations-leistungen-detail-row")
+              ? detailRow.querySelector(".locations-leistungsbereiche-list")
+              : null;
+          if (list) {
+            list.replaceChildren(
+              ...bereiche.map((bereich) => {
+                const item = document.createElement("li");
+                item.className = "locations-leistungsbereiche-item";
+                item.textContent = bereich.name;
+                return item;
+              }),
+            );
+          }
+
+          const loginCell = row.querySelector(".locations-last-login-cell");
+          if (loginCell) {
+            const value = getStandortLetzterLogin(name);
+            loginCell.textContent = value;
+            loginCell.classList.toggle("locations-last-login--never", value === "Noch nie");
+          }
         });
       }
 
@@ -15157,8 +15132,12 @@
         if (tabKey === "overview" && statsOverviewApi?.syncOverviewKpis) {
           statsOverviewApi.syncOverviewKpis();
         }
-        if (tabKey === "performance" && statsPerformanceApi?.syncPerformanceSummaryKpis) {
-          statsPerformanceApi.syncPerformanceSummaryKpis();
+        if (tabKey === "performance" && statsPerformanceApi) {
+          if (statsPerformanceApi.resetPerformanceControls) {
+            statsPerformanceApi.resetPerformanceControls();
+          } else if (statsPerformanceApi.syncPerformanceSummaryKpis) {
+            statsPerformanceApi.syncPerformanceSummaryKpis();
+          }
         }
       }
 
@@ -15634,17 +15613,6 @@
             toggleLocationLeistungenPanel(leistungenToggle);
             return;
           }
-          const inquireBtn = event.target.closest(".locations-leistung-inquire-btn");
-          if (inquireBtn) {
-            event.stopPropagation();
-            const detailRow = inquireBtn.closest(".locations-leistungen-detail-row");
-            const locationName = detailRow?.getAttribute("data-leistungen-for") || "";
-            const leistungName =
-              inquireBtn.closest(".locations-leistung-item")?.querySelector(".locations-leistung-name")
-                ?.textContent || "";
-            openReactivationModal(locationName, "product", leistungName.trim());
-            return;
-          }
           const detailNavBtn = event.target.closest(".locations-detail-nav-btn");
           if (detailNavBtn) {
             event.stopPropagation();
@@ -15654,16 +15622,13 @@
             return;
           }
           const inactiveChip = event.target.closest(".location-status-chip--inactive");
-          const actionBtn = event.target.closest(".location-extend-btn");
-          if (!inactiveChip && !actionBtn) return;
-          const triggerNode = inactiveChip || actionBtn;
-          const row = triggerNode.closest("tr");
+          if (!inactiveChip) return;
+          const row = inactiveChip.closest("tr");
           const locationName =
-            triggerNode.getAttribute("data-location") ||
+            inactiveChip.getAttribute("data-location") ||
             readStandortNameFromCell(row?.querySelector(".locations-row__name")) ||
             "";
-          const actionType = actionBtn?.getAttribute("data-action") || "reactivate";
-          openReactivationModal(locationName, actionType);
+          openReactivationModal(locationName, "reactivate");
         });
       }
       if (reactivationRequestBtn) {
@@ -15855,6 +15820,7 @@
       buildAssignableStandorte();
       initStandortRowMetadata();
       decorateLocationsOverviewAbsence();
+      decorateLocationsLeistungsbereicheAndLogin();
       populateLeadOverviewRows(PERF_DEMO_TARGET_COUNT);
       assignUniqueLeadNames();
       appendOrgTenantLeads();
