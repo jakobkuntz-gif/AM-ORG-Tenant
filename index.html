@@ -633,28 +633,35 @@
         vertical-align: middle;
       }
 
+      /* Lead priority: dot + label (attention ladder — Hoch orange, Mittel blue,
+         Niedrig gray; red stays reserved for errors/destructive actions). */
       .chip {
         display: inline-flex;
         align-items: center;
-        justify-content: center;
-        min-width: 64px;
-        border-radius: 999px;
-        padding: 3px 10px;
-        color: #fff;
-        font-size: 12px;
-        font-weight: 600;
+        gap: 7px;
+        color: var(--text);
+        font-size: 14px;
+        font-weight: 400;
       }
 
-      .chip.low {
-        background: var(--primary);
+      .chip.high .location-status-dot {
+        background: #ffa600;
       }
 
-      .chip.medium {
-        background: var(--orange);
+      .chip.medium .location-status-dot {
+        background: #4c8ba5;
       }
 
-      .chip.high {
-        background: var(--red);
+      .chip.low .location-status-dot {
+        background: #707070;
+      }
+
+      /* Terminal lead status (Gewonnen / Geschlossen incl. closed Reklamationen,
+         i.e. the .status.won/.done classes from leadStatusCssClass): priority is
+         no longer actionable — damp the dot to gray, label text unchanged. */
+      .lead-row:has(.status.won) .chip .location-status-dot,
+      .lead-row:has(.status.done) .chip .location-status-dot {
+        background: #707070;
       }
 
       .status {
@@ -2965,12 +2972,25 @@
         }
       }
 
-      /* Performance period controls: resolved range, custom range, comparison */
-      #statsPanelPerformance [hidden] {
+      /* Shared period controls (Übersicht + Performance): resolved range,
+         custom range, comparison */
+      .stats-panel [hidden] {
         display: none !important;
       }
 
-      #statsPanelPerformance .stats-perf-period-controls {
+      /* Comparison deltas on breakdown rows (13px/700; color set per direction).
+         Fixed-width right-aligned column so rows align with and without sign. */
+      .stats-panel .stats-ov-row-delta {
+        font-size: 13px;
+        font-weight: 700;
+        white-space: nowrap;
+        flex-shrink: 0;
+        min-width: 3.5rem;
+        text-align: right;
+        font-variant-numeric: tabular-nums;
+      }
+
+      .stats-panel .stats-perf-period-controls {
         display: flex;
         flex-direction: column;
         gap: 12px;
@@ -2979,37 +2999,37 @@
         border-bottom: 1px solid #d9d9d9;
       }
 
-      #statsPanelPerformance .stats-perf-range-line {
+      .stats-panel .stats-perf-range-line {
         font-size: 13px;
         color: #707070;
       }
 
-      #statsPanelPerformance .stats-perf-range-value {
+      .stats-panel .stats-perf-range-value {
         color: #2b2b2b;
         font-weight: 500;
       }
 
-      #statsPanelPerformance .stats-perf-custom,
-      #statsPanelPerformance .stats-perf-compare-custom {
+      .stats-panel .stats-perf-custom,
+      .stats-panel .stats-perf-compare-custom {
         display: flex;
         align-items: flex-end;
         flex-wrap: wrap;
         gap: 12px;
       }
 
-      #statsPanelPerformance .stats-perf-date-field {
+      .stats-panel .stats-perf-date-field {
         display: flex;
         flex-direction: column;
         gap: 4px;
       }
 
-      #statsPanelPerformance .stats-perf-date-field label {
+      .stats-panel .stats-perf-date-field label {
         font-size: 14px;
         font-weight: 700;
         color: #2b2b2b;
       }
 
-      #statsPanelPerformance .stats-perf-date-input {
+      .stats-panel .stats-perf-date-input {
         border: 1px solid #d9d9d9;
         border-radius: 6px;
         padding: 6px 10px;
@@ -3019,7 +3039,7 @@
         background: #fff;
       }
 
-      #statsPanelPerformance .stats-perf-apply-btn {
+      .stats-panel .stats-perf-apply-btn {
         border: 0;
         border-radius: 6px;
         padding: 8px 16px;
@@ -3031,23 +3051,23 @@
         cursor: pointer;
       }
 
-      #statsPanelPerformance .stats-perf-apply-btn:hover {
+      .stats-panel .stats-perf-apply-btn:hover {
         background: #3e7287;
       }
 
-      #statsPanelPerformance .stats-perf-date-error {
+      .stats-panel .stats-perf-date-error {
         flex-basis: 100%;
         font-size: 14px;
         color: #e74c3c;
       }
 
-      #statsPanelPerformance .stats-perf-compare-bar {
+      .stats-panel .stats-perf-compare-bar {
         display: flex;
         flex-direction: column;
         gap: 10px;
       }
 
-      #statsPanelPerformance .stats-perf-compare-toggle {
+      .stats-panel .stats-perf-compare-toggle {
         position: relative;
         display: inline-flex;
         align-items: center;
@@ -3060,14 +3080,14 @@
         align-self: flex-start;
       }
 
-      #statsPanelPerformance .stats-perf-compare-toggle input {
+      .stats-panel .stats-perf-compare-toggle input {
         position: absolute;
         opacity: 0;
         width: 0;
         height: 0;
       }
 
-      #statsPanelPerformance .stats-perf-compare-track {
+      .stats-panel .stats-perf-compare-track {
         position: relative;
         width: 38px;
         height: 22px;
@@ -3077,7 +3097,7 @@
         flex: 0 0 auto;
       }
 
-      #statsPanelPerformance .stats-perf-compare-track::after {
+      .stats-panel .stats-perf-compare-track::after {
         content: "";
         position: absolute;
         top: 2px;
@@ -3089,31 +3109,31 @@
         transition: transform 0.15s ease;
       }
 
-      #statsPanelPerformance .stats-perf-compare-toggle input:checked + .stats-perf-compare-track {
+      .stats-panel .stats-perf-compare-toggle input:checked + .stats-perf-compare-track {
         background: #4c8ba5;
       }
 
-      #statsPanelPerformance
+      .stats-panel
         .stats-perf-compare-toggle
         input:checked
         + .stats-perf-compare-track::after {
         transform: translateX(16px);
       }
 
-      #statsPanelPerformance .stats-perf-compare-options {
+      .stats-panel .stats-perf-compare-options {
         display: flex;
         flex-direction: column;
         gap: 8px;
       }
 
-      #statsPanelPerformance .stats-perf-compare-modes {
+      .stats-panel .stats-perf-compare-modes {
         display: flex;
         flex-wrap: wrap;
         align-items: center;
         gap: 8px 18px;
       }
 
-      #statsPanelPerformance .stats-perf-compare-radio {
+      .stats-panel .stats-perf-compare-radio {
         display: inline-flex;
         align-items: center;
         gap: 6px;
@@ -3122,12 +3142,12 @@
         cursor: pointer;
       }
 
-      #statsPanelPerformance .stats-perf-compare-range {
+      .stats-panel .stats-perf-compare-range {
         font-size: 13px;
         color: #2b2b2b;
       }
 
-      #statsPanelPerformance .stats-perf-kpi-delta {
+      .stats-panel .stats-perf-kpi-delta {
         margin-left: 8px;
         font-size: 14px;
         font-weight: 700;
@@ -3135,7 +3155,7 @@
         vertical-align: middle;
       }
 
-      #statsPanelPerformance .stats-perf-kpi-compare {
+      .stats-panel .stats-perf-kpi-compare {
         display: block;
         font-size: 13px;
         color: #707070;
@@ -3447,7 +3467,7 @@
       #statsPanelOverview .stats-ov-status-row {
         position: relative;
         display: grid;
-        grid-template-columns: 1fr auto auto;
+        grid-template-columns: 1fr minmax(3ch, auto) minmax(3.2em, auto) minmax(3.5rem, auto);
         align-items: center;
         gap: 8px 10px;
         padding: 4px 8px;
@@ -3612,7 +3632,9 @@
       }
 
       #statsPanelOverview .stats-ov-segment .stats-panel-body {
-        padding: 16px 18px 52px;
+        /* extra bottom padding reserves room for the absolute export button so it
+           sits inside the card without overlapping the breakdown list border */
+        padding: 16px 18px 68px;
       }
 
       #statsPanelOverview .stats-ov-detail-export-anchor {
@@ -3703,12 +3725,21 @@
         border-top: 1px solid var(--line);
       }
 
+      /* Shared row grid: label/bar | value | share | delta | chevron. Fixed
+         min-widths per column so values, shares and deltas form straight
+         vertical columns across all rows — with or without comparison mode. */
+      #statsPanelOverview .stats-ov-accordion-trigger,
+      #statsPanelOverview .stats-ov-accordion-subrow,
+      #statsPanelOverview .stats-ov-flat-bar-row {
+        display: grid;
+        grid-template-columns:
+          minmax(0, 1fr) minmax(3ch, auto) minmax(3.2em, auto) minmax(3.5rem, auto) 14px;
+        column-gap: 10px;
+        align-items: center;
+      }
+
       #statsPanelOverview .stats-ov-accordion-trigger {
         position: relative;
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        gap: 12px;
         width: 100%;
         padding: 4px 14px;
         border: 0;
@@ -3773,13 +3804,24 @@
 
       #statsPanelOverview .stats-ov-accordion-total {
         font-weight: var(--font-section-heading-weight);
+      }
+
+      #statsPanelOverview .stats-ov-cell-value {
         text-align: right;
-        min-width: 2.5em;
+        font-variant-numeric: tabular-nums;
+        white-space: nowrap;
+      }
+
+      #statsPanelOverview .stats-ov-cell-share {
+        text-align: right;
+        font-variant-numeric: tabular-nums;
+        white-space: nowrap;
       }
 
       #statsPanelOverview .stats-ov-accordion-chevron {
         color: var(--primary);
         font-size: 12px;
+        justify-self: center;
         transition: transform 0.15s ease;
       }
 
@@ -3787,17 +3829,15 @@
         transform: rotate(180deg);
       }
 
+      /* No horizontal padding here — child rows must share the parent rows' grid
+         columns; the child indent lives in the subrow's left padding instead. */
       #statsPanelOverview .stats-ov-accordion-panel {
-        padding: 0 14px 10px;
+        padding: 0 0 10px;
       }
 
       #statsPanelOverview .stats-ov-accordion-subrow {
         position: relative;
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        gap: 12px;
-        padding: 4px 8px 4px 24px;
+        padding: 4px 14px 4px 38px;
         font-size: var(--font-body);
         color: var(--text);
         overflow: hidden;
@@ -3810,10 +3850,6 @@
       }
 
       #statsPanelOverview .stats-ov-flat-bar-row {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        gap: 12px;
         padding: 4px 14px;
         font-size: var(--font-body);
         color: var(--text);
@@ -6029,31 +6065,29 @@
       }
 
       .priority-card.active {
-        border-color: var(--red-light);
-        box-shadow: 0 0 0 1px var(--red-light) inset;
+        border-color: #4c8ba5;
+        box-shadow: 0 0 0 1px #4c8ba5 inset;
       }
 
+      /* Plain color dot (attention ladder), no number — the card label carries
+         the meaning. Hoch deliberately orange, not red. */
       .priority-number {
-        width: 30px;
-        height: 30px;
-        border-radius: 999px;
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        color: var(--white);
-        font-weight: 700;
+        width: 14px;
+        height: 14px;
+        border-radius: 50%;
+        flex-shrink: 0;
       }
 
       .priority-high .priority-number {
-        background: var(--red);
+        background: #ffa600;
       }
 
       .priority-medium .priority-number {
-        background: #f0a425;
+        background: #4c8ba5;
       }
 
       .priority-low .priority-number {
-        background: #3f8ef2;
+        background: #707070;
       }
 
       .lead-detail-page.read-only-mode .priority-card {
@@ -6065,16 +6099,17 @@
         box-shadow: none;
       }
 
+      /* Read-only: lighter tints of the same orange/blue/gray ladder */
       .lead-detail-page.read-only-mode .priority-high .priority-number {
-        background: #e7a8a2;
+        background: #ffdb99;
       }
 
       .lead-detail-page.read-only-mode .priority-medium .priority-number {
-        background: #e9c980;
+        background: #b7d1dc;
       }
 
       .lead-detail-page.read-only-mode .priority-low .priority-number {
-        background: #9fc3ee;
+        background: #c6c6c6;
       }
 
       .lead-detail-page.read-only-mode .priority-name,
@@ -6392,7 +6427,7 @@
         <div class="user-card">
           <div id="sidebarAvatar" class="avatar">JK</div>
           <div id="sidebarUserName" class="user-name">Jakob Kuntz</div>
-          <div id="sidebarTenantName" class="user-meta">Hesena Management GmbH (Verwaltungssitz)</div>
+          <div id="sidebarTenantName" class="user-meta">newcare GmbH (Verwaltungssitz)</div>
         </div>
 
         <nav class="menu">
@@ -6631,7 +6666,7 @@
                   <td data-col="bedarfsort">-</td>
                   <td data-col="standort">Rdf@rsdf</td>
                   <td data-col="quelle">Webform</td>
-                  <td data-col="prioritaet"><span class="chip medium">Mittel</span></td>
+                  <td data-col="prioritaet"><span class="chip medium"><span class="location-status-dot" aria-hidden="true"></span>Mittel</span></td>
                   <td data-col="status"><span class="status progress">In Bearbeitung</span></td>
                   <td data-col="zustandigkeit">Jonas Markus</td>
                   <td data-col="zurAnfrage">
@@ -6649,7 +6684,7 @@
                   <td data-col="bedarfsort">-</td>
                   <td data-col="standort">Kein Standort</td>
                   <td data-col="quelle">Webform</td>
-                  <td data-col="prioritaet"><span class="chip high">Hoch</span></td>
+                  <td data-col="prioritaet"><span class="chip high"><span class="location-status-dot" aria-hidden="true"></span>Hoch</span></td>
                   <td data-col="status"><span class="status new">Neu</span></td>
                   <td data-col="zustandigkeit">Jakob Kuntz</td>
                   <td data-col="zurAnfrage">
@@ -6667,7 +6702,7 @@
                   <td data-col="bedarfsort">-</td>
                   <td data-col="standort">Kein Standort</td>
                   <td data-col="quelle">Importiert</td>
-                  <td data-col="prioritaet"><span class="chip low">Niedrig</span></td>
+                  <td data-col="prioritaet"><span class="chip low"><span class="location-status-dot" aria-hidden="true"></span>Niedrig</span></td>
                   <td data-col="status"><span class="status new">Neu</span></td>
                   <td data-col="zustandigkeit">Nicht zugewiesen</td>
                   <td data-col="zurAnfrage">
@@ -6685,7 +6720,7 @@
                   <td data-col="bedarfsort">55118 yyc</td>
                   <td data-col="standort">Kein Standort</td>
                   <td data-col="quelle">Importiert</td>
-                  <td data-col="prioritaet"><span class="chip medium">Mittel</span></td>
+                  <td data-col="prioritaet"><span class="chip medium"><span class="location-status-dot" aria-hidden="true"></span>Mittel</span></td>
                   <td data-col="status"><span class="status done">Geschlossen</span></td>
                   <td data-col="zustandigkeit">Jakob Kuntz</td>
                   <td data-col="zurAnfrage">
@@ -6993,13 +7028,13 @@
                 </thead>
                 <tbody id="locationsTableBody">
                   <tr>
-                    <td class="locations-row__name">Hesena Management Domizil an der Jade</td>
+                    <td class="locations-row__name">newcare home Hasbergen</td>
                     <td class="locations-leistungsbereiche-cell">
                       <button
                         type="button"
                         class="locations-leistungen-toggle"
                         aria-expanded="false"
-                        aria-label="Leistungsbereiche für Hesena Management Domizil an der Jade anzeigen"
+                        aria-label="Leistungsbereiche für newcare home Hasbergen anzeigen"
                       >
                         <span class="locations-leistungsbereiche-count"></span>
                         <i class="fa-solid fa-chevron-right locations-leistungen-chevron" aria-hidden="true"></i>
@@ -7021,7 +7056,7 @@
                       </button>
                     </td>
                   </tr>
-                  <tr class="locations-leistungen-detail-row" data-leistungen-for="Hesena Management Domizil an der Jade">
+                  <tr class="locations-leistungen-detail-row" data-leistungen-for="newcare home Hasbergen">
                     <td class="locations-leistungen-detail-empty" aria-hidden="true"></td>
                     <td class="locations-leistungsbereiche-detail-cell" colspan="4">
                       <div class="locations-leistungsbereiche-panel">
@@ -7030,13 +7065,13 @@
                     </td>
                   </tr>
                   <tr>
-                    <td class="locations-row__name">Hesena Management Domizil am Ostplatz</td>
+                    <td class="locations-row__name">newcare home Till</td>
                     <td class="locations-leistungsbereiche-cell">
                       <button
                         type="button"
                         class="locations-leistungen-toggle"
                         aria-expanded="false"
-                        aria-label="Leistungsbereiche für Hesena Management Domizil am Ostplatz anzeigen"
+                        aria-label="Leistungsbereiche für newcare home Till anzeigen"
                       >
                         <span class="locations-leistungsbereiche-count"></span>
                         <i class="fa-solid fa-chevron-right locations-leistungen-chevron" aria-hidden="true"></i>
@@ -7058,7 +7093,7 @@
                       </button>
                     </td>
                   </tr>
-                  <tr class="locations-leistungen-detail-row" data-leistungen-for="Hesena Management Domizil am Ostplatz">
+                  <tr class="locations-leistungen-detail-row" data-leistungen-for="newcare home Till">
                     <td class="locations-leistungen-detail-empty" aria-hidden="true"></td>
                     <td class="locations-leistungsbereiche-detail-cell" colspan="4">
                       <div class="locations-leistungsbereiche-panel">
@@ -7067,13 +7102,13 @@
                     </td>
                   </tr>
                   <tr>
-                    <td class="locations-row__name">Hesena Management Domizil an der Werre</td>
+                    <td class="locations-row__name">newcare home Radevormwald</td>
                     <td class="locations-leistungsbereiche-cell">
                       <button
                         type="button"
                         class="locations-leistungen-toggle"
                         aria-expanded="false"
-                        aria-label="Leistungsbereiche für Hesena Management Domizil an der Werre anzeigen"
+                        aria-label="Leistungsbereiche für newcare home Radevormwald anzeigen"
                       >
                         <span class="locations-leistungsbereiche-count"></span>
                         <i class="fa-solid fa-chevron-right locations-leistungen-chevron" aria-hidden="true"></i>
@@ -7095,7 +7130,7 @@
                       </button>
                     </td>
                   </tr>
-                  <tr class="locations-leistungen-detail-row" data-leistungen-for="Hesena Management Domizil an der Werre">
+                  <tr class="locations-leistungen-detail-row" data-leistungen-for="newcare home Radevormwald">
                     <td class="locations-leistungen-detail-empty" aria-hidden="true"></td>
                     <td class="locations-leistungsbereiche-detail-cell" colspan="4">
                       <div class="locations-leistungsbereiche-panel">
@@ -7104,13 +7139,13 @@
                     </td>
                   </tr>
                   <tr>
-                    <td class="locations-row__name">Hesena Management Domizil an der Eise</td>
+                    <td class="locations-row__name">newcare home Felsberg</td>
                     <td class="locations-leistungsbereiche-cell">
                       <button
                         type="button"
                         class="locations-leistungen-toggle"
                         aria-expanded="false"
-                        aria-label="Leistungsbereiche für Hesena Management Domizil an der Eise anzeigen"
+                        aria-label="Leistungsbereiche für newcare home Felsberg anzeigen"
                       >
                         <span class="locations-leistungsbereiche-count"></span>
                         <i class="fa-solid fa-chevron-right locations-leistungen-chevron" aria-hidden="true"></i>
@@ -7132,7 +7167,7 @@
                       </button>
                     </td>
                   </tr>
-                  <tr class="locations-leistungen-detail-row" data-leistungen-for="Hesena Management Domizil an der Eise">
+                  <tr class="locations-leistungen-detail-row" data-leistungen-for="newcare home Felsberg">
                     <td class="locations-leistungen-detail-empty" aria-hidden="true"></td>
                     <td class="locations-leistungsbereiche-detail-cell" colspan="4">
                       <div class="locations-leistungsbereiche-panel">
@@ -7141,13 +7176,13 @@
                     </td>
                   </tr>
                   <tr>
-                    <td class="locations-row__name">Hesena Management Alt-Mariendorf</td>
+                    <td class="locations-row__name">newcare home Moyland</td>
                     <td class="locations-leistungsbereiche-cell">
                       <button
                         type="button"
                         class="locations-leistungen-toggle"
                         aria-expanded="false"
-                        aria-label="Leistungsbereiche für Hesena Management Alt-Mariendorf anzeigen"
+                        aria-label="Leistungsbereiche für newcare home Moyland anzeigen"
                       >
                         <span class="locations-leistungsbereiche-count"></span>
                         <i class="fa-solid fa-chevron-right locations-leistungen-chevron" aria-hidden="true"></i>
@@ -7169,7 +7204,7 @@
                       </button>
                     </td>
                   </tr>
-                  <tr class="locations-leistungen-detail-row" data-leistungen-for="Hesena Management Alt-Mariendorf">
+                  <tr class="locations-leistungen-detail-row" data-leistungen-for="newcare home Moyland">
                     <td class="locations-leistungen-detail-empty" aria-hidden="true"></td>
                     <td class="locations-leistungsbereiche-detail-cell" colspan="4">
                       <div class="locations-leistungsbereiche-panel">
@@ -7178,13 +7213,13 @@
                     </td>
                   </tr>
                   <tr>
-                    <td class="locations-row__name">Hesena Management Haus Hermesgarten</td>
+                    <td class="locations-row__name">newcare home Vellmar</td>
                     <td class="locations-leistungsbereiche-cell">
                       <button
                         type="button"
                         class="locations-leistungen-toggle"
                         aria-expanded="false"
-                        aria-label="Leistungsbereiche für Hesena Management Haus Hermesgarten anzeigen"
+                        aria-label="Leistungsbereiche für newcare home Vellmar anzeigen"
                       >
                         <span class="locations-leistungsbereiche-count"></span>
                         <i class="fa-solid fa-chevron-right locations-leistungen-chevron" aria-hidden="true"></i>
@@ -7206,7 +7241,7 @@
                       </button>
                     </td>
                   </tr>
-                  <tr class="locations-leistungen-detail-row" data-leistungen-for="Hesena Management Haus Hermesgarten">
+                  <tr class="locations-leistungen-detail-row" data-leistungen-for="newcare home Vellmar">
                     <td class="locations-leistungen-detail-empty" aria-hidden="true"></td>
                     <td class="locations-leistungsbereiche-detail-cell" colspan="4">
                       <div class="locations-leistungsbereiche-panel">
@@ -7215,13 +7250,13 @@
                     </td>
                   </tr>
                   <tr>
-                    <td class="locations-row__name">Hesena Management Domizil am Gartenplatz</td>
+                    <td class="locations-row__name">newcare home Fritzlar</td>
                     <td class="locations-leistungsbereiche-cell">
                       <button
                         type="button"
                         class="locations-leistungen-toggle"
                         aria-expanded="false"
-                        aria-label="Leistungsbereiche für Hesena Management Domizil am Gartenplatz anzeigen"
+                        aria-label="Leistungsbereiche für newcare home Fritzlar anzeigen"
                       >
                         <span class="locations-leistungsbereiche-count"></span>
                         <i class="fa-solid fa-chevron-right locations-leistungen-chevron" aria-hidden="true"></i>
@@ -7243,7 +7278,7 @@
                       </button>
                     </td>
                   </tr>
-                  <tr class="locations-leistungen-detail-row" data-leistungen-for="Hesena Management Domizil am Gartenplatz">
+                  <tr class="locations-leistungen-detail-row" data-leistungen-for="newcare home Fritzlar">
                     <td class="locations-leistungen-detail-empty" aria-hidden="true"></td>
                     <td class="locations-leistungsbereiche-detail-cell" colspan="4">
                       <div class="locations-leistungsbereiche-panel">
@@ -7252,87 +7287,13 @@
                     </td>
                   </tr>
                   <tr>
-                    <td class="locations-row__name">Hesena Care GmbH Palais Dorndorf</td>
+                    <td class="locations-row__name">newcare home Geeste</td>
                     <td class="locations-leistungsbereiche-cell">
                       <button
                         type="button"
                         class="locations-leistungen-toggle"
                         aria-expanded="false"
-                        aria-label="Leistungsbereiche für Hesena Care GmbH Palais Dorndorf anzeigen"
-                      >
-                        <span class="locations-leistungsbereiche-count"></span>
-                        <i class="fa-solid fa-chevron-right locations-leistungen-chevron" aria-hidden="true"></i>
-                      </button>
-                    </td>
-                    <td>
-                      <div class="location-status-wrap">
-                        <span class="location-status-indicator">
-                          <span class="location-status-dot location-status-dot--active" aria-hidden="true"></span>
-                          <span class="location-status-label location-status-label--active">Aktiv</span>
-                        </span>
-                      </div>
-                    </td>
-                    <td class="locations-last-login-cell"></td>
-                    <td class="locations-detail-nav-cell">
-                      <button type="button" class="locations-detail-nav-btn" aria-label="Zum Standort">
-                        <i class="fa-solid fa-house" aria-hidden="true"></i>
-                        <i class="fa-solid fa-chevron-right" aria-hidden="true"></i>
-                      </button>
-                    </td>
-                  </tr>
-                  <tr class="locations-leistungen-detail-row" data-leistungen-for="Hesena Care GmbH Palais Dorndorf">
-                    <td class="locations-leistungen-detail-empty" aria-hidden="true"></td>
-                    <td class="locations-leistungsbereiche-detail-cell" colspan="4">
-                      <div class="locations-leistungsbereiche-panel">
-                        <ul class="locations-leistungsbereiche-list"></ul>
-                      </div>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td class="locations-row__name">Hesena Management Seniorenzentrum Borgentreich</td>
-                    <td class="locations-leistungsbereiche-cell">
-                      <button
-                        type="button"
-                        class="locations-leistungen-toggle"
-                        aria-expanded="false"
-                        aria-label="Leistungsbereiche für Hesena Management Seniorenzentrum Borgentreich anzeigen"
-                      >
-                        <span class="locations-leistungsbereiche-count"></span>
-                        <i class="fa-solid fa-chevron-right locations-leistungen-chevron" aria-hidden="true"></i>
-                      </button>
-                    </td>
-                    <td>
-                      <div class="location-status-wrap">
-                        <span class="location-status-indicator">
-                          <span class="location-status-dot location-status-dot--active" aria-hidden="true"></span>
-                          <span class="location-status-label location-status-label--active">Aktiv</span>
-                        </span>
-                      </div>
-                    </td>
-                    <td class="locations-last-login-cell"></td>
-                    <td class="locations-detail-nav-cell">
-                      <button type="button" class="locations-detail-nav-btn" aria-label="Zum Standort">
-                        <i class="fa-solid fa-house" aria-hidden="true"></i>
-                        <i class="fa-solid fa-chevron-right" aria-hidden="true"></i>
-                      </button>
-                    </td>
-                  </tr>
-                  <tr class="locations-leistungen-detail-row" data-leistungen-for="Hesena Management Seniorenzentrum Borgentreich">
-                    <td class="locations-leistungen-detail-empty" aria-hidden="true"></td>
-                    <td class="locations-leistungsbereiche-detail-cell" colspan="4">
-                      <div class="locations-leistungsbereiche-panel">
-                        <ul class="locations-leistungsbereiche-list"></ul>
-                      </div>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td class="locations-row__name">Hesena Management Domizil Lindenhof in Wilhelmshaven</td>
-                    <td class="locations-leistungsbereiche-cell">
-                      <button
-                        type="button"
-                        class="locations-leistungen-toggle"
-                        aria-expanded="false"
-                        aria-label="Leistungsbereiche für Hesena Management Domizil Lindenhof in Wilhelmshaven anzeigen"
+                        aria-label="Leistungsbereiche für newcare home Geeste anzeigen"
                       >
                         <span class="locations-leistungsbereiche-count"></span>
                         <i class="fa-solid fa-chevron-right locations-leistungen-chevron" aria-hidden="true"></i>
@@ -7343,8 +7304,8 @@
                         <button
                           type="button"
                           class="location-status-indicator location-status-chip--inactive"
-                          data-location="Hesena Management Domizil Lindenhof in Wilhelmshaven"
-                          aria-label="Hesena Management Domizil Lindenhof in Wilhelmshaven reaktivieren"
+                          data-location="newcare home Geeste"
+                          aria-label="newcare home Geeste reaktivieren"
                         >
                           <span class="location-status-dot location-status-dot--inactive" aria-hidden="true"></span>
                           <span class="location-status-label location-status-label--inactive">pausiert</span>
@@ -7359,7 +7320,7 @@
                       </button>
                     </td>
                   </tr>
-                  <tr class="locations-leistungen-detail-row" data-leistungen-for="Hesena Management Domizil Lindenhof in Wilhelmshaven">
+                  <tr class="locations-leistungen-detail-row" data-leistungen-for="newcare home Geeste">
                     <td class="locations-leistungen-detail-empty" aria-hidden="true"></td>
                     <td class="locations-leistungsbereiche-detail-cell" colspan="4">
                       <div class="locations-leistungsbereiche-panel">
@@ -7368,13 +7329,13 @@
                     </td>
                   </tr>
                   <tr>
-                    <td class="locations-row__name">Hesena Management Domizil Karl-Hinrichs-Stift</td>
+                    <td class="locations-row__name">newcare home Lurup</td>
                     <td class="locations-leistungsbereiche-cell">
                       <button
                         type="button"
                         class="locations-leistungen-toggle"
                         aria-expanded="false"
-                        aria-label="Leistungsbereiche für Hesena Management Domizil Karl-Hinrichs-Stift anzeigen"
+                        aria-label="Leistungsbereiche für newcare home Lurup anzeigen"
                       >
                         <span class="locations-leistungsbereiche-count"></span>
                         <i class="fa-solid fa-chevron-right locations-leistungen-chevron" aria-hidden="true"></i>
@@ -7385,8 +7346,8 @@
                         <button
                           type="button"
                           class="location-status-indicator location-status-chip--inactive"
-                          data-location="Hesena Management Domizil Karl-Hinrichs-Stift"
-                          aria-label="Hesena Management Domizil Karl-Hinrichs-Stift reaktivieren"
+                          data-location="newcare home Lurup"
+                          aria-label="newcare home Lurup reaktivieren"
                         >
                           <span class="location-status-dot location-status-dot--inactive" aria-hidden="true"></span>
                           <span class="location-status-label location-status-label--inactive">pausiert</span>
@@ -7401,49 +7362,7 @@
                       </button>
                     </td>
                   </tr>
-                  <tr class="locations-leistungen-detail-row" data-leistungen-for="Hesena Management Domizil Karl-Hinrichs-Stift">
-                    <td class="locations-leistungen-detail-empty" aria-hidden="true"></td>
-                    <td class="locations-leistungsbereiche-detail-cell" colspan="4">
-                      <div class="locations-leistungsbereiche-panel">
-                        <ul class="locations-leistungsbereiche-list"></ul>
-                      </div>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td class="locations-row__name">Hesena Management Seniorenpark Diekholzen</td>
-                    <td class="locations-leistungsbereiche-cell">
-                      <button
-                        type="button"
-                        class="locations-leistungen-toggle"
-                        aria-expanded="false"
-                        aria-label="Leistungsbereiche für Hesena Management Seniorenpark Diekholzen anzeigen"
-                      >
-                        <span class="locations-leistungsbereiche-count"></span>
-                        <i class="fa-solid fa-chevron-right locations-leistungen-chevron" aria-hidden="true"></i>
-                      </button>
-                    </td>
-                    <td>
-                      <div class="location-status-wrap">
-                        <button
-                          type="button"
-                          class="location-status-indicator location-status-chip--inactive"
-                          data-location="Hesena Management Seniorenpark Diekholzen"
-                          aria-label="Hesena Management Seniorenpark Diekholzen reaktivieren"
-                        >
-                          <span class="location-status-dot location-status-dot--inactive" aria-hidden="true"></span>
-                          <span class="location-status-label location-status-label--inactive">pausiert</span>
-                        </button>
-                      </div>
-                    </td>
-                    <td class="locations-last-login-cell"></td>
-                    <td class="locations-detail-nav-cell">
-                      <button type="button" class="locations-detail-nav-btn" aria-label="Zum Standort">
-                        <i class="fa-solid fa-house" aria-hidden="true"></i>
-                        <i class="fa-solid fa-chevron-right" aria-hidden="true"></i>
-                      </button>
-                    </td>
-                  </tr>
-                  <tr class="locations-leistungen-detail-row" data-leistungen-for="Hesena Management Seniorenpark Diekholzen">
+                  <tr class="locations-leistungen-detail-row" data-leistungen-for="newcare home Lurup">
                     <td class="locations-leistungen-detail-empty" aria-hidden="true"></td>
                     <td class="locations-leistungsbereiche-detail-cell" colspan="4">
                       <div class="locations-leistungsbereiche-panel">
@@ -7455,8 +7374,8 @@
               </table>
               <div class="locations-footer">
                 <span>Standorte pro Seite:</span>
-                <span>12</span>
-                <span>1-12 von 12</span>
+                <span>9</span>
+                <span>1-9 von 9</span>
                 <button type="button" aria-label="Vorherige Seite">
                   <i class="fa-solid fa-chevron-left" aria-hidden="true"></i>
                 </button>
@@ -7866,6 +7785,15 @@
                     >
                       60T
                     </button>
+                    <button
+                      type="button"
+                      class="stats-overview-period-tab"
+                      role="tab"
+                      data-overview-period="custom"
+                      aria-selected="false"
+                    >
+                      Zeitraum
+                    </button>
                   </div>
                   <div class="stat-inner-head-toolbar stat-standort-toolbar">
                     <label for="statsStandortSelectOverview">Standort</label>
@@ -7881,6 +7809,60 @@
                   </div>
                 </div>
                 <div class="stat-inner-body stat-inner-body--overview">
+                  <div class="stats-perf-period-controls">
+                    <div class="stats-perf-range-line">
+                      Ausgewählter Zeitraum:
+                      <span class="stats-perf-range-value" id="ovRangeValue">—</span>
+                    </div>
+                    <div class="stats-perf-custom" id="ovCustomRange" hidden>
+                      <div class="stats-perf-date-field">
+                        <label for="ovCustomVon">Von</label>
+                        <input type="date" id="ovCustomVon" class="stats-perf-date-input" />
+                      </div>
+                      <div class="stats-perf-date-field">
+                        <label for="ovCustomBis">Bis</label>
+                        <input type="date" id="ovCustomBis" class="stats-perf-date-input" />
+                      </div>
+                      <button type="button" class="btn-info stats-perf-apply-btn" id="ovCustomApply">
+                        Anwenden
+                      </button>
+                      <span class="stats-perf-date-error" id="ovCustomError" role="alert" hidden></span>
+                    </div>
+                    <div class="stats-perf-compare-bar">
+                      <label class="stats-perf-compare-toggle">
+                        <input type="checkbox" id="ovCompareToggle" />
+                        <span class="stats-perf-compare-track" aria-hidden="true"></span>
+                        <span>Vergleichen</span>
+                      </label>
+                      <div class="stats-perf-compare-options" id="ovCompareOptions" hidden>
+                        <div class="stats-perf-compare-modes">
+                          <label class="stats-perf-compare-radio">
+                            <input type="radio" name="ovCompareMode" value="previous" checked />
+                            Vorheriger Zeitraum
+                          </label>
+                          <label class="stats-perf-compare-radio">
+                            <input type="radio" name="ovCompareMode" value="custom" />
+                            Benutzerdefiniert
+                          </label>
+                          <span class="stats-perf-compare-range" id="ovCompareRangeValue"></span>
+                        </div>
+                        <div class="stats-perf-compare-custom" id="ovCompareCustom" hidden>
+                          <div class="stats-perf-date-field">
+                            <label for="ovCompareVon">Von</label>
+                            <input type="date" id="ovCompareVon" class="stats-perf-date-input" />
+                          </div>
+                          <div class="stats-perf-date-field">
+                            <label for="ovCompareBis">Bis</label>
+                            <input type="date" id="ovCompareBis" class="stats-perf-date-input" />
+                          </div>
+                          <button type="button" class="btn-info stats-perf-apply-btn" id="ovCompareApply">
+                            Anwenden
+                          </button>
+                          <span class="stats-perf-date-error" id="ovCompareError" role="alert" hidden></span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
                   <div class="stats-kpi-row stats-kpi-row--summary">
                     <div
                       class="stats-kpi-card stats-perf-kpi-card stats-ov-summary-kpi-card"
@@ -7927,7 +7909,7 @@
                     >
                       <div class="stats-ov-kpi-body">
                         <div class="stats-perf-kpi-text">
-                          <span class="stats-perf-kpi-title">Ø Anfragen / Status</span>
+                          <span class="stats-perf-kpi-title">Anfragen nach Status</span>
                           <div class="stats-ov-status-rows" id="ovKpiStatusRows"></div>
                         </div>
                       </div>
@@ -8023,7 +8005,7 @@
                       data-ov-metric="status"
                     >
                       <div class="stats-panel-head stats-perf-panel-head">
-                        <span class="stats-perf-panel-title">Ø Anfragen / Status</span>
+                        <span class="stats-perf-panel-title">Anfragen nach Status</span>
                         <button
                           type="button"
                           class="stats-perf-detail-close"
@@ -8868,21 +8850,21 @@
               <div style="font-weight: 700; margin-bottom: 8px">Prioritat:</div>
               <div class="priority-row">
                 <div id="priorityHighCard" class="priority-card priority-high">
-                  <span class="priority-number">1</span>
+                  <span class="priority-number" aria-hidden="true"></span>
                   <div>
                     <div class="priority-name">Hoch</div>
                     <div class="priority-sub">Sofort bearbeiten</div>
                   </div>
                 </div>
                 <div id="priorityMediumCard" class="priority-card priority-medium">
-                  <span class="priority-number">2</span>
+                  <span class="priority-number" aria-hidden="true"></span>
                   <div>
                     <div class="priority-name">Mittel</div>
                     <div class="priority-sub">Bald nachfassen</div>
                   </div>
                 </div>
                 <div id="priorityLowCard" class="priority-card priority-low">
-                  <span class="priority-number">3</span>
+                  <span class="priority-number" aria-hidden="true"></span>
                   <div>
                     <div class="priority-name">Niedrig</div>
                     <div class="priority-sub">Weniger dringend</div>
@@ -8895,16 +8877,14 @@
                   <label for="detailStandortSelect">Standort:</label>
                   <select id="detailStandortSelect" class="detail-select">
                     <option>Bitte wahlen...</option>
-                    <option>Hesena Management Domizil an der Jade</option>
-                    <option>Hesena Management Domizil am Ostplatz</option>
-                    <option>Hesena Management Domizil an der Werre</option>
-                    <option>Hesena Management Domizil an der Eise</option>
-                    <option>Hesena Management Alt-Mariendorf</option>
-                    <option>Hesena Management Haus Hermesgarten</option>
-                    <option>Hesena Management Domizil am Gartenplatz</option>
-                    <option>Hesena Care GmbH Palais Dorndorf</option>
-                    <option>Hesena Management Seniorenzentrum Borgentreich</option>
-                    <option>Hesena Management GmbH (Verwaltungssitz)</option>
+                    <option>newcare home Hasbergen</option>
+                    <option>newcare home Till</option>
+                    <option>newcare home Radevormwald</option>
+                    <option>newcare home Felsberg</option>
+                    <option>newcare home Moyland</option>
+                    <option>newcare home Vellmar</option>
+                    <option>newcare home Fritzlar</option>
+                    <option>newcare GmbH (Verwaltungssitz)</option>
                   </select>
                 </div>
                 <div class="detail-control">
@@ -8922,7 +8902,7 @@
                     <option>Betreuungsgebiet Küste</option>
                     <option>Betreuungsgebiet Oldenburg</option>
                     <option>Betreuungsgebiet Holzminden</option>
-                    <option>Verwaltungsgebiet Hesena</option>
+                    <option>Verwaltungsgebiet newcare</option>
                   </select>
                 </div>
                 <div class="detail-control">
@@ -9408,11 +9388,15 @@
       onerror="window.__standortNameDisplayScriptFailed = true"
     ></script>
     <script
-      src="/stats-performance.js?v=20260610-zeitraum"
+      src="/stats-period-controls.js?v=20260611-zeitraum"
+      onerror="window.__statsPeriodControlsScriptFailed = true"
+    ></script>
+    <script
+      src="/stats-performance.js?v=20260611-zeitraum"
       onerror="window.__statsPerformanceScriptFailed = true"
     ></script>
     <script
-      src="/stats-overview.js?v=20260609truncate"
+      src="/stats-overview.js?v=20260611-columns"
       onerror="window.__statsOverviewScriptFailed = true"
     ></script>
     <script
@@ -9585,18 +9569,15 @@
       ];
       const standortSalesTasks = [];
       const LOCATION_ADDRESSES = {
-        "Hesena Management Domizil an der Jade": "Jadeallee 12, Wilhelmshaven",
-        "Hesena Management Domizil am Ostplatz": "Osternburg 45, Oldenburg",
-        "Hesena Management Domizil an der Werre": "Werrestraße 8, Löhne",
-        "Hesena Management Domizil an der Eise": "Eisstraße 3, Bramsche",
-        "Hesena Management Alt-Mariendorf": "Mariendorfer Damm 66, Berlin",
-        "Hesena Management Haus Hermesgarten": "Hermesgarten 14, Hannover",
-        "Hesena Management Domizil am Gartenplatz": "Gartenplatz 2, Hameln",
-        "Hesena Care GmbH Palais Dorndorf": "Schlossstraße 1, Dorndorf",
-        "Hesena Management Seniorenzentrum Borgentreich": "Kirchstraße 19, Borgentreich",
-        "Hesena Management Domizil Lindenhof in Wilhelmshaven": "Lindenstraße 22, Wilhelmshaven",
-        "Hesena Management Domizil Karl-Hinrichs-Stift": "Stiftstraße 5, Oldenburg",
-        "Hesena Management Seniorenpark Diekholzen": "Parkweg 7, Diekholzen",
+        "newcare home Hasbergen": "Lindenallee 12, Hasbergen",
+        "newcare home Till": "Dorfstraße 45, Till",
+        "newcare home Radevormwald": "Kaiserstraße 8, Radevormwald",
+        "newcare home Felsberg": "Burgweg 3, Felsberg",
+        "newcare home Moyland": "Schlossallee 66, Moyland",
+        "newcare home Vellmar": "Rathausplatz 14, Vellmar",
+        "newcare home Fritzlar": "Domplatz 2, Fritzlar",
+        "newcare home Geeste": "Kanalstraße 22, Geeste",
+        "newcare home Lurup": "Luruper Hauptstraße 5, Hamburg",
       };
       let standortSalesTaskTab = null;
       let standortSalesTaskBlobUrl = null;
@@ -9625,17 +9606,15 @@
       }
 
       const PERF_DEMO_STANDORTS = [
-        "Hesena Management Domizil an der Jade",
-        "Hesena Management Domizil am Ostplatz",
-        "Hesena Management Domizil an der Werre",
-        "Hesena Management Domizil an der Eise",
-        "Hesena Management Alt-Mariendorf",
-        "Hesena Management Haus Hermesgarten",
-        "Hesena Management Domizil am Gartenplatz",
-        "Hesena Care GmbH Palais Dorndorf",
-        "Hesena Management Seniorenzentrum Borgentreich",
+        "newcare home Hasbergen",
+        "newcare home Till",
+        "newcare home Radevormwald",
+        "newcare home Felsberg",
+        "newcare home Moyland",
+        "newcare home Vellmar",
+        "newcare home Fritzlar",
       ];
-      const PERF_DEMO_STANDORT_WEIGHTS = [14, 13, 12, 11, 10, 9, 9, 8, 8];
+      const PERF_DEMO_STANDORT_WEIGHTS = [16, 15, 14, 13, 12, 12, 12];
       const PERF_DEMO_BEDARF_POOL = [
         "Ambulante Pflege",
         "Pflegedienst",
@@ -9657,7 +9636,7 @@
       const ORG_TENANT_LEAD_COUNT = 20;
 
       function getTenantOrgStandortName() {
-        return (sidebarTenantName?.textContent || "Hesena Management GmbH (Verwaltungssitz)").trim();
+        return (sidebarTenantName?.textContent || "newcare GmbH (Verwaltungssitz)").trim();
       }
 
       function getStatsStandortFilterOptions() {
@@ -9853,7 +9832,7 @@
         const cell = row.querySelector('[data-col="prioritaet"]');
         if (!cell) return;
         const cls = level === "Hoch" ? "high" : level === "Niedrig" ? "low" : "medium";
-        cell.innerHTML = `<span class="chip ${cls}">${level}</span>`;
+        cell.innerHTML = `<span class="chip ${cls}"><span class="location-status-dot" aria-hidden="true"></span>${level}</span>`;
       }
 
       function appendOrgTenantLeads() {
@@ -10350,19 +10329,16 @@
       const DEFAULT_LOGO_IMAGE = "";
       const AVV_FILE_URL = "/AVV.pdf";
             const GEBIET_BY_STANDORT = {
-        "Hesena Management Domizil an der Jade": "Betreuungsgebiet Nord",
-        "Hesena Management Domizil am Ostplatz": "Betreuungsgebiet West",
-        "Hesena Management Domizil an der Werre": "Betreuungsgebiet Mitte",
-        "Hesena Management Domizil an der Eise": "Betreuungsgebiet Süd",
-        "Hesena Management Alt-Mariendorf": "Betreuungsgebiet Ost",
-        "Hesena Management Haus Hermesgarten": "Betreuungsgebiet Nordwest",
-        "Hesena Management Domizil am Gartenplatz": "Betreuungsgebiet Weser",
-        "Hesena Care GmbH Palais Dorndorf": "Betreuungsgebiet Harz",
-        "Hesena Management Seniorenzentrum Borgentreich": "Betreuungsgebiet Ostwestfalen",
-        "Hesena Management Domizil Lindenhof in Wilhelmshaven": "Betreuungsgebiet Küste",
-        "Hesena Management Domizil Karl-Hinrichs-Stift": "Betreuungsgebiet Oldenburg",
-        "Hesena Management Seniorenpark Diekholzen": "Betreuungsgebiet Holzminden",
-        "Hesena Management GmbH (Verwaltungssitz)": "Verwaltungsgebiet Hesena",
+        "newcare home Hasbergen": "Betreuungsgebiet Nord",
+        "newcare home Till": "Betreuungsgebiet West",
+        "newcare home Radevormwald": "Betreuungsgebiet Mitte",
+        "newcare home Felsberg": "Betreuungsgebiet Süd",
+        "newcare home Moyland": "Betreuungsgebiet Ost",
+        "newcare home Vellmar": "Betreuungsgebiet Nordwest",
+        "newcare home Fritzlar": "Betreuungsgebiet Weser",
+        "newcare home Geeste": "Betreuungsgebiet Küste",
+        "newcare home Lurup": "Betreuungsgebiet Oldenburg",
+        "newcare GmbH (Verwaltungssitz)": "Verwaltungsgebiet newcare",
       };
 
       function resolveGebietForStandort(standort) {
@@ -10592,16 +10568,14 @@
         "Betreutes Wohnen",
       ];
             const STATS_MITARBEITER_BY_STANDORT = {
-        "Hesena Management Domizil an der Jade": ["Melissa Kropp", "Anna Schmidt", "Tom Weber"],
-        "Hesena Management Domizil am Ostplatz": ["Robin Stadel", "Laura Klein", "Max Hoffmann"],
-        "Hesena Management Domizil an der Werre": ["Sandra Koch", "Felix Lang", "Nina Wolf"],
-        "Hesena Management Domizil an der Eise": ["Jakob Kuntz", "Jonas Markus", "Emilia Hart"],
-        "Hesena Management Alt-Mariendorf": ["Lukas Ernst", "Mia König", "Paul Richter"],
-        "Hesena Management Haus Hermesgarten": ["Clara Neumann", "Tim Fischer", "Lea Schulz"],
-        "Hesena Management Domizil am Gartenplatz": ["Marco Brenner", "Hannah Vogt", "Oskar Hahn"],
-        "Hesena Care GmbH Palais Dorndorf": ["Eva Lindner", "Noah Berger", "Mira Stein"],
-        "Hesena Management Seniorenzentrum Borgentreich": ["Jonas Hartmann", "Lena Krüger", "Finn Wolff"],
-        "Hesena Management GmbH (Verwaltungssitz)": ["Jakob Kuntz", "Melissa Kropp", "Robin Stadel", "Anna Schmidt"],
+        "newcare home Hasbergen": ["Melissa Kropp", "Anna Schmidt", "Tom Weber"],
+        "newcare home Till": ["Robin Stadel", "Laura Klein", "Max Hoffmann"],
+        "newcare home Radevormwald": ["Sandra Koch", "Felix Lang", "Nina Wolf"],
+        "newcare home Felsberg": ["Jakob Kuntz", "Jonas Markus", "Emilia Hart"],
+        "newcare home Moyland": ["Lukas Ernst", "Mia König", "Paul Richter"],
+        "newcare home Vellmar": ["Clara Neumann", "Tim Fischer", "Lea Schulz"],
+        "newcare home Fritzlar": ["Marco Brenner", "Hannah Vogt", "Oskar Hahn"],
+        "newcare GmbH (Verwaltungssitz)": ["Jakob Kuntz", "Melissa Kropp", "Robin Stadel", "Anna Schmidt"],
       };
 
       function statsHashForStandort(standort) {
@@ -10843,6 +10817,15 @@
         const scopedRows = getLeadOverviewRowsForStats(scope);
         if (!period || period === "gesamt") return scopedRows;
 
+        // Custom Zeitraum: a concrete {startMs,endMs} range descriptor instead of
+        // a preset key (provided by the shared period controls).
+        if (typeof period === "object" && period.startMs != null && period.endMs != null) {
+          return scopedRows.filter((row) => {
+            const ts = parseRequestDateCell(getCellValue(row, "anfrageDatum"));
+            return ts >= period.startMs && ts <= period.endMs;
+          });
+        }
+
         const maxDays = overviewPeriodToMaxDays(period);
         if (maxDays == null) return scopedRows;
 
@@ -10941,34 +10924,28 @@
       ];
       const OVERVIEW_GEBIET_WEIGHTS = [0, 38, 24, 22, 16];
             const OVERVIEW_BEDARFSART_PROFILES = {
-        "Hesena Management Domizil an der Jade": [52, 38, 10, 0],
-        "Hesena Management Domizil am Ostplatz": [65, 35, 0, 0],
-        "Hesena Management Domizil an der Werre": [48, 34, 12, 6],
-        "Hesena Management Domizil an der Eise": [44, 36, 0, 20],
-        "Hesena Management Alt-Mariendorf": [58, 32, 10, 0],
-        "Hesena Management Haus Hermesgarten": [54, 36, 10, 0],
-        "Hesena Management Domizil am Gartenplatz": [46, 34, 12, 8],
-        "Hesena Care GmbH Palais Dorndorf": [50, 30, 12, 8],
-        "Hesena Management Seniorenzentrum Borgentreich": [52, 28, 12, 8],
-        "Hesena Management Domizil Lindenhof in Wilhelmshaven": [48, 32, 14, 6],
-        "Hesena Management Domizil Karl-Hinrichs-Stift": [56, 30, 10, 4],
-        "Hesena Management Seniorenpark Diekholzen": [42, 38, 12, 8],
-        "Hesena Management GmbH (Verwaltungssitz)": [50, 30, 12, 8],
+        "newcare home Hasbergen": [52, 38, 10, 0],
+        "newcare home Till": [65, 35, 0, 0],
+        "newcare home Radevormwald": [48, 34, 12, 6],
+        "newcare home Felsberg": [44, 36, 0, 20],
+        "newcare home Moyland": [58, 32, 10, 0],
+        "newcare home Vellmar": [54, 36, 10, 0],
+        "newcare home Fritzlar": [46, 34, 12, 8],
+        "newcare home Geeste": [48, 32, 14, 6],
+        "newcare home Lurup": [56, 30, 10, 4],
+        "newcare GmbH (Verwaltungssitz)": [50, 30, 12, 8],
       };
       const OVERVIEW_GEBIET_PROFILES = {
-        "Hesena Management Domizil an der Jade": [0, 32, 27, 23, 18],
-        "Hesena Management Domizil am Ostplatz": [0, 45, 25, 18, 12],
-        "Hesena Management Domizil an der Werre": [0, 36, 24, 21, 19],
-        "Hesena Management Domizil an der Eise": [0, 42, 18, 26, 14],
-        "Hesena Management Alt-Mariendorf": [0, 28, 28, 22, 22],
-        "Hesena Management Haus Hermesgarten": [0, 34, 26, 22, 18],
-        "Hesena Management Domizil am Gartenplatz": [0, 30, 24, 24, 22],
-        "Hesena Care GmbH Palais Dorndorf": [0, 38, 22, 22, 18],
-        "Hesena Management Seniorenzentrum Borgentreich": [0, 40, 20, 24, 16],
-        "Hesena Management Domizil Lindenhof in Wilhelmshaven": [0, 33, 25, 23, 19],
-        "Hesena Management Domizil Karl-Hinrichs-Stift": [0, 35, 23, 22, 20],
-        "Hesena Management Seniorenpark Diekholzen": [0, 31, 27, 24, 18],
-        "Hesena Management GmbH (Verwaltungssitz)": [0, 38, 22, 22, 18],
+        "newcare home Hasbergen": [0, 32, 27, 23, 18],
+        "newcare home Till": [0, 45, 25, 18, 12],
+        "newcare home Radevormwald": [0, 36, 24, 21, 19],
+        "newcare home Felsberg": [0, 42, 18, 26, 14],
+        "newcare home Moyland": [0, 28, 28, 22, 22],
+        "newcare home Vellmar": [0, 34, 26, 22, 18],
+        "newcare home Fritzlar": [0, 30, 24, 24, 22],
+        "newcare home Geeste": [0, 33, 25, 23, 19],
+        "newcare home Lurup": [0, 35, 23, 22, 20],
+        "newcare GmbH (Verwaltungssitz)": [0, 38, 22, 22, 18],
       };
 
       function overviewHashLabel(label) {
@@ -12264,17 +12241,17 @@
       const standortVertretungStateCache = new Map();
 
       // Demo data: which Standorte currently have a site-wide absence (today = 2026-06-10).
-      // - Jade keeps a FUTURE-dated entry (not currently active); its overview "absent"
+      // - Hasbergen keeps a FUTURE-dated entry (not currently active); its overview "absent"
       //   state comes from the "all users absent" mechanism instead (see below).
-      // - Ostplatz has an ACTIVE site-wide absence -> overview shows state 3.
+      // - Till has an ACTIVE site-wide absence -> overview shows state 3.
       const DEMO_SITEWIDE_ABSENCE = {
-        "Hesena Management Domizil an der Jade": {
+        "newcare home Hasbergen": {
           active: true,
           startDate: "2026-07-01",
           endDate: "2026-07-05",
           reason: "Standortweite Fortbildung",
         },
-        "Hesena Management Domizil am Ostplatz": {
+        "newcare home Till": {
           active: true,
           startDate: "2026-06-05",
           endDate: "2026-06-30",
@@ -12284,13 +12261,13 @@
 
       // Demo data: Standorte where EVERY user has an ongoing individual absence.
       // This is the second "absent" mechanism (the automatic-Vertretung trigger).
-      const DEMO_ALL_USERS_ABSENT = new Set(["Hesena Management Domizil an der Jade"]);
+      const DEMO_ALL_USERS_ABSENT = new Set(["newcare home Hasbergen"]);
 
       // Demo data: Standorte with an active Vertretungsregel (substitute Standort).
-      // Jade is automatically covered by Werre; Ostplatz is left without a rule.
+      // Hasbergen is automatically covered by Radevormwald; Till is left without a rule.
       const DEMO_VERTRETUNG_RULE = {
-        "Hesena Management Domizil an der Jade": {
-          substituteStandort: "Hesena Management Domizil an der Werre",
+        "newcare home Hasbergen": {
+          substituteStandort: "newcare home Radevormwald",
           ruleActive: true,
           activeSince: "2026-06-01",
         },
@@ -12301,63 +12278,51 @@
       // Bereiche, at least one has only 1. Objects stay extensible (capacity
       // fields will be added later) — always render against objects, not strings.
       const DEMO_LEISTUNGSBEREICHE = {
-        "Hesena Management Domizil an der Jade": [
+        "newcare home Hasbergen": [
           "Vollstationäre Pflege",
           "Kurzzeitpflege",
           "Tagespflege",
         ],
-        "Hesena Management Domizil am Ostplatz": ["Vollstationäre Pflege", "Betreutes Wohnen"],
-        "Hesena Management Domizil an der Werre": [
+        "newcare home Till": ["Vollstationäre Pflege", "Betreutes Wohnen"],
+        "newcare home Radevormwald": [
           "Vollstationäre Pflege",
           "Kurzzeitpflege",
           "Tagespflege",
           "Betreutes Wohnen",
         ],
-        "Hesena Management Domizil an der Eise": ["Tagespflege"],
-        "Hesena Management Alt-Mariendorf": ["Vollstationäre Pflege", "Kurzzeitpflege"],
-        "Hesena Management Haus Hermesgarten": [
+        "newcare home Felsberg": ["Tagespflege"],
+        "newcare home Moyland": ["Vollstationäre Pflege", "Kurzzeitpflege"],
+        "newcare home Vellmar": [
           "Vollstationäre Pflege",
           "Tagespflege",
           "Betreutes Wohnen",
         ],
-        "Hesena Management Domizil am Gartenplatz": ["Betreutes Wohnen", "Tagespflege"],
-        "Hesena Care GmbH Palais Dorndorf": [
-          "Vollstationäre Pflege",
-          "Kurzzeitpflege",
-          "Tagespflege",
-          "24 Stunden Betreuung",
-        ],
-        "Hesena Management Seniorenzentrum Borgentreich": [
-          "Vollstationäre Pflege",
-          "Kurzzeitpflege",
-        ],
-        "Hesena Management Domizil Lindenhof in Wilhelmshaven": [
+        "newcare home Fritzlar": ["Betreutes Wohnen", "Tagespflege"],
+        "newcare home Geeste": [
           "Vollstationäre Pflege",
           "Tagespflege",
         ],
-        "Hesena Management Domizil Karl-Hinrichs-Stift": [
+        "newcare home Lurup": [
           "Vollstationäre Pflege",
           "Kurzzeitpflege",
           "Tagespflege",
         ],
-        "Hesena Management Seniorenpark Diekholzen": ["Betreutes Wohnen"],
       };
 
-      // Demo data: most recent login of any user of the Standort, as a relative
-      // value. One Standort has never been logged into ("Noch nie").
-      const DEMO_LETZTER_LOGIN = {
-        "Hesena Management Domizil an der Jade": "vor 2 Std.",
-        "Hesena Management Domizil am Ostplatz": "vor 5 Std.",
-        "Hesena Management Domizil an der Werre": "vor 1 Tag",
-        "Hesena Management Domizil an der Eise": "vor 3 Tagen",
-        "Hesena Management Alt-Mariendorf": "vor 6 Tagen",
-        "Hesena Management Haus Hermesgarten": "vor 2 Wochen",
-        "Hesena Management Domizil am Gartenplatz": "vor 4 Std.",
-        "Hesena Care GmbH Palais Dorndorf": "vor 6 Wochen",
-        "Hesena Management Seniorenzentrum Borgentreich": "vor 3 Wochen",
-        "Hesena Management Domizil Lindenhof in Wilhelmshaven": "vor 8 Wochen",
-        "Hesena Management Domizil Karl-Hinrichs-Stift": "Noch nie",
-        "Hesena Management Seniorenpark Diekholzen": "vor 5 Monaten",
+      // Demo data: most recent login of any user of the Standort, seeded as a
+      // "minutes ago" offset so the rendered timestamp is deterministic. null means
+      // the Standort has never been logged into ("Noch nie"). The offsets cover both
+      // display regimes: relative wording (< 14 days) and concrete dates (>= 14 days).
+      const DEMO_LETZTER_LOGIN_MINUTES_AGO = {
+        "newcare home Hasbergen": 35, // vor wenigen Minuten
+        "newcare home Till": 95, // vor einer Stunde
+        "newcare home Radevormwald": 300, // vor 5 Std.
+        "newcare home Felsberg": 1440, // vor einem Tag
+        "newcare home Moyland": 4320, // vor 3 Tagen
+        "newcare home Vellmar": 14400, // vor mehr als einer Woche (10 Tage)
+        "newcare home Fritzlar": 25920, // konkretes Datum (18 Tage)
+        "newcare home Geeste": 50400, // konkretes Datum (35 Tage)
+        "newcare home Lurup": null, // Noch nie
       };
 
       function getStandortLeistungsbereiche(standortName) {
@@ -12365,8 +12330,38 @@
         return names.map((name) => ({ name }));
       }
 
-      function getStandortLetzterLogin(standortName) {
-        return DEMO_LETZTER_LOGIN[standortName] || "Noch nie";
+      // Most recent login timestamp (ms) for a Standort, or null if never.
+      function getStandortLetzterLoginTimestamp(standortName) {
+        const minutesAgo = DEMO_LETZTER_LOGIN_MINUTES_AGO[standortName];
+        if (minutesAgo == null) return null;
+        return Date.now() - minutesAgo * 60000;
+      }
+
+      // Shared hybrid formatter for "Letzter Login" style timestamps. Returns the
+      // display text, an exact-timestamp tooltip ("DD.MM.YYYY, HH:MM Uhr"), and a
+      // never flag. Any consumer of login timestamps should render through this.
+      function formatLetzterLogin(timestampMs, nowMs = Date.now()) {
+        if (timestampMs == null) return { text: "Noch nie", title: "", never: true };
+        const ts = new Date(timestampMs);
+        const p2 = (n) => String(n).padStart(2, "0");
+        const dateStr = `${p2(ts.getDate())}.${p2(ts.getMonth() + 1)}.${ts.getFullYear()}`;
+        const title = `${dateStr}, ${p2(ts.getHours())}:${p2(ts.getMinutes())} Uhr`;
+        const diffMin = Math.max(0, Math.floor((nowMs - timestampMs) / 60000));
+        let text;
+        if (diffMin < 60) {
+          text = "vor wenigen Minuten";
+        } else if (diffMin < 120) {
+          text = "vor einer Stunde";
+        } else if (diffMin < 1440) {
+          text = `vor ${Math.floor(diffMin / 60)} Std.`;
+        } else {
+          const days = Math.floor(diffMin / 1440);
+          if (days === 1) text = "vor einem Tag";
+          else if (days <= 6) text = `vor ${days} Tagen`;
+          else if (days <= 13) text = "vor mehr als einer Woche";
+          else text = dateStr;
+        }
+        return { text, title, never: false };
       }
 
       const STANDORT_FORWARDING_LEAD_TYPES = [
@@ -13235,9 +13230,11 @@
 
           const loginCell = row.querySelector(".locations-last-login-cell");
           if (loginCell) {
-            const value = getStandortLetzterLogin(name);
-            loginCell.textContent = value;
-            loginCell.classList.toggle("locations-last-login--never", value === "Noch nie");
+            const login = formatLetzterLogin(getStandortLetzterLoginTimestamp(name));
+            loginCell.textContent = login.text;
+            loginCell.classList.toggle("locations-last-login--never", login.never);
+            if (login.title) loginCell.setAttribute("title", login.title);
+            else loginCell.removeAttribute("title");
           }
         });
       }
@@ -15129,8 +15126,12 @@
         document.querySelectorAll(".stats-panel").forEach((panel) => {
           panel.classList.toggle("active", panel.dataset.statsPanel === tabKey);
         });
-        if (tabKey === "overview" && statsOverviewApi?.syncOverviewKpis) {
-          statsOverviewApi.syncOverviewKpis();
+        if (tabKey === "overview" && statsOverviewApi) {
+          if (statsOverviewApi.resetOverviewControls) {
+            statsOverviewApi.resetOverviewControls();
+          } else if (statsOverviewApi.syncOverviewKpis) {
+            statsOverviewApi.syncOverviewKpis();
+          }
         }
         if (tabKey === "performance" && statsPerformanceApi) {
           if (statsPerformanceApi.resetPerformanceControls) {

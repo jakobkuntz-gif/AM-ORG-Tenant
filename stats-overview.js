@@ -64,9 +64,117 @@
       return active?.dataset?.overviewPeriod || "gesamt";
     }
 
+    // Shared period/comparison engine (see stats-period-controls.js) — the same
+    // implementation drives the Performance panel, so both panels behave identically.
+    const ovPeriodCtl = global.StatsPeriodControls
+      ? global.StatsPeriodControls.create({
+          panelSelector: "#statsPanelOverview",
+          tabSelector: ".stats-overview-period-tab",
+          periodDatasetKey: "overviewPeriod",
+          dataStartIso: "2026-01-01",
+          periodToMaxDays: (period) => {
+            if (period === "day") return 1;
+            if (period === "7d") return 7;
+            if (period === "30d") return 30;
+            if (period === "60d") return 60;
+            return null;
+          },
+          ids: {
+            rangeValue: "ovRangeValue",
+            customRange: "ovCustomRange",
+            customVon: "ovCustomVon",
+            customBis: "ovCustomBis",
+            customApply: "ovCustomApply",
+            customError: "ovCustomError",
+            compareToggle: "ovCompareToggle",
+            compareOptions: "ovCompareOptions",
+            compareModeName: "ovCompareMode",
+            compareCustom: "ovCompareCustom",
+            compareVon: "ovCompareVon",
+            compareBis: "ovCompareBis",
+            compareApply: "ovCompareApply",
+            compareError: "ovCompareError",
+            compareRangeValue: "ovCompareRangeValue",
+          },
+          onChange: () => syncOverviewKpis(),
+        })
+      : null;
+
+    // Period argument handed to the data deps: a preset key, or a concrete
+    // {startMs,endMs} descriptor when the custom Zeitraum is active.
+    function currentPeriodArg() {
+      const period = getOverviewPeriod();
+      if (period === "custom" && ovPeriodCtl) {
+        const range = ovPeriodCtl.getResolvedRange();
+        const start = new Date(range.start);
+        start.setHours(0, 0, 0, 0);
+        const end = new Date(range.end);
+        end.setHours(23, 59, 59, 999);
+        return { custom: true, startMs: start.getTime(), endMs: end.getTime() };
+      }
+      return period;
+    }
+
+    function ovCompareActive() {
+      return Boolean(ovPeriodCtl && ovPeriodCtl.isCompareOn());
+    }
+
+    // Deterministic comparison value: current value scaled by the ratio of the
+    // seeded range factors — stable per (range, comparison range, key) triple.
+    function ovCompareValue(curValue, key) {
+      if (!ovPeriodCtl) return null;
+      const cur = ovPeriodCtl.getResolvedRange();
+      const comp = ovPeriodCtl.getResolvedCompareRange();
+      const ratio = ovPeriodCtl.scaleFactor(comp, key) / ovPeriodCtl.scaleFactor(cur, key);
+      return curValue * ratio;
+    }
+
+    function ovDeltaPct(curValue, key) {
+      const comp = ovCompareValue(curValue, key);
+      if (comp == null || !comp) return null;
+      return ((curValue - comp) / comp) * 100;
+    }
+
+    function ovDeltaColor(rounded) {
+      if (rounded === 0) return "#707070";
+      return rounded > 0 ? "#77993C" : "#E74C3C";
+    }
+
+    // Delta cell for breakdown rows (13px/700; request counts: more = green).
+    // Always rendered so the row grid keeps a fixed delta column — empty while
+    // comparison is OFF, "±0 %" for zero deltas while ON.
+    function ovRowDeltaHtml(curValue, key) {
+      const delta = ovCompareActive() ? ovDeltaPct(curValue, key) : null;
+      if (delta == null) {
+        return `<span class="stats-ov-row-delta" aria-hidden="true"></span>`;
+      }
+      const rounded = Math.round(delta);
+      const text = rounded === 0 ? "±0&nbsp;%" : `${rounded > 0 ? "+" : ""}${rounded}&nbsp;%`;
+      return `<span class="stats-ov-row-delta" style="color: ${ovDeltaColor(rounded)}">${text}</span>`;
+    }
+
+    // Delta span next to a KPI card value element (managed, removed when off).
+    function ovSetKpiDelta(valueEl, curValue, key) {
+      if (!valueEl) return;
+      let span = valueEl.parentElement?.querySelector(".stats-ov-kpi-delta");
+      const delta = ovCompareActive() ? ovDeltaPct(curValue, key) : null;
+      if (delta == null) {
+        span?.remove();
+        return;
+      }
+      if (!span) {
+        span = document.createElement("span");
+        span.className = "stats-perf-kpi-delta stats-ov-kpi-delta";
+        valueEl.insertAdjacentElement("afterend", span);
+      }
+      const rounded = Math.round(delta);
+      span.textContent = `${rounded > 0 ? "+" : ""}${rounded} %`;
+      span.style.color = ovDeltaColor(rounded);
+    }
+
     function getAllStandorteWeighted() {
       const all = getStandorte().filter(Boolean);
-      return all.length ? all : ["Hesena Management Domizil an der Jade", "Hesena Management Domizil am Ostplatz", "Hesena Management Domizil an der Werre", "Hesena Management Domizil an der Eise"];
+      return all.length ? all : ["newcare home Hasbergen", "newcare home Till", "newcare home Radevormwald", "newcare home Felsberg"];
     }
 
     function getActiveStandorte() {
@@ -96,6 +204,13 @@
     function formatCountPct(count, total) {
       const pct = total ? Math.round((count / total) * 100) : 0;
       return `${count.toLocaleString("de-DE")} <span class="stats-ov-cell-pct">(${pct}%)</span>`;
+    }
+
+    // Value + percent share as two separate cells so breakdown rows can align
+    // them in fixed grid columns.
+    function formatCountPctCells(count, total) {
+      const pct = total ? Math.round((count / total) * 100) : 0;
+      return `<span class="stats-ov-cell-value">${count.toLocaleString("de-DE")}</span><span class="stats-ov-cell-pct stats-ov-cell-share">(${pct}%)</span>`;
     }
 
     function formatAvg(value) {
@@ -163,7 +278,7 @@
           <span class="stats-ov-status-row-fill" aria-hidden="true"></span>
           <span class="stats-ov-status-label">${row.label}</span>
           <span class="stats-ov-status-value">${row.count.toLocaleString("de-DE")}</span>
-          <span class="stats-ov-status-pct">(${pct}%)</span>
+          <span class="stats-ov-status-pct">(${pct}%)</span>${ovRowDeltaHtml(row.count, `status:${row.label}`)}
         </div>`;
         })
         .join("");
@@ -209,6 +324,7 @@
     function renderAccordionBreakdown(mount, groups, idPrefix, scopeTotal, options = {}) {
       if (!mount) return;
       const prefix = idPrefix || "stats-ov-acc";
+      const deltaPrefix = options.deltaKeyPrefix || "";
       const scaleMode = options.barScale === "max" ? "max" : "total";
       const totalAll = Math.max(0, Number(scopeTotal) || 0);
       const fallbackTotal = groups.reduce((sum, group) => sum + (group.total || 0), 0);
@@ -229,13 +345,17 @@
           const childrenHtml = group.children
             .map((child) => {
               const childPct = accordionBarPct(child.count, childMax);
+              const childDelta = ovRowDeltaHtml(
+                child.count,
+                `${deltaPrefix || prefix}:${group.label}:${child.label}`,
+              );
               return `
           <div class="stats-ov-accordion-subrow">
             <span class="stats-ov-accordion-track" style="--stats-ov-acc-pct: ${childPct}%">
               <span class="stats-ov-accordion-row-fill stats-ov-accordion-row-fill--child" aria-hidden="true"></span>
               <span class="stats-ov-accordion-sublabel">${formatStandortDisplayLabel(child.label)}</span>
             </span>
-            <span class="stats-ov-accordion-subvalue">${formatCountPct(child.count, groupTotal)}</span>
+            ${formatCountPctCells(child.count, groupTotal)}${childDelta}
           </div>`;
             })
             .join("");
@@ -251,10 +371,10 @@
               <span class="stats-ov-accordion-row-fill stats-ov-accordion-row-fill--parent" aria-hidden="true"></span>
               <span class="stats-ov-accordion-label"><strong>${formatStandortDisplayLabel(group.label)}</strong></span>
             </span>
-            <span class="stats-ov-accordion-meta">
-              <span class="stats-ov-accordion-total">${groupTotal.toLocaleString("de-DE")}</span>
-              <i class="fa-solid fa-chevron-down stats-ov-accordion-chevron" aria-hidden="true"></i>
-            </span>
+            <span class="stats-ov-cell-value stats-ov-accordion-total">${groupTotal.toLocaleString("de-DE")}</span>
+            <span class="stats-ov-cell-share" aria-hidden="true"></span>
+            ${ovRowDeltaHtml(groupTotal, `${deltaPrefix || prefix}:${group.label}`)}
+            <i class="fa-solid fa-chevron-down stats-ov-accordion-chevron" aria-hidden="true"></i>
           </button>
           <div id="${panelId}" class="stats-ov-accordion-panel" hidden>${childrenHtml}</div>
         </div>`;
@@ -262,17 +382,22 @@
         .join("")}</div>`;
     }
 
+    // Bedarfsart-first breakdown: top-level rows = Bedarfsarten with their totals,
+    // accordion children = Standorte contributing to that Bedarfsart. The card
+    // headline is the average over these top-level totals, so headline and
+    // breakdown always reconcile.
     function bedarfsartAccordionGroups(period) {
-      return bedarfsartMatrixForStandorte(period).map((row) => ({
-        label: row.label,
-        total: row.total,
-        children: OV_BEDARFSARTEN.filter((col) => row.cells[col] != null && row.cells[col] > 0).map(
-          (col) => ({
-            label: col,
-            count: row.cells[col],
-          }),
-        ),
-      }));
+      const matrix = bedarfsartMatrixForStandorte(period);
+      return OV_BEDARFSARTEN.map((col) => {
+        const children = matrix
+          .filter((row) => row.cells[col] != null && row.cells[col] > 0)
+          .map((row) => ({ label: row.label, count: row.cells[col] }));
+        return {
+          label: col,
+          total: children.reduce((sum, child) => sum + child.count, 0),
+          children,
+        };
+      }).filter((group) => group.total > 0);
     }
 
     function renderStandortGebietAccordion(mount, period) {
@@ -281,7 +406,7 @@
         standortGebietAccordionGroups(period),
         "stats-ov-standort",
         overviewData(period).total,
-        { barScale: "max" },
+        { barScale: "max", deltaKeyPrefix: "standort" },
       );
     }
 
@@ -291,7 +416,7 @@
         bedarfsartAccordionGroups(period),
         "stats-ov-bedarf",
         overviewData(period).total,
-        { barScale: "max" },
+        { barScale: "max", deltaKeyPrefix: "bedarfsart" },
       );
     }
 
@@ -299,6 +424,7 @@
       if (!mount) return;
       const scaleMode = options.barScale === "max" ? "max" : "total";
       const fillClass = options.fillClass || "stats-ov-accordion-row-fill--parent";
+      const deltaPrefix = options.deltaKeyPrefix || "";
       const shareBasis = Math.max(0, Number(shareTotal) || 0);
       const rowMax =
         scaleMode === "max"
@@ -307,13 +433,14 @@
       mount.innerHTML = `<div class="stats-ov-accordion stats-ov-flat-bars">${rows
         .map((row) => {
           const barPct = accordionBarPct(row.count, rowMax);
+          const rowDelta = ovRowDeltaHtml(row.count, `${deltaPrefix || "flat"}:${row.label}`);
           return `
         <div class="stats-ov-flat-bar-row">
           <span class="stats-ov-accordion-track" style="--stats-ov-acc-pct: ${barPct}%">
             <span class="stats-ov-accordion-row-fill ${fillClass}" aria-hidden="true"></span>
             <span class="stats-ov-accordion-label">${formatStandortDisplayLabel(row.label)}</span>
           </span>
-          <span class="stats-ov-accordion-subvalue">${formatCountPct(row.count, shareBasis)}</span>
+          ${formatCountPctCells(row.count, shareBasis)}${rowDelta}
         </div>`;
         })
         .join("")}</div>`;
@@ -323,6 +450,7 @@
       renderFlatBarBreakdown(mount, rows, total, {
         barScale: "max",
         fillClass: "stats-ov-accordion-row-fill--parent",
+        deltaKeyPrefix: "gebiet",
       });
     }
 
@@ -379,6 +507,7 @@
       }
       if (requestsEl) {
         requestsEl.textContent = formatOverviewSummaryKpi("requests", summary.requests);
+        ovSetKpiDelta(requestsEl, summary.requests, "summary:requests");
       }
       if (activeEl) {
         activeEl.textContent = formatOverviewSummaryKpi(
@@ -397,7 +526,7 @@
     function syncOverviewKpis() {
       const panel = document.getElementById("statsPanelOverview");
       if (!panel) return;
-      const period = getOverviewPeriod();
+      const period = currentPeriodArg();
       syncSummaryKpiRow(panel, period);
       const data = overviewData(period);
       const total = data.total;
@@ -406,24 +535,39 @@
       const statusTotal = statusPayload.total;
       const standorte = getActiveStandorte();
       const avgStandort = standorte.length ? total / standorte.length : 0;
-      const avgBedarfsart = OV_BEDARFSARTEN.length ? total / OV_BEDARFSARTEN.length : 0;
+      // Headline = average of the visible top-level Bedarfsart rows, so the card
+      // value always reconciles with its Bedarfsart-first breakdown.
+      const bedarfGroups = bedarfsartAccordionGroups(period);
+      const bedarfSum = bedarfGroups.reduce((sum, group) => sum + group.total, 0);
+      const avgBedarfsart = bedarfGroups.length ? bedarfSum / bedarfGroups.length : 0;
       const gebietRows = data.gebietRows || [];
       const avgGebiet = gebietRows.length ? total / gebietRows.length : 0;
 
       renderStatusRows(document.getElementById("ovKpiStatusRows"), statuses, statusTotal);
 
       const standortEl = document.getElementById("ovKpiStandort");
-      if (standortEl) standortEl.textContent = formatAvg(avgStandort);
+      if (standortEl) {
+        standortEl.textContent = formatAvg(avgStandort);
+        ovSetKpiDelta(standortEl, avgStandort, "kpi:standort");
+      }
 
       const bedarfsartEl = document.getElementById("ovKpiBedarfsart");
-      if (bedarfsartEl) bedarfsartEl.textContent = formatAvg(avgBedarfsart);
+      if (bedarfsartEl) {
+        bedarfsartEl.textContent = formatAvg(avgBedarfsart);
+        ovSetKpiDelta(bedarfsartEl, avgBedarfsart, "kpi:bedarfsart");
+      }
 
       const gebietEl = document.getElementById("ovKpiGebiet");
-      if (gebietEl) gebietEl.textContent = formatAvg(avgGebiet);
+      if (gebietEl) {
+        gebietEl.textContent = formatAvg(avgGebiet);
+        ovSetKpiDelta(gebietEl, avgGebiet, "kpi:gebiet");
+      }
 
       clearOverviewCardSparklines(panel);
 
       syncCardVisibility();
+
+      ovPeriodCtl?.updateRangeLine();
 
       if (ovDetailOpen) refreshDetail(ovDetailOpen);
     }
@@ -434,7 +578,7 @@
       const mount = segment?.querySelector("[data-ov-detail-table]");
       if (!segment || !mount) return;
       ensureOvDetailExportButton(segment);
-      const period = getOverviewPeriod();
+      const period = currentPeriodArg();
       if (metric === "status") {
         renderStatusDetailTable(mount, period);
         return;
@@ -465,6 +609,7 @@
     };
 
     function getOverviewPeriodLabel() {
+      if (ovPeriodCtl) return ovPeriodCtl.getRangeLabel();
       return OV_PERIOD_TAB_LABELS[getOverviewPeriod()] || "Gesamt";
     }
 
@@ -568,9 +713,9 @@
         const groups = bedarfsartAccordionGroups(period);
         return [
           ...meta,
-          ["Aufschlüsselung", "Standort → Bedarfsart"],
+          ["Aufschlüsselung", "Bedarfsart → Standort"],
           [],
-          ["Standort", "Bedarfsart", "Anfragen", "Anteil %"],
+          ["Bedarfsart", "Standort", "Anfragen", "Anteil %"],
           ...groups.flatMap((group) =>
             group.children.map((child) => [
               group.label,
@@ -605,7 +750,7 @@
     }
 
     function exportOverviewDetailSegment(metric) {
-      const period = getOverviewPeriod();
+      const period = currentPeriodArg();
       if (!ovExportMetricHasData(metric, period)) {
         window.alert("Keine Daten für den gewählten Zeitraum zum Exportieren.");
         return;
@@ -705,18 +850,20 @@
       }
 
       if (metric === "bedarfsart") {
-        const matrix = bedarfsartMatrixForStandorte(period);
+        const groups = bedarfsartAccordionGroups(period);
         return [
           ...meta,
-          ["Aufschlüsselung", "Standort × Bedarfsart"],
+          ["Aufschlüsselung", "Bedarfsart → Standort"],
           [],
-          ["Standort", ...OV_BEDARFSARTEN],
-          ...matrix.map((row) => [
-            row.label,
-            ...OV_BEDARFSARTEN.map((col) =>
-              row.cells[col] == null ? "–" : formatCountPctPlain(row.cells[col], row.total),
-            ),
-          ]),
+          ["Bedarfsart", "Standort", "Anfragen", "Anteil %"],
+          ...groups.flatMap((group) =>
+            group.children.map((child) => [
+              group.label,
+              child.label,
+              child.count,
+              group.total ? Math.round((child.count / group.total) * 100) : 0,
+            ]),
+          ),
         ];
       }
 
@@ -819,7 +966,7 @@
     }
 
     function exportOverviewConsolidatedCsv() {
-      const period = getOverviewPeriod();
+      const period = currentPeriodArg();
       const metricsWithData = getOverviewExportMetrics().filter((metric) =>
         ovExportMetricHasData(metric, period),
       );
@@ -913,6 +1060,11 @@
       const tabs = document.querySelectorAll("#statsPanelOverview .stats-overview-period-tab");
       if (!tabs.length) return;
       ovPeriodTabsInit = true;
+      if (ovPeriodCtl) {
+        ovPeriodCtl.initTabs();
+        ovPeriodCtl.initControls();
+        return;
+      }
       tabs.forEach((tab) => {
         tab.addEventListener("click", () => {
           const period = tab.dataset.overviewPeriod;
@@ -966,10 +1118,19 @@
       syncOverviewKpis();
     }
 
+    function resetOverviewControls() {
+      if (ovPeriodCtl) {
+        ovPeriodCtl.reset();
+        return;
+      }
+      syncOverviewKpis();
+    }
+
     return {
       boot,
       syncOverviewKpis,
       refreshOverviewLists: syncOverviewKpis,
+      resetOverviewControls,
     };
   }
 

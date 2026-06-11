@@ -19,10 +19,10 @@ const PERF_METRIC_META = {
             },
           },
           gebiet: {
-            flat: { Hesena Management Domizil an der Jade: 38.2, Hesena Management Domizil am Ostplatz: 31.8, "Kein Gebiet": 28.6 },
+            flat: { "newcare home Hasbergen": 38.2, "newcare home Till": 31.8, "Kein Gebiet": 28.6 },
             nested: {
-              Hesena Management Domizil an der Jade: { "Stationäre Pflege": 42.0, "Std. Betreuung": 35.5 },
-              Hesena Management Domizil am Ostplatz: { "Betreutes Wohnen": 29.4, Haushaltshilfe: 34.1 },
+              "newcare home Hasbergen": { "Stationäre Pflege": 42.0, "Std. Betreuung": 35.5 },
+              "newcare home Till": { "Betreutes Wohnen": 29.4, Haushaltshilfe: 34.1 },
               "Kein Gebiet": { Unbekannt: 26.2 },
             },
           },
@@ -47,10 +47,10 @@ const PERF_METRIC_META = {
             },
           },
           gebiet: {
-            flat: { Hesena Management Domizil an der Jade: 1.6, Hesena Management Domizil am Ostplatz: 2.3, "Kein Gebiet": 2.4 },
+            flat: { "newcare home Hasbergen": 1.6, "newcare home Till": 2.3, "Kein Gebiet": 2.4 },
             nested: {
-              Hesena Management Domizil an der Jade: { "Stationäre Pflege": 1.2, "Std. Betreuung": 2.0 },
-              Hesena Management Domizil am Ostplatz: { "Betreutes Wohnen": 2.8, Haushaltshilfe: 1.9 },
+              "newcare home Hasbergen": { "Stationäre Pflege": 1.2, "Std. Betreuung": 2.0 },
+              "newcare home Till": { "Betreutes Wohnen": 2.8, Haushaltshilfe: 1.9 },
               "Kein Gebiet": { Unbekannt: 2.7 },
             },
           },
@@ -75,10 +75,10 @@ const PERF_METRIC_META = {
             },
           },
           gebiet: {
-            flat: { Hesena Management Domizil an der Jade: 265, Hesena Management Domizil am Ostplatz: 292, "Kein Gebiet": 298 },
+            flat: { "newcare home Hasbergen": 265, "newcare home Till": 292, "Kein Gebiet": 298 },
             nested: {
-              Hesena Management Domizil an der Jade: { "Stationäre Pflege": 248, "Std. Betreuung": 279 },
-              Hesena Management Domizil am Ostplatz: { "Betreutes Wohnen": 305, Haushaltshilfe: 278 },
+              "newcare home Hasbergen": { "Stationäre Pflege": 248, "Std. Betreuung": 279 },
+              "newcare home Till": { "Betreutes Wohnen": 305, Haushaltshilfe: 278 },
               "Kein Gebiet": { Unbekannt: 312 },
             },
           },
@@ -112,42 +112,42 @@ const PERF_METRIC_META = {
 
       const DEMO_GEBIET_EMPLOYEE_STATS = [
         {
-          gebiet: "Hesena Management Domizil an der Jade",
+          gebiet: "newcare home Hasbergen",
           mitarbeiter: "Jakob Kuntz",
           conversion: { gebiet: 38.2, employee: 39.5, produkt: { "Stationäre Pflege": 42.0, "Std. Betreuung": 33.8 } },
           complaints: { gebiet: 1.6, employee: 1.4, produkt: { "Stationäre Pflege": 1.1, "Std. Betreuung": 1.8 } },
           investment: { gebiet: 265, employee: 258, produkt: { "Stationäre Pflege": 255, "Std. Betreuung": 284 } },
         },
         {
-          gebiet: "Hesena Management Domizil an der Jade",
+          gebiet: "newcare home Hasbergen",
           mitarbeiter: "Jonas Markus",
           conversion: { gebiet: 38.2, employee: 37.2, produkt: { Haushaltshilfe: 37.0, "Betreutes Wohnen": 36.5 } },
           complaints: { gebiet: 1.6, employee: 1.7, produkt: { Haushaltshilfe: 1.7, "Betreutes Wohnen": 1.5 } },
           investment: { gebiet: 265, employee: 272, produkt: { Haushaltshilfe: 275, "Betreutes Wohnen": 268 } },
         },
         {
-          gebiet: "Hesena Management Alt-Mariendorf",
+          gebiet: "newcare home Moyland",
           mitarbeiter: "Marie Becker",
           conversion: { gebiet: 33.5, employee: 34.8, produkt: { "Betreutes Wohnen": 35.2, Kurzzeitpflege: 32.1 } },
           complaints: { gebiet: 2.0, employee: 1.9, produkt: { "Betreutes Wohnen": 2.1, Kurzzeitpflege: 1.7 } },
           investment: { gebiet: 278, employee: 271, produkt: { "Betreutes Wohnen": 268, Kurzzeitpflege: 282 } },
         },
         {
-          gebiet: "Hesena Management Alt-Mariendorf",
+          gebiet: "newcare home Moyland",
           mitarbeiter: "Tim Wagner",
           conversion: { gebiet: 33.5, employee: 32.1, produkt: { Tagespflege: 31.4, Haushaltshilfe: 33.0 } },
           complaints: { gebiet: 2.0, employee: 2.1, produkt: { Tagespflege: 2.2, Haushaltshilfe: 1.9 } },
           investment: { gebiet: 278, employee: 285, produkt: { Tagespflege: 288, Haushaltshilfe: 279 } },
         },
         {
-          gebiet: "Hesena Management Haus Hermesgarten",
+          gebiet: "newcare home Vellmar",
           mitarbeiter: "Sara Hoffmann",
           conversion: { gebiet: 29.8, employee: 31.2, produkt: { "Std. Betreuung": 32.0, Pflegedienst: 29.8 } },
           complaints: { gebiet: 2.2, employee: 2.0, produkt: { "Std. Betreuung": 1.9, Pflegedienst: 2.1 } },
           investment: { gebiet: 288, employee: 295, produkt: { "Std. Betreuung": 292, Pflegedienst: 301 } },
         },
         {
-          gebiet: "Hesena Management Haus Hermesgarten",
+          gebiet: "newcare home Vellmar",
           mitarbeiter: "Felix Braun",
           conversion: { gebiet: 29.8, employee: 28.4, produkt: { Bewerbung: 30.1, Haushaltshilfe: 26.8 } },
           complaints: { gebiet: 2.2, employee: 2.3, produkt: { Bewerbung: 2.4, Haushaltshilfe: 2.1 } },
@@ -165,7 +165,7 @@ const PERF_METRIC_META = {
       /** Gebiete ohne Mitarbeiter — Gebiet-Durchschnitt inkl. zugehöriger Produkte. */
       const DEMO_GEBIET_ONLY_STATS = [
         {
-          gebiet: "Hesena Management Domizil an der Werre",
+          gebiet: "newcare home Radevormwald",
           conversion: {
             gebiet: 27.4,
             produkt: { Bewerbung: 30.1, "24 Stunden Betreuung": 26.5, "Betreutes Wohnen": 28.2 },
@@ -180,7 +180,7 @@ const PERF_METRIC_META = {
           },
         },
         {
-          gebiet: "Hesena Management Domizil am Ostplatz",
+          gebiet: "newcare home Till",
           conversion: {
             gebiet: 31.8,
             produkt: { "Betreutes Wohnen": 31.5, Haushaltshilfe: 34.1, "Ambulante Pflege": 30.4 },
@@ -195,7 +195,7 @@ const PERF_METRIC_META = {
           },
         },
         {
-          gebiet: "Hesena Management Domizil am Gartenplatz",
+          gebiet: "newcare home Fritzlar",
           conversion: {
             gebiet: 36.1,
             produkt: { "Std. Betreuung": 38.0, Pflegedienst: 34.2, Kurzzeitpflege: 35.5 },
