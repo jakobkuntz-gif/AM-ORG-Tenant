@@ -6,6 +6,12 @@
       "runtimeExecutable": "npm",
       "runtimeArgs": ["run", "dev"],
       "port": 5173
+    },
+    {
+      "name": "subtenant-clickdummy",
+      "runtimeExecutable": "npx",
+      "runtimeArgs": ["-y", "serve", "-l", "4173", "C:/Users/VP/AM-SubTenant-Clickdummy"],
+      "port": 4173
     }
   ]
 }
